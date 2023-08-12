@@ -1,5 +1,0 @@
-[env:bluepill_f103c8]
-board = bluepill_f103c8
-upload_protocol = stlink
-framework = arduino
-platform = ststm32

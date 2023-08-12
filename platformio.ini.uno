@@ -1,4 +1,0 @@
-[env:ATmega328P]
-platform = atmelavr
-board = ATmega328P
-framework = arduino

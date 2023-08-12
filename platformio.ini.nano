@@ -1,4 +1,0 @@
-[env:nanoatmega328new]
-platform = atmelavr
-board = nanoatmega328new
-framework = arduino
