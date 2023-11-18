@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Explorer_Project")(type "KiCad")(uri "${KIPRJMOD}/library/Explorer_Project")(options "")(descr ""))
+)
