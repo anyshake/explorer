@@ -1,6 +1,8 @@
-#pragma once
+#ifndef __CHECKSUM_HPP
+#define __CHECKSUM_HPP
 
-#include <Arduino.h>
 #include <stdint.h>
 
-uint8_t getChecksum(int32_t* array, size_t size);
+uint8_t get_checksum(int32_t* array, uint32_t size);
+
+#endif

@@ -1,91 +1,64 @@
-#include <Arduino.h>
-
-#include "ads1256/adc.hpp"
-#include "ads1256/channel.hpp"
-#include "ads1256/gain.hpp"
-#include "ads1256/sample.hpp"
-
-#include "blink.hpp"
+#include "ads1262/cmds/rdata.hpp"
+#include "ads1262/regs/inpmux.hpp"
+#include "ads1262/regs/mode_0.hpp"
+#include "ads1262/regs/mode_1.hpp"
+#include "ads1262/regs/mode_2.hpp"
 #include "checksum.hpp"
-#include "config.hpp"
-
-ADS1256 adc(SS, PA3, PA2);
-
-int32_t getRawValue(int32_t value) {
-    if (value >> 23) {
-        value -= 16777216;
-    }
-
-    return value;
-}
-
-uint8_t shouldReset() {
-    uint8_t gain = adc.getGain();
-    uint8_t sample = adc.getSample();
-    if (gain != GAIN_RATE || sample != SAMPLE_RATE) {
-        return 1;
-    }
-
-    uint8_t buffer, calibration;
-    adc.getStatus(&buffer, &calibration);
-    if (buffer != ADC_BUFFER || calibration != ADC_CALIBRATION) {
-        return 1;
-    }
-
-    return Serial.available() && Serial.read() == RESET_WORD;
-}
-
-void initADC() {
-    adc.begin();
-    adc.reset();
-
-    adc.setGain(GAIN_RATE);
-    adc.setSample(SAMPLE_RATE);
-    adc.setStatus(ADC_BUFFER, ADC_CALIBRATION);
-}
+#include "mcu_utils/delay.hpp"
+#include "mcu_utils/led.hpp"
+#include "mcu_utils/uart.hpp"
+#include "packet.hpp"
+#include "settings.hpp"
 
 void setup() {
-    Serial.begin(SERIAL_BAUD);
-    blinkLED(3, 50);
+    // Initialize MCU & Peripherals
+    uart_init(MCU_UART_RATE);
+    adc_init(ADC_INIT_CONTROL_TYPE_HARD);
+    adc_reset(ADC_RESET_RESET_TYPE_HARD);
+    led_blink(PIN_MCU_STATE, 5);
 
-    initADC();
-    blinkLED(5, 50);
+    // Configure ADC registers
+    adc_reg_mode_0_t mode_0 = {.run_mode = ADC_MODE_0_RUN_MODE_ONESHOT};
+    adc_reg_set_mode_0(&mode_0);
+    adc_reg_mode_1_t mode_1 = {.filter = ADC_MODE_1_FILTER_SINC1};
+    adc_reg_set_mode_1(&mode_1);
+    adc_reg_mode_2_t mode_2 = {.dr = ADC_MODE_2_DR_400};
+    adc_reg_set_mode_2(&mode_2);
 }
 
 void loop() {
-    sensor_t sensor;
-
-    // Get voltage data
-    for (uint16_t i = 0; i < PACKET_SIZE; i++) {
+    // Initialize packet, mux, and channel data
+    packet_t packet;
+    adc_reg_inpmux_t inpmux;
+    adc_cmd_rdata_t EHZ, EHE, EHN;
+    // Collect channel data
+    for (uint8_t i = 0; i < PACKET_SIZE; i++) {
         // Support runtime reset
-        if (shouldReset()) {
-            Serial.write(ACK_WORD, sizeof(ACK_WORD));
-            Serial.flush();
-
-            initADC();
-            blinkLED(1, 50);
+        if (uart_available() && uart_readch() == RESET_WORD) {
+            send_word_packet(ACK_WORDS, sizeof(ACK_WORDS));
+            setup();
         }
-
-        // Vertical geophone (EHZ)
-        adc.getDifferential(ANALOG_INPUT_AIN1, ANALOG_INPUT_AIN2);
-        sensor.EHZ[i] = getRawValue(
-            adc.getDifferential(ANALOG_INPUT_AIN3, ANALOG_INPUT_AIN4));
-        // East-West geophone (EHE)
-        sensor.EHE[i] = getRawValue(
-            adc.getDifferential(ANALOG_INPUT_AIN5, ANALOG_INPUT_AIN6));
-        // North-South geophone (EHN)
-        sensor.EHN[i] = getRawValue(
-            adc.getDifferential(ANALOG_INPUT_AIN7, ANALOG_INPUT_AIN8));
+        // Read EHZ channel
+        inpmux = {.mux_p = ADC_INPMUX_AIN0, .mux_n = ADC_INPMUX_AIN1};
+        adc_reg_set_inpmux(&inpmux);
+        adc_cmd_rdata(&EHZ, ADC_INIT_CONTROL_TYPE_HARD);
+        packet.EHZ[i] = EHZ.data;
+        // Read EHE channel
+        inpmux = {.mux_p = ADC_INPMUX_AIN2, .mux_n = ADC_INPMUX_AIN3};
+        adc_reg_set_inpmux(&inpmux);
+        adc_cmd_rdata(&EHE, ADC_INIT_CONTROL_TYPE_HARD);
+        packet.EHE[i] = EHE.data;
+        // Read EHN channel
+        inpmux = {.mux_p = ADC_INPMUX_AIN4, .mux_n = ADC_INPMUX_AIN5};
+        adc_reg_set_inpmux(&inpmux);
+        adc_cmd_rdata(&EHN, ADC_INIT_CONTROL_TYPE_HARD);
+        packet.EHN[i] = EHN.data;
     }
-
-    // Get checksum
-    sensor.Checksum[0] = getChecksum(sensor.EHZ, PACKET_SIZE);
-    sensor.Checksum[1] = getChecksum(sensor.EHE, PACKET_SIZE);
-    sensor.Checksum[2] = getChecksum(sensor.EHN, PACKET_SIZE);
-
-    // Send syncing word
-    Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
-    // Send struct data
-    Serial.write((uint8_t*)&sensor, sizeof(sensor));
-    Serial.flush();
+    // Get checksum for each channel
+    packet.checksum[0] = get_checksum(packet.EHZ, PACKET_SIZE);
+    packet.checksum[1] = get_checksum(packet.EHE, PACKET_SIZE);
+    packet.checksum[2] = get_checksum(packet.EHN, PACKET_SIZE);
+    // Send sync word and data packet
+    send_word_packet(SYNC_WORDS, sizeof(SYNC_WORDS));
+    send_data_packet(packet);
 }
