@@ -6,8 +6,7 @@
 
 void uart_init(uint32_t baudrate);
 void uart_writech(uint8_t ch);
-void uart_println(const char* str);
-uint8_t uart_available();
+uint8_t uart_hasdata();
 uint8_t uart_readch();
 
 #endif

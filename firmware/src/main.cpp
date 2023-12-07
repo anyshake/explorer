@@ -1,4 +1,5 @@
 #include "ads1262/cmds/rdata.hpp"
+#include "ads1262/regs/id.hpp"
 #include "ads1262/regs/inpmux.hpp"
 #include "ads1262/regs/mode_0.hpp"
 #include "ads1262/regs/mode_1.hpp"
@@ -9,6 +10,14 @@
 #include "mcu_utils/uart.hpp"
 #include "packet.hpp"
 #include "settings.hpp"
+
+uint8_t should_reset() {
+    adc_reg_id_t id;
+    adc_reg_get_id(&id);
+    uint8_t is_ads1262 = id.dev_id == ADC_ID_DEV_ID_ADS1262;
+    uint8_t has_reset_cmd = uart_hasdata() && uart_readch() == RESET_WORD;
+    return !is_ads1262 || has_reset_cmd;
+}
 
 void setup() {
     // Initialize MCU & Peripherals
@@ -34,7 +43,7 @@ void loop() {
     // Collect channel data
     for (uint8_t i = 0; i < PACKET_SIZE; i++) {
         // Support runtime reset
-        if (uart_available() && uart_readch() == RESET_WORD) {
+        if (should_reset()) {
             send_word_packet(ACK_WORDS, sizeof(ACK_WORDS));
             setup();
         }

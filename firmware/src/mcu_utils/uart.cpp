@@ -8,11 +8,7 @@ void uart_writech(uint8_t ch) {
     Serial.write(ch);
 }
 
-void uart_println(const char* str) {
-    Serial.println(str);
-}
-
-uint8_t uart_available() {
+uint8_t uart_hasdata() {
     return Serial.available();
 }
 
