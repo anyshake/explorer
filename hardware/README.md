@@ -35,7 +35,7 @@ graph LR
     EHE[East-West Geophone] --> B[32-bit ADC]
     EHN[North-South Geophone] --> B[32-bit ADC]
     B --> C[MCU Processor]
-    C --> D[RS232 Serial Port]
+    C --> D[Serial Port]
     D --> E[AnyShake Observer]
 ```
 
@@ -43,6 +43,6 @@ graph LR
 
 ## TODO
 
- - [ ] Replace ESP8266 with STM32F103C8T6
+ - [ ] Replace ESP8266 with STM32F103
  - [ ] Support geophone compensation
  - [ ] Support ADC self-calibration

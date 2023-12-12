@@ -40,3 +40,5 @@ Make sure the serial port is recognized by your PC, then you can flash the firmw
 
  - Click PlatformIO icon on the left sidebar
  - Click Default > General > Upload
+
+After the firmware is uploaded, toggle the BOOT pin to NORMAL mode and reset the device.

@@ -16,7 +16,7 @@ AnyShake Explorer consists of ADC, MCU, and RS232 serial port. The ADC is config
  - Seismic data checksum verification
  - Support reset from AnyShake Observer
  - LED indicators for power, ADC, and serial port
- - Easy to port to other MCUs / ADCs with existing firmware code
+ - Easy to port to other MCUs / ADCs with existing code
 
 ## Hardware
 
