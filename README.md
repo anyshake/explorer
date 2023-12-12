@@ -6,7 +6,17 @@ AnyShake Explorer consists of ADC, MCU, and RS232 serial port. The ADC is config
 
 ## Features
 
-TO BE DONE
+ - 5V USB power supply
+ - ADS1262 10-channel, 32-bit ADC
+ - Differential geophone input
+ - 3-component geophone support
+ - RS232 / TTL dual serial port
+ - Variable channel packet length
+ - Variable serial port baud rate
+ - Seismic data checksum verification
+ - Support reset from AnyShake Observer
+ - LED indicators for power, ADC, and serial port
+ - Easy to port to other MCUs / ADCs with existing firmware code
 
 ## Hardware
 
