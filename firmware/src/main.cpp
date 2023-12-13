@@ -51,17 +51,17 @@ void loop() {
         inpmux = {.mux_p = ADC_INPMUX_AIN0, .mux_n = ADC_INPMUX_AIN1};
         adc_reg_set_inpmux(&inpmux);
         adc_cmd_rdata(&EHZ, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHZ[i] = EHZ.data;
+        packet.EHZ[i] = EHZ.data >> 5;
         // Read EHE channel
         inpmux = {.mux_p = ADC_INPMUX_AIN2, .mux_n = ADC_INPMUX_AIN3};
         adc_reg_set_inpmux(&inpmux);
         adc_cmd_rdata(&EHE, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHE[i] = EHE.data;
+        packet.EHE[i] = EHE.data >> 5;
         // Read EHN channel
         inpmux = {.mux_p = ADC_INPMUX_AIN4, .mux_n = ADC_INPMUX_AIN5};
         adc_reg_set_inpmux(&inpmux);
         adc_cmd_rdata(&EHN, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHN[i] = EHN.data;
+        packet.EHN[i] = EHN.data >> 5;
     }
     // Get checksum for each channel
     packet.checksum[0] = get_checksum(packet.EHZ, PACKET_SIZE);

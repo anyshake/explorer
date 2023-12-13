@@ -31,9 +31,9 @@ The following diagram shows the hardware architecture of the AnyShake Explorer.
 
 ```mermaid
 graph LR
-    EHZ[Vertical Geophone] --> B[32-bit ADC]
-    EHE[East-West Geophone] --> B[32-bit ADC]
-    EHN[North-South Geophone] --> B[32-bit ADC]
+    EHZ[Vertical Geophone] --> B[Differential ADC]
+    EHE[East-West Geophone] --> B[Differential ADC]
+    EHN[North-South Geophone] --> B[Differential ADC]
     B --> C[MCU Processor]
     C --> D[Serial Port]
     D --> E[AnyShake Observer]
