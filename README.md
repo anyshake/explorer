@@ -20,7 +20,7 @@ See [README.md](https://github.com/anyshake/explorer/tree/master/firmware/README
 
 ## Documentation
 
-Please visit [anyshake.org/docs/intro](https://anyshake.org/docs/intro) for quick start guide and more information.
+Please visit [anyshake.org/docs/intro](https://anyshake.org/docs/introduction) for quick start guide and more information.
 
 ## Features
 
