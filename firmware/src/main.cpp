@@ -15,7 +15,6 @@ uint8_t should_reset() {
     adc_reg_id_t id;
     adc_reg_get_id(&id);
     uint8_t is_ads1262 = id.dev_id == ADC_ID_DEV_ID_ADS1262;
-    Serial.println(id.rev_id);
     uint8_t has_reset_cmd = uart_hasdata() && uart_readch() == RESET_WORD;
     return !is_ads1262 || has_reset_cmd;
 }
@@ -64,11 +63,11 @@ void loop() {
         adc_cmd_rdata(&EHN, ADC_INIT_CONTROL_TYPE_HARD);
         packet.EHN[i] = EHN.data >> 5;
     }
-    // // Get checksum for each channel
-    // packet.checksum[0] = get_checksum(packet.EHZ, PACKET_SIZE);
-    // packet.checksum[1] = get_checksum(packet.EHE, PACKET_SIZE);
-    // packet.checksum[2] = get_checksum(packet.EHN, PACKET_SIZE);
-    // // Send sync word and data packet
-    // send_word_packet(SYNC_WORDS, sizeof(SYNC_WORDS));
-    // send_data_packet(packet);
+    // Get checksum for each channel
+    packet.checksum[0] = get_checksum(packet.EHZ, PACKET_SIZE);
+    packet.checksum[1] = get_checksum(packet.EHE, PACKET_SIZE);
+    packet.checksum[2] = get_checksum(packet.EHN, PACKET_SIZE);
+    // Send sync word and data packet
+    send_word_packet(SYNC_WORDS, sizeof(SYNC_WORDS));
+    send_data_packet(packet);
 }
