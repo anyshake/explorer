@@ -24,8 +24,17 @@ void adc_reset(uint8_t reset_type) {
 }
 
 void adc_wait() {
-    while (!!gpio_read(PIN_ADC_DRDY)) {
-        ;
+    boolean is_ready = false;
+    for (uint16_t i = 0; i < UINT16_MAX; i++) {
+        if (!gpio_read(PIN_ADC_DRDY)) {
+            is_ready = true;
+            break;
+        }
+        delay_us(5);
+    }
+    // Hard reset if PIN_ADC_DRDY is stuck high
+    if (!is_ready) {
+        adc_reset(ADC_RESET_RESET_TYPE_HARD);
     }
 }
 

@@ -1,6 +1,7 @@
 #ifndef __ADS1262_UTILS_HPP
 #define __ADS1262_UTILS_HPP
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "ads1262/cmds/cmd_map.hpp"
