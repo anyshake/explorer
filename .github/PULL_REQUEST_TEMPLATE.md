@@ -1,7 +1,8 @@
-**Description**
+### Description
+
 <!--
-Please explain the changes you made here.
-If the feature changes current behaviour, explain why your solution is better.
+    Please explain the changes you made here.
+    If the feature changes current behaviour, explain why your solution is better.
 -->
 
 Before submitting your PR, please indicate which issues (in any of the repos) are either fixed or closed by this PR. See [GitHub Help: Closing issues using keywords](https://help.github.com/articles/closing-issues-via-commit-messages/).
@@ -12,9 +13,9 @@ Before submitting your PR, please indicate which issues (in any of the repos) ar
 - [ ] DO make sure that related issues are opened in other repositories. I.e., the AnyShake Observer, sync word need to be updated
 - [ ] AVOID breaking the continuous integration build.
 
-**Further comments**
-<!--
-If this is a relatively large or complex change, kick off the discussion by explaining why you chose the solution you did, what alternatives you considered, etc.
+### Further comments
 
-:heart: Thank you!
+<!--
+    If this is a relatively large or complex change, kick off the discussion by explaining why you chose the solution you did, what alternatives you considered, etc.
+    :heart: Thank you!
 -->
