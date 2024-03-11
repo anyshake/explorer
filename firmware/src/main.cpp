@@ -29,9 +29,9 @@ void setup() {
     // Configure ADC registers
     adc_reg_mode_0_t mode_0 = {.run_mode = ADC_MODE_0_RUN_MODE_ONESHOT};
     adc_reg_set_mode_0(&mode_0);
-    adc_reg_mode_1_t mode_1 = {.filter = ADC_MODE_1_FILTER_SINC1};
+    adc_reg_mode_1_t mode_1 = {.filter = ADC_MODE_1_FILTER_SINC4};
     adc_reg_set_mode_1(&mode_1);
-    adc_reg_mode_2_t mode_2 = {.dr = ADC_MODE_2_DR_400};
+    adc_reg_mode_2_t mode_2 = {.dr = ADC_MODE_2_DR_1200};
     adc_reg_set_mode_2(&mode_2);
 }
 
