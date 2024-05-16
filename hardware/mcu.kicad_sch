@@ -651,11 +651,11 @@
         )
       )
     )
-    (symbol "Device:L_Small" (pin_numbers hide) (pin_names (offset 0.254) hide) (in_bom yes) (on_board yes)
-      (property "Reference" "L" (at 0.762 1.016 0)
+    (symbol "Device:L_Ferrite_Small" (pin_numbers hide) (pin_names (offset 0.254) hide) (in_bom yes) (on_board yes)
+      (property "Reference" "L" (at 1.27 1.016 0)
         (effects (font (size 1.27 1.27)) (justify left))
       )
-      (property "Value" "L_Small" (at 0.762 -1.016 0)
+      (property "Value" "L_Ferrite_Small" (at 1.27 -1.27 0)
         (effects (font (size 1.27 1.27)) (justify left))
       )
       (property "Footprint" "" (at 0 0 0)
@@ -667,18 +667,146 @@
       (property "ki_keywords" "inductor choke coil reactor magnetic" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Inductor, small symbol" (at 0 0 0)
+      (property "ki_description" "Inductor with ferrite core, small symbol" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_fp_filters" "Choke_* *Coil* Inductor_* L_*" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "L_Small_0_1"
+      (symbol "L_Ferrite_Small_0_1"
         (arc (start 0 -2.032) (mid 0.5058 -1.524) (end 0 -1.016)
           (stroke (width 0) (type default))
           (fill (type none))
         )
         (arc (start 0 -1.016) (mid 0.5058 -0.508) (end 0 0)
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 -1.905)
+            (xy 0.762 -1.651)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 -1.397)
+            (xy 0.762 -1.143)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 -0.889)
+            (xy 0.762 -0.635)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 -0.381)
+            (xy 0.762 -0.127)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 0.127)
+            (xy 0.762 0.381)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 0.635)
+            (xy 0.762 0.889)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 1.143)
+            (xy 0.762 1.397)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0.762 1.651)
+            (xy 0.762 1.905)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 -1.651)
+            (xy 1.016 -1.905)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 -1.143)
+            (xy 1.016 -1.397)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 -0.635)
+            (xy 1.016 -0.889)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 -0.127)
+            (xy 1.016 -0.381)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 0.381)
+            (xy 1.016 0.127)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 0.889)
+            (xy 1.016 0.635)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 1.397)
+            (xy 1.016 1.143)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 1.016 1.905)
+            (xy 1.016 1.651)
+          )
           (stroke (width 0) (type default))
           (fill (type none))
         )
@@ -691,7 +819,7 @@
           (fill (type none))
         )
       )
-      (symbol "L_Small_1_1"
+      (symbol "L_Ferrite_Small_1_1"
         (pin passive line (at 0 2.54 270) (length 0.508)
           (name "~" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
@@ -4178,6 +4306,32 @@
     )
   )
 
+  (symbol (lib_id "Device:L_Ferrite_Small") (at 87.63 24.765 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 28c39316-b1bc-4cdb-898b-629cb8b9678a)
+    (property "Reference" "L2" (at 87.63 19.7317 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "20uH" (at 87.63 22.1559 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Inductor_SMD:L_7.3x7.3_H3.5" (at 87.63 24.765 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 87.63 24.765 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid bd0b81d9-22e8-474e-b06e-6ea593376f23))
+    (pin "2" (uuid 66e8e920-9529-4a61-b259-8ecd6769beda))
+    (instances
+      (project "Explorer"
+        (path "/5c8f7424-a999-476e-9d2c-ffb743590705/e18fc294-84d1-4936-8800-6a2f75cce34e"
+          (reference "L2") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R_Small") (at 26.035 107.315 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2b6418ae-44f3-4b73-b41d-15660c430579)
@@ -6022,32 +6176,6 @@
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/e18fc294-84d1-4936-8800-6a2f75cce34e"
           (reference "#PWR044") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:L_Small") (at 87.63 24.765 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid f0abc6ea-5867-493a-8ab7-49c29ccf555d)
-    (property "Reference" "L2" (at 87.63 20.2419 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "20uH" (at 87.63 22.6661 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Inductor_SMD:L_7.3x7.3_H3.5" (at 87.63 24.765 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 87.63 24.765 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 91e3c4b9-49e3-4ce5-a65b-bdc6ea114627))
-    (pin "2" (uuid ef8becab-9f85-40f9-afff-14e4adf25310))
-    (instances
-      (project "Explorer"
-        (path "/5c8f7424-a999-476e-9d2c-ffb743590705/e18fc294-84d1-4936-8800-6a2f75cce34e"
-          (reference "L2") (unit 1)
         )
       )
     )

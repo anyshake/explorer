@@ -738,6 +738,10 @@
           (name "V+" (effects (font (size 1 1))))
           (number "8" (effects (font (size 1.27 1.27))))
         )
+        (pin no_connect line (at 3.81 -3.81 90) (length 2.54) hide
+          (name "PAD" (effects (font (size 1.27 1.27))))
+          (number "9" (effects (font (size 1.27 1.27))))
+        )
       )
       (symbol "OPA2211_2_1"
         (pin input line (at -6.35 2.54 0) (length 2.54)
@@ -3193,7 +3197,7 @@
     (property "Value" "1uF" (at 29.7561 137.8529 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.4" (at 29.21 140.97 0)
+    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.7" (at 29.21 140.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 29.21 140.97 0)
@@ -3457,7 +3461,7 @@
     (property "Value" "1uF" (at 32.004 99.091 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.4" (at 29.845 98.425 0)
+    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.7" (at 29.845 98.425 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 29.845 98.425 0)
@@ -3754,6 +3758,7 @@
     (pin "2" (uuid 32e3dcf6-9190-4f59-b140-8c78110e397b))
     (pin "1" (uuid c136d26e-aebe-4f3c-92d8-a317b32396a8))
     (pin "8" (uuid c1bcfdad-380c-421e-9fd1-248db9b52d1d))
+    (pin "9" (uuid 712d2c8e-c6cd-400f-97f5-935bb61a1fc4))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
@@ -3837,6 +3842,7 @@
     (pin "2" (uuid 32e3dcf6-9190-4f59-b140-8c78110e397d))
     (pin "1" (uuid c136d26e-aebe-4f3c-92d8-a317b32396aa))
     (pin "8" (uuid c1bcfdad-380c-421e-9fd1-248db9b52d1f))
+    (pin "9" (uuid b6e1e308-5c19-42d4-a6b2-8053401efc93))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
@@ -3983,7 +3989,7 @@
     (property "Value" "1uF" (at 84.5439 137.8529 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.4" (at 85.09 140.97 0)
+    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.7" (at 85.09 140.97 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 85.09 140.97 0)
@@ -4049,6 +4055,7 @@
     (pin "2" (uuid 32e3dcf6-9190-4f59-b140-8c78110e397e))
     (pin "1" (uuid c136d26e-aebe-4f3c-92d8-a317b32396ab))
     (pin "8" (uuid c1bcfdad-380c-421e-9fd1-248db9b52d20))
+    (pin "9" (uuid b3029548-1cfb-4b00-a063-c82e3c2649cb))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
@@ -4462,6 +4469,7 @@
     (pin "2" (uuid f9b310f2-5649-4082-987d-f98d6f15c972))
     (pin "1" (uuid 840f07cb-99cf-4e59-8d65-60ec888a417d))
     (pin "8" (uuid 218829dd-1cbb-490d-abd5-847e8c09239f))
+    (pin "9" (uuid 8c87b6db-6b3f-4e04-b27f-09680ab47abf))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
@@ -4556,7 +4564,7 @@
     (property "Value" "1uF" (at 152.654 151.796 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.4" (at 150.495 151.13 0)
+    (property "Footprint" "Capacitor_SMD:CP_Elec_4x5.7" (at 150.495 151.13 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 150.495 151.13 0)
@@ -4769,6 +4777,7 @@
     (pin "2" (uuid 32e3dcf6-9190-4f59-b140-8c78110e397f))
     (pin "1" (uuid c136d26e-aebe-4f3c-92d8-a317b32396ac))
     (pin "8" (uuid c1bcfdad-380c-421e-9fd1-248db9b52d21))
+    (pin "9" (uuid 04d8f422-6cd0-475d-83da-9d8c640f416e))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
@@ -4801,6 +4810,7 @@
     (pin "2" (uuid ba36b44a-6f46-4f68-8d46-561ed9d8169d))
     (pin "1" (uuid 871563bc-09fa-48f5-bff3-1895841886a5))
     (pin "8" (uuid f8b1ba3f-5ae1-4275-8ad7-e63b5b168deb))
+    (pin "9" (uuid e56995fe-2048-4513-8d79-7dc198c288c0))
     (instances
       (project "Explorer"
         (path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"

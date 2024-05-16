@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/yuki/Devel/Hardware/Explorer/hardware/Explorer.kicad_sch</source>
-    <date>西元2024年05月16日 (週四) 14時21分47秒</date>
+    <date>西元2024年05月16日 (週四) 16時00分21秒</date>
     <tool>Eeschema 7.0.10</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -80,7 +80,7 @@
   <components>
     <comp ref="C1">
       <value>22uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -91,7 +91,7 @@
     </comp>
     <comp ref="C2">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -124,7 +124,7 @@
     </comp>
     <comp ref="C5">
       <value>100uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_8x10</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -135,7 +135,7 @@
     </comp>
     <comp ref="C6">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_8x10</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -168,7 +168,7 @@
     </comp>
     <comp ref="C9">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -179,7 +179,7 @@
     </comp>
     <comp ref="C10">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -234,7 +234,7 @@
     </comp>
     <comp ref="C15">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -267,7 +267,7 @@
     </comp>
     <comp ref="C18">
       <value>47uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -278,7 +278,7 @@
     </comp>
     <comp ref="C19">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -289,7 +289,7 @@
     </comp>
     <comp ref="C20">
       <value>100uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_8x10</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -300,7 +300,7 @@
     </comp>
     <comp ref="C21">
       <value>47uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -311,7 +311,7 @@
     </comp>
     <comp ref="C22">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -333,7 +333,7 @@
     </comp>
     <comp ref="C24">
       <value>47uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -344,7 +344,7 @@
     </comp>
     <comp ref="C25">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -355,7 +355,7 @@
     </comp>
     <comp ref="C26">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -366,7 +366,7 @@
     </comp>
     <comp ref="C27">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -410,7 +410,7 @@
     </comp>
     <comp ref="C31">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -443,7 +443,7 @@
     </comp>
     <comp ref="C34">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -465,7 +465,7 @@
     </comp>
     <comp ref="C36">
       <value>47uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -476,7 +476,7 @@
     </comp>
     <comp ref="C37">
       <value>10uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_6.3x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
@@ -578,13 +578,13 @@
     <comp ref="L1">
       <value>10uH</value>
       <footprint>Inductor_SMD:L_7.3x7.3_H3.5</footprint>
-      <libsource lib="Device" part="L_Ferrite" description="Inductor with ferrite core"/>
+      <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
       <property name="Sheetname" value="Power Supply"/>
       <property name="Sheetfile" value="power.kicad_sch"/>
-      <property name="ki_description" value="Inductor with ferrite core"/>
+      <property name="ki_description" value="Inductor with ferrite core, small symbol"/>
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <sheetpath names="/Power Supply/" tstamps="/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384/"/>
-      <tstamps>037c89ce-f6eb-4928-a9b7-3a4caf2fea13</tstamps>
+      <tstamps>69a9417f-cc34-4f88-b537-f7e52a7e7e70</tstamps>
     </comp>
     <comp ref="R1">
       <value>124k</value>
@@ -1276,13 +1276,13 @@
     <comp ref="L2">
       <value>20uH</value>
       <footprint>Inductor_SMD:L_7.3x7.3_H3.5</footprint>
-      <libsource lib="Device" part="L_Small" description="Inductor, small symbol"/>
+      <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
       <property name="Sheetname" value="MCU Controller"/>
       <property name="Sheetfile" value="mcu.kicad_sch"/>
-      <property name="ki_description" value="Inductor, small symbol"/>
+      <property name="ki_description" value="Inductor with ferrite core, small symbol"/>
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <sheetpath names="/MCU Controller/" tstamps="/e18fc294-84d1-4936-8800-6a2f75cce34e/"/>
-      <tstamps>f0abc6ea-5867-493a-8ab7-49c29ccf555d</tstamps>
+      <tstamps>28c39316-b1bc-4cdb-898b-629cb8b9678a</tstamps>
     </comp>
     <comp ref="R16">
       <value>10k</value>
@@ -1828,7 +1828,7 @@
     </comp>
     <comp ref="C68">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Geophone"/>
       <property name="Sheetfile" value="geophone.kicad_sch"/>
@@ -1850,7 +1850,7 @@
     </comp>
     <comp ref="C70">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Geophone"/>
       <property name="Sheetfile" value="geophone.kicad_sch"/>
@@ -1861,7 +1861,7 @@
     </comp>
     <comp ref="C71">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Geophone"/>
       <property name="Sheetfile" value="geophone.kicad_sch"/>
@@ -1894,7 +1894,7 @@
     </comp>
     <comp ref="C74">
       <value>1uF</value>
-      <footprint>Capacitor_SMD:CP_Elec_4x5.4</footprint>
+      <footprint>Capacitor_SMD:CP_Elec_4x5.7</footprint>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Sheetname" value="Geophone"/>
       <property name="Sheetfile" value="geophone.kicad_sch"/>
@@ -2597,8 +2597,8 @@
         <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="L_Ferrite">
-      <description>Inductor with ferrite core</description>
+    <libpart lib="Device" part="L_Ferrite_Small">
+      <description>Inductor with ferrite core, small symbol</description>
       <docs>~</docs>
       <footprints>
         <fp>Choke_*</fp>
@@ -2608,26 +2608,7 @@
       </footprints>
       <fields>
         <field name="Reference">L</field>
-        <field name="Value">L_Ferrite</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Device" part="L_Small">
-      <description>Inductor, small symbol</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Choke_*</fp>
-        <fp>*Coil*</fp>
-        <fp>Inductor_*</fp>
-        <fp>L_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">L</field>
-        <field name="Value">L_Small</field>
+        <field name="Value">L_Ferrite_Small</field>
         <field name="Datasheet">~</field>
       </fields>
       <pins>
@@ -2737,6 +2718,7 @@
         <pin num="6" name="-" type="input"/>
         <pin num="7" name="" type="output"/>
         <pin num="8" name="V+" type="power_in"/>
+        <pin num="9" name="PAD" type="no_connect"/>
       </pins>
     </libpart>
     <libpart lib="Explorer" part="SSD1306">
@@ -3287,7 +3269,7 @@
       <node ref="D12" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J7" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="J7" pin="2" pinfunction="Pin_2" pintype="passive"/>
-      <node ref="L1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="L1" pin="2" pintype="passive"/>
       <node ref="R1" pin="1" pintype="passive"/>
       <node ref="R16" pin="2" pintype="passive"/>
       <node ref="R2" pin="1" pintype="passive"/>
@@ -3705,7 +3687,7 @@
     <net code="62" name="Net-(D1-K)">
       <node ref="C4" pin="2" pintype="passive"/>
       <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
-      <node ref="L1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="L1" pin="1" pintype="passive"/>
       <node ref="U1" pin="1" pinfunction="SW" pintype="free"/>
     </net>
     <net code="63" name="Net-(D2-A)">
@@ -4072,10 +4054,19 @@
     <net code="157" name="unconnected-(U8-~{RST}-Pad4)">
       <node ref="U8" pin="4" pinfunction="~{RST}" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="158" name="unconnected-(U14-ALERT{slash}RDY-Pad2)">
+    <net code="158" name="unconnected-(U10A-PAD-Pad9)">
+      <node ref="U10" pin="9" pinfunction="PAD" pintype="no_connect"/>
+    </net>
+    <net code="159" name="unconnected-(U11A-PAD-Pad9)">
+      <node ref="U11" pin="9" pinfunction="PAD" pintype="no_connect"/>
+    </net>
+    <net code="160" name="unconnected-(U12A-PAD-Pad9)">
+      <node ref="U12" pin="9" pinfunction="PAD" pintype="no_connect"/>
+    </net>
+    <net code="161" name="unconnected-(U14-ALERT{slash}RDY-Pad2)">
       <node ref="U14" pin="2" pinfunction="ALERT/RDY" pintype="output+no_connect"/>
     </net>
-    <net code="159" name="unconnected-(X1-~{ST}-Pad1)">
+    <net code="162" name="unconnected-(X1-~{ST}-Pad1)">
       <node ref="X1" pin="1" pinfunction="~{ST}" pintype="input+no_connect"/>
     </net>
   </nets>
