@@ -4312,7 +4312,7 @@
     (property "Reference" "L2" (at 87.63 19.7317 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "20uH" (at 87.63 22.1559 90)
+    (property "Value" "22uH" (at 87.63 22.1559 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Inductor_SMD:L_7.3x7.3_H3.5" (at 87.63 24.765 0)

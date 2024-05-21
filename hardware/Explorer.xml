@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/yuki/Devel/Hardware/Explorer/hardware/Explorer.kicad_sch</source>
-    <date>西元2024年05月16日 (週四) 16時00分21秒</date>
+    <date>西元2024年05月22日 (週三) 00時44分20秒</date>
     <tool>Eeschema 7.0.10</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1274,7 +1274,7 @@
       <tstamps>84970306-deeb-4f4f-a9ae-935ae0d87581</tstamps>
     </comp>
     <comp ref="L2">
-      <value>20uH</value>
+      <value>22uH</value>
       <footprint>Inductor_SMD:L_7.3x7.3_H3.5</footprint>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
       <property name="Sheetname" value="MCU Controller"/>
