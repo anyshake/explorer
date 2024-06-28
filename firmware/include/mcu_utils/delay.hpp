@@ -1,10 +1,11 @@
-#ifndef __MCU_UTILS_DELAY_HPP__
-#define __MCU_UTILS_DELAY_HPP__
+#ifndef __MCU_UTILS_DELAY__
+#define __MCU_UTILS_DELAY__
 
 #include <Arduino.h>
 #include <stdint.h>
+#include "FreeRTOS.h"
+#include "task.h"
 
-void delay_ms(uint32_t ms);
-void delay_us(uint32_t us);
+void mcu_utils_delay_ms(uint32_t ms, uint8_t rtos);
 
 #endif

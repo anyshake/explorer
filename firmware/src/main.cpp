@@ -1,73 +1,115 @@
-#include "ads1262/cmds/rdata.hpp"
-#include "ads1262/regs/id.hpp"
-#include "ads1262/regs/inpmux.hpp"
-#include "ads1262/regs/mode_0.hpp"
-#include "ads1262/regs/mode_1.hpp"
-#include "ads1262/regs/mode_2.hpp"
-#include "checksum.hpp"
-#include "mcu_utils/delay.hpp"
-#include "mcu_utils/led.hpp"
-#include "mcu_utils/uart.hpp"
-#include "packet.hpp"
-#include "settings.hpp"
+// #include "FreeRTOS.h"
+// #include "semphr.h"
+// #include "task.h"
 
-uint8_t should_reset() {
-    adc_reg_id_t id;
-    adc_reg_get_id(&id);
-    uint8_t is_ads1262 = id.dev_id == ADC_ID_DEV_ID_ADS1262;
-    uint8_t has_reset_cmd = uart_hasdata() && uart_readch() == RESET_WORD;
-    return !is_ads1262 || has_reset_cmd;
-}
+// #include "ds3231/time.hpp"
+// #include "ds3231/types.hpp"
+
+// #include "gnss/parse.hpp"
+// #include "gnss/types.hpp"
+// #include "gnss/utils.hpp"
+
+// #include "mcu_utils/delay.hpp"
+// #include "mcu_utils/led.hpp"
+// #include "mcu_utils/uart.hpp"
+
+// typedef struct {
+//     SemaphoreHandle_t i2c_bus_mutex;
+//     ds3231_time_t rtc_time;
+//     SemaphoreHandle_t rtc_time_mutex;
+//     gnss_time_t gnss_time;
+//     SemaphoreHandle_t gnss_time_mutex;
+//     gnss_location_t gnss_location;
+//     SemaphoreHandle_t gnss_location_mutex;
+// } global_task_parameters_t;
+
+// void setup() {
+//     static global_task_parameters_t params;
+
+//     params.rtc_time_mutex = xSemaphoreCreateMutex();
+//     params.gnss_location_mutex = xSemaphoreCreateMutex();
+//     params.gnss_time_mutex = xSemaphoreCreateMutex();
+//     params.i2c_bus_mutex = xSemaphoreCreateMutex();
+
+//     if (params.rtc_time_mutex == NULL || params.gnss_location_mutex == NULL
+//     ||
+//         params.gnss_time_mutex == NULL || params.i2c_bus_mutex == NULL) {
+//         mcu_utils_led_blink(MCU_PIN_STATE, 0, 0);
+//     }
+
+//     mcu_utils_i2c_init();
+
+//     gnss_init(GNSS_UART_BAUDRATE);
+//     mcu_utils_uart_init(MCU_UART_BAUDRATE);
+
+//     static TaskHandle_t handle_read_peripherals = NULL;
+//     xTaskCreate(read_peripherals, "read_peripherals",
+//     configMINIMAL_STACK_SIZE,
+//                 &params, tskIDLE_PRIORITY, &handle_read_peripherals);
+
+//     static TaskHandle_t handle_read_gnss = NULL;
+//     xTaskCreate(read_gnss, "read_gnss", configMINIMAL_STACK_SIZE * 4,
+//     &params,
+//                 tskIDLE_PRIORITY, &handle_read_gnss);
+
+//     static TaskHandle_t handle_send_packet = NULL;
+//     xTaskCreate(send_packet, "send_packet", configMINIMAL_STACK_SIZE,
+//     &params,
+//                 tskIDLE_PRIORITY, &handle_send_packet);
+
+//     mcu_utils_led_blink(MCU_PIN_STATE, 5, 0);
+//     vTaskStartScheduler();
+// }
+
+// void loop() {
+//     ;
+// }
+
+#include <Arduino.h>
+#include <SoftwareSerial.h>
+#include <Wire.h>
+
+SoftwareSerial mySerial(PA12, PA11);  // RX, TX
 
 void setup() {
-    // Initialize MCU & Peripherals
-    uart_init(MCU_UART_RATE);
-    adc_init(ADC_INIT_CONTROL_TYPE_HARD);
-    adc_reset(ADC_RESET_RESET_TYPE_HARD);
-    led_blink(PIN_MCU_STATE, 5);
+    Wire.begin();
+    Serial.begin(9600);
+    mySerial.begin(9600);
 
-    // Configure ADC registers
-    adc_reg_mode_0_t mode_0 = {.run_mode = ADC_MODE_0_RUN_MODE_ONESHOT};
-    adc_reg_set_mode_0(&mode_0);
-    adc_reg_mode_1_t mode_1 = {.filter = ADC_MODE_1_FILTER_SINC3};
-    adc_reg_set_mode_1(&mode_1);
-    adc_reg_mode_2_t mode_2 = {.dr = ADC_MODE_2_DR_400};
-    adc_reg_set_mode_2(&mode_2);
+    byte error, address;
+    int nDevices;
+
+    nDevices = 0;
+    for (address = 1; address < 127; address++) {
+        // The i2c_scanner uses the return value of
+        // the Write.endTransmisstion to see if
+        // a device did acknowledge to the address.
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
+
+        if (error == 0) {
+            Serial.print("I2C device found at address 0x");
+            if (address < 16)
+                Serial.print("0");
+            Serial.print(address, HEX);
+            Serial.println("  !");
+
+            nDevices++;
+        } else if (error == 4) {
+            Serial.print("Unknown error at address 0x");
+            if (address < 16)
+                Serial.print("0");
+            Serial.println(address, HEX);
+        }
+    }
+    if (nDevices == 0)
+        Serial.println("No I2C devices found\n");
+    else
+        Serial.println("done\n");
 }
 
 void loop() {
-    // Initialize packet, mux, and channel data
-    packet_t packet;
-    adc_reg_inpmux_t inpmux;
-    adc_cmd_rdata_t EHZ, EHE, EHN;
-    // Collect channel data
-    for (uint8_t i = 0; i < PACKET_SIZE; i++) {
-        // Support runtime reset
-        if (should_reset()) {
-            send_word_packet(ACK_WORDS, sizeof(ACK_WORDS));
-            setup();
-        }
-        // Read EHZ channel
-        inpmux = {.mux_p = ADC_INPMUX_AIN0, .mux_n = ADC_INPMUX_AIN1};
-        adc_reg_set_inpmux(&inpmux);
-        adc_cmd_rdata(&EHZ, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHZ[i] = EHZ.data >> 5;
-        // Read EHE channel
-        inpmux = {.mux_p = ADC_INPMUX_AIN2, .mux_n = ADC_INPMUX_AIN3};
-        adc_reg_set_inpmux(&inpmux);
-        adc_cmd_rdata(&EHE, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHE[i] = EHE.data >> 5;
-        // Read EHN channel
-        inpmux = {.mux_p = ADC_INPMUX_AIN4, .mux_n = ADC_INPMUX_AIN5};
-        adc_reg_set_inpmux(&inpmux);
-        adc_cmd_rdata(&EHN, ADC_INIT_CONTROL_TYPE_HARD);
-        packet.EHN[i] = EHN.data >> 5;
+    if (mySerial.available()) {
+        Serial.write(mySerial.read());
     }
-    // Get checksum for each channel
-    packet.checksum[0] = get_checksum(packet.EHZ, PACKET_SIZE);
-    packet.checksum[1] = get_checksum(packet.EHE, PACKET_SIZE);
-    packet.checksum[2] = get_checksum(packet.EHN, PACKET_SIZE);
-    // Send sync word and data packet
-    send_word_packet(SYNC_WORDS, sizeof(SYNC_WORDS));
-    send_data_packet(packet);
 }

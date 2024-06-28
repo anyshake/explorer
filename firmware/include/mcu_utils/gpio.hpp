@@ -1,15 +1,15 @@
-#ifndef __MCU_UTILS_GPIO_HPP
-#define __MCU_UTILS_GPIO_HPP
+#ifndef __MCU_UTILS_GPIO__
+#define __MCU_UTILS_GPIO__
 
 #include <Arduino.h>
 #include <stdint.h>
 
-#define GPIO_MODE_INPUT 0
-#define GPIO_MODE_OUTPUT 1
+#define MCU_GPIO_MODE_INPUT 0
+#define MCU_GPIO_MODE_OUTPUT 1
 
-void gpio_mode(uint8_t pin, uint8_t mode);
-void gpio_high(uint8_t pin);
-void gpio_low(uint8_t pin);
-uint8_t gpio_read(uint8_t pin);
+void mcu_utils_gpio_mode(uint8_t pin, uint8_t mode);
+void mcu_utils_gpio_high(uint8_t pin);
+void mcu_utils_gpio_low(uint8_t pin);
+uint8_t mcu_utils_gpio_read(uint8_t pin);
 
 #endif

@@ -1,235 +1,937 @@
-(kicad_sch (version 20230121) (generator eeschema)
-
-  (uuid 5c8f7424-a999-476e-9d2c-ffb743590705)
-
-  (paper "A4")
-
-  (title_block
-    (title "AnyShake Explorer")
-    (date "2024-05-06")
-    (company "AnyShake Project")
-  )
-
-  (lib_symbols
-  )
-
-  (junction (at 114.3 109.855) (diameter 0) (color 0 0 0 0)
-    (uuid d93bf9b9-9cee-4c59-8533-eafa3b4a23ad)
-  )
-
-  (wire (pts (xy 114.3 109.855) (xy 124.46 109.855))
-    (stroke (width 0) (type default))
-    (uuid 0973cc87-6dd6-475d-b826-db3c9b90a704)
-  )
-  (wire (pts (xy 105.41 74.93) (xy 168.91 74.93))
-    (stroke (width 0) (type default))
-    (uuid 24034908-2434-407d-bbf4-d0d652772d28)
-  )
-  (wire (pts (xy 105.41 109.855) (xy 114.3 109.855))
-    (stroke (width 0) (type default))
-    (uuid 252f9cae-297f-441b-b277-5028799c6c29)
-  )
-  (wire (pts (xy 105.41 87.63) (xy 168.91 87.63))
-    (stroke (width 0) (type default))
-    (uuid 6731a449-7359-4db1-9f83-965996169911)
-  )
-  (wire (pts (xy 105.41 78.105) (xy 168.91 78.105))
-    (stroke (width 0) (type default))
-    (uuid 6ba1a083-6215-409a-a822-70d6eff496c1)
-  )
-  (wire (pts (xy 149.86 100.33) (xy 168.91 100.33))
-    (stroke (width 0) (type default))
-    (uuid 6c8529c5-6d68-4123-a952-fea4f7b18631)
-  )
-  (wire (pts (xy 105.41 90.805) (xy 168.91 90.805))
-    (stroke (width 0) (type default))
-    (uuid 93411aab-3ea9-41d1-9ecf-690078f026cb)
-  )
-  (wire (pts (xy 105.41 84.455) (xy 168.91 84.455))
-    (stroke (width 0) (type default))
-    (uuid a83290be-4e9d-44b5-aada-d73a27d3e014)
-  )
-  (wire (pts (xy 149.86 103.505) (xy 168.91 103.505))
-    (stroke (width 0) (type default))
-    (uuid a83ba3de-5814-44c9-b242-d0455b055246)
-  )
-  (wire (pts (xy 168.91 106.68) (xy 114.3 106.68))
-    (stroke (width 0) (type default))
-    (uuid b2fe8812-2e01-4e37-926d-55393f6b42da)
-  )
-  (wire (pts (xy 114.3 106.68) (xy 114.3 109.855))
-    (stroke (width 0) (type default))
-    (uuid c598ed41-3db6-4710-b275-406e286c4c93)
-  )
-  (wire (pts (xy 149.86 97.155) (xy 168.91 97.155))
-    (stroke (width 0) (type default))
-    (uuid d47a1b92-ff72-47fe-8214-a1e7e11547e1)
-  )
-  (wire (pts (xy 105.41 81.28) (xy 168.91 81.28))
-    (stroke (width 0) (type default))
-    (uuid dd0515bc-02d9-446d-ba2d-057e0b1da5d6)
-  )
-  (wire (pts (xy 105.41 71.755) (xy 168.91 71.755))
-    (stroke (width 0) (type default))
-    (uuid e148d4a4-073b-4a14-a25b-ce8b6ee371d4)
-  )
-  (wire (pts (xy 105.41 93.98) (xy 168.91 93.98))
-    (stroke (width 0) (type default))
-    (uuid fc438eab-7683-44bf-a69e-9ecac42c886b)
-  )
-
-  (sheet (at 124.46 67.31) (size 25.4 46.99) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384)
-    (property "Sheetname" "Power Supply" (at 124.46 66.5984 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "power.kicad_sch" (at 124.46 114.8846 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (pin "A+9V" output (at 149.86 97.155 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 739c60c9-ff07-4383-a306-79137f485b38)
-    )
-    (pin "A-9V" output (at 149.86 100.33 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid e9c8866c-1b1b-4a58-a56a-dcdf4b00e00b)
-    )
-    (pin "D+3V3" output (at 124.46 109.855 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 2059147c-297e-4d9a-a8bf-67f76a70819e)
-    )
-    (pin "A+3V3" output (at 149.86 103.505 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid a015e776-feb1-46dd-a83b-8b2791cfc4f9)
-    )
-    (instances
-      (project "Explorer"
-        (path "/5c8f7424-a999-476e-9d2c-ffb743590705" (page "2"))
-      )
-    )
-  )
-
-  (sheet (at 80.01 67.31) (size 25.4 46.99) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid e18fc294-84d1-4936-8800-6a2f75cce34e)
-    (property "Sheetname" "MCU Controller" (at 80.01 66.5984 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "mcu.kicad_sch" (at 80.01 114.8846 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (pin "D+3V3" input (at 105.41 109.855 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 0572e893-d452-4d27-b8bf-3d1f004fd5d4)
-    )
-    (pin "MCU_SCLK" output (at 105.41 81.28 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 5beb12ca-c247-45e4-acdb-45ef462b6bc1)
-    )
-    (pin "MCU_MISO" input (at 105.41 84.455 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 2d496a27-237d-46f7-a2a0-234585020285)
-    )
-    (pin "MCU_MOSI" output (at 105.41 87.63 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 6f623db4-ae2e-4b0b-93fb-f64352b0ac19)
-    )
-    (pin "ADC_RESET" output (at 105.41 71.755 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 8909cf1b-3719-46cf-ba20-c80bc122474c)
-    )
-    (pin "MCU_CSEL" output (at 105.41 78.105 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 3cfad249-d9ec-4e22-b956-e9cfac28854a)
-    )
-    (pin "ADC_DRDY" input (at 105.41 74.93 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 6f3043c8-0961-4511-a8aa-52304832651b)
-    )
-    (pin "MCU_SCL" output (at 105.41 90.805 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 88b46c71-c13e-4914-aff6-87a4c2a9f186)
-    )
-    (pin "MCU_SDA" bidirectional (at 105.41 93.98 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 3c8184db-7668-4772-b387-3eb9bd3269b8)
-    )
-    (instances
-      (project "Explorer"
-        (path "/5c8f7424-a999-476e-9d2c-ffb743590705" (page "3"))
-      )
-    )
-  )
-
-  (sheet (at 168.91 67.31) (size 25.4 46.99) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid f5de9976-2d5a-4764-868a-75612195ab17)
-    (property "Sheetname" "Geophone" (at 168.91 66.5984 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "geophone.kicad_sch" (at 168.91 114.8846 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (pin "A+3V3" input (at 168.91 103.505 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 4250f82c-d795-44fa-a2b2-808aab75696f)
-    )
-    (pin "A+9V" input (at 168.91 97.155 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 82d5a7bb-15d2-45e6-8e3b-56aa17d3a2c8)
-    )
-    (pin "A-9V" input (at 168.91 100.33 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 79801e4d-3a02-47c1-a73e-abbd1ffe112f)
-    )
-    (pin "D+3V3" input (at 168.91 106.68 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 3360f3da-6aea-4925-bc76-ff477543035b)
-    )
-    (pin "MCU_SCLK" input (at 168.91 81.28 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 78a23a02-24b6-4778-b704-fe598a73123b)
-    )
-    (pin "MCU_MISO" output (at 168.91 84.455 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 5cc3429d-81e9-4550-9ac7-82847b8625c6)
-    )
-    (pin "MCU_MOSI" input (at 168.91 87.63 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 8a6b447b-8c7a-4aad-b573-d2419247171f)
-    )
-    (pin "MCU_CSEL" input (at 168.91 78.105 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid b6d5e0f2-75f6-4f69-a0a3-9408c19b5e18)
-    )
-    (pin "ADC_DRDY" output (at 168.91 74.93 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 8fefd05e-7819-4d9b-bca8-4d58e47d6e9b)
-    )
-    (pin "ADC_RESET" input (at 168.91 71.755 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid c1fd6dce-bdfb-4bce-bee9-0d5a4abaacc9)
-    )
-    (pin "MCU_SCL" input (at 168.91 90.805 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid c8bd4671-7987-4a48-ae1a-84329c869c09)
-    )
-    (pin "MCU_SDA" bidirectional (at 168.91 93.98 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 601257c9-b1da-42c2-a8a3-b3f31ae0f83c)
-    )
-    (instances
-      (project "Explorer"
-        (path "/5c8f7424-a999-476e-9d2c-ffb743590705" (page "4"))
-      )
-    )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
-  )
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "5c8f7424-a999-476e-9d2c-ffb743590705")
+	(paper "A4")
+	(title_block
+		(title "AnyShake Explorer")
+		(date "2024-05-06")
+		(company "AnyShake Project")
+	)
+	(lib_symbols
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim yes)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 90.17 107.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "04c50f77-ee88-4403-9542-70b546092f7e")
+	)
+	(wire
+		(pts
+			(xy 90.17 107.95) (xy 100.33 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0973cc87-6dd6-475d-b826-db3c9b90a704")
+	)
+	(wire
+		(pts
+			(xy 81.28 77.47) (xy 144.78 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "189cd10f-3d62-45d8-88b7-c477a3c3bb5a")
+	)
+	(wire
+		(pts
+			(xy 81.28 107.95) (xy 90.17 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "252f9cae-297f-441b-b277-5028799c6c29")
+	)
+	(wire
+		(pts
+			(xy 81.28 97.79) (xy 144.78 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6731a449-7359-4db1-9f83-965996169911")
+	)
+	(wire
+		(pts
+			(xy 81.28 90.17) (xy 144.78 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ba1a083-6215-409a-a822-70d6eff496c1")
+	)
+	(wire
+		(pts
+			(xy 125.73 110.49) (xy 144.78 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c8529c5-6d68-4123-a952-fea4f7b18631")
+	)
+	(wire
+		(pts
+			(xy 90.17 107.95) (xy 90.17 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e0e3d72-1130-4b69-a6fe-35132c17f792")
+	)
+	(wire
+		(pts
+			(xy 81.28 80.01) (xy 144.78 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7179ed1c-31e1-4465-97f5-3cc22bfcb146")
+	)
+	(wire
+		(pts
+			(xy 81.28 86.36) (xy 144.78 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ac8c055-be71-44af-8005-e9824bbc18a6")
+	)
+	(wire
+		(pts
+			(xy 81.28 101.6) (xy 144.78 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93411aab-3ea9-41d1-9ecf-690078f026cb")
+	)
+	(wire
+		(pts
+			(xy 81.28 95.25) (xy 144.78 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a83290be-4e9d-44b5-aada-d73a27d3e014")
+	)
+	(wire
+		(pts
+			(xy 81.28 74.93) (xy 144.78 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a94954bd-7a50-4ccc-90db-2edebc70d71f")
+	)
+	(wire
+		(pts
+			(xy 144.78 113.03) (xy 90.17 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2fe8812-2e01-4e37-926d-55393f6b42da")
+	)
+	(wire
+		(pts
+			(xy 81.28 83.82) (xy 144.78 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd71bfeb-9821-4d25-9e0e-290e04f2ff16")
+	)
+	(wire
+		(pts
+			(xy 125.73 107.95) (xy 144.78 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d47a1b92-ff72-47fe-8214-a1e7e11547e1")
+	)
+	(wire
+		(pts
+			(xy 81.28 92.71) (xy 144.78 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd0515bc-02d9-446d-ba2d-057e0b1da5d6")
+	)
+	(wire
+		(pts
+			(xy 81.28 104.14) (xy 144.78 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc438eab-7683-44bf-a69e-9ecac42c886b")
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 186.69 80.01 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "35aca6c0-7093-4f0b-bc4e-d7e7be06daf7")
+		(property "Reference" "H1"
+			(at 189.23 78.7399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 189.23 81.2799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+			(at 186.69 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 186.69 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 186.69 99.06 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a89d9c6e-59e7-4c3c-ba26-31f70ee321aa")
+		(property "Reference" "H4"
+			(at 189.23 97.7899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 189.23 100.3299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+			(at 186.69 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 186.69 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 186.69 92.71 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "daf7b5ba-8d26-4e7e-918c-5a18589ba48d")
+		(property "Reference" "H3"
+			(at 189.23 91.4399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 189.23 93.9799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+			(at 186.69 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 186.69 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 186.69 86.36 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f4b923bf-5895-4f77-89c4-a2a897e4e08d")
+		(property "Reference" "H2"
+			(at 189.23 85.0899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 189.23 87.6299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+			(at 186.69 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 186.69 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 100.33 69.85)
+		(size 25.4 48.26)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384")
+		(property "Sheetname" "Power Supply"
+			(at 100.33 69.1384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 100.33 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "D+3V3" output
+			(at 100.33 107.95 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "2059147c-297e-4d9a-a8bf-67f76a70819e")
+		)
+		(pin "A-2V5" output
+			(at 125.73 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8be7ae64-1de0-42a1-ac1f-d5e24006caa7")
+		)
+		(pin "A+2V5" output
+			(at 125.73 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e2d5bae0-39b8-4e15-a487-9eac5d39015b")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 55.88 69.85)
+		(size 25.4 48.26)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e18fc294-84d1-4936-8800-6a2f75cce34e")
+		(property "Sheetname" "MCU Controller"
+			(at 55.88 69.1384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 55.88 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "D+3V3" input
+			(at 81.28 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0572e893-d452-4d27-b8bf-3d1f004fd5d4")
+		)
+		(pin "MCU_SCLK" output
+			(at 81.28 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5beb12ca-c247-45e4-acdb-45ef462b6bc1")
+		)
+		(pin "MCU_MISO" input
+			(at 81.28 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2d496a27-237d-46f7-a2a0-234585020285")
+		)
+		(pin "MCU_MOSI" output
+			(at 81.28 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6f623db4-ae2e-4b0b-93fb-f64352b0ac19")
+		)
+		(pin "ADC_RESET" output
+			(at 81.28 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8909cf1b-3719-46cf-ba20-c80bc122474c")
+		)
+		(pin "MCU_CSEL" output
+			(at 81.28 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3cfad249-d9ec-4e22-b956-e9cfac28854a")
+		)
+		(pin "ADC_DRDY" input
+			(at 81.28 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6f3043c8-0961-4511-a8aa-52304832651b")
+		)
+		(pin "MCU_SCL" output
+			(at 81.28 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "88b46c71-c13e-4914-aff6-87a4c2a9f186")
+		)
+		(pin "MCU_SDA" bidirectional
+			(at 81.28 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3c8184db-7668-4772-b387-3eb9bd3269b8")
+		)
+		(pin "ADC_START" output
+			(at 81.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "945b6774-6f5a-43cb-bf9a-31e5cb68665c")
+		)
+		(pin "MEMS_INT2" input
+			(at 81.28 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b15a1e95-e042-48bd-8f8a-b58730d68c26")
+		)
+		(pin "MEMS_INT1" input
+			(at 81.28 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "fe85b075-dc9c-4393-898e-43feefc33aef")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 144.78 69.85)
+		(size 25.4 48.26)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "f5de9976-2d5a-4764-868a-75612195ab17")
+		(property "Sheetname" "Sensors"
+			(at 144.78 69.1384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sensors.kicad_sch"
+			(at 144.78 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "D+3V3" input
+			(at 144.78 113.03 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "3360f3da-6aea-4925-bc76-ff477543035b")
+		)
+		(pin "MCU_SCLK" input
+			(at 144.78 92.71 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "78a23a02-24b6-4778-b704-fe598a73123b")
+		)
+		(pin "MCU_MISO" output
+			(at 144.78 95.25 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5cc3429d-81e9-4550-9ac7-82847b8625c6")
+		)
+		(pin "MCU_MOSI" input
+			(at 144.78 97.79 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8a6b447b-8c7a-4aad-b573-d2419247171f")
+		)
+		(pin "MCU_CSEL" input
+			(at 144.78 90.17 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b6d5e0f2-75f6-4f69-a0a3-9408c19b5e18")
+		)
+		(pin "ADC_DRDY" output
+			(at 144.78 80.01 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8fefd05e-7819-4d9b-bca8-4d58e47d6e9b")
+		)
+		(pin "ADC_RESET" input
+			(at 144.78 77.47 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c1fd6dce-bdfb-4bce-bee9-0d5a4abaacc9")
+		)
+		(pin "MCU_SCL" input
+			(at 144.78 101.6 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c8bd4671-7987-4a48-ae1a-84329c869c09")
+		)
+		(pin "MCU_SDA" bidirectional
+			(at 144.78 104.14 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "601257c9-b1da-42c2-a8a3-b3f31ae0f83c")
+		)
+		(pin "ADC_START" input
+			(at 144.78 74.93 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c3914779-4869-4f83-9925-dacff6f8582c")
+		)
+		(pin "A-2V5" input
+			(at 144.78 110.49 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "593ba04d-0e5d-4e17-8480-ab17c7b28c16")
+		)
+		(pin "A+2V5" input
+			(at 144.78 107.95 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "90126cf8-53da-4a1f-b4b0-36e7e74266b0")
+		)
+		(pin "MEMS_INT1" output
+			(at 144.78 83.82 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "72cf2168-bcb1-401c-a3e3-0737d14317ee")
+		)
+		(pin "MEMS_INT2" output
+			(at 144.78 86.36 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "7199abc2-cc1c-4f7e-838d-c03ed0c8675b")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
 )
