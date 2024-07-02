@@ -9642,7 +9642,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d099fd22-6743-4853-8d5b-8d92c1f14e99")
 		(property "Reference" "D3"
 			(at 98.7425 16.51 0)

@@ -190,7 +190,7 @@
 		)
 	)
 	(fp_text user "SSD1306"
-		(at -2.1 -2.7 0)
+		(at 6 0.43575 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "22464709-e4a1-490a-82e7-3e4e8c9d3a31")
