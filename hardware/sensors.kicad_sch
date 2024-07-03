@@ -4631,7 +4631,7 @@
 	)
 	(wire
 		(pts
-			(xy 261.62 104.14) (xy 274.32 104.14)
+			(xy 261.62 104.14) (xy 273.05 104.14)
 		)
 		(stroke
 			(width 0)
@@ -5011,7 +5011,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 104.14) (xy 256.54 104.14)
+			(xy 254 104.14) (xy 256.54 104.14)
 		)
 		(stroke
 			(width 0)
@@ -5181,7 +5181,7 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 104.14) (xy 247.65 104.14)
+			(xy 243.84 104.14) (xy 246.38 104.14)
 		)
 		(stroke
 			(width 0)
@@ -8071,7 +8071,7 @@
 		(uuid "a7fe72d0-4c40-4c91-b57f-f10474d93cbb")
 	)
 	(label "ADC_DRDY"
-		(at 274.32 104.14 180)
+		(at 273.05 104.14 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12705,7 +12705,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 251.46 104.14 0)
+		(at 250.19 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12714,7 +12714,7 @@
 		(fields_autoplaced yes)
 		(uuid "659ae61e-03f4-462b-bb32-eb2bf692801d")
 		(property "Reference" "D23"
-			(at 249.8725 97.79 0)
+			(at 248.6025 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12722,7 +12722,7 @@
 			)
 		)
 		(property "Value" "LED"
-			(at 249.8725 100.33 0)
+			(at 248.6025 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12730,7 +12730,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 251.46 104.14 0)
+			(at 250.19 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12739,7 +12739,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 251.46 104.14 0)
+			(at 250.19 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12748,7 +12748,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 251.46 104.14 0)
+			(at 250.19 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17001,7 +17001,7 @@
 				)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "4.7k"
 			(at 73.914 160.274 90)
 			(effects
 				(font
