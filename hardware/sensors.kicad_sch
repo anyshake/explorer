@@ -12636,7 +12636,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 198.12 158.75 0)
+		(at 198.12 161.29 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12644,7 +12645,7 @@
 		(dnp no)
 		(uuid "63be75e2-2dbe-43d6-88fc-107ad8fed158")
 		(property "Reference" "J14"
-			(at 199.898 158.75 0)
+			(at 200.152 158.496 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12653,7 +12654,7 @@
 			)
 		)
 		(property "Value" "GEOPHONE_E"
-			(at 199.898 161.29 0)
+			(at 200.152 161.036 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12662,7 +12663,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
-			(at 198.12 158.75 0)
+			(at 198.12 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12671,7 +12672,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 198.12 158.75 0)
+			(at 198.12 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12680,7 +12681,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 198.12 158.75 0)
+			(at 198.12 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13517,7 +13518,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 198.12 149.86 0)
+		(at 198.12 152.4 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13525,7 +13527,7 @@
 		(dnp no)
 		(uuid "7b02a2e4-6f71-4fc3-81ea-e4a1f1c73ef6")
 		(property "Reference" "J13"
-			(at 199.898 149.86 0)
+			(at 200.152 149.606 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13534,7 +13536,7 @@
 			)
 		)
 		(property "Value" "GEOPHONE_N"
-			(at 199.898 152.4 0)
+			(at 200.152 152.146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13543,7 +13545,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
-			(at 198.12 149.86 0)
+			(at 198.12 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13552,7 +13554,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 198.12 149.86 0)
+			(at 198.12 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13561,7 +13563,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 198.12 149.86 0)
+			(at 198.12 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14916,7 +14918,8 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 198.12 140.97 0)
+		(at 198.12 143.51 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14924,7 +14927,7 @@
 		(dnp no)
 		(uuid "9df8094b-6ae4-46e9-97c2-6673d817a8d7")
 		(property "Reference" "J12"
-			(at 199.898 140.97 0)
+			(at 200.152 140.716 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14933,7 +14936,7 @@
 			)
 		)
 		(property "Value" "GEOPHONE_Z"
-			(at 199.898 143.51 0)
+			(at 200.152 143.256 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14942,7 +14945,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
-			(at 198.12 140.97 0)
+			(at 198.12 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14951,7 +14954,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 198.12 140.97 0)
+			(at 198.12 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14960,7 +14963,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 198.12 140.97 0)
+			(at 198.12 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
