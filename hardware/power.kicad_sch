@@ -2329,21 +2329,21 @@
 				)
 			)
 		)
-		(symbol "Switch:SW_DPST"
+		(symbol "Switch:SW_DPDT_x2"
 			(pin_names
 				(offset 0) hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "SW"
-				(at 0 6.35 0)
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "SW_DPST"
+			(property "Value" "SW_DPDT_x2"
 				(at 0 -5.08 0)
 				(effects
 					(font
@@ -2369,7 +2369,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Double Pole Single Throw (DPST) Switch"
+			(property "Description" "Switch, dual pole double throw, separate symbols"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2378,7 +2378,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "switch dual double-pole single-throw OFF-ON"
+			(property "ki_keywords" "switch dual-pole double-throw DPDT spdt ON-ON"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2387,93 +2387,19 @@
 					(hide yes)
 				)
 			)
-			(symbol "SW_DPST_0_0"
+			(property "ki_fp_filters" "SW*DPDT*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_DPDT_x2_0_0"
 				(circle
-					(center -2.032 -2.54)
+					(center -2.032 0)
 					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -2.032 2.54)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.524 -2.286) (xy 1.27 -1.016)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.524 2.794) (xy 1.27 4.064)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.27) (xy 0 -0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 1.27) (xy 0 1.905)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0 3.175)
-					)
 					(stroke
 						(width 0)
 						(type default)
@@ -2485,6 +2411,31 @@
 				(circle
 					(center 2.032 -2.54)
 					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_DPDT_x2_0_1"
+				(rectangle
+					(start -3.175 3.81)
+					(end 3.175 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.524 0.254) (xy 1.5748 2.286)
+					)
 					(stroke
 						(width 0)
 						(type default)
@@ -2505,22 +2456,11 @@
 					)
 				)
 			)
-			(symbol "SW_DPST_1_1"
-				(rectangle
-					(start -3.175 4.445)
-					(end 3.175 -3.81)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
+			(symbol "SW_DPDT_x2_1_1"
 				(pin passive line
-					(at -5.08 -2.54 0)
+					(at 5.08 2.54 180)
 					(length 2.54)
-					(name "1"
+					(name "A"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2536,9 +2476,9 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -2.54 180)
+					(at -5.08 0 0)
 					(length 2.54)
-					(name "2"
+					(name "B"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2554,9 +2494,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 2.54 0)
+					(at 5.08 -2.54 180)
 					(length 2.54)
-					(name "3"
+					(name "C"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2571,10 +2511,12 @@
 						)
 					)
 				)
+			)
+			(symbol "SW_DPDT_x2_2_1"
 				(pin passive line
 					(at 5.08 2.54 180)
 					(length 2.54)
-					(name "4"
+					(name "A"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2582,6 +2524,42 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3186,12 +3164,20 @@
 		(uuid "fedfb296-5561-4617-b580-bfeae7826b86")
 	)
 	(no_connect
+		(at 30.48 26.67)
+		(uuid "049b8b2e-31ed-4253-960c-92d3ab90e617")
+	)
+	(no_connect
 		(at 66.04 39.37)
 		(uuid "342ebf73-60d3-400c-bd52-36558e33ffc9")
 	)
 	(no_connect
-		(at 55.88 39.37)
-		(uuid "3550e7fe-d0ab-41ae-9c8d-cec5d4293cf6")
+		(at 30.48 31.75)
+		(uuid "9b152997-7659-4ed6-9f5c-820391ebbc80")
+	)
+	(no_connect
+		(at 20.32 29.21)
+		(uuid "cf676e5b-fbb8-4259-93a0-fa1f96ac1c42")
 	)
 	(wire
 		(pts
@@ -3385,7 +3371,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 34.29) (xy 44.45 34.29)
+			(xy 39.37 36.83) (xy 44.45 36.83)
 		)
 		(stroke
 			(width 0)
@@ -3775,7 +3761,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 34.29) (xy 39.37 46.99)
+			(xy 39.37 36.83) (xy 39.37 46.99)
 		)
 		(stroke
 			(width 0)
@@ -4395,7 +4381,7 @@
 	)
 	(wire
 		(pts
-			(xy 52.07 34.29) (xy 55.88 34.29)
+			(xy 52.07 36.83) (xy 55.88 36.83)
 		)
 		(stroke
 			(width 0)
@@ -4801,7 +4787,7 @@
 		)
 		(uuid "800ba4f3-03fa-4e87-be11-efc241fe0946")
 	)
-	(text_box "7-25V DC Power In"
+	(text_box "7-16V DC Power In"
 		(exclude_from_sim no)
 		(at 13.335 13.335 0)
 		(size 163.195 50.165)
@@ -6817,7 +6803,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "Inductor_SMD:L_1210_3225Metric"
 			(at 62.23 146.05 0)
 			(effects
 				(font
@@ -6861,7 +6847,7 @@
 	)
 	(symbol
 		(lib_id "Diode:SS34")
-		(at 48.26 34.29 180)
+		(at 48.26 36.83 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6870,14 +6856,6 @@
 		(fields_autoplaced yes)
 		(uuid "5b746fe9-3272-4a31-92a4-4066804508f3")
 		(property "Reference" "D1"
-			(at 48.5775 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SS34"
 			(at 48.5775 30.48 0)
 			(effects
 				(font
@@ -6885,8 +6863,16 @@
 				)
 			)
 		)
+		(property "Value" "SS34"
+			(at 48.5775 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" "Diode_SMD:D_SMA"
-			(at 48.26 29.845 0)
+			(at 48.26 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6895,7 +6881,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.vishay.com/docs/88751/ss32.pdf"
-			(at 48.26 34.29 0)
+			(at 48.26 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6904,7 +6890,7 @@
 			)
 		)
 		(property "Description" "40V 3A Schottky Diode, SMA"
-			(at 48.26 34.29 0)
+			(at 48.26 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8895,6 +8881,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_DPDT_x2")
+		(at 25.4 29.21 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9f19e95f-ce61-41e5-aaa6-6b62c4cc81ad")
+		(property "Reference" "SW1"
+			(at 25.4 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_DPDT_x2"
+			(at 25.4 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_THT:SW_Push_2P2T_Toggle_CK_PVA2OAH5xxxxxxV2"
+			(at 25.4 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 25.4 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, dual pole double throw, separate symbols"
+			(at 25.4 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "31c5c266-6619-430c-8690-bccc82d22c0f")
+		)
+		(pin "2"
+			(uuid "b85a5f74-e436-4212-a3f4-87a9fe3d730f")
+		)
+		(pin "3"
+			(uuid "f259a484-a5b2-4dd2-85ac-452b8ff75a15")
+		)
+		(pin "6"
+			(uuid "cbeb48f7-b0df-4e09-a81c-14d303007886")
+		)
+		(pin "4"
+			(uuid "f422e24d-0458-4946-aea1-ac45dc1ef0bb")
+		)
+		(pin "5"
+			(uuid "54217e1c-120e-4fbd-9d1c-37ca4784621f")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
+					(reference "SW1")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GNDA")
 		(at 67.31 100.33 0)
 		(unit 1)
@@ -9569,6 +9635,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_DPDT_x2")
+		(at 60.96 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c70bfaf3-db35-4f6a-a244-3d8660153d2c")
+		(property "Reference" "SW1"
+			(at 60.96 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_DPDT_x2"
+			(at 60.96 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Button_Switch_THT:SW_Push_2P2T_Toggle_CK_PVA2OAH5xxxxxxV2"
+			(at 60.96 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Switch, dual pole double throw, separate symbols"
+			(at 60.96 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "31c5c266-6619-430c-8690-bccc82d22c0f")
+		)
+		(pin "2"
+			(uuid "b85a5f74-e436-4212-a3f4-87a9fe3d730f")
+		)
+		(pin "3"
+			(uuid "f259a484-a5b2-4dd2-85ac-452b8ff75a15")
+		)
+		(pin "6"
+			(uuid "cbeb48f7-b0df-4e09-a81c-14d303007886")
+		)
+		(pin "4"
+			(uuid "f422e24d-0458-4946-aea1-ac45dc1ef0bb")
+		)
+		(pin "5"
+			(uuid "54217e1c-120e-4fbd-9d1c-37ca4784621f")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
+					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GNDA")
 		(at 41.91 100.33 0)
 		(unit 1)
@@ -10234,80 +10380,6 @@
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_DPST")
-		(at 60.96 36.83 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e8216ff2-b57d-4190-92c6-59a10fa84bc6")
-		(property "Reference" "SW1"
-			(at 60.96 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "POWER"
-			(at 60.96 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Button_Switch_THT:SW_Push_2P1T_Toggle_CK_PVA1xxH1xxxxxxV2"
-			(at 60.96 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 60.96 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Double Pole Single Throw (DPST) Switch"
-			(at 60.96 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "20060c10-df27-48a3-9759-142f23a0e811")
-		)
-		(pin "2"
-			(uuid "030ea3fe-a38f-4c4a-9249-b729b9c170ac")
-		)
-		(pin "4"
-			(uuid "9e758078-20b2-49a2-9398-a79148c05c09")
-		)
-		(pin "1"
-			(uuid "b05a0795-21b9-46af-b4ae-adf739872d49")
-		)
-		(instances
-			(project ""
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "SW1")
 					(unit 1)
 				)
 			)
