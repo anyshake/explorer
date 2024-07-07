@@ -8829,7 +8829,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "120"
 			(at 127 177.7999 0)
 			(effects
 				(font
@@ -8898,7 +8898,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_DPDT_x2"
+		(property "Value" "POWER"
 			(at 25.4 22.86 0)
 			(effects
 				(font
@@ -9645,15 +9645,15 @@
 		(fields_autoplaced yes)
 		(uuid "c70bfaf3-db35-4f6a-a244-3d8660153d2c")
 		(property "Reference" "SW1"
-			(at 60.96 29.21 0)
+			(at 60.96 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_DPDT_x2"
-			(at 60.96 31.75 0)
+		(property "Value" "POWER"
+			(at 60.96 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9688,22 +9688,22 @@
 			)
 		)
 		(pin "1"
-			(uuid "31c5c266-6619-430c-8690-bccc82d22c0f")
+			(uuid "31c5c266-6619-430c-8690-bccc82d22c10")
 		)
 		(pin "2"
-			(uuid "b85a5f74-e436-4212-a3f4-87a9fe3d730f")
+			(uuid "b85a5f74-e436-4212-a3f4-87a9fe3d7310")
 		)
 		(pin "3"
-			(uuid "f259a484-a5b2-4dd2-85ac-452b8ff75a15")
+			(uuid "f259a484-a5b2-4dd2-85ac-452b8ff75a16")
 		)
 		(pin "6"
-			(uuid "cbeb48f7-b0df-4e09-a81c-14d303007886")
+			(uuid "cbeb48f7-b0df-4e09-a81c-14d303007887")
 		)
 		(pin "4"
-			(uuid "f422e24d-0458-4946-aea1-ac45dc1ef0bb")
+			(uuid "f422e24d-0458-4946-aea1-ac45dc1ef0bc")
 		)
 		(pin "5"
-			(uuid "54217e1c-120e-4fbd-9d1c-37ca4784621f")
+			(uuid "54217e1c-120e-4fbd-9d1c-37ca47846220")
 		)
 		(instances
 			(project ""
@@ -10748,7 +10748,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "120"
 			(at 127 160.0199 0)
 			(effects
 				(font
@@ -11094,7 +11094,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.24"
+		(property "Value" "0.22"
 			(at 63.5 125.7299 0)
 			(effects
 				(font
