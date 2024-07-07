@@ -15115,7 +15115,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R36"
-			(at 0 1.43 0)
+			(at -2.745 -0.015 0)
 			(layer "F.SilkS")
 			(uuid "bb8213af-ddaa-4599-8c3c-6da5705a8665")
 			(effects
@@ -16639,7 +16639,7 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C42"
-			(at 0 -1.43 0)
+			(at 2.745 0 0)
 			(layer "F.SilkS")
 			(uuid "eb8bcda1-9669-476a-8acd-0a7f5a9e6b52")
 			(effects
@@ -56212,7 +56212,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "4.7k"
 			(at 0 -1.43 0)
 			(layer "B.Fab")
 			(uuid "c4e02a75-02de-4166-878c-c1bfa9b00e0c")
@@ -56835,7 +56835,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "4.7k"
 			(at 0 -1.43 0)
 			(layer "B.Fab")
 			(uuid "dc8ca5a1-484e-4b58-94a7-2ee7f2325b68")
@@ -58538,7 +58538,7 @@
 			)
 		)
 		(property ki_fp_filters "DIP*W7.62mm*")
-		(path "/e18fc294-84d1-4936-8800-6a2f75cce34e/451dc38c-d0d3-445a-a7ef-49df4ced11d9")
+		(path "/e18fc294-84d1-4936-8800-6a2f75cce34e/4b15048c-cca3-42f1-b463-21d60ade7b1e")
 		(sheetname "MCU Controller")
 		(sheetfile "mcu.kicad_sch")
 		(attr smd)
@@ -59332,7 +59332,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "5k"
+		(property "Value" "4.7k"
 			(at 0 -1.43 0)
 			(layer "B.Fab")
 			(uuid "9ed378f6-3d56-4319-81a1-897e7b64740e")
