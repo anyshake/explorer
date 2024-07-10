@@ -58,7 +58,12 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "starved_thermal|66300000|145235000|47bb1036-54ae-493f-8cc0-ffaeed8cf55e|ab410693-6ae8-4f2a-91c2-2a797d5f0a3f|F.Cu",
+        "starved_thermal|66300000|146435000|47bb1036-54ae-493f-8cc0-ffaeed8cf55e|42d5fb73-c72d-4191-8d27-06646acdd0fa|B.Cu",
+        "starved_thermal|67500000|145235000|47bb1036-54ae-493f-8cc0-ffaeed8cf55e|a18219cc-b1bf-4c14-acbc-1f345da1967d|F.Cu",
+        "starved_thermal|67500000|146435000|47bb1036-54ae-493f-8cc0-ffaeed8cf55e|0e69346e-d371-4e74-b824-c05ac1989290|B.Cu"
+      ],
       "meta": {
         "version": 2
       },
@@ -72,7 +77,7 @@
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
-        "duplicate_footprints": "warning",
+        "duplicate_footprints": "error",
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_symbol_mismatch": "warning",
