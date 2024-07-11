@@ -1268,7 +1268,7 @@
 				)
 			)
 		)
-		(property "Value" "33pF"
+		(property "Value" "22pF"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "a3078eec-1bf8-42b5-ba51-8bc50fcf67e3")
@@ -33960,7 +33960,7 @@
 				)
 			)
 		)
-		(property "Value" "33pF"
+		(property "Value" "22pF"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "c334e7bb-eeb1-449b-b1de-d7c0bb7b11a6")
