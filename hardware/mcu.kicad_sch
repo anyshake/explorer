@@ -11095,7 +11095,7 @@
 		(uuid "0015a82c-51f9-4669-b1cd-ad85e86ee66c")
 	)
 	(label "ADC_START"
-		(at 177.8 33.02 180)
+		(at 177.8 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11172,7 +11172,7 @@
 		(uuid "0aa5c749-947c-4b0e-b3db-9947c095cc3e")
 	)
 	(label "GNSS_RXD"
-		(at 177.8 58.42 180)
+		(at 177.8 33.02 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11359,7 +11359,7 @@
 		(uuid "3e4c12ce-34d7-4639-a97d-d49c73d19b7f")
 	)
 	(label "ADC_DRDY"
-		(at 177.8 35.56 180)
+		(at 177.8 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11568,7 +11568,7 @@
 		(uuid "6fc58837-74bf-49f1-8682-7de4e2ee3062")
 	)
 	(label "GNSS_TXD"
-		(at 177.8 55.88 180)
+		(at 177.8 35.56 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
