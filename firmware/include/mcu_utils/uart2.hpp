@@ -5,8 +5,8 @@
 #include <SoftwareSerial.h>
 #include <stdint.h>
 
-#define MCU_UART2_PIN_TXD PB15
-#define MCU_UART2_PIN_RXD PB14
+#define MCU_UTILS_UART2_PIN_TXD PA2
+#define MCU_UTILS_UART2_PIN_RXD PA3
 
 void mcu_utils_uart2_init(uint32_t baudrate);
 void mcu_utils_uart2_writech(uint8_t ch);
