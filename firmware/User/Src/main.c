@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "Core/Inc/dma.h"
 #include "Core/Inc/main.h"
 #include "cmsis_os.h"
 
@@ -75,25 +74,31 @@ void task_read_adc(void* argument) {
     if (states->legacy_mode) {
         while (true) {
             int64_t current_timestamp = mcu_utils_uptime_ms();
-            while (current_timestamp % time_span != 0) {
-                mcu_utils_delay_ms(1, true);
+            while (current_timestamp %
+                       (time_span * LEGACY_PACKET_CHANNEL_SIZE) !=
+                   0) {
                 current_timestamp = mcu_utils_uptime_ms();
             }
 
-            for (uint8_t n = 0; n < LEGACY_DATA_PACKET_SIZE; n++) {
-                // Read Z-axis accelerometer data
-                lsm6ds3_reg_get_outz_xl(&outz_xl);
-                states->adc_channel_buffer->data[n] =
-                    outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
-                // Read E-axis accelerometer data
-                lsm6ds3_reg_get_outx_xl(&outx_xl);
-                states->adc_channel_buffer->data[n + LEGACY_DATA_PACKET_SIZE] =
-                    outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
-                // Read N-axis accelerometer data
-                lsm6ds3_reg_get_outy_xl(&outy_xl);
-                states->adc_channel_buffer
-                    ->data[n + 2 * LEGACY_DATA_PACKET_SIZE] =
-                    outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+            for (uint8_t n = 0; n < LEGACY_PACKET_CHANNEL_SIZE; n++) {
+                if (states->no_geophone) {
+                    // Read Z-axis accelerometer data
+                    lsm6ds3_reg_get_outz_xl(&outz_xl);
+                    states->adc_channel_buffer->data[n] =
+                        outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                    // Read E-axis accelerometer data
+                    lsm6ds3_reg_get_outx_xl(&outx_xl);
+                    states->adc_channel_buffer
+                        ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
+                        outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                    // Read N-axis accelerometer data
+                    lsm6ds3_reg_get_outy_xl(&outy_xl);
+                    states->adc_channel_buffer
+                        ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
+                        outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                } else {
+                    ;
+                }
             }
 
             osMessageQueuePut(states->reader_drdy_queue, &current_timestamp, 0,
@@ -108,8 +113,6 @@ void task_read_adc(void* argument) {
 
             if (current_timestamp - prev_timestamp >= time_span) {
                 prev_timestamp = current_timestamp;
-                n++;
-
                 if (states->no_geophone) {
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
@@ -125,12 +128,16 @@ void task_read_adc(void* argument) {
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      2 * states->sample_rate] =
                         outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                } else {
+                    ;
                 }
 
                 if (n % states->sample_rate == 0) {
                     osMessageQueuePut(states->reader_drdy_queue,
                                       &current_timestamp, 0, 0);
                 }
+
+                n++;
             }
         }
     }
@@ -144,8 +151,7 @@ void task_send_data(void* argument) {
         if (osMessageQueueGet(states->reader_drdy_queue, &timestamp, NULL, 0) ==
             osOK) {
             if (states->legacy_mode) {
-                send_legacy_data_packet(states->adc_channel_buffer, timestamp,
-                                        states->sample_rate);
+                send_legacy_data_packet(states->adc_channel_buffer);
             } else {
                 send_data_packet(states->adc_channel_buffer, timestamp,
                                  states->sample_rate);
@@ -405,7 +411,7 @@ void setup(void) {
     // Allocate memory for ADC data buffer
     if (states.legacy_mode) {
         states.adc_channel_buffer =
-            array_int32_make(3 * LEGACY_DATA_PACKET_SIZE);
+            array_int32_make(3 * LEGACY_PACKET_CHANNEL_SIZE);
     } else {
         states.adc_channel_buffer = array_int32_make(3 * states.sample_rate);
     }

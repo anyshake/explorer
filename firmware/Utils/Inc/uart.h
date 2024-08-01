@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "Core/Inc/dma.h"
 #include "Core/Inc/usart.h"
 #include "Utils/Inc/delay.h"
 #include "stm32f1xx_hal.h"

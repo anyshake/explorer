@@ -1,17 +1,16 @@
 #include "User/Inc/packet.h"
 
-void send_legacy_data_packet(int32_array_t* channel_buf,
-                             int64_t timestamp,
-                             bool is_rtos) {
+void send_legacy_data_packet(int32_array_t* channel_buf) {
     legacy_data_packet_t packet = {0};
     // Set packet data from channel buffer
-    for (uint8_t i = 0; i < LEGACY_DATA_PACKET_SIZE; i++) {
+    for (uint8_t i = 0; i < LEGACY_PACKET_CHANNEL_SIZE; i++) {
         packet.z_axis[i] = channel_buf->data[i];
-        packet.e_axis[i] = channel_buf->data[i + LEGACY_DATA_PACKET_SIZE];
-        packet.n_axis[i] = channel_buf->data[i + 2 * LEGACY_DATA_PACKET_SIZE];
+        packet.e_axis[i] = channel_buf->data[i + LEGACY_PACKET_CHANNEL_SIZE];
+        packet.n_axis[i] =
+            channel_buf->data[i + 2 * LEGACY_PACKET_CHANNEL_SIZE];
     }
     // Calculate checksums for each channel
-    for (uint8_t i = 0; i < LEGACY_DATA_PACKET_SIZE; i++) {
+    for (uint8_t i = 0; i < LEGACY_PACKET_CHANNEL_SIZE; i++) {
         uint8_t* bytes = (uint8_t*)&packet.z_axis[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
             packet.checksum[0] ^= bytes[j];

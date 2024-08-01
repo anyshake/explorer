@@ -42,10 +42,9 @@ void mcu_utils_uart_init(uint32_t baudrate, bool is_rtos) {
 }
 
 void mcu_utils_uart_write(uint8_t* tx_data, uint16_t tx_len) {
-    if (tx_len < 10) {
-        HAL_UART_Transmit(&huart1, tx_data, tx_len, 1000);
-    } else {
-        HAL_UART_Transmit_DMA(&huart1, tx_data, tx_len);
+    HAL_UART_Transmit_DMA(&huart1, tx_data, tx_len);
+    while (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC) == RESET) {
+        ;
     }
 }
 

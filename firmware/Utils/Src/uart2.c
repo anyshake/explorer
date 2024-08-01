@@ -40,11 +40,7 @@ void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
 }
 
 void mcu_utils_uart2_write(uint8_t* tx_data, uint16_t tx_len) {
-    if (tx_len < 10) {
-        HAL_UART_Transmit(&huart2, tx_data, tx_len, 1000);
-    } else {
-        HAL_UART_Transmit_DMA(&huart2, tx_data, tx_len);
-    }
+    HAL_UART_Transmit(&huart2, tx_data, tx_len, 1000);
 }
 
 void mcu_utils_uart2_flush(void) {
