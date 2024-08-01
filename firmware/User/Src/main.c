@@ -13,6 +13,7 @@
 #include "Utils/Inc/uart.h"
 #include "Utils/Inc/uptime.h"
 
+#include "User/Inc/eeprom/read.h"
 #include "User/Inc/eeprom/utils.h"
 
 #include "User/Inc/ssd1306/display.h"
@@ -56,7 +57,7 @@ typedef struct {
     gnss_location_t gnss_location;
     gnss_time_t gnss_time;
     // ADC data buffer and RTOS resources
-    array_int32_t* adc_channel_buffer;
+    int32_array_t* adc_channel_buffer;
     osMessageQueueId_t reader_drdy_queue;
 } explorer_states_t;
 
@@ -72,7 +73,7 @@ void task_read_adc(void* argument) {
     uint8_t time_span = 1000 / states->sample_rate;
 
     if (states->legacy_mode) {
-        while (1) {
+        while (true) {
             int64_t current_timestamp = mcu_utils_uptime_ms();
             while (current_timestamp % time_span != 0) {
                 mcu_utils_delay_ms(1, true);
@@ -138,7 +139,7 @@ void task_read_adc(void* argument) {
 void task_send_data(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
 
-    while (1) {
+    while (true) {
         int64_t timestamp;
         if (osMessageQueueGet(states->reader_drdy_queue, &timestamp, NULL, 0) ==
             osOK) {
@@ -157,7 +158,7 @@ void task_calib_gnss(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
     bool has_succeed = true;
 
-    while (1) {
+    while (true) {
         int64_t timestamp =
             gnss_get_current_timestamp(states->local_base_timestamp,
                                        states->gnss_ref_timestamp) /
@@ -190,7 +191,7 @@ void task_feed_iwdg(void* argument) {
     bool is_led_on = false;
     mcu_utils_iwdg_init(false);
 
-    while (1) {
+    while (true) {
         is_led_on = !is_led_on;
         if (is_led_on) {
             mcu_utils_gpio_high(MCU_STATE_PIN);
@@ -198,14 +199,13 @@ void task_feed_iwdg(void* argument) {
             mcu_utils_gpio_low(MCU_STATE_PIN);
         }
         mcu_utils_iwdg_feed();
-        mcu_utils_delay_ms(1000, true);
+        mcu_utils_delay_ms(1500, true);
     }
 }
 
 void peripherals_init(explorer_states_t* states) {
     // Initialize state LED pin
     mcu_utils_gpio_init(false);
-    mcu_utils_gpio_mode(MCU_STATE_PIN, MCU_UTILS_GPIO_MODE_OUTPUT);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
 
     // Initialize SSD1306 display
@@ -213,10 +213,10 @@ void peripherals_init(explorer_states_t* states) {
     ssd1306_enable();
     ssd1306_clear();
     const char version[] = FW_VERSION;
-    ssd1306_display_bitmap(0, 0, 128, 8, SSD1306_STYLE_FONT_BITMAP_LIB,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(0, 0, version, SSD1306_STYLE_FONT_ASCII_8X16,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, version, SSD1306_FONT_TYPE_ASCII_8X16,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     mcu_utils_delay_ms(1000, false);
 
     // Get user options from DIP switches
@@ -225,7 +225,12 @@ void peripherals_init(explorer_states_t* states) {
     mcu_utils_gpio_mode(OPTIONS_LEGACY_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
     states->legacy_mode = mcu_utils_gpio_read(OPTIONS_LEGACY_MODE_PIN);
     mcu_utils_gpio_mode(OPTIONS_ADC_24BIT_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->adc_24bit_mode = mcu_utils_gpio_read(OPTIONS_ADC_24BIT_MODE_PIN);
+    if (states->legacy_mode) {
+        states->adc_24bit_mode = false;
+    } else {
+        states->adc_24bit_mode =
+            mcu_utils_gpio_read(OPTIONS_ADC_24BIT_MODE_PIN);
+    }
 
     // Get sample rate from DIP switches
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
@@ -233,16 +238,16 @@ void peripherals_init(explorer_states_t* states) {
     switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 |
             mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
         case 1:
-            states->sample_rate = states->no_geophone ? 25 : 50;
+            states->sample_rate = 50;
             break;
         case 2:
-            states->sample_rate = states->no_geophone ? 50 : 100;
+            states->sample_rate = 100;
             break;
         case 3:
-            states->sample_rate = states->no_geophone ? 100 : 125;
+            states->sample_rate = 125;
             break;
         default:
-            states->sample_rate = states->no_geophone ? 10 : 25;
+            states->sample_rate = 25;
             break;
     }
 
@@ -267,8 +272,8 @@ void peripherals_init(explorer_states_t* states) {
 
     // Display startup screen
     ssd1306_display_string(0, 0, "Peripheral Init",
-                           SSD1306_STYLE_FONT_ASCII_8X16,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                           SSD1306_FONT_TYPE_ASCII_8X16,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     mcu_utils_delay_ms(1000, false);
 
     // Read device ID from EEPROM
@@ -321,15 +326,15 @@ void peripherals_init(explorer_states_t* states) {
 
 void get_gnss_data(explorer_states_t* states) {
     ssd1306_display_string(0, 0, "Fetch GNSS Data",
-                           SSD1306_STYLE_FONT_ASCII_8X16,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                           SSD1306_FONT_TYPE_ASCII_8X16,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
     for (uint8_t n = 0;; n++) {
         // Wait for PPS signal
         if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp)) {
             ssd1306_display_string(0, 0, "GNSS No Signal!",
-                                   SSD1306_STYLE_FONT_ASCII_8X16,
-                                   SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                                   SSD1306_FONT_TYPE_ASCII_8X16,
+                                   SSD1306_FONT_DISPLAY_COLOR_WHITE);
             mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
             continue;
         }
@@ -346,8 +351,8 @@ void get_gnss_data(explorer_states_t* states) {
         // Check if GNSS data is valid
         if (states->gnss_time.is_valid && states->gnss_location.is_valid) {
             ssd1306_display_string(0, 0, "GNSS Data Valid",
-                                   SSD1306_STYLE_FONT_ASCII_8X16,
-                                   SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                                   SSD1306_FONT_TYPE_ASCII_8X16,
+                                   SSD1306_FONT_DISPLAY_COLOR_WHITE);
             mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
             mcu_utils_delay_ms(1000, false);
             break;
@@ -358,35 +363,35 @@ void get_gnss_data(explorer_states_t* states) {
 void display_settings(explorer_states_t* states) {
     char display_buf[24];
 
-    snprintf(display_buf, sizeof(display_buf), "SAMPLERATE: %d Hz",
-             (int)states->sample_rate);
-    ssd1306_display_string(0, 0, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "BAUDRATE: B%d",
+    snprintf(display_buf, sizeof(display_buf), "BAUD RATE: B%d",
              (int)states->baud_rate);
-    ssd1306_display_string(0, 1, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %d Hz",
+             (int)states->sample_rate);
+    ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "NO GEOPHONE: %s",
              (int)states->no_geophone ? "YES" : "NO");
-    ssd1306_display_string(0, 2, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s",
              (int)states->legacy_mode ? "YES" : "NO");
-    ssd1306_display_string(0, 3, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "24-BIT MODE: %s",
              (int)states->adc_24bit_mode ? "YES" : "NO");
-    ssd1306_display_string(0, 4, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X",
              (int)states->device_id);
-    ssd1306_display_string(0, 5, display_buf, SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(28, 6, "anyshake.org", SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(28, 6, "anyshake.org", SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     ssd1306_display_string(13, 7, "AnyShake Explorer",
-                           SSD1306_STYLE_FONT_ASCII_8X6,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                           SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
 
 void setup(void) {
@@ -407,8 +412,8 @@ void setup(void) {
 
     // Display device settings
     ssd1306_display_string(0, 0, "Device Started!",
-                           SSD1306_STYLE_FONT_ASCII_8X16,
-                           SSD1306_STYLE_DISPLAY_COLOR_WHITE);
+                           SSD1306_FONT_TYPE_ASCII_8X16,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     mcu_utils_delay_ms(1000, false);
     ssd1306_clear();
     display_settings(&states);
@@ -450,13 +455,12 @@ void setup(void) {
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    MX_DMA_Init();
 
     osKernelInitialize();
     setup();
     osKernelStart();
 
-    while (1) {
+    while (true) {
         ;
     }
 }

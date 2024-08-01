@@ -17,10 +17,10 @@ typedef struct {
     uint8_t checksum[3];
 } legacy_data_packet_t;
 
-void send_legacy_data_packet(array_int32_t* channel_buf,
+void send_legacy_data_packet(int32_array_t* channel_buf,
                              int64_t timestamp,
                              bool is_rtos);
-void send_data_packet(array_int32_t* channel_buf,
+void send_data_packet(int32_array_t* channel_buf,
                       int64_t timestamp,
                       uint8_t sample_rate);
 

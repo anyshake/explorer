@@ -18,7 +18,8 @@ void mcu_utils_i2c_read(uint8_t address,
         return;
     }
 
-    HAL_I2C_Mem_Read(&hi2c1, address, reg, reg_width, rx_data, rx_len, 1000);
+    HAL_I2C_Mem_Read(&hi2c1, address << 1, reg, reg_width, rx_data, rx_len,
+                     1000);
 }
 
 void mcu_utils_i2c_write(uint8_t address,

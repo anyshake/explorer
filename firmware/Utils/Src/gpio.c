@@ -1,10 +1,7 @@
 #include "Utils/Inc/gpio.h"
 
 void mcu_utils_gpio_init(bool is_rtos) {
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
+    MX_GPIO_Init();
     mcu_utils_delay_ms(100, is_rtos);
 }
 

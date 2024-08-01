@@ -36,6 +36,11 @@
         "stm32f1xx_hal_tim.h": "c",
         "iwdg.h": "c",
         "parse.h": "c",
-        "packet.h": "c"
+        "packet.h": "c",
+        "outz_xl.h": "c",
+        "outy_xl.h": "c",
+        "who_am_i.h": "c",
+        "read.h": "c",
+        "style.h": "c"
     }
 }

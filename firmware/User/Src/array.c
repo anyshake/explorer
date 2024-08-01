@@ -1,8 +1,8 @@
 #include "User/Inc/array.h"
 
-array_int32_t* array_int32_make(uint16_t size) {
-    array_int32_t* arr =
-        (array_int32_t*)malloc(sizeof(array_int32_t) + sizeof(int32_t) * size);
+int32_array_t* array_int32_make(uint16_t size) {
+    int32_array_t* arr =
+        (int32_array_t*)malloc(sizeof(int32_array_t) + sizeof(int32_t) * size);
     if (arr == NULL) {
         return NULL;
     }
@@ -13,6 +13,6 @@ array_int32_t* array_int32_make(uint16_t size) {
     return arr;
 }
 
-void array_int32_clear(array_int32_t* arr) {
+void array_int32_clear(int32_array_t* arr) {
     free(arr);
 }

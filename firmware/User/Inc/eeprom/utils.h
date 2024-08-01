@@ -13,7 +13,5 @@
 void eeprom_init(mcu_utils_gpio_t pin_wp, bool is_rtos);
 void eeprom_protect(mcu_utils_gpio_t pin_wp, bool enable);
 void eeprom_earse(mcu_utils_gpio_t pin_wp, uint8_t len);
-void eeprom_write(mcu_utils_gpio_t pin_wp, uint8_t* buf, uint8_t len);
-void eeprom_read(uint8_t* buf, uint8_t len);
 
 #endif
