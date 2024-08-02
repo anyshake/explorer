@@ -53,7 +53,7 @@ typedef struct {
     int64_t gnss_ref_timestamp;
     int64_t local_base_timestamp;
     // GNSS message buffer
-    uint8_t gnss_rmc_message[GNSS_SENTENCE_BUFFER_SIZE];
+    uint8_t gnss_message[GNSS_SENTENCE_BUFFER_SIZE];
     gnss_location_t gnss_location;
     gnss_time_t gnss_time;
     // ADC data buffer and RTOS resources
@@ -157,7 +157,8 @@ void task_send_data(void* argument) {
                 send_legacy_data_packet(states->adc_channel_buffer);
             } else {
                 send_data_packet(states->adc_channel_buffer,
-                                 states->uart_packet_buffer, timestamp,
+                                 states->uart_packet_buffer,
+                                 &states->gnss_location, timestamp,
                                  states->sample_rate, states->device_id);
             }
         }
@@ -183,11 +184,11 @@ void task_calib_gnss(void* argument) {
                 continue;
             }
 
-            if (gnss_get_sentence(states->gnss_rmc_message,
+            if (gnss_get_sentence(states->gnss_message,
                                   GNSS_SENTENCE_TYPE_RMC)) {
-                gnss_padding_sentence(states->gnss_rmc_message);
+                gnss_padding_sentence(states->gnss_message);
                 gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
-                               states->gnss_rmc_message);
+                               states->gnss_message);
                 states->gnss_ref_timestamp =
                     gnss_get_timestamp(&states->gnss_time);
                 has_succeed = true;
@@ -210,7 +211,7 @@ void task_feed_iwdg(void* argument) {
             mcu_utils_gpio_low(MCU_STATE_PIN);
         }
         mcu_utils_iwdg_feed();
-        mcu_utils_delay_ms(1500, true);
+        mcu_utils_delay_ms(1000, true);
     }
 }
 
@@ -343,7 +344,7 @@ void get_gnss_data(explorer_states_t* states) {
                            SSD1306_FONT_TYPE_ASCII_8X16,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
-    for (uint8_t n = 0;; n++) {
+    for (bool has_elevation = false;;) {
         // Wait for PPS signal
         if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, true)) {
             ssd1306_display_string(0, 0, "GNSS No Signal!",
@@ -353,17 +354,29 @@ void get_gnss_data(explorer_states_t* states) {
             continue;
         }
 
-        // Read NMEA message
-        if (gnss_get_sentence(states->gnss_rmc_message,
-                              GNSS_SENTENCE_TYPE_RMC)) {
-            gnss_padding_sentence(states->gnss_rmc_message);
-            gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
-                           states->gnss_rmc_message);
-            states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
+        if (!has_elevation) {
+            // Read NMEA message for elevation data
+            if (gnss_get_sentence(states->gnss_message,
+                                  GNSS_SENTENCE_TYPE_GGA)) {
+                gnss_padding_sentence(states->gnss_message);
+                gnss_parse_gga(&states->gnss_location, states->gnss_message);
+                has_elevation = states->gnss_location.is_valid;
+            }
+        } else {
+            // Read NMEA message for RMC data
+            if (gnss_get_sentence(states->gnss_message,
+                                  GNSS_SENTENCE_TYPE_RMC)) {
+                gnss_padding_sentence(states->gnss_message);
+                gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
+                               states->gnss_message);
+                states->gnss_ref_timestamp =
+                    gnss_get_timestamp(&states->gnss_time);
+            }
         }
 
         // Check if GNSS data is valid
-        if (states->gnss_time.is_valid && states->gnss_location.is_valid) {
+        if (states->gnss_time.is_valid && states->gnss_location.is_valid &&
+            has_elevation) {
             ssd1306_display_string(0, 0, "GNSS Data Valid",
                                    SSD1306_FONT_TYPE_ASCII_8X16,
                                    SSD1306_FONT_DISPLAY_COLOR_WHITE);
