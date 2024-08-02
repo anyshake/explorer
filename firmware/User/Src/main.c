@@ -254,16 +254,16 @@ void peripherals_init(explorer_states_t* states) {
     switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 |
             mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
         case 1:
-            states->sample_rate = 50;
-            break;
-        case 2:
             states->sample_rate = 100;
             break;
+        case 2:
+            states->sample_rate = 50;
+            break;
         case 3:
-            states->sample_rate = 125;
+            states->sample_rate = 25;
             break;
         default:
-            states->sample_rate = 25;
+            states->sample_rate = 125;
             break;
     }
 

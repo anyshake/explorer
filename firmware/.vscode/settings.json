@@ -42,6 +42,7 @@
         "who_am_i.h": "c",
         "read.h": "c",
         "style.h": "c",
-        "crc.h": "c"
+        "crc.h": "c",
+        "crc32.h": "c"
     }
 }
