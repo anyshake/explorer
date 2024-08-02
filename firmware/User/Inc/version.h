@@ -50,11 +50,18 @@
 #define BUILD_SEC_CH0 (__TIME__[6])
 #define BUILD_SEC_CH1 (__TIME__[7])
 
-#define FW_VERSION                                                             \
-    {                                                                          \
-        'F', 'W', ':', ' ', BUILD_YEAR_CH2, BUILD_YEAR_CH3, BUILD_MONTH_CH0,   \
-            BUILD_MONTH_CH1, BUILD_DAY_CH0, BUILD_DAY_CH1, '.',                \
-            BUILD_HOUR_CH0, BUILD_HOUR_CH1, BUILD_MIN_CH0, BUILD_MIN_CH1, '\0' \
-    }
+#define FW_VERSION    \
+    {BUILD_YEAR_CH2,  \
+     BUILD_YEAR_CH3,  \
+     BUILD_MONTH_CH0, \
+     BUILD_MONTH_CH1, \
+     BUILD_DAY_CH0,   \
+     BUILD_DAY_CH1,   \
+     '.',             \
+     BUILD_HOUR_CH0,  \
+     BUILD_HOUR_CH1,  \
+     BUILD_MIN_CH0,   \
+     BUILD_MIN_CH1,   \
+     '\0'}
 
 #endif

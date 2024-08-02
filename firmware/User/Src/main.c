@@ -227,12 +227,8 @@ void peripherals_init(explorer_states_t* states) {
     ssd1306_init(false);
     ssd1306_enable();
     ssd1306_clear();
-    const char version[] = FW_VERSION;
     ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(0, 0, version, SSD1306_FONT_TYPE_ASCII_8X16,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    mcu_utils_delay_ms(1000, false);
 
     // Get user options from DIP switches
     mcu_utils_gpio_mode(OPTIONS_NO_GEOPHONE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
@@ -390,12 +386,12 @@ void get_gnss_data(explorer_states_t* states) {
 void display_settings(explorer_states_t* states) {
     char display_buf[24];
 
-    snprintf(display_buf, sizeof(display_buf), "BAUD RATE: B%d",
-             (int)states->baud_rate);
-    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %d Hz",
              (int)states->sample_rate);
+    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "PORT BR: %d bps",
+             (int)states->baud_rate);
     ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "NO GEOPHONE: %s",
@@ -414,10 +410,11 @@ void display_settings(explorer_states_t* states) {
              (int)states->device_id);
     ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(28, 6, "anyshake.org", SSD1306_FONT_TYPE_ASCII_8X6,
+    const char version[] = FW_VERSION;
+    snprintf(display_buf, sizeof(display_buf), "FW VER: %s", version);
+    ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(13, 7, "AnyShake Explorer",
-                           SSD1306_FONT_TYPE_ASCII_8X6,
+    ssd1306_display_string(28, 7, "anyshake.org", SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
 
