@@ -41,9 +41,9 @@ void mcu_utils_uart_init(uint32_t baudrate, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void mcu_utils_uart_write(uint8_t* tx_data, uint16_t tx_len) {
+void mcu_utils_uart_write(uint8_t* tx_data, uint16_t tx_len, bool wait) {
     HAL_UART_Transmit_DMA(&huart1, tx_data, tx_len);
-    while (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC) == RESET) {
+    while (wait && __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC) == RESET) {
         ;
     }
 }

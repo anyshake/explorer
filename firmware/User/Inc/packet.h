@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "User/Inc/array.h"
+#include "Utils/Inc/crc32.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/uart.h"
 
@@ -19,7 +20,9 @@ typedef struct {
 
 void send_legacy_data_packet(int32_array_t* channel_buf);
 void send_data_packet(int32_array_t* channel_buf,
+                      uint8_array_t* packet_buf,
                       int64_t timestamp,
-                      uint8_t sample_rate);
+                      uint16_t sample_rate,
+                      uint32_t device_id);
 
 #endif

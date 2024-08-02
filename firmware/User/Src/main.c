@@ -5,6 +5,7 @@
 #include "Core/Inc/main.h"
 #include "cmsis_os.h"
 
+#include "Utils/Inc/crc32.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/iwdg.h"
@@ -44,7 +45,7 @@ typedef struct {
     // Startup settings
     uint32_t device_id;
     uint32_t baud_rate;
-    uint8_t sample_rate;
+    uint16_t sample_rate;
     bool no_geophone;
     bool legacy_mode;
     bool adc_24bit_mode;
@@ -58,6 +59,8 @@ typedef struct {
     // ADC data buffer and RTOS resources
     int32_array_t* adc_channel_buffer;
     osMessageQueueId_t reader_drdy_queue;
+    // Packet buffer for UART transmission
+    uint8_array_t* uart_packet_buffer;
 } explorer_states_t;
 
 void task_read_adc(void* argument) {
@@ -117,17 +120,20 @@ void task_read_adc(void* argument) {
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n % states->sample_rate] =
-                        outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                        // outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                        1;
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      states->sample_rate] =
-                        outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                        // outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                        2;
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      2 * states->sample_rate] =
-                        outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                        // outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                        3;
                 } else {
                     ;
                 }
@@ -153,8 +159,9 @@ void task_send_data(void* argument) {
             if (states->legacy_mode) {
                 send_legacy_data_packet(states->adc_channel_buffer);
             } else {
-                send_data_packet(states->adc_channel_buffer, timestamp,
-                                 states->sample_rate);
+                send_data_packet(states->adc_channel_buffer,
+                                 states->uart_packet_buffer, timestamp,
+                                 states->sample_rate, states->device_id);
             }
         }
     }
@@ -210,6 +217,9 @@ void task_feed_iwdg(void* argument) {
 }
 
 void peripherals_init(explorer_states_t* states) {
+    // Initialize CRC32 module
+    mcu_utils_crc32_init();
+
     // Initialize state LED pin
     mcu_utils_gpio_init(false);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
@@ -263,13 +273,13 @@ void peripherals_init(explorer_states_t* states) {
     switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 |
             mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {
         case 1:
-            states->baud_rate = 230400;
+            states->baud_rate = 57600;
             break;
         case 2:
-            states->baud_rate = 460800;
+            states->baud_rate = 38400;
             break;
         case 3:
-            states->baud_rate = 921600;
+            states->baud_rate = 19200;
             break;
         default:
             states->baud_rate = 115200;
@@ -409,11 +419,12 @@ void setup(void) {
     }
 
     // Allocate memory for ADC data buffer
-    if (states.legacy_mode) {
-        states.adc_channel_buffer =
-            array_int32_make(3 * LEGACY_PACKET_CHANNEL_SIZE);
-    } else {
-        states.adc_channel_buffer = array_int32_make(3 * states.sample_rate);
+    states.adc_channel_buffer =
+        array_int32_make(states.legacy_mode ? 3 * LEGACY_PACKET_CHANNEL_SIZE
+                                            : 3 * states.sample_rate);
+    // Pre-allocate memory for UART packet buffer
+    if (!states.legacy_mode) {
+        states.uart_packet_buffer = array_uint8_make(1);
     }
 
     // Display device settings
@@ -439,13 +450,13 @@ void setup(void) {
     osThreadNew(task_send_data, &states, &send_data_attr);
     const osThreadAttr_t calib_gnss_attr = {
         .name = "GNSS Calib",
-        .stack_size = 128 * 8,
+        .stack_size = 128 * 4,
         .priority = (osPriority_t)osPriorityNormal,
     };
     osThreadNew(task_calib_gnss, &states, &calib_gnss_attr);
     const osThreadAttr_t feed_iwdg_attr = {
         .name = "Feed IWDG",
-        .stack_size = 128,
+        .stack_size = 32,
         .priority = (osPriority_t)osPriorityNormal,
     };
     osThreadNew(task_feed_iwdg, NULL, &feed_iwdg_attr);

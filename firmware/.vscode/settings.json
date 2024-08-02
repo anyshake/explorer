@@ -41,6 +41,7 @@
         "outy_xl.h": "c",
         "who_am_i.h": "c",
         "read.h": "c",
-        "style.h": "c"
+        "style.h": "c",
+        "crc.h": "c"
     }
 }
