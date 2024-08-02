@@ -13,17 +13,25 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_gpio_high(pin.rst);
 }
 
-bool gnss_get_0pps(gnss_ctl_pin_t pin, int64_t* base_time) {
-    uint8_t pps_state = mcu_utils_gpio_read(pin.pps);
-
+bool gnss_get_0pps(gnss_ctl_pin_t pin, int64_t* base_time, bool wait) {
+    uint8_t initial_pps_state = mcu_utils_gpio_read(pin.pps);
     int64_t start_time = mcu_utils_uptime_ms();
-    while (pps_state == mcu_utils_gpio_read(pin.pps) &&
-           mcu_utils_uptime_ms() - start_time <= 2000) {
-        ;
+    int64_t current_time;
+
+    while (wait) {
+        current_time = mcu_utils_uptime_ms();
+        if (initial_pps_state != mcu_utils_gpio_read(pin.pps)) {
+            *base_time = current_time;
+            return true;
+        }
+        if (current_time - start_time > 2000) {
+            return false;
+        }
     }
 
-    if (mcu_utils_uptime_ms() - start_time > 2000) {
-        return false;
+    if (!wait && initial_pps_state != mcu_utils_gpio_read(pin.pps)) {
+        *base_time = mcu_utils_uptime_ms();
+        return true;
     }
 
     *base_time = mcu_utils_uptime_ms();

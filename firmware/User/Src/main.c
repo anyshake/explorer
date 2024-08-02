@@ -120,20 +120,17 @@ void task_read_adc(void* argument) {
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n % states->sample_rate] =
-                        // outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
-                        1;
+                        outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      states->sample_rate] =
-                        // outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
-                        2;
+                        outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      2 * states->sample_rate] =
-                        // outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
-                        3;
+                        outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
                 } else {
                     ;
                 }
@@ -181,14 +178,15 @@ void task_calib_gnss(void* argument) {
         if (timestamp % 86400 == 0 || !has_succeed) {
             has_succeed = false;
 
-            if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp)) {
+            if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp,
+                               false)) {
                 continue;
             }
 
             if (gnss_get_sentence(states->gnss_rmc_message,
                                   GNSS_SENTENCE_TYPE_RMC)) {
                 gnss_padding_sentence(states->gnss_rmc_message);
-                gnss_parse_rmc(NULL, &states->gnss_time,
+                gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
                                states->gnss_rmc_message);
                 states->gnss_ref_timestamp =
                     gnss_get_timestamp(&states->gnss_time);
@@ -347,7 +345,7 @@ void get_gnss_data(explorer_states_t* states) {
 
     for (uint8_t n = 0;; n++) {
         // Wait for PPS signal
-        if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp)) {
+        if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, true)) {
             ssd1306_display_string(0, 0, "GNSS No Signal!",
                                    SSD1306_FONT_TYPE_ASCII_8X16,
                                    SSD1306_FONT_DISPLAY_COLOR_WHITE);
