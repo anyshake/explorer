@@ -71,6 +71,10 @@ void task_read_adc(void* argument) {
     lsm6ds3_reg_outx_xl_t outx_xl;
     lsm6ds3_reg_outy_xl_t outy_xl;
 
+    // Initialize ADC mutiplexer, data result
+    ads1262_reg_inpmux_t inpmux;
+    ads1262_cmd_rdata_t rdata;
+
     // Get time span (in ms) for sampling
     uint8_t time_span = 1000 / states->sample_rate;
 
@@ -100,7 +104,35 @@ void task_read_adc(void* argument) {
                         ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
                         outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
                 } else {
-                    ;
+                    // Read Z-axis geophone data (AIN0, AIN1)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN0;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN1;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer->data[n] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
+                    // Read E-axis geophone data (AIN2, AIN3)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN2;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN3;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer
+                        ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
+                    // Read N-axis geophone data (AIN4, AIN5)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN4;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN5;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer
+                        ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
                 }
             }
 
@@ -132,7 +164,35 @@ void task_read_adc(void* argument) {
                                                      2 * states->sample_rate] =
                         outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
                 } else {
-                    ;
+                    // Read Z-axis geophone data (AIN0, AIN1)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN0;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN1;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer->data[n % states->sample_rate] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
+                    // Read E-axis geophone data (AIN2, AIN3)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN2;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN3;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer->data[(n % states->sample_rate) +
+                                                     states->sample_rate] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
+                    // Read N-axis geophone data (AIN4, AIN5)
+                    inpmux.mux_p = ADS1262_INPMUX_AIN4;
+                    inpmux.mux_n = ADS1262_INPMUX_AIN5;
+                    ads1262_reg_set_inpmux(&inpmux);
+                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
+                                      ADS1262_INIT_CONTROL_TYPE_HARD);
+                    states->adc_channel_buffer->data[(n % states->sample_rate) +
+                                                     2 * states->sample_rate] =
+                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
+                                               : rdata.data;
                 }
 
                 if (n % states->sample_rate == 0) {
