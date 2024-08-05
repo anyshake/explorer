@@ -403,7 +403,7 @@ void get_gnss_data(explorer_states_t* states) {
     for (bool has_elevation = false;;) {
         // Wait for PPS signal
         if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, true)) {
-            ssd1306_display_string(0, 0, "GNSS No Signal!",
+            ssd1306_display_string(0, 0, "GNSS Not Ready!",
                                    SSD1306_FONT_TYPE_ASCII_8X16,
                                    SSD1306_FONT_DISPLAY_COLOR_WHITE);
             mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
