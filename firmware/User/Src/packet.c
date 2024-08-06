@@ -64,19 +64,19 @@ void send_data_packet(int32_array_t* channel_buf,
         sizeof(uint64_t) +
         // Header checksum [36:37]
         sizeof(uint8_t) +
-        // Z-axis data [37:sample_rate]
+        // Z-axis data [37:sample_rate*4]
         sample_rate * sizeof(int32_t) +
-        // E-axis data [sample_rate:2*sample_rate]
+        // E-axis data [sample_rate*4:2*sample_rate*4]
         sample_rate * sizeof(int32_t) +
-        // N-axis data [2*sample_rate:3*sample_rate]
+        // N-axis data [2*sample_rate*4:3*sample_rate*4]
         sample_rate * sizeof(int32_t) +
-        // Channel CRC32 checksum [3*sample_rate:3*sample_rate+4]
+        // Channel CRC32 checksum [3*sample_rate*4:3*sample_rate*4+4]
         sizeof(int32_t) +
-        // Reserved [3*sample_rate+4:3*sample_rate+4+8]
+        // Reserved [3*sample_rate*4+4:3*sample_rate*4+4+8]
         sizeof(uint64_t) +
-        // Tail checksum [3*sample_rate+4+8:3*sample_rate+4+8+1]
+        // Tail checksum [3*sample_rate*4+4+8:3*sample_rate*4+4+8+1]
         sizeof(uint8_t) +
-        // Frame tail [3*sample_rate+4+8+1:packet_size]
+        // Frame tail [3*sample_rate*4+4+8+1:packet_size]
         sizeof(uint8_t) + sizeof(uint8_t);
     if (packet_buf->size != packet_size) {
         array_uint8_free(packet_buf);
