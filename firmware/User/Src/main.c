@@ -142,7 +142,7 @@ void task_read_adc(void* argument) {
     } else {
         int64_t prev_timestamp = 0;
 
-        for (uint16_t n = 0;;) {
+        for (uint64_t n = 0;;) {
             int64_t current_timestamp = gnss_get_current_timestamp(
                 states->local_base_timestamp, states->gnss_ref_timestamp);
 
