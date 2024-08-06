@@ -455,15 +455,15 @@ void display_settings(explorer_states_t* states) {
     ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "NO GEOPHONE: %s",
-             (int)states->no_geophone ? "YES" : "NO");
+             states->no_geophone ? "YES" : "NO");
     ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s",
-             (int)states->legacy_mode ? "YES" : "NO");
+             states->legacy_mode ? "YES" : "NO");
     ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "24-BIT MODE: %s",
-             (int)states->adc_24bit_mode ? "YES" : "NO");
+             states->adc_24bit_mode ? "YES" : "NO");
     ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X",
