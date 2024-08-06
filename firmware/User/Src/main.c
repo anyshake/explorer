@@ -195,7 +195,7 @@ void task_read_adc(void* argument) {
                                                : rdata.data;
                 }
 
-                if (n % states->sample_rate == 0) {
+                if (n && n % states->sample_rate == 0) {
                     osMessageQueuePut(states->reader_drdy_queue,
                                       &current_timestamp, 0, 0);
                 }
