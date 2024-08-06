@@ -47,46 +47,52 @@ void send_data_packet(int32_array_t* channel_buf,
     // Calculate packet size and initialize buffer
     uint16_t packet_size =
         // Frame header [0:2]
-        2 +
+        sizeof(uint8_t) + sizeof(uint8_t) +
         // Sample rate [2:4]
-        2 +
+        sizeof(uint16_t) +
         // Unix timestamp [4:12]
-        8 +
+        sizeof(int64_t) +
         // Device ID [12:16]
-        4 +
+        sizeof(uint32_t) +
         // Latitude [16:20]
-        4 +
+        sizeof(float) +
         // Longitude [20:24]
-        4 +
+        sizeof(float) +
         // Elevation [24:28]
-        4 +
+        sizeof(float) +
         // Reserved [28:36]
-        8 +
-        // Header checksum [36:38]
-        2 +
-        // Z-axis data [38:sample_rate]
+        sizeof(uint64_t) +
+        // Header checksum [36:37]
+        sizeof(uint8_t) +
+        // Z-axis data [37:sample_rate]
         sample_rate * sizeof(int32_t) +
         // E-axis data [sample_rate:2*sample_rate]
         sample_rate * sizeof(int32_t) +
         // N-axis data [2*sample_rate:3*sample_rate]
         sample_rate * sizeof(int32_t) +
-        // Channle data checksum [3*sample_rate:3*sample_rate+4]
-        4 +
+        // Channel CRC32 checksum [3*sample_rate:3*sample_rate+4]
+        sizeof(int32_t) +
         // Reserved [3*sample_rate+4:3*sample_rate+4+8]
-        8 +
-        // Tail checksum [3*sample_rate+4+8:3*sample_rate+4+8+2]
-        2 +
-        // Frame tail [3*sample_rate+4+8+2:packet_size]
-        2;
+        sizeof(uint64_t) +
+        // Tail checksum [3*sample_rate+4+8:3*sample_rate+4+8+1]
+        sizeof(uint8_t) +
+        // Frame tail [3*sample_rate+4+8+1:packet_size]
+        sizeof(uint8_t) + sizeof(uint8_t);
     if (packet_buf->size != packet_size) {
         array_uint8_free(packet_buf);
         packet_buf = array_uint8_make(packet_size);
     }
 
     // Set packet reserved fields to 0xFF
-    for (uint8_t i = 0; i < sizeof(int64_t); i++) {
+    for (uint8_t i = 0; i < sizeof(uint64_t); i++) {
         packet_buf->data[28 + i] = 0xFF;
-        packet_buf->data[packet_size - sizeof(int64_t) - 2 + i] = 0xFF;
+        packet_buf->data[packet_size -
+                         // Frame tail
+                         sizeof(uint8_t) - sizeof(uint8_t) -
+                         // Tail checksum
+                         sizeof(uint8_t) -
+                         // Reserved
+                         sizeof(uint64_t) + i] = 0xFF;
     }
 
     // Set packet frame header field
@@ -133,29 +139,26 @@ void send_data_packet(int32_array_t* channel_buf,
     }
 
     // Get checksum for header
-    uint16_t header_checksum = 0;
-    for (uint8_t i = 1; i < 36; i++) {
+    uint8_t header_checksum = 0;
+    for (uint8_t i = 2; i < 36; i++) {
         header_checksum ^= packet_buf->data[i];
     }
-    bytes = (uint8_t*)&header_checksum;
-    for (uint8_t i = 0; i < sizeof(uint16_t); i++) {
-        packet_buf->data[36 + i] = bytes[i];
-    }
+    packet_buf->data[36] = header_checksum;
 
     // Set packet data from channel buffer (int32_t to uint8_t)
     for (uint8_t i = 0; i < sample_rate; i++) {
         bytes = (uint8_t*)&channel_buf->data[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet_buf->data[38 + i * sizeof(int32_t) + j] = bytes[j];
+            packet_buf->data[37 + i * sizeof(int32_t) + j] = bytes[j];
         }
         bytes = (uint8_t*)&channel_buf->data[i + sample_rate];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet_buf->data[38 + sample_rate * sizeof(int32_t) +
+            packet_buf->data[37 + sample_rate * sizeof(int32_t) +
                              i * sizeof(int32_t) + j] = bytes[j];
         }
         bytes = (uint8_t*)&channel_buf->data[i + 2 * sample_rate];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet_buf->data[38 + 2 * sample_rate * sizeof(int32_t) +
+            packet_buf->data[37 + 2 * sample_rate * sizeof(int32_t) +
                              i * sizeof(int32_t) + j] = bytes[j];
         }
     }
@@ -165,19 +168,20 @@ void send_data_packet(int32_array_t* channel_buf,
         mcu_utils_crc32_get((uint32_t*)channel_buf->data, channel_buf->size);
     bytes = (uint8_t*)&checksum;
     for (uint8_t i = 0; i < sizeof(uint32_t); i++) {
-        packet_buf->data[38 + 3 * sample_rate * sizeof(uint32_t) + i] =
+        packet_buf->data[37 + 3 * sample_rate * sizeof(uint32_t) + i] =
             bytes[i];
     }
 
     // Get checksum for tail
-    uint16_t tail_checksum = 0;
-    for (uint16_t i = packet_size - 12; i < packet_size - 4; i++) {
+    uint8_t tail_checksum = 0;
+    for (uint16_t i = packet_size - sizeof(uint8_t) - sizeof(uint8_t) -
+                      sizeof(uint8_t) - sizeof(uint64_t);
+         i < packet_size - sizeof(uint8_t) - sizeof(uint8_t) - sizeof(uint8_t);
+         i++) {
         tail_checksum ^= packet_buf->data[i];
     }
-    bytes = (uint8_t*)&tail_checksum;
-    for (uint8_t i = 0; i < sizeof(uint16_t); i++) {
-        packet_buf->data[packet_size - 4 + i] = bytes[i];
-    }
+    packet_buf->data[packet_size - sizeof(uint8_t) - sizeof(uint8_t) -
+                     sizeof(uint8_t)] = tail_checksum;
 
     // Set packet frame tail
     packet_buf->data[packet_size - 2] = 0xD9;
