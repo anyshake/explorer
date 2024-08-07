@@ -92,17 +92,26 @@ void task_read_adc(void* argument) {
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n] =
-                        outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                        states->adc_24bit_mode
+                            ? outz_xl.outz_h_xl << 16 | outz_xl.outz_l_xl << 8 |
+                                  0
+                            : outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer
                         ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
-                        outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                        states->adc_24bit_mode
+                            ? outx_xl.outx_h_xl << 16 | outx_xl.outx_l_xl << 8 |
+                                  0
+                            : outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer
                         ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
-                        outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                        states->adc_24bit_mode
+                            ? outy_xl.outy_h_xl << 16 | outy_xl.outy_l_xl << 8 |
+                                  0
+                            : outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
                 } else {
                     // Read Z-axis geophone data (AIN0, AIN1)
                     inpmux.mux_p = ADS1262_INPMUX_AIN0;
@@ -152,17 +161,26 @@ void task_read_adc(void* argument) {
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n % states->sample_rate] =
-                        outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                        states->adc_24bit_mode
+                            ? outz_xl.outz_h_xl << 16 | outz_xl.outz_l_xl << 8 |
+                                  0
+                            : outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      states->sample_rate] =
-                        outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                        states->adc_24bit_mode
+                            ? outx_xl.outx_h_xl << 16 | outx_xl.outx_l_xl << 8 |
+                                  0
+                            : outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      2 * states->sample_rate] =
-                        outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                        states->adc_24bit_mode
+                            ? outy_xl.outy_h_xl << 16 | outy_xl.outy_l_xl << 8 |
+                                  0
+                            : outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
                 } else {
                     // Read Z-axis geophone data (AIN0, AIN1)
                     inpmux.mux_p = ADS1262_INPMUX_AIN0;
@@ -296,12 +314,7 @@ void peripherals_init(explorer_states_t* states) {
     mcu_utils_gpio_mode(OPTIONS_LEGACY_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
     states->legacy_mode = mcu_utils_gpio_read(OPTIONS_LEGACY_MODE_PIN);
     mcu_utils_gpio_mode(OPTIONS_ADC_24BIT_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    if (states->legacy_mode) {
-        states->adc_24bit_mode = false;
-    } else {
-        states->adc_24bit_mode =
-            mcu_utils_gpio_read(OPTIONS_ADC_24BIT_MODE_PIN);
-    }
+    states->adc_24bit_mode = mcu_utils_gpio_read(OPTIONS_ADC_24BIT_MODE_PIN);
 
     // Get sample rate from DIP switches
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
