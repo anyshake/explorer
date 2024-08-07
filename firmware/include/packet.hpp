@@ -15,6 +15,5 @@ typedef struct {
 } packet_t;
 
 void send_data_packet(packet_t packet);
-void send_word_packet(const uint8_t* word, uint8_t len);
 
 #endif

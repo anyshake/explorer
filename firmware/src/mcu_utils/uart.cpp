@@ -4,14 +4,6 @@ void uart_init(uint32_t baudrate) {
     Serial.begin(baudrate);
 }
 
-void uart_writech(uint8_t ch) {
-    Serial.write(ch);
-}
-
-uint8_t uart_hasdata() {
-    return Serial.available();
-}
-
-uint8_t uart_readch() {
-    return Serial.read();
+void uart_writebuf(uint8_t *tx_buf, uint16_t len) {
+    Serial.write(tx_buf, len);
 }

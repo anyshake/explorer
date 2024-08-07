@@ -5,8 +5,6 @@
 #include <stdint.h>
 
 void uart_init(uint32_t baudrate);
-void uart_writech(uint8_t ch);
-uint8_t uart_hasdata();
-uint8_t uart_readch();
+void uart_writebuf(uint8_t* tx_buf, uint16 len);
 
 #endif
