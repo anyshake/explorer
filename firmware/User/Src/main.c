@@ -93,25 +93,31 @@ void task_read_adc(void* argument) {
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n] =
                         states->adc_24bit_mode
-                            ? outz_xl.outz_h_xl << 16 | outz_xl.outz_l_xl << 8 |
-                                  0
-                            : outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                            ? ((int16_t)(outz_xl.outz_h_xl << 8 |
+                                         outz_xl.outz_l_xl))
+                                  << 8
+                            : (int16_t)(outz_xl.outz_h_xl << 8 |
+                                        outz_xl.outz_l_xl);
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer
                         ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
                         states->adc_24bit_mode
-                            ? outx_xl.outx_h_xl << 16 | outx_xl.outx_l_xl << 8 |
-                                  0
-                            : outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                            ? ((int16_t)(outx_xl.outx_h_xl << 8 |
+                                         outx_xl.outx_l_xl))
+                                  << 8
+                            : (int16_t)(outx_xl.outx_h_xl << 8 |
+                                        outx_xl.outx_l_xl);
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer
                         ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
                         states->adc_24bit_mode
-                            ? outy_xl.outy_h_xl << 16 | outy_xl.outy_l_xl << 8 |
-                                  0
-                            : outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                            ? ((int16_t)(outy_xl.outy_h_xl << 8 |
+                                         outy_xl.outy_l_xl))
+                                  << 8
+                            : (int16_t)(outy_xl.outy_h_xl << 8 |
+                                        outy_xl.outy_l_xl);
                 } else {
                     // Read Z-axis geophone data (AIN0, AIN1)
                     inpmux.mux_p = ADS1262_INPMUX_AIN0;
@@ -162,25 +168,31 @@ void task_read_adc(void* argument) {
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n % states->sample_rate] =
                         states->adc_24bit_mode
-                            ? outz_xl.outz_h_xl << 16 | outz_xl.outz_l_xl << 8 |
-                                  0
-                            : outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl;
+                            ? ((int16_t)(outz_xl.outz_h_xl << 8 |
+                                        outz_xl.outz_l_xl))
+                                  << 8
+                            : (int16_t)(outz_xl.outz_h_xl << 8 |
+                                        outz_xl.outz_l_xl);
                     // Read E-axis accelerometer data
                     lsm6ds3_reg_get_outx_xl(&outx_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      states->sample_rate] =
                         states->adc_24bit_mode
-                            ? outx_xl.outx_h_xl << 16 | outx_xl.outx_l_xl << 8 |
-                                  0
-                            : outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl;
+                            ? ((int16_t)(outx_xl.outx_h_xl << 8 |
+                                        outx_xl.outx_l_xl))
+                                  << 8
+                            : (int16_t)(outx_xl.outx_h_xl << 8 |
+                                        outx_xl.outx_l_xl);
                     // Read N-axis accelerometer data
                     lsm6ds3_reg_get_outy_xl(&outy_xl);
                     states->adc_channel_buffer->data[(n % states->sample_rate) +
                                                      2 * states->sample_rate] =
                         states->adc_24bit_mode
-                            ? outy_xl.outy_h_xl << 16 | outy_xl.outy_l_xl << 8 |
-                                  0
-                            : outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl;
+                            ? ((int16_t)(outy_xl.outy_h_xl << 8 |
+                                        outy_xl.outy_l_xl))
+                                  << 8
+                            : (int16_t)(outy_xl.outy_h_xl << 8 |
+                                        outy_xl.outy_l_xl);
                 } else {
                     // Read Z-axis geophone data (AIN0, AIN1)
                     inpmux.mux_p = ADS1262_INPMUX_AIN0;
