@@ -1,7 +1,7 @@
-#include "ads1262/regs/gpiocon.hpp"
+#include "ads1262/regs/gpiocon.h"
 
-void adc_reg_set_gpiocon(adc_reg_gpiocon_t* gpiocon) {
-    uint8_t gpiocon_data = __ADC_GPIOCON_DEFAULT_VALUE;
+void ads1262_reg_set_gpiocon(ads1262_reg_gpiocon_t* gpiocon) {
+    uint8_t gpiocon_data = __ADS1262_GPIOCON_DEFAULT_VALUE;
     gpiocon_data &= ~(0x01 << 7);
     gpiocon_data |= (gpiocon->gpio_7 & 0x01) << 7;
     gpiocon_data &= ~(0x01 << 6);
@@ -18,12 +18,12 @@ void adc_reg_set_gpiocon(adc_reg_gpiocon_t* gpiocon) {
     gpiocon_data |= (gpiocon->gpio_1 & 0x01) << 1;
     gpiocon_data &= ~0x01;
     gpiocon_data |= (gpiocon->gpio_0 & 0x01);
-    adc_write_reg(ADC_REG_GPIOCON, &gpiocon_data);
+    ads1262_write_reg(ADS1262_REG_GPIOCON, &gpiocon_data);
 }
 
-void adc_reg_get_gpiocon(adc_reg_gpiocon_t* gpiocon) {
+void ads1262_reg_get_gpiocon(ads1262_reg_gpiocon_t* gpiocon) {
     uint8_t gpiocon_data = 0;
-    adc_read_reg(ADC_REG_GPIOCON, &gpiocon_data);
+    ads1262_read_reg(ADS1262_REG_GPIOCON, &gpiocon_data);
     gpiocon->gpio_7 = (gpiocon_data & 0x80) >> 7;
     gpiocon->gpio_6 = (gpiocon_data & 0x40) >> 6;
     gpiocon->gpio_5 = (gpiocon_data & 0x20) >> 5;

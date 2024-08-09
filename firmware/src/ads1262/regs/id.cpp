@@ -1,8 +1,8 @@
-#include "ads1262/regs/id.hpp"
+#include "ads1262/regs/id.h"
 
-void adc_reg_get_id(adc_reg_id_t* id) {
+void ads1262_reg_get_id(ads1262_reg_id_t* id) {
     uint8_t id_data = 0;
-    adc_read_reg(ADC_REG_ID, &id_data);
+    ads1262_read_reg(ADS1262_REG_ID, &id_data);
     id->dev_id = (id_data & 0xE0) >> 5;
     id->rev_id = id_data & 0x1F;
 }

@@ -1,73 +1,70 @@
-#include "ads1262/utils.hpp"
+#include "ads1262/utils.h"
 
-void adc_init(uint8_t control_type) {
-    spi_init();
-    gpio_mode(PIN_ADC_SS, GPIO_MODE_OUTPUT);
-    gpio_mode(PIN_ADC_DRDY, GPIO_MODE_INPUT);
-    gpio_mode(PIN_ADC_RST, GPIO_MODE_OUTPUT);
-    gpio_mode(PIN_ADC_START, GPIO_MODE_OUTPUT);
-    if (control_type == ADC_INIT_CONTROL_TYPE_HARD) {
-        gpio_low(PIN_ADC_START);
-    } else if (control_type == ADC_INIT_CONTROL_TYPE_SOFT) {
-        gpio_high(PIN_ADC_START);
+void ads1262_init(ads1262_ctl_pin_t pin, uint8_t control_type, bool is_rtos) {
+    mcu_utils_spi_init(is_rtos);
+    mcu_utils_gpio_mode(pin.drdy, MCU_UTILS_GPIO_MODE_INPUT);
+    mcu_utils_gpio_mode(pin.rst, MCU_UTILS_GPIO_MODE_OUTPUT);
+    mcu_utils_gpio_mode(pin.start, MCU_UTILS_GPIO_MODE_OUTPUT);
+
+    mcu_utils_gpio_low(pin.rst);
+    mcu_utils_delay_ms(100, is_rtos);
+    mcu_utils_gpio_high(pin.rst);
+
+    if (control_type == ADS1262_INIT_CONTROL_TYPE_HARD) {
+        mcu_utils_gpio_low(pin.start);
+    } else if (control_type == ADS1262_INIT_CONTROL_TYPE_SOFT) {
+        mcu_utils_gpio_high(pin.start);
     }
 }
 
-void adc_reset(uint8_t reset_type) {
-    if (reset_type == ADC_RESET_RESET_TYPE_HARD) {
-        gpio_low(PIN_ADC_RST);
-        delay_ms(50);
-        gpio_high(PIN_ADC_RST);
-    } else if (reset_type == ADC_RESET_RESET_TYPE_SOFT) {
-        adc_write_cmd(ADC_CMD_RESET, NULL, 1, ADC_WRITE_CMD_WAIT_ENABLE);
+void ads1262_reset(ads1262_ctl_pin_t pin, uint8_t reset_type, bool is_rtos) {
+    if (reset_type == ADS1262_RESET_RESET_TYPE_HARD) {
+        mcu_utils_gpio_low(pin.rst);
+        mcu_utils_delay_ms(100, is_rtos);
+        mcu_utils_gpio_high(pin.rst);
+    } else if (reset_type == ADS1262_RESET_RESET_TYPE_SOFT) {
+        ads1262_write_cmd(pin, ADS1262_CMD_RESET, NULL, 1,
+                          ADS1262_WRITE_CMD_WAIT_ENABLE);
     }
 }
 
-void adc_wait() {
-    boolean is_ready = false;
-    for (uint16_t i = 0; i < UINT16_MAX; i++) {
-        if (!gpio_read(PIN_ADC_DRDY)) {
-            is_ready = true;
-            break;
-        }
-        delay_us(5);
-    }
-    // Hard reset if PIN_ADC_DRDY is stuck high
-    if (!is_ready) {
-        adc_reset(ADC_RESET_RESET_TYPE_HARD);
+void ads1262_wait(ads1262_ctl_pin_t pin) {
+    while (mcu_utils_gpio_read(pin.drdy)) {
+        ;
     }
 }
 
-void adc_read_reg(uint8_t reg, uint8_t* rx_data) {
-    gpio_low(PIN_ADC_SS);
-    spi_write(ADC_CMD_RREG | reg);
-    spi_write(0);  // Read only 1 register
-    *rx_data = spi_write(0xFF);
-    gpio_high(PIN_ADC_SS);
+void ads1262_read_reg(uint8_t reg, uint8_t* rx_data) {
+    mcu_utils_gpio_low(SPI_SS);
+    mcu_utils_spi_transfer(ADS1262_CMD_RREG | reg);
+    mcu_utils_spi_transfer(0);  // Read only 1 register
+    *rx_data = mcu_utils_spi_transfer(0xFF);
+    mcu_utils_gpio_high(SPI_SS);
 }
 
-void adc_write_reg(uint8_t reg, uint8_t* rx_data) {
-    gpio_low(PIN_ADC_SS);
-    spi_write(ADC_CMD_WREG | reg);
-    spi_write(0);  // Write only 1 register
-    spi_write(*rx_data);
-    gpio_high(PIN_ADC_SS);
+void ads1262_write_reg(uint8_t reg, uint8_t* tx_data) {
+    mcu_utils_gpio_low(SPI_SS);
+    mcu_utils_spi_transfer(ADS1262_CMD_WREG | reg);
+    mcu_utils_spi_transfer(0);  // Write only 1 register
+    mcu_utils_spi_transfer(*tx_data);
+    mcu_utils_gpio_high(SPI_SS);
 }
 
-void adc_write_cmd(uint8_t cmd,
-                   uint8_t* rx_data,
-                   uint8_t rx_len,
-                   uint8_t wait) {
-    if (wait == ADC_WRITE_CMD_WAIT_ENABLE) {
-        adc_wait();
+void ads1262_write_cmd(ads1262_ctl_pin_t pin,
+                       uint8_t cmd,
+                       uint8_t* rx_data,
+                       uint8_t rx_len,
+                       uint8_t wait) {
+    if (wait == ADS1262_WRITE_CMD_WAIT_ENABLE) {
+        ads1262_wait(pin);
     }
-    gpio_low(PIN_ADC_SS);
-    spi_write(cmd);
+    mcu_utils_gpio_low(SPI_SS);
+    mcu_utils_spi_transfer(cmd);
     for (uint8_t i = 0; i < rx_len; i++) {
-        uint8_t rx_byte = spi_write(0xFF);
+        uint8_t rx_byte = mcu_utils_spi_transfer(0xFF);
         if (rx_data != NULL) {
             rx_data[i] = rx_byte;
         }
     }
-    gpio_high(PIN_ADC_SS);
+    mcu_utils_gpio_high(SPI_SS);
 }

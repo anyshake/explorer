@@ -1,15 +1,19 @@
-#include "ads1262/cmds/rdata.hpp"
+#include "ads1262/cmds/rdata.h"
 
-void adc_cmd_rdata(adc_cmd_rdata_t* rdata, uint8_t control_type) {
+void ads1262_cmd_rdata(ads1262_ctl_pin_t pin,
+                       ads1262_cmd_rdata_t* rdata,
+                       uint8_t control_type) {
     uint8_t rx_data[6] = {0};
-    if (control_type == ADC_INIT_CONTROL_TYPE_SOFT) {
-        adc_write_cmd(ADC_CMD_START1, NULL, 0, ADC_WRITE_CMD_WAIT_DISABLE);
+    if (control_type == ADS1262_INIT_CONTROL_TYPE_SOFT) {
+        ads1262_write_cmd(pin, ADS1262_CMD_START1, NULL, 0,
+                          ADS1262_WRITE_CMD_WAIT_DISABLE);
     } else {
-        gpio_high(PIN_ADC_START);
+        mcu_utils_gpio_high(pin.start);
     }
-    adc_write_cmd(ADC_CMD_RDATA1, rx_data, 6, ADC_WRITE_CMD_WAIT_ENABLE);
-    if (control_type == ADC_INIT_CONTROL_TYPE_HARD) {
-        gpio_low(PIN_ADC_START);
+    ads1262_write_cmd(pin, ADS1262_CMD_RDATA1, rx_data, 6,
+                      ADS1262_WRITE_CMD_WAIT_ENABLE);
+    if (control_type == ADS1262_INIT_CONTROL_TYPE_HARD) {
+        mcu_utils_gpio_low(pin.start);
     }
     rdata->status = rx_data[0];
     rdata->data =

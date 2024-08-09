@@ -1,7 +1,7 @@
-#include "ads1262/regs/gpiodat.hpp"
+#include "ads1262/regs/gpiodat.h"
 
-void adc_reg_set_gpiodat(adc_reg_gpiodat_t* gpiodat) {
-    uint8_t gpiodat_data = __ADC_GPIODAT_DEFAULT_VALUE;
+void ads1262_reg_set_gpiodat(ads1262_reg_gpiodat_t* gpiodat) {
+    uint8_t gpiodat_data = __ADS1262_GPIODAT_DEFAULT_VALUE;
     gpiodat_data &= ~(0x01 << 7);
     gpiodat_data |= (gpiodat->gpio_7 & 0x01) << 7;
     gpiodat_data &= ~(0x01 << 6);
@@ -18,12 +18,12 @@ void adc_reg_set_gpiodat(adc_reg_gpiodat_t* gpiodat) {
     gpiodat_data |= (gpiodat->gpio_1 & 0x01) << 1;
     gpiodat_data &= ~0x01;
     gpiodat_data |= (gpiodat->gpio_0 & 0x01);
-    adc_write_reg(ADC_REG_GPIODAT, &gpiodat_data);
+    ads1262_write_reg(ADS1262_REG_GPIODAT, &gpiodat_data);
 }
 
-void adc_reg_get_gpiodat(adc_reg_gpiodat_t* gpiodat) {
+void ads1262_reg_get_gpiodat(ads1262_reg_gpiodat_t* gpiodat) {
     uint8_t gpiodat_data = 0;
-    adc_read_reg(ADC_REG_GPIODAT, &gpiodat_data);
+    ads1262_read_reg(ADS1262_REG_GPIODAT, &gpiodat_data);
     gpiodat->gpio_7 = (gpiodat_data & 0x80) >> 7;
     gpiodat->gpio_6 = (gpiodat_data & 0x40) >> 6;
     gpiodat->gpio_5 = (gpiodat_data & 0x20) >> 5;
