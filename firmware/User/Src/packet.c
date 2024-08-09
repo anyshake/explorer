@@ -44,49 +44,10 @@ void send_data_packet(int32_array_t* channel_buf,
         return;
     }
 
-    // Calculate packet size and initialize buffer
-    uint16_t packet_size =
-        // Frame header [0:2]
-        sizeof(uint8_t) + sizeof(uint8_t) +
-        // Sample rate [2:4]
-        sizeof(uint16_t) +
-        // Unix timestamp [4:12]
-        sizeof(int64_t) +
-        // Device ID [12:16]
-        sizeof(uint32_t) +
-        // Latitude [16:20]
-        sizeof(float) +
-        // Longitude [20:24]
-        sizeof(float) +
-        // Elevation [24:28]
-        sizeof(float) +
-        // Reserved [28:36]
-        sizeof(uint64_t) +
-        // Header checksum [36:37]
-        sizeof(uint8_t) +
-        // Z-axis data [37:sample_rate*4]
-        sample_rate * sizeof(int32_t) +
-        // E-axis data [sample_rate*4:2*sample_rate*4]
-        sample_rate * sizeof(int32_t) +
-        // N-axis data [2*sample_rate*4:3*sample_rate*4]
-        sample_rate * sizeof(int32_t) +
-        // Channel CRC32 checksum [3*sample_rate*4:3*sample_rate*4+4]
-        sizeof(int32_t) +
-        // Reserved [3*sample_rate*4+4:3*sample_rate*4+4+8]
-        sizeof(uint64_t) +
-        // Tail checksum [3*sample_rate*4+4+8:3*sample_rate*4+4+8+1]
-        sizeof(uint8_t) +
-        // Frame tail [3*sample_rate*4+4+8+1:packet_size]
-        sizeof(uint8_t) + sizeof(uint8_t);
-    if (packet_buf->size != packet_size) {
-        array_uint8_free(packet_buf);
-        packet_buf = array_uint8_make(packet_size);
-    }
-
     // Set packet reserved fields to 0xFF
     for (uint8_t i = 0; i < sizeof(uint64_t); i++) {
         packet_buf->data[28 + i] = 0xFF;
-        packet_buf->data[packet_size -
+        packet_buf->data[packet_buf->size -
                          // Frame tail
                          sizeof(uint8_t) - sizeof(uint8_t) -
                          // Tail checksum
@@ -120,21 +81,21 @@ void send_data_packet(int32_array_t* channel_buf,
     // Set packet latitude field
     float latitude = location->latitude;
     bytes = (uint8_t*)&latitude;
-    for (uint8_t i = 0; i < sizeof(latitude); i++) {
+    for (uint8_t i = 0; i < sizeof(float); i++) {
         packet_buf->data[16 + i] = bytes[i];
     }
 
     // Set packet longitude field
     float longitude = location->longitude;
     bytes = (uint8_t*)&longitude;
-    for (uint8_t i = 0; i < sizeof(longitude); i++) {
+    for (uint8_t i = 0; i < sizeof(float); i++) {
         packet_buf->data[20 + i] = bytes[i];
     }
 
     // Set packet elevation field
     float elevation = location->altitude;
     bytes = (uint8_t*)&elevation;
-    for (uint8_t i = 0; i < sizeof(elevation); i++) {
+    for (uint8_t i = 0; i < sizeof(float); i++) {
         packet_buf->data[24 + i] = bytes[i];
     }
 
@@ -174,18 +135,54 @@ void send_data_packet(int32_array_t* channel_buf,
 
     // Get checksum for tail
     uint8_t tail_checksum = 0;
-    for (uint16_t i = packet_size - sizeof(uint8_t) - sizeof(uint8_t) -
+    for (uint16_t i = packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) -
                       sizeof(uint8_t) - sizeof(uint64_t);
-         i < packet_size - sizeof(uint8_t) - sizeof(uint8_t) - sizeof(uint8_t);
+         i <
+         packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) - sizeof(uint8_t);
          i++) {
         tail_checksum ^= packet_buf->data[i];
     }
-    packet_buf->data[packet_size - sizeof(uint8_t) - sizeof(uint8_t) -
+    packet_buf->data[packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) -
                      sizeof(uint8_t)] = tail_checksum;
 
     // Set packet frame tail
-    packet_buf->data[packet_size - 2] = 0xD9;
-    packet_buf->data[packet_size - 1] = 0xF1;
+    packet_buf->data[packet_buf->size - 2] = 0xD9;
+    packet_buf->data[packet_buf->size - 1] = 0xF1;
 
-    mcu_utils_uart_write(packet_buf->data, packet_size, false);
+    mcu_utils_uart_write(packet_buf->data, packet_buf->size, false);
+}
+
+uint16_t get_data_packet_size(uint16_t sample_rate) {
+    return  // Frame header [0:2]
+        sizeof(uint8_t) + sizeof(uint8_t) +
+        // Sample rate [2:4]
+        sizeof(uint16_t) +
+        // Unix timestamp [4:12]
+        sizeof(int64_t) +
+        // Device ID [12:16]
+        sizeof(uint32_t) +
+        // Latitude [16:20]
+        sizeof(float) +
+        // Longitude [20:24]
+        sizeof(float) +
+        // Elevation [24:28]
+        sizeof(float) +
+        // Reserved [28:36]
+        sizeof(uint64_t) +
+        // Header checksum [36:37]
+        sizeof(uint8_t) +
+        // Z-axis data [37:sample_rate*4]
+        sample_rate * sizeof(int32_t) +
+        // E-axis data [sample_rate*4:2*sample_rate*4]
+        sample_rate * sizeof(int32_t) +
+        // N-axis data [2*sample_rate*4:3*sample_rate*4]
+        sample_rate * sizeof(int32_t) +
+        // Channel CRC32 checksum [3*sample_rate*4:3*sample_rate*4+4]
+        sizeof(int32_t) +
+        // Reserved [3*sample_rate*4+4:3*sample_rate*4+4+8]
+        sizeof(uint64_t) +
+        // Tail checksum [3*sample_rate*4+4+8:3*sample_rate*4+4+8+1]
+        sizeof(uint8_t) +
+        // Frame tail [3*sample_rate*4+4+8+1:packet_size]
+        sizeof(uint8_t) + sizeof(uint8_t);
 }

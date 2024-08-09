@@ -169,7 +169,7 @@ void task_read_adc(void* argument) {
                     states->adc_channel_buffer->data[n % states->sample_rate] =
                         states->adc_24bit_mode
                             ? ((int16_t)(outz_xl.outz_h_xl << 8 |
-                                        outz_xl.outz_l_xl))
+                                         outz_xl.outz_l_xl))
                                   << 8
                             : (int16_t)(outz_xl.outz_h_xl << 8 |
                                         outz_xl.outz_l_xl);
@@ -179,7 +179,7 @@ void task_read_adc(void* argument) {
                                                      states->sample_rate] =
                         states->adc_24bit_mode
                             ? ((int16_t)(outx_xl.outx_h_xl << 8 |
-                                        outx_xl.outx_l_xl))
+                                         outx_xl.outx_l_xl))
                                   << 8
                             : (int16_t)(outx_xl.outx_h_xl << 8 |
                                         outx_xl.outx_l_xl);
@@ -189,7 +189,7 @@ void task_read_adc(void* argument) {
                                                      2 * states->sample_rate] =
                         states->adc_24bit_mode
                             ? ((int16_t)(outy_xl.outy_h_xl << 8 |
-                                        outy_xl.outy_l_xl))
+                                         outy_xl.outy_l_xl))
                                   << 8
                             : (int16_t)(outy_xl.outy_h_xl << 8 |
                                         outy_xl.outy_l_xl);
@@ -257,7 +257,6 @@ void task_send_data(void* argument) {
 
 void task_calib_gnss(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
-    bool has_succeed = true;
 
     while (true) {
         int64_t timestamp =
@@ -266,26 +265,39 @@ void task_calib_gnss(void* argument) {
             1000;
 
         // Calibrate GNSS time at UTC 00:00:00 every day
-        if (timestamp % 86400 == 0 || !has_succeed) {
-            has_succeed = false;
+        if (timestamp % 86400 == 0) {
+            uint8_t attempts = 0;
+            bool success = false;
 
-            if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp,
-                               false)) {
-                continue;
+            while (attempts < 3 && !success) {
+                if (gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp,
+                                  false)) {
+                    if (gnss_get_sentence(states->gnss_message,
+                                          GNSS_SENTENCE_TYPE_RMC)) {
+                        gnss_padding_sentence(states->gnss_message);
+                        gnss_parse_rmc(&states->gnss_location,
+                                       &states->gnss_time,
+                                       states->gnss_message);
+                        states->gnss_ref_timestamp =
+                            gnss_get_timestamp(&states->gnss_time);
+                        success = true;
+                    }
+                }
+
+                if (!success) {
+                    attempts++;
+                    if (attempts < 3) {
+                        mcu_utils_delay_ms(500, true);
+                    }
+                }
             }
 
-            if (gnss_get_sentence(states->gnss_message,
-                                  GNSS_SENTENCE_TYPE_RMC)) {
-                gnss_padding_sentence(states->gnss_message);
-                gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
-                               states->gnss_message);
-                states->gnss_ref_timestamp =
-                    gnss_get_timestamp(&states->gnss_time);
-                has_succeed = true;
+            if (!success) {
+                continue;
             }
         }
 
-        mcu_utils_delay_ms(100, true);
+        mcu_utils_delay_ms(500, true);
     }
 }
 
@@ -511,13 +523,13 @@ void setup(void) {
         get_gnss_data(&states);
     }
 
-    // Allocate memory for ADC data buffer
+    // Allocate memory buffers
     states.adc_channel_buffer =
         array_int32_make(states.legacy_mode ? 3 * LEGACY_PACKET_CHANNEL_SIZE
                                             : 3 * states.sample_rate);
-    // Pre-allocate memory for UART packet buffer
     if (!states.legacy_mode) {
-        states.uart_packet_buffer = array_uint8_make(1);
+        uint16_t packet_size = get_data_packet_size(states.sample_rate);
+        states.uart_packet_buffer = array_uint8_make(packet_size);
     }
 
     // Display device settings

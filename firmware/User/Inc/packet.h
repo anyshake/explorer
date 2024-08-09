@@ -26,5 +26,6 @@ void send_data_packet(int32_array_t* channel_buf,
                       int64_t timestamp,
                       uint16_t sample_rate,
                       uint32_t device_id);
+uint16_t get_data_packet_size(uint16_t sample_rate);
 
 #endif
