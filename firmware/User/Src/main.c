@@ -125,29 +125,44 @@ void task_read_adc(void* argument) {
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer->data[n] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer->data[n] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer->data[n] = rdata.data;
+                    }
                     // Read E-axis geophone data (AIN2, AIN3)
                     inpmux.mux_p = ADS1262_INPMUX_AIN2;
                     inpmux.mux_n = ADS1262_INPMUX_AIN3;
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer
-                        ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer
+                            ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer
+                            ->data[n + LEGACY_PACKET_CHANNEL_SIZE] = rdata.data;
+                    }
                     // Read N-axis geophone data (AIN4, AIN5)
                     inpmux.mux_p = ADS1262_INPMUX_AIN4;
                     inpmux.mux_n = ADS1262_INPMUX_AIN5;
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer
-                        ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer
+                            ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer
+                            ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
+                            rdata.data;
+                    }
                 }
             }
 
@@ -200,29 +215,49 @@ void task_read_adc(void* argument) {
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer->data[n % states->sample_rate] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer
+                            ->data[n % states->sample_rate] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer
+                            ->data[n % states->sample_rate] = rdata.data;
+                    }
                     // Read E-axis geophone data (AIN2, AIN3)
                     inpmux.mux_p = ADS1262_INPMUX_AIN2;
                     inpmux.mux_n = ADS1262_INPMUX_AIN3;
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer->data[(n % states->sample_rate) +
-                                                     states->sample_rate] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer
+                            ->data[(n % states->sample_rate) +
+                                   states->sample_rate] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer
+                            ->data[(n % states->sample_rate) +
+                                   states->sample_rate] = rdata.data;
+                    }
                     // Read N-axis geophone data (AIN4, AIN5)
                     inpmux.mux_p = ADS1262_INPMUX_AIN4;
                     inpmux.mux_n = ADS1262_INPMUX_AIN5;
                     ads1262_reg_set_inpmux(&inpmux);
                     ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
                                       ADS1262_INIT_CONTROL_TYPE_HARD);
-                    states->adc_channel_buffer->data[(n % states->sample_rate) +
-                                                     2 * states->sample_rate] =
-                        states->adc_24bit_mode ? rdata.data >> 8 & 0xFFFFFF
-                                               : rdata.data;
+                    if (states->adc_24bit_mode) {
+                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
+                        states->adc_channel_buffer
+                            ->data[(n % states->sample_rate) +
+                                   2 * states->sample_rate] =
+                            temp & 0x800000 ? temp | 0xFF000000 : temp;
+                    } else {
+                        states->adc_channel_buffer
+                            ->data[(n % states->sample_rate) +
+                                   2 * states->sample_rate] = rdata.data;
+                    }
                 }
 
                 if (n && n % states->sample_rate == 0) {
