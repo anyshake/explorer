@@ -43,6 +43,7 @@
         "read.h": "c",
         "style.h": "c",
         "crc.h": "c",
-        "crc32.h": "c"
+        "crc32.h": "c",
+        "fputc.h": "c"
     }
 }
