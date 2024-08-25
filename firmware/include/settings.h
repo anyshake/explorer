@@ -4,10 +4,9 @@
 #include "ads1262/utils.h"
 #include "utils/gpio.h"
 
+#define EXPLORER_24BIT_MODE 1
 #define EXPLORER_SAMPLERATE 100
 #define EXPLORER_BAUDRATE 115200
-#define EXPLORER_DEV_ID 19890604
-#define EXPLORER_24BIT_MODE 1
 
 static const mcu_utils_gpio_t MCU_STATE_PIN = {
     .pin = 2,

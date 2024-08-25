@@ -5,14 +5,18 @@
 #include <stdint.h>
 
 #include "array.h"
-#include "utils/uart.h"
-#include "utils/crc32.h"
 #include "utils/delay.h"
+#include "utils/uart.h"
 
-void send_data_packet(int32_array_t* channel_buf,
-                      uint8_array_t* packet_buf,
-                      uint16_t sample_rate,
-                      uint32_t device_id);
-uint16_t get_data_packet_size(uint16_t sample_rate);
+#define EXPLORER_CHANNEL_SIZE 5
+
+typedef struct {
+    int32_t z_axis[EXPLORER_CHANNEL_SIZE];
+    int32_t e_axis[EXPLORER_CHANNEL_SIZE];
+    int32_t n_axis[EXPLORER_CHANNEL_SIZE];
+    uint8_t checksum[3];
+} data_packet_t;
+
+void send_data_packet(int32_array_t* channel_buf);
 
 #endif
