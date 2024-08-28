@@ -7,11 +7,17 @@ void lsm6ds3_init(lsm6ds3_ints_pin_t pin, bool is_rtos) {
 }
 
 void lsm6ds3_reset(bool is_rtos) {
-    lsm6ds3_reg_ctrl3_c_t ctrl3_c;
-    lsm6ds3_reg_get_ctrl3_c(&ctrl3_c);
-    ctrl3_c.sw_reset = LSM6DS3_CTRL3_C_SW_RESET_RESET_DEVICE;
+    lsm6ds3_reg_ctrl3_c_t ctrl3_c = {
+        .sw_reset = LSM6DS3_CTRL3_C_SW_RESET_NORMAL_MODE,
+    };
     lsm6ds3_reg_set_ctrl3_c(&ctrl3_c);
     mcu_utils_delay_ms(100, is_rtos);
+}
+
+void lsm6ds3_wait(lsm6ds3_ints_pin_t pin) {
+    while (!mcu_utils_gpio_read(pin.int_1)) {
+        ;
+    }
 }
 
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data) {

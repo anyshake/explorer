@@ -100,11 +100,11 @@ void send_data_packet(int32_array_t* channel_buf,
     }
 
     // Get checksum for header
-    uint8_t header_checksum = 0;
+    uint8_t xor_checksum = 0;
     for (uint8_t i = 2; i < 36; i++) {
-        header_checksum ^= packet_buf->data[i];
+        xor_checksum ^= packet_buf->data[i];
     }
-    packet_buf->data[36] = header_checksum;
+    packet_buf->data[36] = xor_checksum;
 
     // Set packet data from channel buffer (int32_t to uint8_t)
     for (uint8_t i = 0; i < sample_rate; i++) {
@@ -125,25 +125,25 @@ void send_data_packet(int32_array_t* channel_buf,
     }
 
     // Get CRC checksum for channel data
-    uint32_t checksum =
+    uint32_t crc_checksum =
         mcu_utils_crc32_get((uint32_t*)channel_buf->data, channel_buf->size);
-    bytes = (uint8_t*)&checksum;
+    bytes = (uint8_t*)&crc_checksum;
     for (uint8_t i = 0; i < sizeof(uint32_t); i++) {
         packet_buf->data[37 + 3 * sample_rate * sizeof(uint32_t) + i] =
             bytes[i];
     }
 
     // Get checksum for tail
-    uint8_t tail_checksum = 0;
+    xor_checksum = 0;
     for (uint16_t i = packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) -
                       sizeof(uint8_t) - sizeof(uint64_t);
          i <
          packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) - sizeof(uint8_t);
          i++) {
-        tail_checksum ^= packet_buf->data[i];
+        xor_checksum ^= packet_buf->data[i];
     }
     packet_buf->data[packet_buf->size - sizeof(uint8_t) - sizeof(uint8_t) -
-                     sizeof(uint8_t)] = tail_checksum;
+                     sizeof(uint8_t)] = xor_checksum;
 
     // Set packet frame tail
     packet_buf->data[packet_buf->size - 2] = 0xD9;

@@ -69,7 +69,7 @@ typedef struct {
     uint8_t sw_reset;
 } lsm6ds3_reg_ctrl3_c_t;
 
-void lsm6ds3_reg_set_ctrl3_c(lsm6ds3_reg_ctrl3_c_t* ctrl3_c_t);
-void lsm6ds3_reg_get_ctrl3_c(lsm6ds3_reg_ctrl3_c_t* ctrl3_c_t);
+void lsm6ds3_reg_set_ctrl3_c(lsm6ds3_reg_ctrl3_c_t* ctrl3_c);
+void lsm6ds3_reg_get_ctrl3_c(lsm6ds3_reg_ctrl3_c_t* ctrl3_c);
 
 #endif

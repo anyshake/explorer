@@ -20,6 +20,8 @@
 #include "User/Inc/ssd1306/utils.h"
 
 #include "User/Inc/lsm6ds3/regs/ctrl1_xl.h"
+#include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
+#include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
 #include "User/Inc/lsm6ds3/regs/outx_xl.h"
 #include "User/Inc/lsm6ds3/regs/outy_xl.h"
 #include "User/Inc/lsm6ds3/regs/outz_xl.h"
@@ -89,6 +91,9 @@ void task_read_adc(void* argument) {
 
             for (uint8_t n = 0; n < LEGACY_PACKET_CHANNEL_SIZE; n++) {
                 if (states->no_geophone) {
+                    // Wait for LSM6DS3 data ready
+                    lsm6ds3_wait(LSM6DS3_INTS_PIN);
+
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n] =
@@ -179,6 +184,9 @@ void task_read_adc(void* argument) {
             if (current_timestamp - prev_timestamp >= time_span) {
                 prev_timestamp = current_timestamp;
                 if (states->no_geophone) {
+                    // Wait for LSM6DS3 data ready
+                    lsm6ds3_wait(LSM6DS3_INTS_PIN);
+
                     // Read Z-axis accelerometer data
                     lsm6ds3_reg_get_outz_xl(&outz_xl);
                     states->adc_channel_buffer->data[n % states->sample_rate] =
@@ -426,6 +434,15 @@ void peripherals_init(explorer_states_t* states) {
     // Initialize LSM6DS3 accelerometer
     lsm6ds3_init(LSM6DS3_INTS_PIN, false);
     lsm6ds3_reset(false);
+    lsm6ds3_reg_int1_ctrl_t int1_ctrl = {
+        .drdy_xl = LSM6DS3_INT1_CTRL_DRDY_XL_ENABLED,
+    };
+    lsm6ds3_reg_set_int1_ctrl(&int1_ctrl);
+    lsm6ds3_reg_ctrl3_c_t ctrl3_c = {
+        .bdu = LSM6DS3_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED,
+        .if_inc = LSM6DS3_CTRL3_C_IF_INC_ENABLED,
+    };
+    lsm6ds3_reg_set_ctrl3_c(&ctrl3_c);
     lsm6ds3_reg_ctrl1_xl_t ctrl1_xl = {
         .odr_xl = LSM6DS3_CTRL1_XL_ODR_XL_6660HZ,
         .fs_xl = LSM6DS3_CTRL1_XL_FS_XL_2G,

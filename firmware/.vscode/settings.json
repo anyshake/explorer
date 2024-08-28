@@ -44,6 +44,7 @@
         "style.h": "c",
         "crc.h": "c",
         "crc32.h": "c",
-        "fputc.h": "c"
+        "fputc.h": "c",
+        "int1_ctrl.h": "c"
     }
 }

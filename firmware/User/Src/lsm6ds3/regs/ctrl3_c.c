@@ -3,17 +3,21 @@
 void lsm6ds3_reg_set_ctrl3_c(lsm6ds3_reg_ctrl3_c_t* ctrl3_c) {
     uint8_t ctrl3_c_data = __LSM6DS3_CTRL3_C_DEFAULT_VALUE;
     ctrl3_c_data &= ~(0x01 << 7);
-    ctrl3_c_data |= (ctrl3_c->sw_reset & 0x01) << 7;
+    ctrl3_c_data |= (ctrl3_c->boot & 0x01) << 7;
     ctrl3_c_data &= ~(0x01 << 6);
-    ctrl3_c_data |= (ctrl3_c->ble & 0x01) << 6;
+    ctrl3_c_data |= (ctrl3_c->bdu & 0x01) << 6;
+    ctrl3_c_data &= ~(0x01 << 5);
+    ctrl3_c_data |= (ctrl3_c->h_lactive & 0x01) << 5;
     ctrl3_c_data &= ~(0x01 << 4);
-    ctrl3_c_data |= (ctrl3_c->if_inc & 0x01) << 4;
+    ctrl3_c_data |= (ctrl3_c->pp_od & 0x01) << 4;
     ctrl3_c_data &= ~(0x01 << 3);
     ctrl3_c_data |= (ctrl3_c->sim & 0x01) << 3;
     ctrl3_c_data &= ~(0x01 << 2);
-    ctrl3_c_data |= (ctrl3_c->pp_od & 0x01) << 2;
-    ctrl3_c_data &= ~(0x03);
-    ctrl3_c_data |= (ctrl3_c->h_lactive & 0x03);
+    ctrl3_c_data |= (ctrl3_c->if_inc & 0x01) << 2;
+    ctrl3_c_data &= ~(0x01 << 1);
+    ctrl3_c_data |= (ctrl3_c->ble & 0x01) << 1;
+    ctrl3_c_data &= ~0x01;
+    ctrl3_c_data |= ctrl3_c->sw_reset & 0x01;
     lsm6ds3_write_reg(LSM6DS3_REG_CTRL3_C, ctrl3_c_data);
 }
 

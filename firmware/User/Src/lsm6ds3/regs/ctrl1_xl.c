@@ -9,6 +9,7 @@ void lsm6ds3_reg_set_ctrl1_xl(lsm6ds3_reg_ctrl1_xl_t* ctrl1_xl) {
     ctrl1_xl_data &= ~(0x01 << 1);
     ctrl1_xl_data |= (ctrl1_xl->lpf1_bw_sel & 0x01) << 1;
     ctrl1_xl_data &= ~0x01;
+    ctrl1_xl_data |= ctrl1_xl->bw0_xl & 0x01;
     lsm6ds3_write_reg(LSM6DS3_REG_CTRL1_XL, ctrl1_xl_data);
 }
 
