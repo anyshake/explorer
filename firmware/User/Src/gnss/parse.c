@@ -134,7 +134,7 @@ void gnss_parse_gga(gnss_location_t* location, uint8_t* str_buf) {
             case 9:
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
-                        location->altitude = atof(token);
+                        location->elevation = atof(token);
                         location->is_valid = true;
                     } else {
                         location->is_valid = false;

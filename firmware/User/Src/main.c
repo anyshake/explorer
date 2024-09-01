@@ -5,7 +5,6 @@
 #include "Core/Inc/main.h"
 #include "cmsis_os.h"
 
-#include "Utils/Inc/crc32.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/iwdg.h"
@@ -22,14 +21,8 @@
 #include "User/Inc/lsm6ds3/regs/ctrl1_xl.h"
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
 #include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
-#include "User/Inc/lsm6ds3/regs/outx_xl.h"
-#include "User/Inc/lsm6ds3/regs/outy_xl.h"
-#include "User/Inc/lsm6ds3/regs/outz_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
-#include "User/Inc/ads1262/cmds/rdata.h"
-#include "User/Inc/ads1262/regs/id.h"
-#include "User/Inc/ads1262/regs/inpmux.h"
 #include "User/Inc/ads1262/regs/mode_0.h"
 #include "User/Inc/ads1262/regs/mode_1.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
@@ -40,6 +33,7 @@
 
 #include "User/Inc/array.h"
 #include "User/Inc/packet.h"
+#include "User/Inc/reader.h"
 #include "User/Inc/settings.h"
 #include "User/Inc/version.h"
 
@@ -47,7 +41,8 @@ typedef struct {
     // Startup settings
     uint32_t device_id;
     uint32_t baud_rate;
-    uint16_t sample_rate;
+    uint8_t sample_rate;
+    uint8_t channel_samples;
     bool no_geophone;
     bool legacy_mode;
     bool adc_24bit_mode;
@@ -67,215 +62,24 @@ typedef struct {
 
 void task_read_adc(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
-
-    // Initialize accelerometer result
-    lsm6ds3_reg_outz_xl_t outz_xl;
-    lsm6ds3_reg_outx_xl_t outx_xl;
-    lsm6ds3_reg_outy_xl_t outy_xl;
-
-    // Initialize ADC mutiplexer, data result
-    ads1262_reg_inpmux_t inpmux;
-    ads1262_cmd_rdata_t rdata;
-
-    // Get time span (in ms) for sampling
     uint8_t time_span = 1000 / states->sample_rate;
 
-    if (states->legacy_mode) {
-        while (true) {
-            int64_t current_timestamp = mcu_utils_uptime_ms();
-            while (current_timestamp %
-                       (time_span * LEGACY_PACKET_CHANNEL_SIZE) !=
-                   0) {
-                current_timestamp = mcu_utils_uptime_ms();
-            }
-
-            for (uint8_t n = 0; n < LEGACY_PACKET_CHANNEL_SIZE; n++) {
-                if (states->no_geophone) {
-                    // Wait for LSM6DS3 data ready
-                    lsm6ds3_wait(LSM6DS3_INTS_PIN);
-
-                    // Read Z-axis accelerometer data
-                    lsm6ds3_reg_get_outz_xl(&outz_xl);
-                    states->adc_channel_buffer->data[n] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outz_xl.outz_h_xl << 8 |
-                                         outz_xl.outz_l_xl))
-                                  << 8
-                            : (int16_t)(outz_xl.outz_h_xl << 8 |
-                                        outz_xl.outz_l_xl);
-                    // Read E-axis accelerometer data
-                    lsm6ds3_reg_get_outx_xl(&outx_xl);
-                    states->adc_channel_buffer
-                        ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outx_xl.outx_h_xl << 8 |
-                                         outx_xl.outx_l_xl))
-                                  << 8
-                            : (int16_t)(outx_xl.outx_h_xl << 8 |
-                                        outx_xl.outx_l_xl);
-                    // Read N-axis accelerometer data
-                    lsm6ds3_reg_get_outy_xl(&outy_xl);
-                    states->adc_channel_buffer
-                        ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outy_xl.outy_h_xl << 8 |
-                                         outy_xl.outy_l_xl))
-                                  << 8
-                            : (int16_t)(outy_xl.outy_h_xl << 8 |
-                                        outy_xl.outy_l_xl);
-                } else {
-                    // Read Z-axis geophone data (AIN0, AIN1)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN0;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN1;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer->data[n] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer->data[n] = rdata.data;
-                    }
-                    // Read E-axis geophone data (AIN2, AIN3)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN2;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN3;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer
-                            ->data[n + LEGACY_PACKET_CHANNEL_SIZE] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer
-                            ->data[n + LEGACY_PACKET_CHANNEL_SIZE] = rdata.data;
-                    }
-                    // Read N-axis geophone data (AIN4, AIN5)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN4;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN5;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer
-                            ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer
-                            ->data[n + 2 * LEGACY_PACKET_CHANNEL_SIZE] =
-                            rdata.data;
-                    }
-                }
-            }
-
-            osMessageQueuePut(states->reader_drdy_queue, &current_timestamp, 0,
-                              0);
-        }
-    } else {
-        int64_t prev_timestamp = 0;
-
-        for (uint64_t n = 0;;) {
-            int64_t current_timestamp = gnss_get_current_timestamp(
+    for (int64_t current_timestamp = 0;;) {
+        while (mcu_utils_uptime_ms() % (time_span * states->channel_samples) !=
+               0) {
+            current_timestamp = gnss_get_current_timestamp(
                 states->local_base_timestamp, states->gnss_ref_timestamp);
-
-            if (current_timestamp - prev_timestamp >= time_span) {
-                prev_timestamp = current_timestamp;
-                if (states->no_geophone) {
-                    // Wait for LSM6DS3 data ready
-                    lsm6ds3_wait(LSM6DS3_INTS_PIN);
-
-                    // Read Z-axis accelerometer data
-                    lsm6ds3_reg_get_outz_xl(&outz_xl);
-                    states->adc_channel_buffer->data[n % states->sample_rate] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outz_xl.outz_h_xl << 8 |
-                                         outz_xl.outz_l_xl))
-                                  << 8
-                            : (int16_t)(outz_xl.outz_h_xl << 8 |
-                                        outz_xl.outz_l_xl);
-                    // Read E-axis accelerometer data
-                    lsm6ds3_reg_get_outx_xl(&outx_xl);
-                    states->adc_channel_buffer->data[(n % states->sample_rate) +
-                                                     states->sample_rate] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outx_xl.outx_h_xl << 8 |
-                                         outx_xl.outx_l_xl))
-                                  << 8
-                            : (int16_t)(outx_xl.outx_h_xl << 8 |
-                                        outx_xl.outx_l_xl);
-                    // Read N-axis accelerometer data
-                    lsm6ds3_reg_get_outy_xl(&outy_xl);
-                    states->adc_channel_buffer->data[(n % states->sample_rate) +
-                                                     2 * states->sample_rate] =
-                        states->adc_24bit_mode
-                            ? ((int16_t)(outy_xl.outy_h_xl << 8 |
-                                         outy_xl.outy_l_xl))
-                                  << 8
-                            : (int16_t)(outy_xl.outy_h_xl << 8 |
-                                        outy_xl.outy_l_xl);
-                } else {
-                    // Read Z-axis geophone data (AIN0, AIN1)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN0;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN1;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer
-                            ->data[n % states->sample_rate] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer
-                            ->data[n % states->sample_rate] = rdata.data;
-                    }
-                    // Read E-axis geophone data (AIN2, AIN3)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN2;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN3;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer
-                            ->data[(n % states->sample_rate) +
-                                   states->sample_rate] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer
-                            ->data[(n % states->sample_rate) +
-                                   states->sample_rate] = rdata.data;
-                    }
-                    // Read N-axis geophone data (AIN4, AIN5)
-                    inpmux.mux_p = ADS1262_INPMUX_AIN4;
-                    inpmux.mux_n = ADS1262_INPMUX_AIN5;
-                    ads1262_reg_set_inpmux(&inpmux);
-                    ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata,
-                                      ADS1262_INIT_CONTROL_TYPE_HARD);
-                    if (states->adc_24bit_mode) {
-                        int32_t temp = (int32_t)((rdata.data >> 8) & 0xFFFFFF);
-                        states->adc_channel_buffer
-                            ->data[(n % states->sample_rate) +
-                                   2 * states->sample_rate] =
-                            temp & 0x800000 ? temp | 0xFF000000 : temp;
-                    } else {
-                        states->adc_channel_buffer
-                            ->data[(n % states->sample_rate) +
-                                   2 * states->sample_rate] = rdata.data;
-                    }
-                }
-
-                if (n && n % states->sample_rate == 0) {
-                    osMessageQueuePut(states->reader_drdy_queue,
-                                      &current_timestamp, 0, 0);
-                }
-
-                n++;
-            }
         }
+
+        if (states->no_geophone) {
+            get_acc_readout(LSM6DS3_INTS_PIN, states->adc_channel_buffer,
+                            states->channel_samples, states->adc_24bit_mode);
+        } else {
+            get_adc_readout(ADS1262_CTL_PIN, states->adc_channel_buffer,
+                            states->channel_samples, states->adc_24bit_mode);
+        }
+
+        osMessageQueuePut(states->reader_drdy_queue, &current_timestamp, 0, 0);
     }
 }
 
@@ -287,12 +91,13 @@ void task_send_data(void* argument) {
         if (osMessageQueueGet(states->reader_drdy_queue, &timestamp, NULL, 0) ==
             osOK) {
             if (states->legacy_mode) {
-                send_legacy_data_packet(states->adc_channel_buffer);
+                send_legacy_data_packet(states->adc_channel_buffer,
+                                        states->channel_samples);
             } else {
                 send_data_packet(states->adc_channel_buffer,
-                                 states->uart_packet_buffer,
-                                 &states->gnss_location, timestamp,
-                                 states->sample_rate, states->device_id);
+                                 states->uart_packet_buffer, timestamp,
+                                 &states->gnss_location, states->device_id,
+                                 states->channel_samples);
             }
         }
     }
@@ -361,9 +166,6 @@ void task_feed_iwdg(void* argument) {
 }
 
 void peripherals_init(explorer_states_t* states) {
-    // Initialize CRC32 module
-    mcu_utils_crc32_init();
-
     // Initialize state LED pin
     mcu_utils_gpio_init(false);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
@@ -401,6 +203,9 @@ void peripherals_init(explorer_states_t* states) {
             states->sample_rate = 125;
             break;
     }
+    states->channel_samples = states->legacy_mode
+                                  ? LEGACY_PACKET_CHANNEL_SAMPLES
+                                  : MAINLINE_PACKET_CHANNEL_SAMPLES;
 
     // Get baud rate from DIP switches
     mcu_utils_gpio_mode(BAUDRATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
@@ -408,13 +213,13 @@ void peripherals_init(explorer_states_t* states) {
     switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 |
             mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {
         case 1:
-            states->baud_rate = 57600;
+            states->baud_rate = 76800;
             break;
         case 2:
-            states->baud_rate = 38400;
+            states->baud_rate = 57600;
             break;
         case 3:
-            states->baud_rate = 19200;
+            states->baud_rate = 38400;
             break;
         default:
             states->baud_rate = 115200;
@@ -568,19 +373,18 @@ void display_settings(explorer_states_t* states) {
 }
 
 void setup(void) {
-    // Initialize peripherals
     static explorer_states_t states;
+
+    // Initialize peripherals
     peripherals_init(&states);
     if (!states.legacy_mode) {
         get_gnss_data(&states);
     }
 
     // Allocate memory buffers
-    states.adc_channel_buffer =
-        array_int32_make(states.legacy_mode ? 3 * LEGACY_PACKET_CHANNEL_SIZE
-                                            : 3 * states.sample_rate);
+    states.adc_channel_buffer = array_int32_make(3 * states.channel_samples);
     if (!states.legacy_mode) {
-        uint16_t packet_size = get_data_packet_size(states.sample_rate);
+        uint8_t packet_size = get_data_packet_size(states.channel_samples);
         states.uart_packet_buffer = array_uint8_make(packet_size);
     }
 

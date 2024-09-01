@@ -30,7 +30,7 @@ typedef struct {
 typedef struct {
     double latitude;
     double longitude;
-    double altitude;
+    double elevation;
     bool is_valid;
 } gnss_location_t;
 

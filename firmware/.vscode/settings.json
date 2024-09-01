@@ -45,6 +45,10 @@
         "crc.h": "c",
         "crc32.h": "c",
         "fputc.h": "c",
-        "int1_ctrl.h": "c"
+        "int1_ctrl.h": "c",
+        "reader.h": "c",
+        "inpmux.h": "c",
+        "id.h": "c",
+        "mode_0.h": "c"
     }
 }
