@@ -4,7 +4,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](https://github.com/anyshake/explorer/blob/master/LICENSE)
 
-**Please note: AnyShake Explorer implemented by ESP8266 will be deprecated soon, to get started with AnyShake Observer, set `explorer_settings.legacy` option to `true`. The new hardware solution is currently in the "next" branch and will be merged into the master branch.**
+**Please note: AnyShake Explorer implemented by ESP8266 will be deprecated soon, the new hardware solution is currently in the "next" branch and will be merged into the master branch.**
 
 ## Overview
 

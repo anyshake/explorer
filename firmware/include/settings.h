@@ -4,6 +4,7 @@
 #include "ads1262/utils.h"
 #include "utils/gpio.h"
 
+#define EXPLORER_LEGACY_MODE 0
 #define EXPLORER_24BIT_MODE 1
 #define EXPLORER_SAMPLERATE 100
 #define EXPLORER_BAUDRATE 115200
