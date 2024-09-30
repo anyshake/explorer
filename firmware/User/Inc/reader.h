@@ -15,11 +15,9 @@
 
 void get_adc_readout(ads1262_ctl_pin_t ctl_pin,
                      int32_array_t* channel_buffer,
-                     uint8_t channel_samples,
-                     bool is_24bit);
+                     uint8_t channel_samples);
 void get_acc_readout(lsm6ds3_ints_pin_t ints_pin,
                      int32_array_t* channel_buffer,
-                     uint8_t channel_samples,
-                     bool is_24bit);
+                     uint8_t channel_samples);
 
 #endif

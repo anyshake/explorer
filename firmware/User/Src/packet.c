@@ -39,7 +39,7 @@ void send_data_packet(int32_array_t* channel_buf,
                       uint8_array_t* uart_buf,
                       int64_t timestamp,
                       gnss_location_t* location,
-                      uint32_t device_id,
+                      uint32_t device_info,
                       uint16_t channel_samples) {
     if (channel_buf == NULL || uart_buf == NULL) {
         return;
@@ -58,10 +58,10 @@ void send_data_packet(int32_array_t* channel_buf,
     // Set variable data fields by timestamp
     float temp_float = 0;
     switch ((timestamp / 1000) % 4) {
-        // Set packet device ID field
+        // Set packet device info field
         case 0:
-            bytes = (uint8_t*)&device_id;
-            for (uint8_t i = 0; i < sizeof(device_id); i++) {
+            bytes = (uint8_t*)&device_info;
+            for (uint8_t i = 0; i < sizeof(device_info); i++) {
                 uart_buf->data[10 + i] = bytes[i];
             }
             break;

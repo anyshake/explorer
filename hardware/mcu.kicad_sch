@@ -11435,7 +11435,7 @@
 		)
 		(uuid "599bbf67-9097-4f6a-86c4-7fd1269e119a")
 	)
-	(label "OPT_24BIT_MODE"
+	(label "OPT_USE_GNSS"
 		(at 194.31 120.65 180)
 		(fields_autoplaced yes)
 		(effects
@@ -11842,7 +11842,7 @@
 		)
 		(uuid "ae9a0a6c-1328-4776-9399-dc785398e52c")
 	)
-	(label "OPT_24BIT_MODE"
+	(label "OPT_USE_GNSS"
 		(at 163.83 85.09 0)
 		(fields_autoplaced yes)
 		(effects
@@ -11864,7 +11864,7 @@
 		)
 		(uuid "b175c0bb-39f1-412b-8ed9-69ff1dc55ea2")
 	)
-	(label "OPT_24BIT_MODE"
+	(label "OPT_USE_GNSS"
 		(at 109.22 81.28 0)
 		(fields_autoplaced yes)
 		(effects

@@ -28,11 +28,11 @@ static const mcu_utils_gpio_t OPTIONS_NO_GEOPHONE_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_12,
 };
-static const mcu_utils_gpio_t OPTIONS_LEGACY_MODE_PIN = {
+static const mcu_utils_gpio_t OPTIONS_USE_GNSS_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_11,
 };
-static const mcu_utils_gpio_t OPTIONS_ADC_24BIT_MODE_PIN = {
+static const mcu_utils_gpio_t OPTIONS_LEGACY_MODE_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_10,
 };

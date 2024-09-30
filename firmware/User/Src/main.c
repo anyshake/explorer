@@ -38,14 +38,15 @@
 #include "User/Inc/version.h"
 
 typedef struct {
-    // Startup settings
-    uint32_t device_id;
+    // 23-bit device ID + 1-bit mode
+    // GNSS bit (1: GNSS enabled, 0: GNSS disabled)
+    uint32_t device_info;
     uint32_t baud_rate;
     uint8_t sample_rate;
     uint8_t channel_samples;
     bool no_geophone;
+    bool use_gnss_time;
     bool legacy_mode;
-    bool adc_24bit_mode;
     // To get current GNSS time
     int64_t gnss_ref_timestamp;
     int64_t local_base_timestamp;
@@ -67,16 +68,19 @@ void task_read_adc(void* argument) {
     for (int64_t current_timestamp = 0;;) {
         while (mcu_utils_uptime_ms() % (time_span * states->channel_samples) !=
                0) {
-            current_timestamp = gnss_get_current_timestamp(
-                states->local_base_timestamp, states->gnss_ref_timestamp);
+            current_timestamp =
+                states->use_gnss_time
+                    ? gnss_get_current_timestamp(states->local_base_timestamp,
+                                                 states->gnss_ref_timestamp)
+                    : mcu_utils_uptime_ms();
         }
 
         if (states->no_geophone) {
             get_acc_readout(LSM6DS3_INTS_PIN, states->adc_channel_buffer,
-                            states->channel_samples, states->adc_24bit_mode);
+                            states->channel_samples);
         } else {
             get_adc_readout(ADS1262_CTL_PIN, states->adc_channel_buffer,
-                            states->channel_samples, states->adc_24bit_mode);
+                            states->channel_samples);
         }
 
         osMessageQueuePut(states->reader_drdy_queue, &current_timestamp, 0, 0);
@@ -96,7 +100,7 @@ void task_send_data(void* argument) {
             } else {
                 send_data_packet(states->adc_channel_buffer,
                                  states->uart_packet_buffer, timestamp,
-                                 &states->gnss_location, states->device_id,
+                                 &states->gnss_location, states->device_info,
                                  states->channel_samples);
             }
         }
@@ -180,10 +184,10 @@ void peripherals_init(explorer_states_t* states) {
     // Get user options from DIP switches
     mcu_utils_gpio_mode(OPTIONS_NO_GEOPHONE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
     states->no_geophone = mcu_utils_gpio_read(OPTIONS_NO_GEOPHONE_PIN);
+    mcu_utils_gpio_mode(OPTIONS_USE_GNSS_PIN, MCU_UTILS_GPIO_MODE_INPUT);
+    states->use_gnss_time = mcu_utils_gpio_read(OPTIONS_USE_GNSS_PIN);
     mcu_utils_gpio_mode(OPTIONS_LEGACY_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
     states->legacy_mode = mcu_utils_gpio_read(OPTIONS_LEGACY_MODE_PIN);
-    mcu_utils_gpio_mode(OPTIONS_ADC_24BIT_MODE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->adc_24bit_mode = mcu_utils_gpio_read(OPTIONS_ADC_24BIT_MODE_PIN);
 
     // Get sample rate from DIP switches
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
@@ -234,7 +238,11 @@ void peripherals_init(explorer_states_t* states) {
 
     // Read device ID from EEPROM
     eeprom_init(EEPROM_WP_PIN, false);
-    eeprom_read((uint8_t*)&states->device_id, sizeof(states->device_id));
+    eeprom_read((uint8_t*)&states->device_info, sizeof(states->device_info));
+    // Set GNSS mode bit if GNSS is enabled
+    if (states->use_gnss_time) {
+        states->device_info |= 0x80000000;
+    }
 
     // Initialize LSM6DS3 accelerometer
     lsm6ds3_init(LSM6DS3_INTS_PIN, false);
@@ -283,8 +291,12 @@ void peripherals_init(explorer_states_t* states) {
     mcu_utils_uart_flush();
 
     // Initialize GNSS module
-    gnss_init(GNSS_CTL_PIN, GNSS_UART_BAUDRATE, false);
-    gnss_reset(GNSS_CTL_PIN, false);
+    if (!states->legacy_mode && states->use_gnss_time) {
+        gnss_init(GNSS_CTL_PIN, GNSS_UART_BAUDRATE, false);
+        gnss_reset(GNSS_CTL_PIN, false);
+    } else {
+        mcu_utils_gpio_low(GNSS_CTL_PIN.rst);
+    }
 
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
 }
@@ -352,16 +364,16 @@ void display_settings(explorer_states_t* states) {
              states->no_geophone ? "YES" : "NO");
     ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s",
-             states->legacy_mode ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %s",
+             states->use_gnss_time ? "YES" : "NO");
     ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "24-BIT MODE: %s",
-             states->adc_24bit_mode ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s",
+             states->legacy_mode ? "YES" : "NO");
     ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X",
-             (int)states->device_id);
+             (int)states->device_info & 0x7FFFFFFF);
     ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     const char version[] = FW_VERSION;
@@ -374,10 +386,10 @@ void display_settings(explorer_states_t* states) {
 
 void setup(void) {
     static explorer_states_t states;
-
-    // Initialize peripherals
     peripherals_init(&states);
-    if (!states.legacy_mode) {
+
+    // Get current GNSS time if GNSS is enabled and not in legacy mode
+    if (!states.legacy_mode && states.use_gnss_time) {
         get_gnss_data(&states);
     }
 
@@ -409,18 +421,21 @@ void setup(void) {
         .priority = (osPriority_t)osPriorityNormal,
     };
     osThreadNew(task_send_data, &states, &send_data_attr);
-    const osThreadAttr_t calib_gnss_attr = {
-        .name = "GNSS Calib",
-        .stack_size = 128 * 4,
-        .priority = (osPriority_t)osPriorityNormal,
-    };
-    osThreadNew(task_calib_gnss, &states, &calib_gnss_attr);
     const osThreadAttr_t feed_iwdg_attr = {
         .name = "Feed IWDG",
         .stack_size = 32,
         .priority = (osPriority_t)osPriorityNormal,
     };
     osThreadNew(task_feed_iwdg, NULL, &feed_iwdg_attr);
+    // Auto-calibrate GNSS time if GNSS is enabled
+    if (!states.legacy_mode && states.use_gnss_time) {
+        const osThreadAttr_t calib_gnss_attr = {
+            .name = "GNSS Calib",
+            .stack_size = 128 * 4,
+            .priority = (osPriority_t)osPriorityNormal,
+        };
+        osThreadNew(task_calib_gnss, &states, &calib_gnss_attr);
+    }
 
     // Create RTOS resources
     const osMessageQueueAttr_t reader_drdy_queue_attr = {

@@ -25,7 +25,7 @@ void send_data_packet(int32_array_t* channel_buf,
                       uint8_array_t* uart_buf,
                       int64_t timestamp,
                       gnss_location_t* location,
-                      uint32_t device_id,
+                      uint32_t device_info,
                       uint16_t channel_samples);
 uint8_t get_data_packet_size(uint8_t channel_samples);
 
