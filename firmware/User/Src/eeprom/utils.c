@@ -17,6 +17,9 @@ void eeprom_protect(mcu_utils_gpio_t pin_wp, bool enable) {
 void eeprom_earse(mcu_utils_gpio_t pin_wp, uint8_t len) {
     eeprom_protect(pin_wp, false);
     uint8_t buf[len];
+    for (uint8_t i = 0; i < len; i++) {
+        buf[i] = 0xFF;
+    }
     mcu_utils_i2c_write(EEPROM_I2C_ADDRESS, 0x00, buf, len,
                         MCU_UTILS_I2C_REG_WIDTH_16);
     eeprom_protect(pin_wp, true);
