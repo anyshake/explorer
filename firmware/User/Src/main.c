@@ -38,9 +38,7 @@
 #include "User/Inc/version.h"
 
 typedef struct {
-    // 23-bit device ID + 1-bit mode
-    // GNSS bit (1: GNSS enabled, 0: GNSS disabled)
-    uint32_t device_info;
+    uint32_t device_id;  // 23 bit (1 bit for GNSS indicator)
     uint32_t baud_rate;
     uint8_t sample_rate;
     uint8_t channel_samples;
@@ -89,6 +87,7 @@ void task_read_adc(void* argument) {
 
 void task_send_data(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
+    uint32_t device_info = states->use_gnss_time ? states->device_id | 0x80000000 : states->device_id & 0x7FFFFFFF;
 
     while (true) {
         int64_t timestamp;
@@ -100,7 +99,8 @@ void task_send_data(void* argument) {
             } else {
                 send_data_packet(states->adc_channel_buffer,
                                  states->uart_packet_buffer, timestamp,
-                                 &states->gnss_location, states->device_info,
+                                 &states->gnss_location,
+                                 device_info,
                                  states->channel_samples);
             }
         }
@@ -238,11 +238,7 @@ void peripherals_init(explorer_states_t* states) {
 
     // Read device ID from EEPROM
     eeprom_init(EEPROM_WP_PIN, false);
-    eeprom_read((uint8_t*)&states->device_info, sizeof(states->device_info));
-    // Set GNSS mode bit if GNSS is enabled
-    if (states->use_gnss_time) {
-        states->device_info |= 0x80000000;
-    }
+    eeprom_read((uint8_t*)&states->device_id, sizeof(states->device_id));
 
     // Initialize LSM6DS3 accelerometer
     lsm6ds3_init(LSM6DS3_INTS_PIN, false);
@@ -373,7 +369,7 @@ void display_settings(explorer_states_t* states) {
     ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X",
-             (int)states->device_info & 0x7FFFFFFF);
+             (int)states->device_id);
     ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
     const char version[] = FW_VERSION;
