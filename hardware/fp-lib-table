@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Explorer")(type "KiCad")(uri "${KIPRJMOD}/library/Explorer.pretty")(options "")(descr ""))
+)
