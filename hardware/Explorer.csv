@@ -1,5 +1,5 @@
 "Reference","Value","Datasheet","Footprint","Qty","DNP"
-"BT1","BAT+3V","~","Battery:BatteryHolder_LINX_BAT-HLD-012-SMT","1",""
+"BT1","DMS3R3","~","Battery:BatteryHolder_Seiko_MS621F","1",""
 "C1,C2,C9,C10,C11,C17,C18,C20,C21,C23,C25,C26,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C45,C55,C56,C57,C58,C59,C64","0.1uF","~","Capacitor_SMD:C_0603_1608Metric","29",""
 "C3,C4,C12,C13,C19","22uF","~","Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T","5",""
 "C5,C6,C7,C8,C14,C63","1uF","~","Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T","6",""

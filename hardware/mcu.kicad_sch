@@ -16879,25 +16879,24 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "88a55256-c5e7-4992-b7d5-c024cce4b082")
 		(property "Reference" "BT1"
-			(at 54.0385 15.24 90)
+			(at 60.706 17.526 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "BAT+3V"
-			(at 54.0385 17.78 90)
+		(property "Value" "DMS3R3"
+			(at 60.706 20.066 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Battery:BatteryHolder_LINX_BAT-HLD-012-SMT"
+		(property "Footprint" "Battery:BatteryHolder_Seiko_MS621F"
 			(at 54.356 22.86 90)
 			(effects
 				(font
