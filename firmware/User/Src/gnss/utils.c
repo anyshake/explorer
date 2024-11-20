@@ -11,6 +11,7 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_gpio_low(pin.rst);
     mcu_utils_delay_ms(100, is_rtos);
     mcu_utils_gpio_high(pin.rst);
+    mcu_utils_delay_ms(100, is_rtos);
 }
 
 bool gnss_get_0pps(gnss_ctl_pin_t pin, int64_t* base_time, bool wait) {
