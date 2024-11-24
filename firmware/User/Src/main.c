@@ -442,8 +442,8 @@ void setup(void) {
 }
 
 int main(void) {
-    HAL_Init();
     SystemClock_Config();
+    HAL_Init();
 
     osKernelInitialize();
     setup();
