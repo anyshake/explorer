@@ -32,6 +32,7 @@
 #include "User/Inc/gnss/utils.h"
 
 #include "User/Inc/array.h"
+#include "User/Inc/calibration.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/reader.h"
 #include "User/Inc/settings.h"
@@ -51,6 +52,7 @@ typedef struct {
     // GNSS message buffer
     uint8_t gnss_message[GNSS_SENTENCE_BUFFER_SIZE];
     gnss_location_t gnss_location;
+    gnss_status_t gnss_status;
     gnss_time_t gnss_time;
     // ADC data buffer and RTOS resources
     int32_array_t* adc_channel_buffer;
@@ -111,13 +113,13 @@ void task_calib_gnss(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
 
     while (true) {
-        int64_t timestamp =
+        int64_t timestamp_sec =
             gnss_get_current_timestamp(states->local_base_timestamp,
                                        states->gnss_ref_timestamp) /
             1000;
 
         // Calibrate GNSS time at UTC 00:00:00 every day
-        if (timestamp % 86400 == 0) {
+        if (timestamp_sec % 86400 == 0) {
             uint8_t attempts = 0;
             bool success = false;
 
@@ -302,39 +304,42 @@ void get_gnss_data(explorer_states_t* states) {
                            SSD1306_FONT_TYPE_ASCII_8X16,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
-    for (bool has_elevation = false;;) {
+    for (char display_buf[24];;) {
+        mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
+
+        // Read NMEA message for status and elevation
+        if (gnss_get_sentence(states->gnss_message,
+                              GNSS_SENTENCE_TYPE_GGA)) {
+            gnss_padding_sentence(states->gnss_message);
+            gnss_parse_gga(&states->gnss_status, &states->gnss_location,
+                           states->gnss_message);
+            snprintf(display_buf, sizeof(display_buf), "SAT: %d, HDOP: %.1f",
+                     states->gnss_status.satellites, states->gnss_status.hdop);
+            ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
+                                   SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        }
+
         // Wait for PPS signal
         if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, true)) {
             ssd1306_display_string(0, 0, "GNSS Not Ready!",
                                    SSD1306_FONT_TYPE_ASCII_8X16,
                                    SSD1306_FONT_DISPLAY_COLOR_WHITE);
-            mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
             continue;
         }
 
-        if (!has_elevation) {
-            // Read NMEA message for elevation data
-            if (gnss_get_sentence(states->gnss_message,
-                                  GNSS_SENTENCE_TYPE_GGA)) {
-                gnss_padding_sentence(states->gnss_message);
-                gnss_parse_gga(&states->gnss_location, states->gnss_message);
-                has_elevation = states->gnss_location.is_valid;
-            }
-        } else {
-            // Read NMEA message for RMC data
-            if (gnss_get_sentence(states->gnss_message,
-                                  GNSS_SENTENCE_TYPE_RMC)) {
-                gnss_padding_sentence(states->gnss_message);
-                gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
-                               states->gnss_message);
-                states->gnss_ref_timestamp =
-                    gnss_get_timestamp(&states->gnss_time);
-            }
+        // Read NMEA message for RMC data
+        if (gnss_get_sentence(states->gnss_message,
+                              GNSS_SENTENCE_TYPE_RMC)) {
+            gnss_padding_sentence(states->gnss_message);
+            gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
+                           states->gnss_message);
+            states->gnss_ref_timestamp =
+                gnss_get_timestamp(&states->gnss_time);
         }
 
         // Check if GNSS data is valid
         if (states->gnss_time.is_valid && states->gnss_location.is_valid &&
-            has_elevation) {
+            states->gnss_status.hdop <= 1) {
             ssd1306_display_string(0, 0, "GNSS Data Valid",
                                    SSD1306_FONT_TYPE_ASCII_8X16,
                                    SSD1306_FONT_DISPLAY_COLOR_WHITE);
@@ -383,6 +388,13 @@ void display_settings(explorer_states_t* states) {
 void setup(void) {
     static explorer_states_t states;
     peripherals_init(&states);
+
+    // Calibrate ADC offset
+    ssd1306_display_string(0, 0, "Calibrating ADC",
+                           SSD1306_FONT_TYPE_ASCII_8X16,
+                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    calibrate_adc_offset(ADS1262_CTL_PIN);
+    mcu_utils_delay_ms(1000, false);
 
     // Get current GNSS time if GNSS is enabled and not in legacy mode
     if (!states.legacy_mode && states.use_gnss_time) {

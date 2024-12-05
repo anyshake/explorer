@@ -85,7 +85,9 @@ void gnss_parse_rmc(gnss_location_t* location,
     }
 }
 
-void gnss_parse_gga(gnss_location_t* location, uint8_t* str_buf) {
+void gnss_parse_gga(gnss_status_t* status,
+                    gnss_location_t* location,
+                    uint8_t* str_buf) {
     uint8_t str_len = strlen((char*)str_buf);
     char buffer[str_len];
     strncpy(buffer, (char*)str_buf, str_len);
@@ -131,6 +133,20 @@ void gnss_parse_gga(gnss_location_t* location, uint8_t* str_buf) {
                     }
                 }
                 break;
+            case 7:
+                if (status != NULL) {
+                    if (*token != GNSS_SENTENCE_PADDING_CHAR) {
+                        status->satellites = (uint8_t)atoi(token);
+                    }
+                }
+            case 8:
+                if (status != NULL) {
+                    if (*token != GNSS_SENTENCE_PADDING_CHAR) {
+                        status->hdop = atof(token);
+                    } else {
+                        status->hdop = 0.0;
+                    }
+                }
             case 9:
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
