@@ -151,17 +151,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 111.76) (xy 144.78 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6c8529c5-6d68-4123-a952-fea4f7b18631")
-	)
-	(wire
-		(pts
-			(xy 90.17 109.22) (xy 90.17 114.3)
+			(xy 90.17 109.22) (xy 90.17 111.76)
 		)
 		(stroke
 			(width 0)
@@ -221,7 +211,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 114.3) (xy 90.17 114.3)
+			(xy 144.78 111.76) (xy 90.17 111.76)
 		)
 		(stroke
 			(width 0)
@@ -527,7 +517,7 @@
 	)
 	(sheet
 		(at 100.33 69.85)
-		(size 25.4 50.8)
+		(size 25.4 48.26)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -547,7 +537,7 @@
 			)
 		)
 		(property "Sheetfile" "power.kicad_sch"
-			(at 100.33 121.2346 0)
+			(at 100.33 118.6946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -564,16 +554,6 @@
 				(justify left)
 			)
 			(uuid "2059147c-297e-4d9a-a8bf-67f76a70819e")
-		)
-		(pin "REF+5V" output
-			(at 125.73 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "0b227d36-32a8-404b-b002-3ba4fe215c10")
 		)
 		(pin "A+5V" output
 			(at 125.73 109.22 0)
@@ -595,7 +575,7 @@
 	)
 	(sheet
 		(at 55.88 69.85)
-		(size 25.4 50.8)
+		(size 25.4 48.26)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -615,7 +595,7 @@
 			)
 		)
 		(property "Sheetfile" "mcu.kicad_sch"
-			(at 55.88 121.2346 0)
+			(at 55.88 118.6946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -753,7 +733,7 @@
 	)
 	(sheet
 		(at 144.78 69.85)
-		(size 25.4 50.8)
+		(size 25.4 48.26)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -773,7 +753,7 @@
 			)
 		)
 		(property "Sheetfile" "sensors.kicad_sch"
-			(at 144.78 121.2346 0)
+			(at 144.78 118.6946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -782,7 +762,7 @@
 			)
 		)
 		(pin "D+3V3" input
-			(at 144.78 114.3 180)
+			(at 144.78 111.76 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -910,16 +890,6 @@
 				(justify left)
 			)
 			(uuid "4094dd9e-61c1-4781-98be-cefbda557794")
-		)
-		(pin "REF+5V" input
-			(at 144.78 111.76 180)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-			(uuid "d122eb97-ecca-4b10-8fc4-b945775673a2")
 		)
 		(instances
 			(project "Explorer"
