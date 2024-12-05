@@ -49,6 +49,8 @@
         "reader.h": "c",
         "inpmux.h": "c",
         "id.h": "c",
-        "mode_0.h": "c"
+        "mode_0.h": "c",
+        "start.h": "c",
+        "calibration.h": "c"
     }
 }
