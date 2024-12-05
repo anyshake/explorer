@@ -8,22 +8,22 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin,
 
     for (uint8_t i = 0; i < channel_samples; i++) {
         // Read Z-axis geophone data (AIN0, AIN1)
-        inpmux.mux_p = ADS1262_INPMUX_AIN0;
-        inpmux.mux_n = ADS1262_INPMUX_AIN1;
+        inpmux.mux_p = ADS1262_INPMUX_AIN1;
+        inpmux.mux_n = ADS1262_INPMUX_AIN0;
         ads1262_reg_set_inpmux(&inpmux);
         ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
         channel_buffer->data[i] = rdata.data;
 
         // Read E-axis geophone data (AIN2, AIN3)
-        inpmux.mux_p = ADS1262_INPMUX_AIN2;
-        inpmux.mux_n = ADS1262_INPMUX_AIN3;
+        inpmux.mux_p = ADS1262_INPMUX_AIN3;
+        inpmux.mux_n = ADS1262_INPMUX_AIN2;
         ads1262_reg_set_inpmux(&inpmux);
         ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
         channel_buffer->data[i + channel_samples] = rdata.data;
 
         // Read N-axis geophone data (AIN4, AIN5)
-        inpmux.mux_p = ADS1262_INPMUX_AIN4;
-        inpmux.mux_n = ADS1262_INPMUX_AIN5;
+        inpmux.mux_p = ADS1262_INPMUX_AIN5;
+        inpmux.mux_n = ADS1262_INPMUX_AIN4;
         ads1262_reg_set_inpmux(&inpmux);
         ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
         channel_buffer->data[i + 2 * channel_samples] = rdata.data;
