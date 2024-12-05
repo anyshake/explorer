@@ -28,6 +28,11 @@ typedef struct {
 } gnss_ctl_pin_t;
 
 typedef struct {
+    double hdop;
+    uint8_t satellites;
+} gnss_status_t;
+
+typedef struct {
     double latitude;
     double longitude;
     double elevation;
