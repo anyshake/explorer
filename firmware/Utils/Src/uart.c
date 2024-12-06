@@ -17,8 +17,6 @@ void USART1_IRQHandler(void) {
 }
 
 void mcu_utils_uart_init(uint32_t baudrate, bool is_rtos) {
-    MX_DMA_Init();
-
     huart1.Instance = USART1;
     huart1.Init.BaudRate = baudrate;
     huart1.Init.WordLength = UART_WORDLENGTH_8B;
