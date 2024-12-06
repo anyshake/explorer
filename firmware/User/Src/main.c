@@ -39,7 +39,7 @@
 #include "User/Inc/version.h"
 
 typedef struct {
-    uint32_t device_id;  // 23 bit (1 bit for GNSS indicator)
+    uint32_t device_id;
     uint32_t baud_rate;
     uint8_t sample_rate;
     uint8_t channel_samples;
@@ -381,7 +381,7 @@ void display_settings(explorer_states_t* states) {
     snprintf(display_buf, sizeof(display_buf), "FW VER: %s", version);
     ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(28, 7, "anyshake.org", SSD1306_FONT_TYPE_ASCII_8X6,
+    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6,
                            SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
 
@@ -390,11 +390,13 @@ void setup(void) {
     peripherals_init(&states);
 
     // Calibrate ADC offset
-    ssd1306_display_string(0, 0, "Calibrating ADC",
-                           SSD1306_FONT_TYPE_ASCII_8X16,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    calibrate_adc_offset(ADS1262_CTL_PIN);
-    mcu_utils_delay_ms(1000, false);
+    if (!states.no_geophone) {
+        ssd1306_display_string(0, 0, "Calibrating ADC",
+                               SSD1306_FONT_TYPE_ASCII_8X16,
+                               SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        calibrate_adc_offset(ADS1262_CTL_PIN);
+        mcu_utils_delay_ms(1000, false);
+    }
 
     // Get current GNSS time if GNSS is enabled and not in legacy mode
     if (!states.legacy_mode && states.use_gnss_time) {
@@ -458,6 +460,7 @@ int main(void) {
     HAL_Init();
 
     osKernelInitialize();
+    MX_DMA_Init();
     setup();
     osKernelStart();
 
