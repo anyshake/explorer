@@ -51,6 +51,7 @@
         "id.h": "c",
         "mode_0.h": "c",
         "start.h": "c",
-        "calibration.h": "c"
+        "calibration.h": "c",
+        "interface.h": "c"
     }
 }
