@@ -23,6 +23,7 @@
 #include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
+#include "User/Inc/ads1262/regs/interface.h"
 #include "User/Inc/ads1262/regs/mode_0.h"
 #include "User/Inc/ads1262/regs/mode_1.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
@@ -262,9 +263,20 @@ void peripherals_init(explorer_states_t* states) {
 
     // Initialize ADS1262 ADC
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD, false);
-    ads1262_reg_mode_0_t mode_0 = {.run_mode = ADS1262_MODE_0_RUN_MODE_ONESHOT};
+    ads1262_reg_interface_t interface = {
+        .status = ADS1262_INTERFACE_STATUS_ENABLED,
+        .crc = ADS1262_INTERFACE_CRC_CRC,
+    };
+    ads1262_reg_set_interface(&interface);
+    ads1262_reg_mode_0_t mode_0 = {
+        .run_mode = ADS1262_MODE_0_RUN_MODE_ONESHOT,
+    };
     ads1262_reg_set_mode_0(&mode_0);
-    ads1262_reg_mode_1_t mode_1 = {.filter = ADS1262_MODE_1_FILTER_SINC1};
+    ads1262_reg_mode_1_t mode_1 = {
+        .filter = ADS1262_MODE_1_FILTER_SINC1,
+        .sb_adc = ADS1262_MODE_1_SB_ADC1,
+        .sb_pol = ADS1262_MODE_1_SB_POL_UP,
+    };
     ads1262_reg_set_mode_1(&mode_1);
     ads1262_reg_mode_2_t mode_2;
     switch (states->sample_rate) {
