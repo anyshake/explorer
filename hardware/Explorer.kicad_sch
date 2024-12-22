@@ -7,6 +7,7 @@
 	(title_block
 		(title "AnyShake Explorer")
 		(date "2024-05-06")
+		(rev "20241221")
 		(company "AnyShake Project")
 	)
 	(lib_symbols
@@ -111,6 +112,16 @@
 	)
 	(wire
 		(pts
+			(xy 125.73 114.3) (xy 144.78 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1230b982-2793-4a3f-8f8a-fd213df8feb8")
+	)
+	(wire
+		(pts
 			(xy 81.28 78.74) (xy 144.78 78.74)
 		)
 		(stroke
@@ -208,6 +219,16 @@
 			(type default)
 		)
 		(uuid "a94954bd-7a50-4ccc-90db-2edebc70d71f")
+	)
+	(wire
+		(pts
+			(xy 125.73 116.84) (xy 144.78 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b01616ec-ec26-41d3-af94-4a977f230fdd")
 	)
 	(wire
 		(pts
@@ -516,8 +537,8 @@
 		)
 	)
 	(sheet
-		(at 100.33 69.85)
-		(size 25.4 48.26)
+		(at 100.33 67.945)
+		(size 25.4 53.34)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -528,7 +549,7 @@
 		)
 		(uuid "a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384")
 		(property "Sheetname" "Power Supply"
-			(at 100.33 69.1384 0)
+			(at 100.33 67.2334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -537,7 +558,7 @@
 			)
 		)
 		(property "Sheetfile" "power.kicad_sch"
-			(at 100.33 118.6946 0)
+			(at 100.33 121.8696 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -564,6 +585,26 @@
 				(justify right)
 			)
 			(uuid "3bba3429-724e-4c05-86b5-6a8667cd3458")
+		)
+		(pin "A-2V5" output
+			(at 125.73 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "aca1eeb0-c33d-4de4-99e5-2b3def18d042")
+		)
+		(pin "A+2V5" output
+			(at 125.73 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "79658a12-57aa-4242-a4e7-babcd5815132")
 		)
 		(instances
 			(project "Explorer"
@@ -732,8 +773,8 @@
 		)
 	)
 	(sheet
-		(at 144.78 69.85)
-		(size 25.4 48.26)
+		(at 144.78 67.945)
+		(size 25.4 53.34)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -744,7 +785,7 @@
 		)
 		(uuid "f5de9976-2d5a-4764-868a-75612195ab17")
 		(property "Sheetname" "Sensors"
-			(at 144.78 69.1384 0)
+			(at 144.78 67.2334 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -753,7 +794,7 @@
 			)
 		)
 		(property "Sheetfile" "sensors.kicad_sch"
-			(at 144.78 118.6946 0)
+			(at 144.78 121.8696 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -890,6 +931,26 @@
 				(justify left)
 			)
 			(uuid "4094dd9e-61c1-4781-98be-cefbda557794")
+		)
+		(pin "A+2V5" input
+			(at 144.78 114.3 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6dcf7220-4f2d-45a9-a8c9-0c7c3901e15f")
+		)
+		(pin "A-2V5" input
+			(at 144.78 116.84 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "150fade6-51e8-47ae-974a-e187a8a61a8f")
 		)
 		(instances
 			(project "Explorer"
