@@ -15528,7 +15528,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 73.66 182.88 0)
 			(effects
 				(font
