@@ -6,7 +6,7 @@
 "C4,C5,C11,C19,C21,C22,C23,C25,C32,C33,C35,C36,C38,C40,C41,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C60,C67,C68,C69,C70,C72,C73,C74,C75,C77","0.1uF","~","Capacitor_SMD:C_0603_1608Metric","35",""
 "C7","0.01uF","~","Capacitor_SMD:C_0603_1608Metric","1",""
 "C8,C10,C16,C17,C20,C24,C26,C27,C29,C34","22uF","~","Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T","10",""
-"C9","220uF","~","Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T","1",""
+"C9","220uF","~","Capacitor_SMD:CP_Elec_6.3x7.7","1",""
 "C14","470p","~","Capacitor_SMD:C_0603_1608Metric","1",""
 "C30","220pF","~","Capacitor_SMD:C_0603_1608Metric","1",""
 "C37,C39","100pF","~","Capacitor_SMD:C_0603_1608Metric","2",""
