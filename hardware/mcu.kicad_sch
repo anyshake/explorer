@@ -1420,6 +1420,108 @@
 				)
 			)
 		)
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
 				(offset 1.016) hide)
@@ -8112,16 +8214,6 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 57.15) (xy 30.48 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "15874f5b-2b88-4523-b91b-fa104251dd92")
-	)
-	(wire
-		(pts
 			(xy 87.63 39.37) (xy 90.17 39.37)
 		)
 		(stroke
@@ -8129,6 +8221,16 @@
 			(type default)
 		)
 		(uuid "175fd288-0963-4eb8-a775-ea189949dc95")
+	)
+	(wire
+		(pts
+			(xy 15.24 54.61) (xy 15.24 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1825b199-271f-4200-b95d-f8e982ca36c0")
 	)
 	(wire
 		(pts
@@ -8159,6 +8261,16 @@
 			(type default)
 		)
 		(uuid "1a077ee9-35bd-47f8-9441-7256afbdb658")
+	)
+	(wire
+		(pts
+			(xy 81.28 87.63) (xy 81.28 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a18bad4-9e13-44fb-8406-cdbc3e822adf")
 	)
 	(wire
 		(pts
@@ -8459,6 +8571,16 @@
 			(type default)
 		)
 		(uuid "36662041-9b21-47cb-9012-63d661186b13")
+	)
+	(wire
+		(pts
+			(xy 68.58 90.17) (xy 81.28 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37812b88-48ec-4b53-b35a-da02528c05f8")
 	)
 	(wire
 		(pts
@@ -9702,6 +9824,16 @@
 	)
 	(wire
 		(pts
+			(xy 15.24 57.15) (xy 30.48 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83bade28-570c-4259-a477-0515780714ad")
+	)
+	(wire
+		(pts
 			(xy 240.03 85.09) (xy 240.03 87.63)
 		)
 		(stroke
@@ -10592,7 +10724,7 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 59.69) (xy 30.48 59.69)
+			(xy 17.78 59.69) (xy 30.48 59.69)
 		)
 		(stroke
 			(width 0)
@@ -11910,6 +12042,17 @@
 		)
 		(uuid "487e3a79-9953-4f0a-8263-601926a07666")
 	)
+	(label "GNSS_TXD"
+		(at 68.58 90.17 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "48be4b4b-7657-4246-bf15-ddeee041ed99")
+	)
 	(label "MCU_SCL"
 		(at 44.45 114.3 180)
 		(fields_autoplaced yes)
@@ -12043,7 +12186,7 @@
 		(uuid "6d0a38f9-30d8-44b2-8db0-794a9718ff12")
 	)
 	(label "GNSS_TXD"
-		(at 16.51 57.15 0)
+		(at 17.78 57.15 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12087,7 +12230,7 @@
 		(uuid "7af1acef-7511-4267-a872-b7cbe76972a0")
 	)
 	(label "GNSS_RXD"
-		(at 16.51 59.69 0)
+		(at 17.78 59.69 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -18052,6 +18195,73 @@
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/e18fc294-84d1-4936-8800-6a2f75cce34e"
 					(reference "R26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 15.24 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "913f4e01-4807-4419-8ee6-09b89b53c399")
+		(property "Reference" "TP7"
+			(at 17.78 50.0379 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GNSS_TXD"
+			(at 17.78 52.5779 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 20.32 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 20.32 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 15.24 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee529c7e-1138-440c-bd8b-14597fcaabd5")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/e18fc294-84d1-4936-8800-6a2f75cce34e"
+					(reference "TP7")
 					(unit 1)
 				)
 			)

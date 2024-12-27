@@ -68,6 +68,7 @@
 "TP4","TP_A-2V5","~","TestPoint:TestPoint_Pad_D1.0mm","1",""
 "TP5","TP_VCC","~","TestPoint:TestPoint_Pad_D1.0mm","1",""
 "TP6","TP_D+3V3","~","TestPoint:TestPoint_Pad_D1.0mm","1",""
+"TP7","GNSS_TXD","~","TestPoint:TestPoint_Pad_D1.0mm","1",""
 "U1","TPS5430DDA","http://www.ti.com/lit/ds/symlink/tps5430.pdf","Package_SO:TI_SO-PowerPAD-8","1",""
 "U2","TPS79225DBV","https://www.ti.com/lit/ds/symlink/tps792.pdf","Package_TO_SOT_SMD:SOT-23-5","1",""
 "U3","MIC5219-5.0YM5","http://ww1.microchip.com/downloads/en/DeviceDoc/MIC5219-500mA-Peak-Output-LDO-Regulator-DS20006021A.pdf","Package_TO_SOT_SMD:SOT-23-5","1",""
