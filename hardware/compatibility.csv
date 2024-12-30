@@ -12,9 +12,9 @@ APM32F103CBT6,not started,,
 MM32F103C8T6,not started,,
 MM32F103CBT6,not started,,
 AIR32F103CBT6,not started,,
-AIR32F103CCT6,not started,,"Alternative to STM32F103CBT6, 256 KB flash version"
+AIR32F103CCT6,not started,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version+ACI-
 N32G452CBL7,not started,,Alternative to STM32F103CBT6
-N32G452CCL7,not started,,"Alternative to STM32F103CBT6, 256 KB flash version"
+N32G452CCL7,not started,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version+ACI-
 AT32F413C8T7,not started,,Alternative to STM32F103C8T6
 AT32F413CBT7,not started,,Alternative to STM32F103CBT6
-CH32F103C8T6,not started,,
+CH32F103C8T6,finished,failed,
