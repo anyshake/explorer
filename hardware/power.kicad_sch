@@ -6121,7 +6121,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0e907cd0-cae4-417d-9df6-03ac470ec4de")
-		(property "Reference" "#FLG09"
+		(property "Reference" "#FLG08"
 			(at 256.54 125.095 0)
 			(effects
 				(font
@@ -6171,7 +6171,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#FLG09")
+					(reference "#FLG08")
 					(unit 1)
 				)
 			)
@@ -7411,7 +7411,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "442a6a86-ae03-4681-a500-57e62b9193be")
-		(property "Reference" "#FLG08"
+		(property "Reference" "#FLG07"
 			(at 242.57 125.095 0)
 			(effects
 				(font
@@ -7461,7 +7461,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#FLG08")
+					(reference "#FLG07")
 					(unit 1)
 				)
 			)
@@ -8297,7 +8297,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5cfee23a-9e9b-4a46-b124-a1af942f6919")
-		(property "Reference" "#FLG011"
+		(property "Reference" "#FLG010"
 			(at 259.08 104.775 0)
 			(effects
 				(font
@@ -8347,7 +8347,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#FLG011")
+					(reference "#FLG010")
 					(unit 1)
 				)
 			)
@@ -8363,7 +8363,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5d6ce862-f14b-4e84-bab5-259fc29c0ac6")
-		(property "Reference" "#FLG010"
+		(property "Reference" "#FLG09"
 			(at 259.08 89.535 0)
 			(effects
 				(font
@@ -8413,7 +8413,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#FLG010")
+					(reference "#FLG09")
 					(unit 1)
 				)
 			)
@@ -10215,7 +10215,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "944a3f74-a450-4ee4-a1cf-f9845619ee0f")
-		(property "Reference" "#FLG07"
+		(property "Reference" "#FLG06"
 			(at 228.6 125.095 0)
 			(effects
 				(font
@@ -10265,7 +10265,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#FLG07")
+					(reference "#FLG06")
 					(unit 1)
 				)
 			)
