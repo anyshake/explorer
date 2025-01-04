@@ -4,17 +4,18 @@ STM32F103CBT6,finished,pass,
 GD32F103C8T6,finished,pass,
 GD32F103CBT6,finished,pass,
 HK32F103C8T6,finished,pass,
-HK32F103CBT6,not started,,
-CKS32F103C8T6,not started,,
+HK32F103CBT6,finished,pass,
+CKS32F103C8T6,finished,pass,
 CKS32F103CBT6,not started,,
 APM32F103C8T6,finished,pass,
 APM32F103CBT6,not started,,
-MM32F103C8T6,not started,,
-MM32F103CBT6,not started,,
-AIR32F103CBT6,not started,,
-AIR32F103CCT6,not started,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version+ACI-
-N32G452CBL7,not started,,Alternative to STM32F103CBT6
-N32G452CCL7,not started,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version+ACI-
+MM32F103C8T6,finished,failed,STLink: Unknown chip
+MM32F103CBT6,finished,failed,STLink: Unknown chip
+AIR32F103CBT6,finished,failed,+ACI-SPI, IIC bus error+ACI-
+AIR32F103CCT6,finished,failed,+ACI-Alternative to STM32F103CBT6, 256 KB flash version
+SPI, IIC bus error+ACI-
+N32G452CBL7,finished,,+ACI-Alternative to STM32F103CBT6, Stlink not recognize+ACI-
+N32G452CCL7,finished,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version, Stlink not recognize+ACI-
 AT32F413C8T7,not started,,Alternative to STM32F103C8T6
 AT32F413CBT7,not started,,Alternative to STM32F103CBT6
-CH32F103C8T6,finished,failed,
+CH32F103C8T6,finished,failed,Firmware crash
