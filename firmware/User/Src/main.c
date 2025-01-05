@@ -25,7 +25,6 @@
 
 #include "User/Inc/ads1262/regs/interface.h"
 #include "User/Inc/ads1262/regs/mode_0.h"
-#include "User/Inc/ads1262/regs/mode_1.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
 
 #include "User/Inc/gnss/parse.h"
@@ -272,12 +271,6 @@ void peripherals_init(explorer_states_t* states) {
         .run_mode = ADS1262_MODE_0_RUN_MODE_ONESHOT,
     };
     ads1262_reg_set_mode_0(&mode_0);
-    ads1262_reg_mode_1_t mode_1 = {
-        .filter = ADS1262_MODE_1_FILTER_SINC1,
-        .sb_adc = ADS1262_MODE_1_SB_ADC1,
-        .sb_pol = ADS1262_MODE_1_SB_POL_UP,
-    };
-    ads1262_reg_set_mode_1(&mode_1);
     ads1262_reg_mode_2_t mode_2;
     switch (states->sample_rate) {
         case 25:
