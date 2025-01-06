@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "AnyShake Explorer")
-		(date "2024-05-06")
-		(rev "20241221")
+		(date "2025-01-06")
+		(rev "20250106")
 		(company "AnyShake Project")
 	)
 	(lib_symbols

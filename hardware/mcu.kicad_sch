@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "AnyShake Explorer")
-		(date "2024-05-06")
-		(rev "20241221")
+		(date "2025-01-06")
+		(rev "20250106")
 		(company "AnyShake Project")
 	)
 	(lib_symbols
@@ -11833,6 +11833,17 @@
 		)
 		(uuid "146808bc-74a1-4e45-a9fe-a29fbaa4b1dc")
 	)
+	(label "OPTIONS_B3"
+		(at 195.58 120.65 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "17842056-df4f-4027-9efb-b21fc8bfb7a2")
+	)
 	(label "D+3V3"
 		(at 22.86 102.87 180)
 		(fields_autoplaced yes)
@@ -11843,6 +11854,17 @@
 			(justify right bottom)
 		)
 		(uuid "1a264430-c983-4a14-9252-2f91b435e891")
+	)
+	(label "OPTIONS_B1"
+		(at 195.58 115.57 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1c017b4b-04a3-4d58-b568-2486352fb6ef")
 	)
 	(label "ADC_RESET"
 		(at 179.07 30.48 180)
@@ -11987,6 +12009,17 @@
 		)
 		(uuid "41672f89-7fd7-4a06-b7f1-f949ed3818ff")
 	)
+	(label "OPTIONS_B2"
+		(at 195.58 118.11 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "41822586-a111-45f5-912d-5ffa2875c335")
+	)
 	(label "MCU_TXD"
 		(at 210.82 62.23 0)
 		(fields_autoplaced yes)
@@ -12075,17 +12108,6 @@
 		)
 		(uuid "599bbf67-9097-4f6a-86c4-7fd1269e119a")
 	)
-	(label "OPT_USE_GNSS"
-		(at 195.58 120.65 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "59c84ac8-0ad7-443e-9c2b-cdd150960760")
-	)
 	(label "GNSS_1PPS"
 		(at 179.07 48.26 180)
 		(fields_autoplaced yes)
@@ -12119,6 +12141,17 @@
 		)
 		(uuid "5f8c8b79-7e26-46c6-ba53-94653911c31c")
 	)
+	(label "OPTIONS_B1"
+		(at 165.1 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5fcf9578-6aa6-4d6e-bea3-47c164dceefa")
+	)
 	(label "MCU_SCL"
 		(at 41.91 137.16 180)
 		(fields_autoplaced yes)
@@ -12129,6 +12162,17 @@
 			(justify right bottom)
 		)
 		(uuid "60262a4b-ddf4-495c-8c80-b6ddfa7bfa5f")
+	)
+	(label "OPTIONS_B3"
+		(at 165.1 85.09 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60f9ab68-1ee6-4305-9997-745e897612a3")
 	)
 	(label "SAMP_RATE_B2"
 		(at 115.57 128.27 0)
@@ -12162,17 +12206,6 @@
 			(justify right bottom)
 		)
 		(uuid "65555a3f-7514-4b5f-b79c-0ef27aea34a5")
-	)
-	(label "OPT_NO_GEOPHONE"
-		(at 110.49 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "65acf9a7-48a3-45a8-badc-786bc64797b8")
 	)
 	(label "MCU_BOOT0"
 		(at 31.75 195.58 0)
@@ -12229,6 +12262,17 @@
 		)
 		(uuid "7af1acef-7511-4267-a872-b7cbe76972a0")
 	)
+	(label "OPTIONS_B2"
+		(at 110.49 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7ff292e0-c335-4efb-97cd-239abebd4598")
+	)
 	(label "GNSS_RXD"
 		(at 17.78 59.69 0)
 		(fields_autoplaced yes)
@@ -12283,17 +12327,6 @@
 			(justify left bottom)
 		)
 		(uuid "8a58b876-d337-4235-b3d3-b25f828c4395")
-	)
-	(label "OPT_NO_GEOPHONE"
-		(at 195.58 115.57 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8c30ba1e-908a-486a-813e-937a1dbb7c84")
 	)
 	(label "RS232M_RXD"
 		(at 245.11 109.22 0)
@@ -12360,6 +12393,17 @@
 			(justify left bottom)
 		)
 		(uuid "9733db10-e75c-4798-8061-5e0a08cba0f5")
+	)
+	(label "OPTIONS_B1"
+		(at 110.49 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "999592ad-459a-4c81-93a7-2ee3af187dd6")
 	)
 	(label "MCU_SWDIO"
 		(at 114.3 105.41 0)
@@ -12482,17 +12526,6 @@
 		)
 		(uuid "ae9a0a6c-1328-4776-9399-dc785398e52c")
 	)
-	(label "OPT_USE_GNSS"
-		(at 165.1 85.09 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b0cbfb1d-39f0-4dfc-915c-170dbfbce3df")
-	)
 	(label "RS232F_RXD"
 		(at 205.74 114.3 0)
 		(fields_autoplaced yes)
@@ -12503,17 +12536,6 @@
 			(justify left bottom)
 		)
 		(uuid "b175c0bb-39f1-412b-8ed9-69ff1dc55ea2")
-	)
-	(label "OPT_USE_GNSS"
-		(at 110.49 81.28 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b491092a-0ea9-4ef4-8ebe-2634d55c130c")
 	)
 	(label "MCU_TXD"
 		(at 179.07 50.8 180)
@@ -12548,8 +12570,8 @@
 		)
 		(uuid "ba3bffb6-4e13-4c57-bfe7-11fa51ce5516")
 	)
-	(label "OPT_LEGACY_MODE"
-		(at 110.49 83.82 0)
+	(label "OPTIONS_B3"
+		(at 110.49 81.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12557,7 +12579,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "bd2dfd30-f41b-4eb0-bb87-bfc13793a08b")
+		(uuid "c946e159-9745-46d6-a921-e30d6de6ba05")
 	)
 	(label "MCU_SDA"
 		(at 110.49 73.66 0)
@@ -12647,17 +12669,6 @@
 		)
 		(uuid "cf3bebbb-0bb9-4fc1-8e64-ff9d2a80d70a")
 	)
-	(label "OPT_LEGACY_MODE"
-		(at 195.58 118.11 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d2e9c738-9183-4d17-809a-15e2f2714ab2")
-	)
 	(label "SAMP_RATE_B1"
 		(at 110.49 63.5 0)
 		(fields_autoplaced yes)
@@ -12690,17 +12701,6 @@
 			(justify left bottom)
 		)
 		(uuid "d895d7aa-0e44-45c9-ad6c-a1f05e9de898")
-	)
-	(label "OPT_LEGACY_MODE"
-		(at 165.1 82.55 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ddd106e5-ec3e-4a1b-9846-ede68248d655")
 	)
 	(label "GNSS_1PPS"
 		(at 78.74 72.39 180)
@@ -12779,8 +12779,8 @@
 		)
 		(uuid "ef804e74-87ba-4071-ba81-6ab27f1cc052")
 	)
-	(label "OPT_NO_GEOPHONE"
-		(at 165.1 80.01 0)
+	(label "OPTIONS_B2"
+		(at 165.1 82.55 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12788,7 +12788,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f59f782e-c893-449e-a1bd-22a8011da027")
+		(uuid "f703904e-2f4b-40a5-8fc9-506b8b554b1f")
 	)
 	(label "D+3V3"
 		(at 255.27 20.32 180)
