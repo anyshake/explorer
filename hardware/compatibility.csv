@@ -14,8 +14,8 @@ MM32F103CBT6,finished,failed,STLink: Unknown chip
 AIR32F103CBT6,finished,failed,+ACI-SPI, IIC bus error+ACI-
 AIR32F103CCT6,finished,failed,+ACI-Alternative to STM32F103CBT6, 256 KB flash version
 SPI, IIC bus error+ACI-
-N32G452CBL7,finished,,+ACI-Alternative to STM32F103CBT6, Stlink not recognize+ACI-
-N32G452CCL7,finished,,+ACI-Alternative to STM32F103CBT6, 256 KB flash version, Stlink not recognize+ACI-
-AT32F413C8T7,not started,,Alternative to STM32F103C8T6
-AT32F413CBT7,not started,,Alternative to STM32F103CBT6
+N32G452CBL7,finished,pass,+ACI-Alternative to STM32F103CBT6, Stlink not recognize, use Jlink OB instead+ACI-
+N32G452CCL7,finished,pass,+ACI-Alternative to STM32F103CBT6, 256 KB flash version, Stlink not recognize, , use Jlink OB instead+ACI-
+AT32F413C8T7,finished,failed,+ACI-Alternative to STM32F103C8T6, Stlink not recognize+ACI-
+AT32F413CBT7,finished,failed,+ACI-Alternative to STM32F103CBT6, Stlink not recognize+ACI-
 CH32F103C8T6,finished,failed,Firmware crash
