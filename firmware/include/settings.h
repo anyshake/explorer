@@ -1,13 +1,18 @@
 #ifndef __SETTINGS_H
 #define __SETTINGS_H
 
+#include <stdbool.h>
+
 #include "ads1262/utils.h"
 #include "utils/gpio.h"
 
-#define EXPLORER_LEGACY_MODE 0
-#define EXPLORER_24BIT_MODE 1
 #define EXPLORER_SAMPLERATE 100
 #define EXPLORER_BAUDRATE 115200
+
+// Keep this enabled if you are using 4.5 Hz geophone (e.g. LGT-4.5)
+// this is useful for geophone low frequency response (<= 1.0 Hz)
+// see filter.h, filter.c for detailed implementation
+#define ENABLE_COMPENSATION true
 
 static const mcu_utils_gpio_t MCU_STATE_PIN = {
     .pin = 2,

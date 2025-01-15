@@ -1,91 +1,52 @@
 #include "packet.h"
 
-void send_legacy_data_packet(int32_array_t* channel_buf,
-                             uint8_t channel_samples) {
-    if (channel_buf == NULL) {
-        return;
-    }
-    data_packet_t packet = {0};
-
-    // Set packet data from channel buffer
-    for (uint8_t i = 0; i < channel_samples; i++) {
-        packet.z_axis[i] = channel_buf->data[i];
-        packet.e_axis[i] = channel_buf->data[i + channel_samples];
-        packet.n_axis[i] = channel_buf->data[i + 2 * channel_samples];
-    }
-
-    // Calculate checksums for each channel
-    for (uint8_t i = 0; i < channel_samples; i++) {
-        uint8_t* bytes = (uint8_t*)&packet.z_axis[i];
-        for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet.checksum[0] ^= bytes[j];
-        }
-        bytes = (uint8_t*)&packet.e_axis[i];
-        for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet.checksum[1] ^= bytes[j];
-        }
-        bytes = (uint8_t*)&packet.n_axis[i];
-        for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            packet.checksum[2] ^= bytes[j];
-        }
-    }
-
-    uint8_t frame_header[] = {0xFC, 0x1B};
-    mcu_utils_uart_write(frame_header, sizeof(frame_header), true);
-    mcu_utils_uart_write((uint8_t*)&packet, sizeof(data_packet_t), true);
-}
-
-void send_data_packet(int32_array_t* channel_buf,
-                      uint8_array_t* uart_buf,
-                      int64_t timestamp,
-                      uint16_t channel_samples) {
-    if (channel_buf == NULL || uart_buf == NULL) {
+void send_data_packet(int64_t timestamp,
+                      int32_t adc_readout_z_axis[],
+                      int32_t adc_readout_e_axis[],
+                      int32_t adc_readout_n_axis[],
+                      uint16_t channel_samples,
+                      uint8_array_t* uart_packet_buffer) {
+    if (adc_readout_z_axis == NULL || adc_readout_e_axis == NULL ||
+        adc_readout_n_axis == NULL || uart_packet_buffer == NULL) {
         return;
     }
 
-    // Set packet frame header field
-    uart_buf->data[0] = 0xFA;
-    uart_buf->data[1] = 0xDE;
+    uart_packet_buffer->data[0] = 0xFA;
+    uart_packet_buffer->data[1] = 0xDE;
 
-    // Set packet timestamp
     uint8_t* bytes = (uint8_t*)&timestamp;
     for (uint8_t i = 0; i < sizeof(timestamp); i++) {
-        uart_buf->data[2 + i] = bytes[i];
+        uart_packet_buffer->data[2 + i] = bytes[i];
     }
 
-    // Set variable data fields to dummy value
-    uint32_t dummy_val = 19890604;  // Fixed value
+    uint32_t dummy_val = 19890604;  // Fixed value for Explorer Gen 1
     bytes = (uint8_t*)&dummy_val;
     for (uint8_t i = 0; i < sizeof(dummy_val); i++) {
-        uart_buf->data[10 + i] = bytes[i];
+        uart_packet_buffer->data[10 + i] = bytes[i];
     }
 
-    // Set packet data from channel buffer (int32_t to uint8_t)
     for (uint8_t i = 0; i < channel_samples; i++) {
-        bytes = (uint8_t*)&channel_buf->data[i];
+        bytes = (uint8_t*)&adc_readout_z_axis[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            uart_buf->data[14 + i * sizeof(int32_t) + j] = bytes[j];
+            uart_packet_buffer->data[14 + i * sizeof(int32_t) + j] = bytes[j];
         }
-        bytes = (uint8_t*)&channel_buf->data[i + channel_samples];
+        bytes = (uint8_t*)&adc_readout_e_axis[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            uart_buf->data[14 + channel_samples * sizeof(int32_t) +
-                           i * sizeof(int32_t) + j] = bytes[j];
+            uart_packet_buffer->data[14 + channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
-        bytes = (uint8_t*)&channel_buf->data[i + 2 * channel_samples];
+        bytes = (uint8_t*)&adc_readout_e_axis[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            uart_buf->data[14 + 2 * channel_samples * sizeof(int32_t) +
-                           i * sizeof(int32_t) + j] = bytes[j];
+            uart_packet_buffer->data[14 + 2 * channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
     }
 
-    // Get checksum for packet
     uint8_t xor_checksum = 0;
-    for (uint8_t i = 2; i < uart_buf->size - sizeof(xor_checksum); i++) {
-        xor_checksum ^= uart_buf->data[i];
+    for (uint8_t i = 2; i < uart_packet_buffer->size - sizeof(xor_checksum); i++) {
+        xor_checksum ^= uart_packet_buffer->data[i];
     }
-    uart_buf->data[uart_buf->size - sizeof(xor_checksum)] = xor_checksum;
+    uart_packet_buffer->data[uart_packet_buffer->size - sizeof(xor_checksum)] = xor_checksum;
 
-    mcu_utils_uart_write(uart_buf->data, uart_buf->size, false);
+    mcu_utils_uart_write(uart_packet_buffer->data, uart_packet_buffer->size, false);
 }
 
 uint8_t get_data_packet_size(uint8_t channel_samples) {

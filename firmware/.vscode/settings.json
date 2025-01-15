@@ -43,6 +43,9 @@
         "ranges": "c",
         "arduino.h": "c",
         "stdbool.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "functional": "cpp",
+        "*.tcc": "cpp",
+        "ostream": "cpp"
     }
 }
