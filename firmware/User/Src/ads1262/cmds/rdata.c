@@ -5,13 +5,11 @@ void ads1262_cmd_rdata(ads1262_ctl_pin_t pin,
                        uint8_t control_type) {
     uint8_t rx_data[6] = {0};
     if (control_type == ADS1262_INIT_CONTROL_TYPE_SOFT) {
-        ads1262_write_cmd(pin, ADS1262_CMD_START1, NULL, 0,
-                          ADS1262_WRITE_CMD_WAIT_DISABLE);
+        ads1262_write_cmd(pin, ADS1262_CMD_START1, NULL, 0, ADS1262_WRITE_CMD_WAIT_DISABLE);
     } else {
         mcu_utils_gpio_high(pin.start);
     }
-    ads1262_write_cmd(pin, ADS1262_CMD_RDATA1, rx_data, sizeof(rx_data),
-                      ADS1262_WRITE_CMD_WAIT_ENABLE);
+    ads1262_write_cmd(pin, ADS1262_CMD_RDATA1, rx_data, sizeof(rx_data), ADS1262_WRITE_CMD_WAIT_ENABLE);
     if (control_type == ADS1262_INIT_CONTROL_TYPE_HARD) {
         mcu_utils_gpio_low(pin.start);
     }
@@ -24,18 +22,19 @@ void ads1262_cmd_rdata(ads1262_ctl_pin_t pin,
 }
 
 bool ads1262_cmd_rdata_is_valid(ads1262_cmd_rdata_t* rdata, uint8_t crc_mode) {
-    uint8_t* data = (uint8_t*)(&rdata->data);
-
-    if (crc_mode == ADS1262_INTERFACE_CRC_DISABLED) {
+    if (crc_mode == ADS1262_REG_INTERFACE_CRC_DISABLED) {
         return true;
-    } else if (crc_mode == ADS1262_INTERFACE_CRC_CHECKSUM) {
+    }
+
+    uint8_t* data = (uint8_t*)(&rdata->data);
+    if (crc_mode == ADS1262_REG_INTERFACE_CRC_CHECKSUM) {
         uint16_t calc_checksum = 0x9B;  // Offset given in datasheet
         for (uint8_t i = 0; i < sizeof(rdata->data); i++) {
             calc_checksum += data[i];
         }
 
         return (uint8_t)(calc_checksum % 256) == rdata->crc;
-    } else if (crc_mode == ADS1262_INTERFACE_CRC_CRC) {
+    } else if (crc_mode == ADS1262_REG_INTERFACE_CRC_CRC) {
         uint8_t calc_crc = 0;
         for (uint8_t i = 0; i < sizeof(rdata->data); i++) {
             calc_crc ^= data[sizeof(rdata->data) - i - 1];

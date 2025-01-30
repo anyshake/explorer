@@ -6,16 +6,16 @@
 #include "User/Inc/ads1262/reg_map.h"
 #include "User/Inc/ads1262/utils.h"
 
-#define __ADS1262_POWER_DEFAULT_VALUE 0x11
+#define __ADS1262_REG_POWER_DEFAULT_VALUE 0x11
 
-#define ADS1262_POWER_RESET_NONE 0x00
-#define ADS1262_POWER_RESET_OCCURRED 0x01
+#define ADS1262_REG_POWER_RESET_NONE 0x00
+#define ADS1262_REG_POWER_RESET_OCCURRED 0x01
 
-#define ADS1262_POWER_VBIAS_DISABLED 0x00
-#define ADS1262_POWER_VBIAS_ENABLED 0x01
+#define ADS1262_REG_POWER_VBIAS_DISABLED 0x00
+#define ADS1262_REG_POWER_VBIAS_ENABLED 0x01
 
-#define ADS1262_POWER_INTREF_DISABLED 0x00
-#define ADS1262_POWER_INTREF_ENABLED 0x01
+#define ADS1262_REG_POWER_INTREF_DISABLED 0x00
+#define ADS1262_REG_POWER_INTREF_ENABLED 0x01
 
 typedef struct {
     // Reset indicator, indicates ADC reset has occurred. Clear this bit to
@@ -35,6 +35,7 @@ typedef struct {
     uint8_t intref;
 } ads1262_reg_power_t;
 
+ads1262_reg_power_t ads1262_reg_new_power(void);
 void ads1262_reg_set_power(ads1262_reg_power_t* power);
 void ads1262_reg_get_power(ads1262_reg_power_t* power);
 

@@ -1,12 +1,16 @@
 #include "Utils/Inc/spi.h"
 
 void mcu_utils_spi_init(bool is_rtos) {
-    MX_SPI1_Init();
+    if (HAL_SPI_GetState(&hspi1) == HAL_SPI_STATE_RESET) {
+        MX_SPI1_Init();
+    }
     mcu_utils_delay_ms(100, is_rtos);
 }
 
 void mcu_utils_spi_end(void) {
-    HAL_SPI_DeInit(&hspi1);
+    if (HAL_SPI_GetState(&hspi1) != HAL_SPI_STATE_RESET) {
+        HAL_SPI_DeInit(&hspi1);
+    }
 }
 
 volatile bool is_spi1_transfer_complete = true;

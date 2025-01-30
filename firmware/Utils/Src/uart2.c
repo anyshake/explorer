@@ -6,8 +6,7 @@ void USART2_IRQHandler(void) {
     if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_RXNE)) {
         uint8_t received_byte;
         HAL_UART_Receive(&huart2, &received_byte, 1, 0);
-        uint16_t next_head =
-            (uart2_rx_buffer.head + 1) % MCU_UTILS_UART2_BUFFER_SIZE;
+        uint16_t next_head = (uart2_rx_buffer.head + 1) % MCU_UTILS_UART2_BUFFER_SIZE;
         if (next_head != uart2_rx_buffer.tail) {
             uart2_rx_buffer.buffer[uart2_rx_buffer.head] = received_byte;
             uart2_rx_buffer.head = next_head;
@@ -17,24 +16,26 @@ void USART2_IRQHandler(void) {
 }
 
 void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
-    huart2.Instance = USART2;
-    huart2.Init.BaudRate = baudrate;
-    huart2.Init.WordLength = UART_WORDLENGTH_8B;
-    huart2.Init.StopBits = UART_STOPBITS_1;
-    huart2.Init.Parity = UART_PARITY_NONE;
-    huart2.Init.Mode = UART_MODE_TX_RX;
-    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-    if (HAL_UART_Init(&huart2) != HAL_OK) {
-        Error_Handler();
+    if (HAL_UART_GetState(&huart2) == HAL_UART_STATE_RESET) {
+        huart2.Instance = USART2;
+        huart2.Init.BaudRate = baudrate;
+        huart2.Init.WordLength = UART_WORDLENGTH_8B;
+        huart2.Init.StopBits = UART_STOPBITS_1;
+        huart2.Init.Parity = UART_PARITY_NONE;
+        huart2.Init.Mode = UART_MODE_TX_RX;
+        huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+        huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+        if (HAL_UART_Init(&huart2) != HAL_OK) {
+            Error_Handler();
+        }
+
+        HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(USART2_IRQn);
+
+        uart2_rx_buffer.head = 0;
+        uart2_rx_buffer.tail = 0;
+        __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
     }
-
-    HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(USART2_IRQn);
-
-    uart2_rx_buffer.head = 0;
-    uart2_rx_buffer.tail = 0;
-    __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
 
     mcu_utils_delay_ms(100, is_rtos);
 }
@@ -49,7 +50,10 @@ void mcu_utils_uart2_flush(void) {
 }
 
 void mcu_utils_uart2_end(void) {
-    HAL_UART_DeInit(&huart2);
+    if (HAL_UART_GetState(&huart2) != HAL_UART_STATE_RESET) {
+        __HAL_UART_DISABLE_IT(&huart2, UART_IT_RXNE);
+        HAL_UART_DeInit(&huart2);
+    }
 }
 
 bool mcu_utils_uart2_hasdata(void) {
@@ -62,7 +66,6 @@ uint8_t mcu_utils_uart2_read(void) {
     }
 
     uint8_t data = uart2_rx_buffer.buffer[uart2_rx_buffer.tail];
-    uart2_rx_buffer.tail =
-        (uart2_rx_buffer.tail + 1) % MCU_UTILS_UART2_BUFFER_SIZE;
+    uart2_rx_buffer.tail = (uart2_rx_buffer.tail + 1) % MCU_UTILS_UART2_BUFFER_SIZE;
     return data;
 }

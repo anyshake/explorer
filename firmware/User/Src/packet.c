@@ -99,13 +99,11 @@ void send_data_packet(int32_array_t* channel_buf,
         }
         bytes = (uint8_t*)&channel_buf->data[i + channel_samples];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            uart_buf->data[14 + channel_samples * sizeof(int32_t) +
-                           i * sizeof(int32_t) + j] = bytes[j];
+            uart_buf->data[14 + channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
         bytes = (uint8_t*)&channel_buf->data[i + 2 * channel_samples];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
-            uart_buf->data[14 + 2 * channel_samples * sizeof(int32_t) +
-                           i * sizeof(int32_t) + j] = bytes[j];
+            uart_buf->data[14 + 2 * channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
     }
 

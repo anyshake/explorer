@@ -18,6 +18,15 @@
 #include "User/Inc/ssd1306/display.h"
 #include "User/Inc/ssd1306/utils.h"
 
+#include "User/Inc/icm42688/regs/accel_config0.h"
+#include "User/Inc/icm42688/regs/accel_config_static2.h"
+#include "User/Inc/icm42688/regs/gyro_accel_config0.h"
+#include "User/Inc/icm42688/regs/int_config.h"
+#include "User/Inc/icm42688/regs/int_config1.h"
+#include "User/Inc/icm42688/regs/int_source0.h"
+#include "User/Inc/icm42688/regs/pwr_mgmt0.h"
+#include "User/Inc/icm42688/utils.h"
+
 #include "User/Inc/lsm6ds3/regs/ctrl1_xl.h"
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
 #include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
@@ -36,7 +45,10 @@
 #include "User/Inc/packet.h"
 #include "User/Inc/reader.h"
 #include "User/Inc/settings.h"
-#include "User/Inc/version.h"
+
+#ifndef FW_REV
+#define FW_REV "custombuild"
+#endif
 
 typedef struct {
     uint32_t device_id;
@@ -66,21 +78,22 @@ void task_read_adc(void* argument) {
     uint8_t time_span = 1000 / states->sample_rate;
 
     for (int64_t current_timestamp = 0;;) {
-        while (mcu_utils_uptime_ms() % (time_span * states->channel_samples) !=
-               0) {
-            current_timestamp =
-                states->use_gnss_time
-                    ? gnss_get_current_timestamp(states->local_base_timestamp,
-                                                 states->gnss_ref_timestamp)
-                    : mcu_utils_uptime_ms();
+        while (mcu_utils_uptime_ms() % (time_span * states->channel_samples) != 0) {
+            if (states->use_gnss_time) {
+                current_timestamp = gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp);
+            } else {
+                current_timestamp = mcu_utils_uptime_ms();
+            }
         }
 
         if (states->no_geophone) {
-            get_acc_readout(LSM6DS3_INTS_PIN, states->adc_channel_buffer,
-                            states->channel_samples);
+#ifndef USE_LSM6DS3
+            get_accel_readout(ICM42688_INTS_PIN, states->adc_channel_buffer, states->channel_samples);
+#else
+            get_accel_readout(LSM6DS3_INTS_PIN, states->adc_channel_buffer, states->channel_samples);
+#endif
         } else {
-            get_adc_readout(ADS1262_CTL_PIN, states->adc_channel_buffer,
-                            states->channel_samples);
+            get_adc_readout(ADS1262_CTL_PIN, states->adc_channel_buffer, states->channel_samples);
         }
 
         osMessageQueuePut(states->reader_drdy_queue, &current_timestamp, 0, 0);
@@ -93,17 +106,13 @@ void task_send_data(void* argument) {
 
     while (true) {
         int64_t timestamp;
-        if (osMessageQueueGet(states->reader_drdy_queue, &timestamp, NULL, 0) ==
-            osOK) {
+        if (osMessageQueueGet(states->reader_drdy_queue, &timestamp, NULL, 0) == osOK) {
             if (states->legacy_mode) {
-                send_legacy_data_packet(states->adc_channel_buffer,
-                                        states->channel_samples);
+                send_legacy_data_packet(states->adc_channel_buffer, states->channel_samples);
             } else {
-                send_data_packet(states->adc_channel_buffer,
-                                 states->uart_packet_buffer, timestamp,
-                                 &states->gnss_location,
-                                 device_info,
-                                 states->channel_samples);
+                send_data_packet(states->adc_channel_buffer, states->uart_packet_buffer,
+                                 timestamp, &states->gnss_location,
+                                 device_info, states->channel_samples);
             }
         }
     }
@@ -113,10 +122,7 @@ void task_calib_gnss(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
 
     while (true) {
-        int64_t timestamp_sec =
-            gnss_get_current_timestamp(states->local_base_timestamp,
-                                       states->gnss_ref_timestamp) /
-            1000;
+        int64_t timestamp_sec = gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) / 1000;
 
         // Calibrate GNSS time at UTC 00:00:00 every day
         if (timestamp_sec % 86400 == 0) {
@@ -124,16 +130,11 @@ void task_calib_gnss(void* argument) {
             bool success = false;
 
             while (attempts < 3 && !success) {
-                if (gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp,
-                                  false)) {
-                    if (gnss_get_sentence(states->gnss_message,
-                                          GNSS_SENTENCE_TYPE_RMC)) {
+                if (gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, false)) {
+                    if (gnss_get_sentence(states->gnss_message, GNSS_SENTENCE_TYPE_RMC)) {
                         gnss_padding_sentence(states->gnss_message);
-                        gnss_parse_rmc(&states->gnss_location,
-                                       &states->gnss_time,
-                                       states->gnss_message);
-                        states->gnss_ref_timestamp =
-                            gnss_get_timestamp(&states->gnss_time);
+                        gnss_parse_rmc(&states->gnss_location, &states->gnss_time, states->gnss_message);
+                        states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
                         success = true;
                     }
                 }
@@ -180,8 +181,7 @@ void peripherals_init(explorer_states_t* states) {
     ssd1306_init(false);
     ssd1306_enable();
     ssd1306_clear();
-    ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
     // Get user options from DIP switches
     mcu_utils_gpio_mode(OPTIONS_NO_GEOPHONE_PIN, MCU_UTILS_GPIO_MODE_INPUT);
@@ -194,8 +194,7 @@ void peripherals_init(explorer_states_t* states) {
     // Get sample rate from DIP switches
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
-    switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 |
-            mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
+    switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 | mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
         case 1:
             states->sample_rate = 100;
             break;
@@ -209,15 +208,12 @@ void peripherals_init(explorer_states_t* states) {
             states->sample_rate = 125;
             break;
     }
-    states->channel_samples = states->legacy_mode
-                                  ? LEGACY_PACKET_CHANNEL_SAMPLES
-                                  : MAINLINE_PACKET_CHANNEL_SAMPLES;
+    states->channel_samples = states->legacy_mode ? LEGACY_PACKET_CHANNEL_SAMPLES : MAINLINE_PACKET_CHANNEL_SAMPLES;
 
     // Get baud rate from DIP switches
     mcu_utils_gpio_mode(BAUDRATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(BAUDRATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
-    switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 |
-            mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {
+    switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 | mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {
         case 1:
             states->baud_rate = 76800;
             break;
@@ -233,61 +229,82 @@ void peripherals_init(explorer_states_t* states) {
     }
 
     // Display startup screen
-    ssd1306_display_string(0, 0, "Peripheral Init",
-                           SSD1306_FONT_TYPE_ASCII_8X16,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, "Peripheral Init", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     mcu_utils_delay_ms(1000, false);
 
     // Read device ID from EEPROM
     eeprom_init(EEPROM_WP_PIN, false);
     eeprom_read((uint8_t*)&states->device_id, sizeof(states->device_id));
 
-    // Initialize LSM6DS3 accelerometer
+    // Initialize ICM42688 / LSM6DS3 accelerometer
+#ifndef USE_LSM6DS3
+    icm42688_init(ICM42688_INTS_PIN, false);
+    icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
+    icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;
+    icm42688_reg_accel_config0.accel_odr = ICM42688_REG_ACCEL_CONFIG0_ACCEL_ODR_1_KHZ;
+    icm42688_reg_set_accel_config0(&icm42688_reg_accel_config0);
+    icm42688_reg_gyro_accel_config0_t icm42688_reg_gyro_accel_config0 = icm42688_reg_new_gyro_accel_config0();
+    icm42688_reg_gyro_accel_config0.accel_ui_filt_bw = ICM42688_REG_GYRO_ACCEL_CONFIG0_ACCEL_UI_FILT_BW_LOW_LATENCY_ODR_DEC2;
+    icm42688_reg_set_gyro_accel_config0(&icm42688_reg_gyro_accel_config0);
+    icm42688_reg_int_config_t icm42688_reg_int_config = icm42688_reg_new_int_config();
+    icm42688_reg_int_config.int1_drive_circuit = ICM42688_REG_INT_CONFIG_INT1_DRIVE_CIRCUIT_PUSH_PULL;
+    icm42688_reg_set_int_config(&icm42688_reg_int_config);
+    icm42688_reg_int_source0_t icm42688_reg_int_source0 = icm42688_reg_new_int_source0();
+    icm42688_reg_int_source0.ui_drdy_int1_en = ICM42688_REG_INT_SOURCE0_UI_DRDY_INT1_EN_ENABLED;
+    icm42688_reg_set_int_source0(&icm42688_reg_int_source0);
+    icm42688_reg_int_config1_t icm42688_reg_int_config1 = icm42688_reg_new_int_config1();
+    icm42688_reg_int_config1.int_async_reset = ICM42688_REG_INT_CONFIG1_INT_ASYNC_RESET_ENABLED;
+    icm42688_reg_set_int_config1(&icm42688_reg_int_config1);
+    icm42688_reg_accel_config_static2_t icm42688_reg_accel_config_static2 = icm42688_reg_new_accel_config_static2();
+    icm42688_reg_accel_config_static2.accel_aaf_delt = 100;
+    icm42688_reg_accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_ENABLED;
+    icm42688_reg_set_accel_config_static2(&icm42688_reg_accel_config_static2);
+    icm42688_reg_pwr_mgmt0_t icm42688_reg_pwr_mgmt0 = icm42688_reg_new_pwr_mgmt0();
+    icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_DISABLED;
+    icm42688_reg_pwr_mgmt0.accel_mode = ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE;
+    icm42688_reg_set_pwr_mgmt0(&icm42688_reg_pwr_mgmt0);
+#else
     lsm6ds3_init(LSM6DS3_INTS_PIN, false);
-    lsm6ds3_reset(false);
-    lsm6ds3_reg_int1_ctrl_t int1_ctrl = {
-        .drdy_xl = LSM6DS3_INT1_CTRL_DRDY_XL_ENABLED,
-    };
-    lsm6ds3_reg_set_int1_ctrl(&int1_ctrl);
-    lsm6ds3_reg_ctrl3_c_t ctrl3_c = {
-        .bdu = LSM6DS3_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED,
-        .if_inc = LSM6DS3_CTRL3_C_IF_INC_ENABLED,
-    };
-    lsm6ds3_reg_set_ctrl3_c(&ctrl3_c);
-    lsm6ds3_reg_ctrl1_xl_t ctrl1_xl = {
-        .odr_xl = LSM6DS3_CTRL1_XL_ODR_XL_6660HZ,
-        .fs_xl = LSM6DS3_CTRL1_XL_FS_XL_2G,
-    };
-    lsm6ds3_reg_set_ctrl1_xl(&ctrl1_xl);
+    lsm6ds3_reg_int1_ctrl_t lsm6ds3_reg_int1_ctrl = lsm6ds3_reg_new_int1_ctrl();
+    lsm6ds3_reg_int1_ctrl.drdy_xl = LSM6DS3_REG_INT1_CTRL_DRDY_XL_ENABLED;
+    lsm6ds3_reg_set_int1_ctrl(&lsm6ds3_reg_int1_ctrl);
+    lsm6ds3_reg_ctrl3_c_t lsm6ds3_reg_ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
+    lsm6ds3_reg_ctrl3_c.bdu = LSM6DS3_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
+    lsm6ds3_reg_ctrl3_c.if_inc = LSM6DS3_REG_CTRL3_C_IF_INC_ENABLED;
+    lsm6ds3_reg_set_ctrl3_c(&lsm6ds3_reg_ctrl3_c);
+    lsm6ds3_reg_ctrl1_xl_t lsm6ds3_reg_ctrl1_xl = lsm6ds3_reg_new_ctrl1_xl();
+    lsm6ds3_reg_ctrl1_xl.odr_xl = LSM6DS3_REG_CTRL1_XL_ODR_XL_833HZ;
+    lsm6ds3_reg_ctrl1_xl.fs_xl = LSM6DS3_REG_CTRL1_XL_FS_XL_2G;
+    lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_100HZ;
+    lsm6ds3_reg_set_ctrl1_xl(&lsm6ds3_reg_ctrl1_xl);
+#endif
 
     // Initialize ADS1262 ADC
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD, false);
-    ads1262_reg_interface_t interface = {
-        .status = ADS1262_INTERFACE_STATUS_ENABLED,
-        .crc = ADS1262_INTERFACE_CRC_CRC,
-    };
-    ads1262_reg_set_interface(&interface);
-    ads1262_reg_mode_0_t mode_0 = {
-        .run_mode = ADS1262_MODE_0_RUN_MODE_ONESHOT,
-    };
-    ads1262_reg_set_mode_0(&mode_0);
-    ads1262_reg_mode_2_t mode_2;
+    ads1262_reg_interface_t ads1262_reg_interface = ads1262_reg_new_interface();
+    ads1262_reg_interface.status = ADS1262_REG_INTERFACE_STATUS_ENABLED;
+    ads1262_reg_interface.crc = ADS1262_REG_INTERFACE_CRC_CRC;
+    ads1262_reg_set_interface(&ads1262_reg_interface);
+    ads1262_reg_mode_0_t ads1262_reg_mode_0 = ads1262_reg_new_mode_0();
+    ads1262_reg_mode_0.run_mode = ADS1262_REG_MODE_0_RUN_MODE_ONESHOT;
+    ads1262_reg_set_mode_0(&ads1262_reg_mode_0);
+    ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
     switch (states->sample_rate) {
         case 25:
-            mode_2.dr = ADS1262_MODE_2_DR_100;
+            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_100;
             break;
         case 50:
-            mode_2.dr = ADS1262_MODE_2_DR_400;
+            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_400;
             break;
         case 100:
         case 125:
-            mode_2.dr = ADS1262_MODE_2_DR_1200;
+            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_1200;
             break;
         default:
-            mode_2.dr = ADS1262_MODE_2_DR_38400;
+            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_38400;
             break;
     }
-    ads1262_reg_set_mode_2(&mode_2);
+    ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
 
     // Initialize serial port
     mcu_utils_uart_init(states->baud_rate, false);
@@ -305,23 +322,17 @@ void peripherals_init(explorer_states_t* states) {
 }
 
 void get_gnss_data(explorer_states_t* states) {
-    ssd1306_display_string(0, 0, "Fetch GNSS Data",
-                           SSD1306_FONT_TYPE_ASCII_8X16,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, "Fetch GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
     for (char display_buf[24];;) {
         mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
 
         // Read NMEA message for status and elevation
-        if (gnss_get_sentence(states->gnss_message,
-                              GNSS_SENTENCE_TYPE_GGA)) {
+        if (gnss_get_sentence(states->gnss_message, GNSS_SENTENCE_TYPE_GGA)) {
             gnss_padding_sentence(states->gnss_message);
-            gnss_parse_gga(&states->gnss_status, &states->gnss_location,
-                           states->gnss_message);
-            snprintf(display_buf, sizeof(display_buf), "SAT: %d, HDOP: %.1f",
-                     states->gnss_status.satellites, states->gnss_status.hdop);
-            ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                                   SSD1306_FONT_DISPLAY_COLOR_WHITE);
+            gnss_parse_gga(&states->gnss_status, &states->gnss_location, states->gnss_message);
+            snprintf(display_buf, sizeof(display_buf), "SAT: %d, HDOP: %.1f", states->gnss_status.satellites, states->gnss_status.hdop);
+            ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
         }
 
         // Wait for PPS signal
@@ -333,13 +344,11 @@ void get_gnss_data(explorer_states_t* states) {
         }
 
         // Read NMEA message for RMC data
-        if (gnss_get_sentence(states->gnss_message,
-                              GNSS_SENTENCE_TYPE_RMC)) {
+        if (gnss_get_sentence(states->gnss_message, GNSS_SENTENCE_TYPE_RMC)) {
             gnss_padding_sentence(states->gnss_message);
             gnss_parse_rmc(&states->gnss_location, &states->gnss_time,
                            states->gnss_message);
-            states->gnss_ref_timestamp =
-                gnss_get_timestamp(&states->gnss_time);
+            states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
         }
 
         // Check if GNSS data is valid
@@ -358,36 +367,21 @@ void get_gnss_data(explorer_states_t* states) {
 void display_settings(explorer_states_t* states) {
     char display_buf[24];
 
-    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %d Hz",
-             (int)states->sample_rate);
-    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "PORT BR: %d bps",
-             (int)states->baud_rate);
-    ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "NO GEOPHONE: %s",
-             states->no_geophone ? "YES" : "NO");
-    ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %s",
-             states->use_gnss_time ? "YES" : "NO");
-    ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s",
-             states->legacy_mode ? "YES" : "NO");
-    ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X",
-             (int)states->device_id);
-    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    const char version[] = FW_VERSION;
-    snprintf(display_buf, sizeof(display_buf), "FW VER: %s", version);
-    ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %d Hz", (int)states->sample_rate);
+    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "PORT BR: %d bps", (int)states->baud_rate);
+    ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "NO GEOPHONE: %s", states->no_geophone ? "YES" : "NO");
+    ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %s", states->use_gnss_time ? "YES" : "NO");
+    ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "LEGACY MODE: %s", states->legacy_mode ? "YES" : "NO");
+    ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08X", (int)states->device_id);
+    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "FW REV: %s", FW_REV);
+    ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
 
 void setup(void) {
@@ -396,9 +390,7 @@ void setup(void) {
 
     // Calibrate ADC offset
     if (!states.no_geophone) {
-        ssd1306_display_string(0, 0, "Calibrating ADC",
-                               SSD1306_FONT_TYPE_ASCII_8X16,
-                               SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        ssd1306_display_string(0, 0, "Calibrating ADC", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
         calibrate_adc_offset(ADS1262_CTL_PIN);
         mcu_utils_delay_ms(1000, false);
     }
@@ -416,9 +408,7 @@ void setup(void) {
     }
 
     // Display device settings
-    ssd1306_display_string(0, 0, "Device Started!",
-                           SSD1306_FONT_TYPE_ASCII_8X16,
-                           SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, "Device Started!", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     mcu_utils_delay_ms(1000, false);
     ssd1306_clear();
     display_settings(&states);
@@ -456,8 +446,7 @@ void setup(void) {
     const osMessageQueueAttr_t reader_drdy_queue_attr = {
         .name = "DRDY Timestamp",
     };
-    states.reader_drdy_queue =
-        osMessageQueueNew(1, sizeof(int64_t), &reader_drdy_queue_attr);
+    states.reader_drdy_queue = osMessageQueueNew(1, sizeof(int64_t), &reader_drdy_queue_attr);
 }
 
 int main(void) {

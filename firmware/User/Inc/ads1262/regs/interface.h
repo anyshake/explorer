@@ -6,17 +6,17 @@
 #include "User/Inc/ads1262/reg_map.h"
 #include "User/Inc/ads1262/utils.h"
 
-#define __ADS1262_INTERFACE_DEFAULT_VALUE 0x05
+#define __ADS1262_REG_INTERFACE_DEFAULT_VALUE 0x05
 
-#define ADS1262_INTERFACE_TIMEOUT_DISABLED 0x00
-#define ADS1262_INTERFACE_TIMEOUT_ENABLED 0x01
+#define ADS1262_REG_INTERFACE_TIMEOUT_DISABLED 0x00
+#define ADS1262_REG_INTERFACE_TIMEOUT_ENABLED 0x01
 
-#define ADS1262_INTERFACE_STATUS_DISABLED 0x00
-#define ADS1262_INTERFACE_STATUS_ENABLED 0x01
+#define ADS1262_REG_INTERFACE_STATUS_DISABLED 0x00
+#define ADS1262_REG_INTERFACE_STATUS_ENABLED 0x01
 
-#define ADS1262_INTERFACE_CRC_DISABLED 0x00
-#define ADS1262_INTERFACE_CRC_CHECKSUM 0x01
-#define ADS1262_INTERFACE_CRC_CRC 0x02
+#define ADS1262_REG_INTERFACE_CRC_DISABLED 0x00
+#define ADS1262_REG_INTERFACE_CRC_CHECKSUM 0x01
+#define ADS1262_REG_INTERFACE_CRC_CRC 0x02
 
 typedef struct {
     // Serial interface time-out enable, enables the serial interface automatic
@@ -38,6 +38,7 @@ typedef struct {
     uint8_t crc;
 } ads1262_reg_interface_t;
 
+ads1262_reg_interface_t ads1262_reg_new_interface(void);
 void ads1262_reg_set_interface(ads1262_reg_interface_t* interface);
 void ads1262_reg_get_interface(ads1262_reg_interface_t* interface);
 

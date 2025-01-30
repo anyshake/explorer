@@ -1,8 +1,7 @@
 #include "User/Inc/array.h"
 
 int8_array_t* array_int8_make(uint16_t size) {
-    int8_array_t* arr =
-        (int8_array_t*)malloc(sizeof(int8_array_t) + sizeof(int8_t) * size);
+    int8_array_t* arr = (int8_array_t*)malloc(sizeof(int8_array_t) + sizeof(int8_t) * size);
     if (arr == NULL) {
         return NULL;
     }
@@ -18,8 +17,7 @@ void array_int8_free(int8_array_t* arr) {
 }
 
 uint8_array_t* array_uint8_make(uint16_t size) {
-    uint8_array_t* arr =
-        (uint8_array_t*)malloc(sizeof(uint8_array_t) + sizeof(uint8_t) * size);
+    uint8_array_t* arr = (uint8_array_t*)malloc(sizeof(uint8_array_t) + sizeof(uint8_t) * size);
     if (arr == NULL) {
         return NULL;
     }
@@ -35,8 +33,7 @@ void array_uint8_free(uint8_array_t* arr) {
 }
 
 int16_array_t* array_int16_make(uint16_t size) {
-    int16_array_t* arr =
-        (int16_array_t*)malloc(sizeof(int16_array_t) + sizeof(int16_t) * size);
+    int16_array_t* arr = (int16_array_t*)malloc(sizeof(int16_array_t) + sizeof(int16_t) * size);
     if (arr == NULL) {
         return NULL;
     }
@@ -69,8 +66,7 @@ void array_uint16_free(uint16_array_t* arr) {
 }
 
 int32_array_t* array_int32_make(uint16_t size) {
-    int32_array_t* arr =
-        (int32_array_t*)malloc(sizeof(int32_array_t) + sizeof(int32_t) * size);
+    int32_array_t* arr = (int32_array_t*)malloc(sizeof(int32_array_t) + sizeof(int32_t) * size);
     if (arr == NULL) {
         return NULL;
     }

@@ -6,8 +6,8 @@
 #include "User/Inc/ads1262/reg_map.h"
 #include "User/Inc/ads1262/utils.h"
 
-#define ADS1262_ID_DEV_ID_ADS1262 0x00
-#define ADS1262_ID_DEV_ID_ADS1263 0x01
+#define ADS1262_REG_ID_DEV_ID_ADS1262 0x00
+#define ADS1262_REG_ID_DEV_ID_ADS1263 0x01
 
 typedef struct {
     // Device ID, read-only

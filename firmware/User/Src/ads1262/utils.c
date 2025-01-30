@@ -6,8 +6,7 @@ void ads1262_reset(ads1262_ctl_pin_t pin, uint8_t reset_type, bool is_rtos) {
         mcu_utils_delay_ms(100, is_rtos);
         mcu_utils_gpio_high(pin.rst);
     } else if (reset_type == ADS1262_RESET_RESET_TYPE_SOFT) {
-        ads1262_write_cmd(pin, ADS1262_CMD_RESET, NULL, 1,
-                          ADS1262_WRITE_CMD_WAIT_ENABLE);
+        ads1262_write_cmd(pin, ADS1262_CMD_RESET, NULL, 1, ADS1262_WRITE_CMD_WAIT_ENABLE);
     }
     mcu_utils_delay_ms(100, is_rtos);
 }
