@@ -6,7 +6,9 @@
 
 #include "Core/Inc/i2c.h"
 #include "Utils/Inc/delay.h"
+#include "stm32f1xx.h"
 #include "stm32f1xx_hal.h"
+#include "stm32f1xx_hal_gpio.h"
 
 #define MCU_UTILS_I2C_REG_WIDTH_8 I2C_MEMADD_SIZE_8BIT
 #define MCU_UTILS_I2C_REG_WIDTH_16 I2C_MEMADD_SIZE_16BIT
