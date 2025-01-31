@@ -12,7 +12,7 @@
 #define SSD1306_REG_TYPE_CMD 0x00
 #define SSD1306_REG_TYPE_DATA 0x40
 
-void ssd1306_init(bool is_rtos);
+void ssd1306_init(void);
 void ssd1306_enable(void);
 void ssd1306_disable(void);
 void ssd1306_clear(void);

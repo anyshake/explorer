@@ -17,7 +17,7 @@ typedef struct {
 } lsm6ds3_ints_pin_t;
 
 void lsm6ds3_wait(lsm6ds3_ints_pin_t pin);
-void lsm6ds3_init(lsm6ds3_ints_pin_t pin, bool is_rtos);
+void lsm6ds3_init(lsm6ds3_ints_pin_t pin);
 void lsm6ds3_reset(bool is_rtos);
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data);
 void lsm6ds3_write_reg(uint8_t reg, uint8_t tx_data);

@@ -8264,16 +8264,6 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 87.63) (xy 81.28 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a18bad4-9e13-44fb-8406-cdbc3e822adf")
-	)
-	(wire
-		(pts
 			(xy 257.81 153.67) (xy 269.24 153.67)
 		)
 		(stroke
@@ -8571,16 +8561,6 @@
 			(type default)
 		)
 		(uuid "36662041-9b21-47cb-9012-63d661186b13")
-	)
-	(wire
-		(pts
-			(xy 68.58 90.17) (xy 81.28 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "37812b88-48ec-4b53-b35a-da02528c05f8")
 	)
 	(wire
 		(pts
@@ -11703,7 +11683,6 @@
 	)
 	(label "MEMS_INT2"
 		(at 110.49 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11714,7 +11693,6 @@
 	)
 	(label "ADC_START"
 		(at 179.07 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11725,7 +11703,6 @@
 	)
 	(label "SAMP_RATE_B2"
 		(at 110.49 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11736,7 +11713,6 @@
 	)
 	(label "MCU_MISO"
 		(at 179.07 43.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11747,7 +11723,6 @@
 	)
 	(label "SAMP_RATE_B1"
 		(at 115.57 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11758,7 +11733,6 @@
 	)
 	(label "BAUD_RATE_B2"
 		(at 195.58 134.62 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11769,7 +11743,6 @@
 	)
 	(label "ROM_WP"
 		(at 179.07 27.94 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11780,7 +11753,6 @@
 	)
 	(label "RS232F_TXD"
 		(at 271.78 57.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11791,7 +11763,6 @@
 	)
 	(label "GNSS_RXD"
 		(at 179.07 33.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11802,7 +11773,6 @@
 	)
 	(label "MCU_MOSI"
 		(at 179.07 45.72 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11813,7 +11783,6 @@
 	)
 	(label "MCU_BOOT1"
 		(at 29.21 195.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11824,7 +11793,6 @@
 	)
 	(label "MEMS_INT1"
 		(at 231.14 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11835,7 +11803,6 @@
 	)
 	(label "OPTIONS_B3"
 		(at 195.58 120.65 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11846,7 +11813,6 @@
 	)
 	(label "D+3V3"
 		(at 22.86 102.87 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11857,7 +11823,6 @@
 	)
 	(label "OPTIONS_B1"
 		(at 195.58 115.57 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11868,7 +11833,6 @@
 	)
 	(label "ADC_RESET"
 		(at 179.07 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11879,7 +11843,6 @@
 	)
 	(label "D+3V3"
 		(at 153.67 19.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11890,7 +11853,6 @@
 	)
 	(label "GNSS_RESET"
 		(at 179.07 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11901,7 +11863,6 @@
 	)
 	(label "MCU_SDA"
 		(at 257.81 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11912,7 +11873,6 @@
 	)
 	(label "MCU_SCLK"
 		(at 257.81 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11923,7 +11883,6 @@
 	)
 	(label "D+3V3"
 		(at 153.67 125.73 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11934,7 +11893,6 @@
 	)
 	(label "D+3V3"
 		(at 16.51 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11945,7 +11903,6 @@
 	)
 	(label "MCU_SDA"
 		(at 41.91 139.7 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11956,7 +11913,6 @@
 	)
 	(label "MCU_TXD"
 		(at 82.55 130.81 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11967,7 +11923,6 @@
 	)
 	(label "RS232F_RXD"
 		(at 259.08 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11978,7 +11933,6 @@
 	)
 	(label "MCU_TXD"
 		(at 185.42 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11989,7 +11943,6 @@
 	)
 	(label "ADC_DRDY"
 		(at 179.07 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12000,7 +11953,6 @@
 	)
 	(label "MCU_RXD"
 		(at 185.42 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12011,7 +11963,6 @@
 	)
 	(label "OPTIONS_B2"
 		(at 195.58 118.11 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12022,7 +11973,6 @@
 	)
 	(label "MCU_TXD"
 		(at 210.82 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12033,7 +11983,6 @@
 	)
 	(label "MCU_SDA"
 		(at 44.45 111.76 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12044,7 +11993,6 @@
 	)
 	(label "MCU_MOSI"
 		(at 257.81 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12055,7 +12003,6 @@
 	)
 	(label "D+3V3"
 		(at 231.14 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12066,7 +12013,6 @@
 	)
 	(label "BAUD_RATE_B1"
 		(at 195.58 132.08 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12075,20 +12021,8 @@
 		)
 		(uuid "487e3a79-9953-4f0a-8263-601926a07666")
 	)
-	(label "GNSS_TXD"
-		(at 68.58 90.17 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "48be4b4b-7657-4246-bf15-ddeee041ed99")
-	)
 	(label "MCU_SCL"
 		(at 44.45 114.3 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12099,7 +12033,6 @@
 	)
 	(label "MCU_CSEL"
 		(at 179.07 38.1 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12110,7 +12043,6 @@
 	)
 	(label "GNSS_1PPS"
 		(at 179.07 48.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12121,7 +12053,6 @@
 	)
 	(label "MCU_TXD"
 		(at 139.7 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12132,7 +12063,6 @@
 	)
 	(label "D+3V3"
 		(at 76.2 152.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12143,7 +12073,6 @@
 	)
 	(label "OPTIONS_B1"
 		(at 165.1 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12154,7 +12083,6 @@
 	)
 	(label "MCU_SCL"
 		(at 41.91 137.16 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12165,7 +12093,6 @@
 	)
 	(label "OPTIONS_B3"
 		(at 165.1 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12176,7 +12103,6 @@
 	)
 	(label "SAMP_RATE_B2"
 		(at 115.57 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12187,7 +12113,6 @@
 	)
 	(label "MCU_RXD"
 		(at 179.07 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12198,7 +12123,6 @@
 	)
 	(label "MCU_XTAL1"
 		(at 132.08 175.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12209,7 +12133,6 @@
 	)
 	(label "MCU_BOOT0"
 		(at 31.75 195.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12220,7 +12143,6 @@
 	)
 	(label "GNSS_TXD"
 		(at 17.78 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12231,7 +12153,6 @@
 	)
 	(label "GNSS_TXD"
 		(at 179.07 35.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12242,7 +12163,6 @@
 	)
 	(label "MCU_MISO"
 		(at 257.81 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12253,7 +12173,6 @@
 	)
 	(label "RS232M_TXD"
 		(at 271.78 62.23 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12264,7 +12183,6 @@
 	)
 	(label "OPTIONS_B2"
 		(at 110.49 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12275,7 +12193,6 @@
 	)
 	(label "GNSS_RXD"
 		(at 17.78 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12286,7 +12203,6 @@
 	)
 	(label "MCU_TXD"
 		(at 210.82 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12297,7 +12213,6 @@
 	)
 	(label "MCU_CSEL"
 		(at 257.81 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12308,7 +12223,6 @@
 	)
 	(label "MCU_SCL"
 		(at 110.49 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12319,7 +12233,6 @@
 	)
 	(label "MCU_STATE"
 		(at 120.65 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12330,7 +12243,6 @@
 	)
 	(label "RS232M_RXD"
 		(at 245.11 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12341,7 +12253,6 @@
 	)
 	(label "MCU_XTAL0"
 		(at 132.08 162.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12352,7 +12263,6 @@
 	)
 	(label "GNSS_RESET"
 		(at 16.51 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12363,7 +12273,6 @@
 	)
 	(label "D+3V3"
 		(at 27.94 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12374,7 +12283,6 @@
 	)
 	(label "MCU_SWCLK"
 		(at 114.3 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12385,7 +12293,6 @@
 	)
 	(label "SAMP_RATE_B1"
 		(at 165.1 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12396,7 +12303,6 @@
 	)
 	(label "OPTIONS_B1"
 		(at 110.49 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12407,7 +12313,6 @@
 	)
 	(label "MCU_SWDIO"
 		(at 114.3 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12418,7 +12323,6 @@
 	)
 	(label "BAUD_RATE_B1"
 		(at 165.1 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12429,7 +12333,6 @@
 	)
 	(label "D+3V3"
 		(at 40.64 36.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12440,7 +12343,6 @@
 	)
 	(label "MEMS_INT2"
 		(at 231.14 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12451,7 +12353,6 @@
 	)
 	(label "BAUD_RATE_B2"
 		(at 165.1 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12462,7 +12363,6 @@
 	)
 	(label "MCU_SWCLK"
 		(at 179.07 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12473,7 +12373,6 @@
 	)
 	(label "D+3V3"
 		(at 172.72 160.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12484,7 +12383,6 @@
 	)
 	(label "ADC_RESET"
 		(at 231.14 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12495,7 +12393,6 @@
 	)
 	(label "D+3V3"
 		(at 172.72 170.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12506,7 +12403,6 @@
 	)
 	(label "MCU_BOOT1"
 		(at 110.49 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12517,7 +12413,6 @@
 	)
 	(label "ADC_START"
 		(at 231.14 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12528,7 +12423,6 @@
 	)
 	(label "RS232F_RXD"
 		(at 205.74 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12539,7 +12433,6 @@
 	)
 	(label "MCU_TXD"
 		(at 179.07 50.8 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12550,7 +12443,6 @@
 	)
 	(label "MCU_RXD"
 		(at 81.28 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12561,7 +12453,6 @@
 	)
 	(label "MCU_SCL"
 		(at 257.81 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12572,7 +12463,6 @@
 	)
 	(label "OPTIONS_B3"
 		(at 110.49 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12583,7 +12473,6 @@
 	)
 	(label "MCU_SDA"
 		(at 110.49 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12594,7 +12483,6 @@
 	)
 	(label "MCU_RXD"
 		(at 139.7 160.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12605,7 +12493,6 @@
 	)
 	(label "ADC_DRDY"
 		(at 231.14 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12616,7 +12503,6 @@
 	)
 	(label "MCU_BOOT0"
 		(at 120.65 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12627,7 +12513,6 @@
 	)
 	(label "MEMS_INT1"
 		(at 110.49 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12638,7 +12523,6 @@
 	)
 	(label "RS232F_RXD"
 		(at 271.78 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12649,7 +12533,6 @@
 	)
 	(label "ROM_WP"
 		(at 44.45 116.84 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12660,7 +12543,6 @@
 	)
 	(label "MCU_STATE"
 		(at 139.7 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12671,7 +12553,6 @@
 	)
 	(label "SAMP_RATE_B1"
 		(at 110.49 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12682,7 +12563,6 @@
 	)
 	(label "BAUD_RATE_B1"
 		(at 110.49 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12693,7 +12573,6 @@
 	)
 	(label "SAMP_RATE_B2"
 		(at 165.1 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12704,7 +12583,6 @@
 	)
 	(label "GNSS_1PPS"
 		(at 78.74 72.39 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12715,7 +12593,6 @@
 	)
 	(label "MCU_SCLK"
 		(at 179.07 40.64 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12726,7 +12603,6 @@
 	)
 	(label "MCU_XTAL1"
 		(at 120.65 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12737,7 +12613,6 @@
 	)
 	(label "MCU_XTAL0"
 		(at 120.65 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12748,7 +12623,6 @@
 	)
 	(label "MCU_RXD"
 		(at 218.44 82.55 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12759,7 +12633,6 @@
 	)
 	(label "RS232M_TXD"
 		(at 245.11 114.3 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12770,7 +12643,6 @@
 	)
 	(label "MCU_RXD"
 		(at 218.44 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12781,7 +12653,6 @@
 	)
 	(label "OPTIONS_B2"
 		(at 165.1 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12792,7 +12663,6 @@
 	)
 	(label "D+3V3"
 		(at 255.27 20.32 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12803,7 +12673,6 @@
 	)
 	(label "MCU_SWDIO"
 		(at 179.07 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12814,7 +12683,6 @@
 	)
 	(label "RS232F_TXD"
 		(at 205.74 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12825,7 +12693,6 @@
 	)
 	(label "RS232M_RXD"
 		(at 271.78 72.39 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12836,7 +12703,6 @@
 	)
 	(label "BAUD_RATE_B2"
 		(at 110.49 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12847,7 +12713,6 @@
 	)
 	(label "D+3V3"
 		(at 99.06 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12858,7 +12723,6 @@
 	)
 	(label "RS232F_TXD"
 		(at 259.08 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12870,7 +12734,6 @@
 	(hierarchical_label "MCU_SCLK"
 		(shape output)
 		(at 269.24 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12882,7 +12745,6 @@
 	(hierarchical_label "MEMS_INT1"
 		(shape input)
 		(at 242.57 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12894,7 +12756,6 @@
 	(hierarchical_label "MCU_MOSI"
 		(shape output)
 		(at 269.24 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12906,7 +12767,6 @@
 	(hierarchical_label "MCU_CSEL"
 		(shape output)
 		(at 269.24 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12918,7 +12778,6 @@
 	(hierarchical_label "ADC_RESET"
 		(shape output)
 		(at 242.57 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12930,7 +12789,6 @@
 	(hierarchical_label "D+3V3"
 		(shape input)
 		(at 242.57 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12942,7 +12800,6 @@
 	(hierarchical_label "ADC_START"
 		(shape output)
 		(at 242.57 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12954,7 +12811,6 @@
 	(hierarchical_label "MCU_MISO"
 		(shape input)
 		(at 269.24 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12966,7 +12822,6 @@
 	(hierarchical_label "MEMS_INT2"
 		(shape input)
 		(at 242.57 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12978,7 +12833,6 @@
 	(hierarchical_label "MCU_SDA"
 		(shape bidirectional)
 		(at 269.24 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12990,7 +12844,6 @@
 	(hierarchical_label "MCU_SCL"
 		(shape output)
 		(at 269.24 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13002,7 +12855,6 @@
 	(hierarchical_label "ADC_DRDY"
 		(shape input)
 		(at 242.57 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -1,8 +1,6 @@
 #include "User/Inc/gnss/utils.h"
 
-void gnss_init(gnss_ctl_pin_t pin, uint32_t baudrate, bool is_rtos) {
-    mcu_utils_uart2_init(baudrate, is_rtos);
-
+void gnss_init(gnss_ctl_pin_t pin, uint32_t baudrate) {
     mcu_utils_gpio_mode(pin.pps, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(pin.rst, MCU_UTILS_GPIO_MODE_OUTPUT);
 }

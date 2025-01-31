@@ -1,10 +1,8 @@
 #include "User/Inc/lsm6ds3/utils.h"
 
-void lsm6ds3_init(lsm6ds3_ints_pin_t pin, bool is_rtos) {
+void lsm6ds3_init(lsm6ds3_ints_pin_t pin) {
     mcu_utils_gpio_mode(pin.int_1, GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(pin.int_2, GPIO_MODE_INPUT);
-    mcu_utils_i2c_init(is_rtos);
-    lsm6ds3_reset(false);
 }
 
 void lsm6ds3_reset(bool is_rtos) {

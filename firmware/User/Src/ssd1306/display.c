@@ -15,24 +15,15 @@ void ssd1306_display_char(uint8_t x,
     ssd1306_set_position(x, y);
     if (font == SSD1306_FONT_TYPE_ASCII_8X16) {
         for (uint8_t i = 0; i < 8; i++) {
-            ssd1306_write_data(
-                color == SSD1306_FONT_DISPLAY_COLOR_WHITE
-                    ? SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i]
-                    : ~SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i]);
+            ssd1306_write_data(color == SSD1306_FONT_DISPLAY_COLOR_WHITE ? SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i] : ~SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i]);
         }
         ssd1306_set_position(x, y + 1);
         for (uint8_t i = 0; i < 8; i++) {
-            ssd1306_write_data(
-                color == SSD1306_FONT_DISPLAY_COLOR_WHITE
-                    ? SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i + 8]
-                    : ~SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i + 8]);
+            ssd1306_write_data(color == SSD1306_FONT_DISPLAY_COLOR_WHITE ? SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i + 8] : ~SSD1306_FONT_TYPE_ASCII_8X16_LIB[offset][i + 8]);
         }
     } else if (font == SSD1306_FONT_TYPE_ASCII_8X6) {
         for (uint8_t i = 0; i < 6; i++) {
-            ssd1306_write_data(
-                color == SSD1306_FONT_DISPLAY_COLOR_WHITE
-                    ? SSD1306_FONT_TYPE_ASCII_8X6_LIB[offset][i]
-                    : ~SSD1306_FONT_TYPE_ASCII_8X6_LIB[offset][i]);
+            ssd1306_write_data(color == SSD1306_FONT_DISPLAY_COLOR_WHITE ? SSD1306_FONT_TYPE_ASCII_8X6_LIB[offset][i] : ~SSD1306_FONT_TYPE_ASCII_8X6_LIB[offset][i]);
         }
     }
 }
@@ -45,10 +36,10 @@ void ssd1306_display_string(uint8_t x,
     uint8_t i = 0;
     while (str[i] != '\0') {
         ssd1306_display_char(x, y, str[i], font, color);
-        x += font == SSD1306_FONT_TYPE_ASCII_8X16 ? 8 : 6;
+        x += (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 8 : 6;
         if (x > 112) {
             x = 0;
-            y += font == SSD1306_FONT_TYPE_ASCII_8X16 ? 2 : 1;
+            y += (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 2 : 1;
         }
         i++;
     }
@@ -63,9 +54,7 @@ void ssd1306_display_bitmap(uint8_t start_x,
     for (uint8_t y = 0; y < height; y++) {
         ssd1306_set_position(start_x, start_y + y);
         for (uint8_t x = 0; x < width; x++) {
-            ssd1306_write_data(color == SSD1306_FONT_DISPLAY_COLOR_WHITE
-                                   ? bitmap[y * width + x]
-                                   : ~bitmap[y * width + x]);
+            ssd1306_write_data((color == SSD1306_FONT_DISPLAY_COLOR_WHITE) ? bitmap[y * width + x] : ~bitmap[y * width + x]);
         }
     }
 }

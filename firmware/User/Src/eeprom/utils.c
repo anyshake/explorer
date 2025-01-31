@@ -1,9 +1,8 @@
 #include "User/Inc/eeprom/utils.h"
 
-void eeprom_init(mcu_utils_gpio_t pin_wp, bool is_rtos) {
+void eeprom_init(mcu_utils_gpio_t pin_wp) {
     mcu_utils_gpio_mode(pin_wp, MCU_UTILS_GPIO_MODE_OUTPUT);
     mcu_utils_gpio_high(pin_wp);
-    mcu_utils_i2c_init(is_rtos);
 }
 
 void eeprom_protect(mcu_utils_gpio_t pin_wp, bool enable) {

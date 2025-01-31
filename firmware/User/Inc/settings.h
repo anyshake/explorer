@@ -41,6 +41,10 @@ static const mcu_utils_gpio_t EEPROM_WP_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_5,
 };
+static const mcu_utils_gpio_t MCU_BOOT1_PIN = {
+    .port = GPIOB,
+    .pin = GPIO_PIN_2,
+};
 static const mcu_utils_gpio_t MCU_STATE_PIN = {
     .port = GPIOC,
     .pin = GPIO_PIN_13,

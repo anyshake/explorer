@@ -1,10 +1,8 @@
 #include "User/Inc/icm42688/utils.h"
 
-void icm42688_init(icm42688_ints_pin_t pin, bool is_rtos) {
+void icm42688_init(icm42688_ints_pin_t pin) {
     mcu_utils_gpio_mode(pin.int_1, GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(pin.int_2, GPIO_MODE_INPUT);
-    mcu_utils_i2c_init(is_rtos);
-    icm42688_reset(false);
 }
 
 void icm42688_reset(bool is_rtos) {

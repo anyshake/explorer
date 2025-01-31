@@ -80,6 +80,8 @@
         "gyro_accel_config0.h": "c",
         "accel_config1.h": "c",
         "stm32f1xx.h": "c",
-        "stm32f1xx_hal_gpio.h": "c"
+        "stm32f1xx_hal_gpio.h": "c",
+        "peripheral.h": "c",
+        "font.h": "c"
     }
 }

@@ -5529,7 +5529,6 @@
 	)
 	(label "VCC"
 		(at 34.29 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5540,7 +5539,6 @@
 	)
 	(label "VCC"
 		(at 161.29 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5551,7 +5549,6 @@
 	)
 	(label "D+3V3"
 		(at 218.44 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5562,7 +5559,6 @@
 	)
 	(label "A+2V5"
 		(at 248.92 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5573,7 +5569,6 @@
 	)
 	(label "A-2V5"
 		(at 248.92 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5584,7 +5579,6 @@
 	)
 	(label "VCC"
 		(at 184.15 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5595,7 +5589,6 @@
 	)
 	(label "VCC"
 		(at 16.51 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5606,7 +5599,6 @@
 	)
 	(label "VIN"
 		(at 58.42 41.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5617,7 +5609,6 @@
 	)
 	(label "A+2V5"
 		(at 152.4 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5628,7 +5619,6 @@
 	)
 	(label "A-2V5"
 		(at 168.91 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5639,7 +5629,6 @@
 	)
 	(label "D+3V3"
 		(at 273.05 33.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5651,7 +5640,6 @@
 	(hierarchical_label "A-2V5"
 		(shape output)
 		(at 266.7 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5663,7 +5651,6 @@
 	(hierarchical_label "D+3V3"
 		(shape output)
 		(at 236.22 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5675,7 +5662,6 @@
 	(hierarchical_label "A+2V5"
 		(shape output)
 		(at 266.7 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

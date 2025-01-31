@@ -11,12 +11,10 @@ void ads1262_reset(ads1262_ctl_pin_t pin, uint8_t reset_type, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void ads1262_init(ads1262_ctl_pin_t pin, uint8_t control_type, bool is_rtos) {
-    mcu_utils_spi_init(is_rtos);
+void ads1262_init(ads1262_ctl_pin_t pin, uint8_t control_type) {
     mcu_utils_gpio_mode(pin.drdy, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(pin.rst, MCU_UTILS_GPIO_MODE_OUTPUT);
     mcu_utils_gpio_mode(pin.start, MCU_UTILS_GPIO_MODE_OUTPUT);
-    ads1262_reset(pin, ADS1262_RESET_RESET_TYPE_HARD, is_rtos);
 
     if (control_type == ADS1262_INIT_CONTROL_TYPE_HARD) {
         mcu_utils_gpio_low(pin.start);

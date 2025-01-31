@@ -7041,7 +7041,6 @@
 	)
 	(label "EHZ"
 		(at 114.3 27.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7052,7 +7051,6 @@
 	)
 	(label "A-2V5"
 		(at 114.3 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7063,7 +7061,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 281.94 22.86 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7074,7 +7071,6 @@
 	)
 	(label "MEMS_INT1"
 		(at 82.55 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7085,7 +7081,6 @@
 	)
 	(label "D+3V3"
 		(at 53.34 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7096,7 +7091,6 @@
 	)
 	(label "EHZ"
 		(at 185.42 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7107,7 +7101,6 @@
 	)
 	(label "MCU_CSEL"
 		(at 213.36 43.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7118,7 +7111,6 @@
 	)
 	(label "EHE_LP"
 		(at 114.3 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7129,7 +7121,6 @@
 	)
 	(label "MCU_CSEL"
 		(at 115.57 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7140,7 +7131,6 @@
 	)
 	(label "EHZ_BP"
 		(at 109.22 25.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7151,7 +7141,6 @@
 	)
 	(label "EHE"
 		(at 64.77 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7162,7 +7151,6 @@
 	)
 	(label "EHE_BP"
 		(at 114.3 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7173,7 +7161,6 @@
 	)
 	(label "EHN_LP"
 		(at 59.69 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7184,7 +7171,6 @@
 	)
 	(label "D+3V3"
 		(at 20.32 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7195,7 +7181,6 @@
 	)
 	(label "EHN"
 		(at 114.3 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7206,7 +7191,6 @@
 	)
 	(label "PREAMP_EN"
 		(at 158.75 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7217,7 +7201,6 @@
 	)
 	(label "EHN"
 		(at 255.27 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7228,7 +7211,6 @@
 	)
 	(label "EHE"
 		(at 114.3 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7239,7 +7221,6 @@
 	)
 	(label "PREAMP_NP"
 		(at 281.94 27.94 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7250,7 +7231,6 @@
 	)
 	(label "EHZ"
 		(at 17.78 29.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7261,7 +7241,6 @@
 	)
 	(label "A-2V5"
 		(at 114.3 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7272,7 +7251,6 @@
 	)
 	(label "MCU_SCL"
 		(at 83.82 152.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7283,7 +7261,6 @@
 	)
 	(label "A+2V5"
 		(at 134.62 115.57 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7294,7 +7271,6 @@
 	)
 	(label "EHZ"
 		(at 64.77 29.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7305,7 +7281,6 @@
 	)
 	(label "A-2V5"
 		(at 199.39 129.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7316,7 +7291,6 @@
 	)
 	(label "A-2V5"
 		(at 228.6 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7327,7 +7301,6 @@
 	)
 	(label "MEMS_INT1"
 		(at 139.7 152.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7338,7 +7311,6 @@
 	)
 	(label "A-2V5"
 		(at 256.54 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7349,7 +7321,6 @@
 	)
 	(label "PREAMP_ZP"
 		(at 191.77 24.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7360,7 +7331,6 @@
 	)
 	(label "A+2V5"
 		(at 199.39 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7371,7 +7341,6 @@
 	)
 	(label "PREAMP_NP"
 		(at 191.77 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7382,7 +7351,6 @@
 	)
 	(label "EHE"
 		(at 219.71 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7393,7 +7361,6 @@
 	)
 	(label "A+2V5"
 		(at 20.32 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7404,7 +7371,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 203.2 20.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7415,7 +7381,6 @@
 	)
 	(label "MEMS_INT2"
 		(at 82.55 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7426,7 +7391,6 @@
 	)
 	(label "MCU_SCLK"
 		(at 213.36 45.72 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7437,7 +7401,6 @@
 	)
 	(label "EHN"
 		(at 17.78 105.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7448,7 +7411,6 @@
 	)
 	(label "A+2V5"
 		(at 228.6 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7459,7 +7421,6 @@
 	)
 	(label "EHN_LP"
 		(at 114.3 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7470,7 +7431,6 @@
 	)
 	(label "PREAMP_EP"
 		(at 281.94 33.02 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7481,7 +7441,6 @@
 	)
 	(label "A+2V5"
 		(at 134.62 77.47 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7492,7 +7451,6 @@
 	)
 	(label "D+3V3"
 		(at 271.78 43.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7503,7 +7461,6 @@
 	)
 	(label "PREAMP_ZN"
 		(at 158.75 25.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7514,7 +7471,6 @@
 	)
 	(label "ADC_DRDY"
 		(at 213.36 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7525,7 +7481,6 @@
 	)
 	(label "ADC_RESET"
 		(at 48.26 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7536,7 +7491,6 @@
 	)
 	(label "A-2V5"
 		(at 256.54 129.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7547,7 +7501,6 @@
 	)
 	(label "EHN"
 		(at 64.77 105.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7558,7 +7511,6 @@
 	)
 	(label "A+2V5"
 		(at 207.01 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7569,7 +7521,6 @@
 	)
 	(label "A+2V5"
 		(at 256.54 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7580,7 +7531,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 213.36 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7591,7 +7541,6 @@
 	)
 	(label "MCU_MOSI"
 		(at 115.57 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7602,7 +7551,6 @@
 	)
 	(label "PREAMP_EN"
 		(at 281.94 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7613,7 +7561,6 @@
 	)
 	(label "D+3V3"
 		(at 53.34 154.94 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7624,7 +7571,6 @@
 	)
 	(label "D+3V3"
 		(at 53.34 149.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7635,7 +7581,6 @@
 	)
 	(label "EHE_BP"
 		(at 109.22 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7646,7 +7591,6 @@
 	)
 	(label "MCU_MISO"
 		(at 213.36 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7657,7 +7601,6 @@
 	)
 	(label "D+3V3"
 		(at 107.95 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7668,7 +7611,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 281.94 20.32 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7679,7 +7621,6 @@
 	)
 	(label "PREAMP_NN"
 		(at 158.75 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7690,7 +7631,6 @@
 	)
 	(label "ADC_START"
 		(at 48.26 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7701,7 +7641,6 @@
 	)
 	(label "MCU_SDA"
 		(at 149.86 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7712,7 +7651,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 203.2 22.86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7723,7 +7661,6 @@
 	)
 	(label "EHZ_BP"
 		(at 114.3 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7734,7 +7671,6 @@
 	)
 	(label "A+2V5"
 		(at 199.39 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7745,7 +7681,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 236.22 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7756,7 +7691,6 @@
 	)
 	(label "A+2V5"
 		(at 134.62 39.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7767,7 +7701,6 @@
 	)
 	(label "MCU_SCLK"
 		(at 115.57 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7778,7 +7711,6 @@
 	)
 	(label "D+3V3"
 		(at 105.41 138.43 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7789,7 +7721,6 @@
 	)
 	(label "A+2V5"
 		(at 228.6 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7800,7 +7731,6 @@
 	)
 	(label "PREAMP_NN"
 		(at 281.94 25.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7811,7 +7741,6 @@
 	)
 	(label "A-2V5"
 		(at 114.3 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7822,7 +7751,6 @@
 	)
 	(label "A-2V5"
 		(at 20.32 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7833,7 +7761,6 @@
 	)
 	(label "ADC_START"
 		(at 213.36 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7844,7 +7771,6 @@
 	)
 	(label "PREAMP_EP"
 		(at 191.77 62.23 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7855,7 +7781,6 @@
 	)
 	(label "A-2V5"
 		(at 228.6 129.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7866,7 +7791,6 @@
 	)
 	(label "MCU_MOSI"
 		(at 213.36 48.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7877,7 +7801,6 @@
 	)
 	(label "A+2V5"
 		(at 256.54 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7888,7 +7811,6 @@
 	)
 	(label "MCU_SDA"
 		(at 83.82 149.86 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7899,7 +7821,6 @@
 	)
 	(label "EHE"
 		(at 17.78 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7910,7 +7831,6 @@
 	)
 	(label "A-2V5"
 		(at 260.35 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7921,7 +7841,6 @@
 	)
 	(label "MEMS_INT2"
 		(at 139.7 154.94 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7932,7 +7851,6 @@
 	)
 	(label "A-2V5"
 		(at 207.01 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7943,7 +7861,6 @@
 	)
 	(label "A+2V5"
 		(at 273.05 137.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7954,7 +7871,6 @@
 	)
 	(label "D+3V3"
 		(at 53.34 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7965,7 +7881,6 @@
 	)
 	(label "EHN_BP"
 		(at 109.22 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7976,7 +7891,6 @@
 	)
 	(label "A-2V5"
 		(at 199.39 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7987,7 +7901,6 @@
 	)
 	(label "PREAMP_ZN"
 		(at 281.94 35.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7998,7 +7911,6 @@
 	)
 	(label "EHZ_LP"
 		(at 114.3 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8009,7 +7921,6 @@
 	)
 	(label "EHN_BP"
 		(at 114.3 106.68 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8020,7 +7931,6 @@
 	)
 	(label "ADC_REFOUT"
 		(at 203.2 25.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8031,7 +7941,6 @@
 	)
 	(label "EHZ_LP"
 		(at 59.69 25.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8042,7 +7951,6 @@
 	)
 	(label "A-2V5"
 		(at 273.05 162.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8053,7 +7961,6 @@
 	)
 	(label "EHE_LP"
 		(at 59.69 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8064,7 +7971,6 @@
 	)
 	(label "PREAMP_ZP"
 		(at 281.94 38.1 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8075,7 +7981,6 @@
 	)
 	(label "ADC_RESET"
 		(at 281.94 40.64 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8086,7 +7991,6 @@
 	)
 	(label "MCU_SCL"
 		(at 149.86 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8097,7 +8001,6 @@
 	)
 	(label "MCU_MISO"
 		(at 115.57 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8108,7 +8011,6 @@
 	)
 	(label "ADC_DRDY"
 		(at 48.26 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8120,7 +8022,6 @@
 	(hierarchical_label "MEMS_INT2"
 		(shape output)
 		(at 93.98 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8132,7 +8033,6 @@
 	(hierarchical_label "ADC_RESET"
 		(shape input)
 		(at 59.69 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8144,7 +8044,6 @@
 	(hierarchical_label "MCU_SDA"
 		(shape bidirectional)
 		(at 161.29 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8156,7 +8055,6 @@
 	(hierarchical_label "D+3V3"
 		(shape input)
 		(at 29.21 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8168,7 +8066,6 @@
 	(hierarchical_label "A+2V5"
 		(shape input)
 		(at 29.21 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8180,7 +8077,6 @@
 	(hierarchical_label "MCU_SCLK"
 		(shape input)
 		(at 127 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8192,7 +8088,6 @@
 	(hierarchical_label "MCU_SCL"
 		(shape input)
 		(at 161.29 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8204,7 +8099,6 @@
 	(hierarchical_label "MCU_CSEL"
 		(shape input)
 		(at 127 185.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8216,7 +8110,6 @@
 	(hierarchical_label "MCU_MOSI"
 		(shape input)
 		(at 127 193.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8228,7 +8121,6 @@
 	(hierarchical_label "MCU_MISO"
 		(shape output)
 		(at 127 190.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8240,7 +8132,6 @@
 	(hierarchical_label "ADC_DRDY"
 		(shape output)
 		(at 59.69 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8252,7 +8143,6 @@
 	(hierarchical_label "ADC_START"
 		(shape input)
 		(at 59.69 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8264,7 +8154,6 @@
 	(hierarchical_label "MEMS_INT1"
 		(shape output)
 		(at 93.98 187.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8276,7 +8165,6 @@
 	(hierarchical_label "A-2V5"
 		(shape input)
 		(at 29.21 191.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

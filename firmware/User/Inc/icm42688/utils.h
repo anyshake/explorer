@@ -18,7 +18,7 @@ typedef struct {
 } icm42688_ints_pin_t;
 
 void icm42688_wait(icm42688_ints_pin_t pin);
-void icm42688_init(icm42688_ints_pin_t pin, bool is_rtos);
+void icm42688_init(icm42688_ints_pin_t pin);
 void icm42688_reset(bool is_rtos);
 void icm42688_read_reg(uint8_t reg, uint8_t* rx_data);
 void icm42688_write_reg(uint8_t reg, uint8_t tx_data);
