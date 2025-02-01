@@ -23,6 +23,7 @@
 
 #include "User/Inc/array.h"
 #include "User/Inc/calibration.h"
+#include "User/Inc/magic.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/peripheral.h"
 #include "User/Inc/reader.h"
@@ -244,6 +245,39 @@ void read_gnss_data(explorer_states_t* states) {
     }
 }
 
+void spirit_level_mode(void) {
+    int32_array_t* accel_readout_buffer = array_int32_make(3);
+    ssd1306_clear();
+    ssd1306_display_string(0, 0, "> Spirit Level", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    char display_buf[19];
+    while (1) {
+#ifndef USE_LSM6DS3
+        get_accel_readout(ICM42688_INTS_PIN, accel_readout_buffer, 1);
+#else
+        get_accel_readout(LSM6DS3_INTS_PIN, accel_readout_buffer, 1);
+#endif
+        int32_t acc_x = accel_readout_buffer->data[1];
+        int32_t acc_y = accel_readout_buffer->data[2];
+        int32_t acc_z = accel_readout_buffer->data[0];
+        float x_angle = quick_atan2(-acc_x, quick_sqrt(acc_y * acc_y + acc_z * acc_z)) * 180.0 / MAGIC_PI;
+        float y_angle = quick_atan2(acc_y, acc_z) * 180.0 / MAGIC_PI;
+
+#ifndef USE_LSM6DS3
+        x_angle = -x_angle;
+#else
+        y_angle = -y_angle;
+#endif
+
+        snprintf(display_buf, sizeof(display_buf), "X: %7.2f deg", x_angle);
+        ssd1306_display_string(20, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        snprintf(display_buf, sizeof(display_buf), "Y: %7.2f deg", y_angle);
+        ssd1306_display_string(20, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+
+        mcu_utils_delay_ms(100, false);
+    }
+}
+
 void display_device_settings(explorer_states_t* states) {
     char display_buf[24];
 
@@ -267,6 +301,7 @@ void display_device_settings(explorer_states_t* states) {
 void system_setup(void) {
     mcu_utils_gpio_init(false);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
+    mcu_utils_gpio_high(MCU_STATE_PIN);
 
     mcu_utils_i2c_init(false);
     mcu_utils_spi_init(false);
@@ -299,30 +334,11 @@ void system_setup(void) {
 #else
     lsm6ds3_reset(false);
 #endif
-    peri_imu_init(states.no_geophone, states.leveling_mode);
+    peri_imu_init();
     mcu_utils_delay_ms(1000, false);
 
     if (states.leveling_mode) {
-        ssd1306_clear();
-        ssd1306_display_string(0, 0, "> Spirit Level", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        ssd1306_display_string(0, 5, "todo...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        mcu_utils_delay_ms(1000, false);
-        //         int16_t gyro_data[3];
-        //         char display_buf[24];
-        //         while (1) {
-        // #ifndef USE_LSM6DS3
-        //             get_gyro_readout(ICM42688_INTS_PIN, gyro_data);
-        // #else
-        //             get_gyro_readout(LSM6DS3_INTS_PIN, gyro_data);
-        // #endif
-        //             snprintf(display_buf, sizeof(display_buf), "X: %06d", gyro_data[0]);
-        //             ssd1306_display_string(2, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        //             snprintf(display_buf, sizeof(display_buf), "Y: %06d", gyro_data[1]);
-        //             ssd1306_display_string(2, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        //             snprintf(display_buf, sizeof(display_buf), "Z: %06d", gyro_data[2]);
-        //             ssd1306_display_string(2, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        //             mcu_utils_delay_ms(100, false);
-        //         }
+        spirit_level_mode();
     }
 
     peri_gnss_init();

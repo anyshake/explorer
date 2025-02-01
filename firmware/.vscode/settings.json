@@ -82,6 +82,8 @@
         "stm32f1xx.h": "c",
         "stm32f1xx_hal_gpio.h": "c",
         "peripheral.h": "c",
-        "font.h": "c"
+        "font.h": "c",
+        "math.h": "c",
+        "magic.h": "c"
     }
 }

@@ -61,27 +61,6 @@ void get_accel_readout(icm42688_ints_pin_t ints_pin,
         channel_buffer->data[i + 2 * channel_samples] = (int16_t)(accel_data_y.accel_data_y_h << 8 | accel_data_y.accel_data_y_l);
     }
 }
-
-void get_gyro_readout(icm42688_ints_pin_t ints_pin, int16_t gyro_data[3]) {
-    icm42688_reg_gyro_data_x_t gyro_data_x;
-    icm42688_reg_gyro_data_y_t gyro_data_y;
-    icm42688_reg_gyro_data_z_t gyro_data_z;
-
-    // Wait for ICM-42688 data ready
-    icm42688_wait(ints_pin);
-
-    // Read Z-axis gyroscope data
-    icm42688_reg_get_gyro_data_z(&gyro_data_z);
-    gyro_data[0] = (int16_t)(gyro_data_z.gyro_data_z_h << 8 | gyro_data_z.gyro_data_z_l);
-
-    // Read E-axis gyroscope data
-    icm42688_reg_get_gyro_data_x(&gyro_data_x);
-    gyro_data[1] = (int16_t)(gyro_data_x.gyro_data_x_h << 8 | gyro_data_x.gyro_data_x_l);
-
-    // Read N-axis gyroscope data
-    icm42688_reg_get_gyro_data_y(&gyro_data_y);
-    gyro_data[2] = (int16_t)(gyro_data_y.gyro_data_y_h << 8 | gyro_data_y.gyro_data_y_l);
-}
 #else
 void get_accel_readout(lsm6ds3_ints_pin_t ints_pin,
                        int32_array_t* channel_buffer,
@@ -106,9 +85,5 @@ void get_accel_readout(lsm6ds3_ints_pin_t ints_pin,
         lsm6ds3_reg_get_outy_xl(&outy_xl);
         channel_buffer->data[i + 2 * channel_samples] = (int16_t)(outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl);
     }
-}
-
-void get_gyro_readout(lsm6ds3_ints_pin_t ints_pin, int16_t gyro_data[3]) {
-    ;
 }
 #endif

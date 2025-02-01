@@ -14,7 +14,7 @@ void peri_eeprom_init(void) {
     eeprom_init(EEPROM_WP_PIN);
 }
 
-void peri_imu_init(bool accel_en, bool gyro_en) {
+void peri_imu_init(void) {
 #ifndef USE_LSM6DS3
     icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
     icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;
@@ -38,8 +38,8 @@ void peri_imu_init(bool accel_en, bool gyro_en) {
     icm42688_reg_set_accel_config_static2(&icm42688_reg_accel_config_static2);
     icm42688_reg_pwr_mgmt0_t icm42688_reg_pwr_mgmt0 = icm42688_reg_new_pwr_mgmt0();
     icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_DISABLED;
-    icm42688_reg_pwr_mgmt0.gyro_mode = gyro_en ? ICM42688_REG_PWR_MGMT0_GYRO_MODE_LOW_NOISE : ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF;
-    icm42688_reg_pwr_mgmt0.accel_mode = accel_en ? ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE : ICM42688_REG_PWR_MGMT0_ACCEL_MODE_OFF;
+    icm42688_reg_pwr_mgmt0.gyro_mode = ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF;
+    icm42688_reg_pwr_mgmt0.accel_mode = ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE;
     icm42688_reg_set_pwr_mgmt0(&icm42688_reg_pwr_mgmt0);
 #else
     lsm6ds3_reg_int1_ctrl_t lsm6ds3_reg_int1_ctrl = lsm6ds3_reg_new_int1_ctrl();
