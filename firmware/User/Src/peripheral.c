@@ -1,7 +1,7 @@
 #include "User/Inc/peripheral.h"
 
 void peri_gnss_init(void) {
-    gnss_init(GNSS_CTL_PIN, GNSS_UART_BAUDRATE);
+    gnss_init(GNSS_CTL_PIN);
 }
 
 void peri_screen_init(void) {
@@ -14,7 +14,7 @@ void peri_eeprom_init(void) {
     eeprom_init(EEPROM_WP_PIN);
 }
 
-void peri_imu_init(void) {
+void peri_imu_init(uint8_t sample_rate) {
 #ifndef USE_LSM6DS3
     icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
     icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;
@@ -37,7 +37,7 @@ void peri_imu_init(void) {
     icm42688_reg_accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_ENABLED;
     icm42688_reg_set_accel_config_static2(&icm42688_reg_accel_config_static2);
     icm42688_reg_pwr_mgmt0_t icm42688_reg_pwr_mgmt0 = icm42688_reg_new_pwr_mgmt0();
-    icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_DISABLED;
+    icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_ENABLED;
     icm42688_reg_pwr_mgmt0.gyro_mode = ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF;
     icm42688_reg_pwr_mgmt0.accel_mode = ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE;
     icm42688_reg_set_pwr_mgmt0(&icm42688_reg_pwr_mgmt0);
@@ -67,19 +67,13 @@ void peri_adc_init(uint8_t control_type, uint8_t sample_rate) {
     ads1262_reg_set_mode_0(&ads1262_reg_mode_0);
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
     switch (sample_rate) {
-        case 25:
-            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_100;
-            break;
         case 50:
+        case 100:
             ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_400;
             break;
-        case 100:
-        case 125:
+        case 200:
+        case 250:
             ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_1200;
-            break;
-        default:
-            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_38400;
-            break;
     }
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
 }

@@ -12,10 +12,11 @@ void lsm6ds3_reset(bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void lsm6ds3_wait(lsm6ds3_ints_pin_t pin) {
-    while (!mcu_utils_gpio_read(pin.int_1)) {
-        ;
-    }
+void lsm6ds3_wait(void) {
+    lsm6ds3_reg_int1_ctrl_t int1_ctrl;
+    do {
+        lsm6ds3_reg_get_int1_ctrl(&int1_ctrl);
+    } while (!int1_ctrl.drdy_xl);
 }
 
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data) {

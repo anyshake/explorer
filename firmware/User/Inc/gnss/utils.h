@@ -50,7 +50,7 @@ typedef struct {
     bool is_valid;
 } gnss_time_t;
 
-void gnss_init(gnss_ctl_pin_t pin, uint32_t baudrate);
+void gnss_init(gnss_ctl_pin_t pin);
 void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos);
 bool gnss_get_0pps(gnss_ctl_pin_t pin, int64_t* base_time, bool wait);
 bool gnss_get_sentence(uint8_t* str_buf, const char* keyword);

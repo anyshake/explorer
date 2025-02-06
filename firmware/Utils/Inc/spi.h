@@ -5,8 +5,8 @@
 #include <stdint.h>
 
 #include "Core/Inc/spi.h"
-#include "stm32f1xx_hal.h"
 #include "Utils/Inc/delay.h"
+#include "stm32f1xx_hal_spi.h"
 
 void mcu_utils_spi_init(bool is_rtos);
 void mcu_utils_spi_end(void);

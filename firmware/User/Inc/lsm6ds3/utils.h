@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
+#include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/i2c.h"
@@ -16,7 +17,7 @@ typedef struct {
     mcu_utils_gpio_t int_2;
 } lsm6ds3_ints_pin_t;
 
-void lsm6ds3_wait(lsm6ds3_ints_pin_t pin);
+void lsm6ds3_wait(void);
 void lsm6ds3_init(lsm6ds3_ints_pin_t pin);
 void lsm6ds3_reset(bool is_rtos);
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data);

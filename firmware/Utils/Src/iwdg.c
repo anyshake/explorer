@@ -1,8 +1,7 @@
 #include "Utils/Inc/iwdg.h"
 
-void mcu_utils_iwdg_init(bool is_rtos) {
+void mcu_utils_iwdg_init(void) {
     MX_IWDG_Init();
-    mcu_utils_delay_ms(100, false);
 }
 
 void mcu_utils_iwdg_feed(void) {

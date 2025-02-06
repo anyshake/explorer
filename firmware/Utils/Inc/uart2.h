@@ -3,12 +3,10 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <string.h>
 
 #include "Core/Inc/usart.h"
 #include "Utils/Inc/delay.h"
-#include "Utils/Inc/gpio.h"
-#include "stm32f1xx_hal.h"
+#include "stm32f1xx_hal_uart.h"
 
 #define MCU_UTILS_UART2_BUFFER_SIZE 256
 

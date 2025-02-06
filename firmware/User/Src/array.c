@@ -49,8 +49,7 @@ void array_int16_free(int16_array_t* arr) {
 }
 
 uint16_array_t* array_uint16_make(uint16_t size) {
-    uint16_array_t* arr = (uint16_array_t*)malloc(sizeof(uint16_array_t) +
-                                                  sizeof(uint16_t) * size);
+    uint16_array_t* arr = (uint16_array_t*)malloc(sizeof(uint16_array_t) + sizeof(uint16_t) * size);
     if (arr == NULL) {
         return NULL;
     }
@@ -82,8 +81,7 @@ void array_int32_free(int32_array_t* arr) {
 }
 
 uint32_array_t* array_uint32_make(uint16_t size) {
-    uint32_array_t* arr = (uint32_array_t*)malloc(sizeof(uint32_array_t) +
-                                                  sizeof(uint32_t) * size);
+    uint32_array_t* arr = (uint32_array_t*)malloc(sizeof(uint32_array_t) + sizeof(uint32_t) * size);
     if (arr == NULL) {
         return NULL;
     }

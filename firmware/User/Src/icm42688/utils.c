@@ -12,7 +12,7 @@ void icm42688_reset(bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void icm42688_wait(icm42688_ints_pin_t pin) {
+void icm42688_wait(void) {
     icm42688_reg_int_status_t int_status;
     do {
         icm42688_reg_get_int_status(&int_status);

@@ -7,7 +7,12 @@
 #include "User/Inc/lsm6ds3/utils.h"
 #include "Utils/Inc/gpio.h"
 
-#define GNSS_UART_BAUDRATE 9600
+#ifndef FW_REV
+#define FW_REV "custombuild"
+#endif
+
+#define PACKET_INTERVAL 100
+#define GNSS_BAUDRATE 9600
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,
@@ -25,7 +30,7 @@ static const mcu_utils_gpio_t SAMPLERATE_SELECT_P2 = {
     .port = GPIOB,
     .pin = GPIO_PIN_4,
 };
-static const mcu_utils_gpio_t OPTIONS_NO_GEOPHONE_PIN = {
+static const mcu_utils_gpio_t OPTIONS_USE_ACCELEROMETER_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_12,
 };
@@ -33,7 +38,7 @@ static const mcu_utils_gpio_t OPTIONS_USE_GNSS_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_11,
 };
-static const mcu_utils_gpio_t OPTIONS_LEGACY_MODE_PIN = {
+static const mcu_utils_gpio_t OPTIONS_CHANNEL_6D_PIN = {
     .port = GPIOB,
     .pin = GPIO_PIN_10,
 };

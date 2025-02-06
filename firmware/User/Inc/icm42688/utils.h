@@ -17,7 +17,7 @@ typedef struct {
     mcu_utils_gpio_t int_2;
 } icm42688_ints_pin_t;
 
-void icm42688_wait(icm42688_ints_pin_t pin);
+void icm42688_wait(void);
 void icm42688_init(icm42688_ints_pin_t pin);
 void icm42688_reset(bool is_rtos);
 void icm42688_read_reg(uint8_t reg, uint8_t* rx_data);

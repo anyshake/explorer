@@ -6,7 +6,8 @@
 
 #include "Core/Inc/gpio.h"
 #include "Utils/Inc/delay.h"
-#include "stm32f1xx_hal.h"
+#include "stm32f103xb.h"
+#include "stm32f1xx_hal_gpio.h"
 
 #define MCU_UTILS_GPIO_MODE_INPUT 0
 #define MCU_UTILS_GPIO_MODE_OUTPUT 1
