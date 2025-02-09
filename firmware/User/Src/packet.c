@@ -76,24 +76,20 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
         states->uart_packet_buffer->data[offset] = bytes[i];
     }
 
-    uint32_t variable_data_uint32 = 0;
     switch ((timestamp / 1000) % 10) {
         case 0:
             bytes = (uint8_t*)&states->device_id;
             break;
         case 1:
-            bytes = (uint8_t*)&variable_data_uint32;
-            break;
-        case 2:
             bytes = (uint8_t*)&states->gnss_location.latitude;
             break;
-        case 3:
+        case 2:
             bytes = (uint8_t*)&states->gnss_location.longitude;
             break;
-        case 4:
+        case 3:
             bytes = (uint8_t*)&states->gnss_location.elevation;
             break;
-        case 5:
+        case 4:
             bytes = (uint8_t*)&temperature;
             break;
     }

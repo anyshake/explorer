@@ -49,8 +49,8 @@ void get_accel_readout(int16_t arr[], float* temp) {
     if (temp != NULL) {
         icm42688_reg_temp_data_t temp_data;
         icm42688_reg_get_temp_data(&temp_data);
-        int16_t tmp = temp_data.temp_data_h << 8 | temp_data.temp_data_l;
-        *temp = ((float)tmp / 132.48) + 25;
+        int16_t temp_raw = temp_data.temp_data_h << 8 | temp_data.temp_data_l;
+        *temp = (float)temp_raw / 132.48 + 25;
     }
 }
 #else
@@ -73,7 +73,8 @@ void get_accel_readout(int16_t arr[], float* temp) {
     if (temp != NULL) {
         lsm6ds3_reg_out_temp_t out_temp;
         lsm6ds3_reg_get_out_temp(&out_temp);
-        *temp = (float)(out_temp.out_temp_l) / 16.0;
+        int16_t temp_raw = out_temp.out_temp_h << 8 | out_temp.out_temp_l;
+        *temp = (float)temp_raw / 16.0 + 25.0;
     }
 }
 #endif
