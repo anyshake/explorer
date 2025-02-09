@@ -250,11 +250,11 @@ void spirit_level_mode(void) {
         y_angle = -y_angle;
 #endif
 
-        snprintf(display_buf, sizeof(display_buf), "X: %7.2f deg", x_angle);
+        snprintf(display_buf, sizeof(display_buf), "TMP: %5.2f * C", temperature);
         ssd1306_display_string(20, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        snprintf(display_buf, sizeof(display_buf), "Y: %7.2f deg", y_angle);
+        snprintf(display_buf, sizeof(display_buf), "X: %7.2f deg", x_angle);
         ssd1306_display_string(20, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        snprintf(display_buf, sizeof(display_buf), "T: %7.2f * C", temperature);
+        snprintf(display_buf, sizeof(display_buf), "Y: %7.2f deg", y_angle);
         ssd1306_display_string(20, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
         mcu_utils_delay_ms(100, false);
