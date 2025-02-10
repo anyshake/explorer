@@ -37,39 +37,37 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
     }
 
     uint32_t device_config = 0x00;
-    device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 31;
+    device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 30;
     switch (states->sample_rate) {
         case 250:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 27;
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 26;
             break;
         case 200:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_200HZ << 27;
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_200HZ << 26;
             break;
         case 100:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_100HZ << 27;
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_100HZ << 26;
             break;
         case 50:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_50HZ << 27;
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_50HZ << 26;
             break;
     }
     if (states->channel_6d) {
-        device_config |= (PACKET_DEVICE_CONFIG_CHANNEL_1_INT32 << 25) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_2_INT32 << 23) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_3_INT32 << 21) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_4_INT16 << 19) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_5_INT16 << 17) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_6_INT16 << 15);
+        device_config |= (PACKET_DEVICE_CONFIG_CHANNEL_1_INT32 << 24) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_2_INT32 << 22) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_3_INT32 << 20) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_4_INT16 << 18) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_5_INT16 << 16) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_6_INT16 << 14);
     } else {
         uint32_t type = states->use_accelerometer ? PACKET_DEVICE_CONFIG_CHANNEL_1_INT16 : PACKET_DEVICE_CONFIG_CHANNEL_1_INT32;
-        device_config |= (type << 25) | (type << 23) | (type << 21);
+        device_config |= (type << 24) | (type << 22) | (type << 20);
     }
-    device_config |= (PACKET_VARIABLE_CONFIG_BIT_5_ENABLED << 5) |
-                     (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_4_ENABLED : PACKET_VARIABLE_CONFIG_BIT_4_DISABLED << 4) |
+    device_config |= (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
                      (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED << 3) |
                      (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_2_ENABLED : PACKET_VARIABLE_CONFIG_BIT_2_DISABLED << 2) |
-                     (PACKET_VARIABLE_CONFIG_BIT_1_ENABLED << 1) |
+                     (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_1_ENABLED : PACKET_VARIABLE_CONFIG_BIT_1_DISABLED << 1) |
                      (PACKET_VARIABLE_CONFIG_BIT_0_ENABLED);
-    ;
     bytes = (uint8_t*)&device_config;
     for (uint8_t i = 0; i < sizeof(packet_device_config_t); i++) {
         offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + i;
