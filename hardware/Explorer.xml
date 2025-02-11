@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/yuki/Devel/Hardware/explorer/hardware/Explorer.kicad_sch</source>
-    <date>2025-02-04T16:31:13+0800</date>
+    <date>2025-02-12T00:26:17+0800</date>
     <tool>Eeschema 8.0.8</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -2454,7 +2454,7 @@
       <property name="ki_keywords" value="HCMOS not inverter"/>
       <property name="ki_fp_filters" value="DIP*W7.62mm*"/>
       <sheetpath names="/MCU Controller/" tstamps="/e18fc294-84d1-4936-8800-6a2f75cce34e/"/>
-      <tstamps>e6be41ea-fff1-49a1-a936-8abc4876ee9a 4b15048c-cca3-42f1-b463-21d60ade7b1e 06a02ac1-2116-4e29-a57c-03a1dacbe494 b61f67e3-98e6-419a-bf13-44dcc5de04e4 17b60ef6-93fc-4558-a980-0e5a4f17b4d9 451dc38c-d0d3-445a-a7ef-49df4ced11d9 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
+      <tstamps>b61f67e3-98e6-419a-bf13-44dcc5de04e4 451dc38c-d0d3-445a-a7ef-49df4ced11d9 4b15048c-cca3-42f1-b463-21d60ade7b1e 17b60ef6-93fc-4558-a980-0e5a4f17b4d9 06a02ac1-2116-4e29-a57c-03a1dacbe494 e6be41ea-fff1-49a1-a936-8abc4876ee9a 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
     </comp>
     <comp ref="U10">
       <value>MAX3485</value>
@@ -4214,58 +4214,22 @@
       <tstamps>430dceda-8f80-4d80-ae41-46d4b497d100</tstamps>
     </comp>
     <comp ref="U13">
-      <value>LMP2022</value>
-      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/lmp2022.pdf</datasheet>
-      <description>Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</description>
+      <value>OPA2387DGKR</value>
+      <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
+      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
       <fields>
-        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmp2022.pdf</field>
-        <field name="Description">Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</field>
+        <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
+        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
       </fields>
-      <libsource lib="Explorer" part="LMP2022" description="Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"/>
+      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
       <property name="Sheetname" value="Sensors"/>
       <property name="Sheetfile" value="sensors.kicad_sch"/>
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>ccaacf5a-7375-44c7-811f-e18564d6f48f eb8f2766-845b-4762-896b-884c82097987 023b2a64-359b-467c-ae48-62775933b9cb</tstamps>
-    </comp>
-    <comp ref="U14">
-      <value>LMP2022</value>
-      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/lmp2022.pdf</datasheet>
-      <description>Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</description>
-      <fields>
-        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmp2022.pdf</field>
-        <field name="Description">Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</field>
-      </fields>
-      <libsource lib="Explorer" part="LMP2022" description="Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"/>
-      <property name="Sheetname" value="Sensors"/>
-      <property name="Sheetfile" value="sensors.kicad_sch"/>
-      <property name="ki_keywords" value="dual opamp"/>
-      <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
-      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>2692e757-a6f8-4946-a5de-c3d25c42c871 993ffe20-271f-43d3-b90d-81a99a04d7e8 1ba4c27b-c3bc-43b8-bff3-6adc9d547cb2</tstamps>
-    </comp>
-    <comp ref="U15">
-      <value>LMP2022</value>
-      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/lmp2022.pdf</datasheet>
-      <description>Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</description>
-      <fields>
-        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmp2022.pdf</field>
-        <field name="Description">Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</field>
-      </fields>
-      <libsource lib="Explorer" part="LMP2022" description="Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"/>
-      <property name="Sheetname" value="Sensors"/>
-      <property name="Sheetfile" value="sensors.kicad_sch"/>
-      <property name="ki_keywords" value="dual opamp"/>
-      <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
-      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>9b258ce1-1ba0-468f-bd93-60cfcb86a31c 296a24a2-e9f5-474a-9255-d8cc4d6022d8 29541b55-592c-411e-a2b1-df82a85dfdeb</tstamps>
+      <tstamps>ecd185ef-9b05-485c-ac5c-0e65b5084dfd df178056-8de9-4375-9cbe-00c00c75ae8c 3c572221-d3c2-4ddc-8137-280074c2d057</tstamps>
     </comp>
     <comp ref="U16">
       <value>ICM-42688-P</value>
@@ -4356,6 +4320,42 @@
       <property name="ki_fp_filters" value="TSSOP*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>7fa01fba-d214-4b3b-931d-19eab8c56789</tstamps>
+    </comp>
+    <comp ref="U21">
+      <value>OPA2387DGKR</value>
+      <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
+      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <fields>
+        <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
+        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+      </fields>
+      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="dual opamp"/>
+      <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>c4a34b1f-cce0-41af-8b6f-c03cfb667015 d5fd8a62-61e7-48f3-81d6-22929e18e0b3 81ceca1d-a265-4aa9-aee4-9afff9a81ad9</tstamps>
+    </comp>
+    <comp ref="U22">
+      <value>OPA2387DGKR</value>
+      <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
+      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <fields>
+        <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
+        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+      </fields>
+      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="dual opamp"/>
+      <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>938cbb80-208f-448c-85af-4894e439029d 87457c80-d981-4fc5-8ed4-fcbeaf50f3e0 28961f06-7f37-4b8d-8561-691359c7cbe2</tstamps>
     </comp>
   </components>
   <libparts>
@@ -4865,40 +4865,6 @@
         <pin num="14" name="AP_SDA/AP_SDIO/AP_SDI" type="bidirectional"/>
       </pins>
     </libpart>
-    <libpart lib="Explorer" part="LMP2022">
-      <description>Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</description>
-      <docs>https://www.ti.com/lit/ds/symlink/lmp2022.pdf</docs>
-      <footprints>
-        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
-        <fp>DIP*W7.62mm*</fp>
-        <fp>TO*99*</fp>
-        <fp>OnSemi*Micro8*</fp>
-        <fp>TSSOP*3x3mm*P0.65mm*</fp>
-        <fp>TSSOP*4.4x3mm*P0.65mm*</fp>
-        <fp>MSOP*3x3mm*P0.65mm*</fp>
-        <fp>SSOP*3.9x4.9mm*P0.635mm*</fp>
-        <fp>LFCSP*2x2mm*P0.5mm*</fp>
-        <fp>*SIP*</fp>
-        <fp>SOIC*5.3x6.2mm*P1.27mm*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">LMP2022</field>
-        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/lmp2022.pdf</field>
-        <field name="Description">Zero-Drift, Low-Noise, EMI-Hardened Amplifiers</field>
-      </fields>
-      <pins>
-        <pin num="1" name="" type="output"/>
-        <pin num="2" name="-" type="input"/>
-        <pin num="3" name="+" type="input"/>
-        <pin num="4" name="V-" type="power_in"/>
-        <pin num="5" name="+" type="input"/>
-        <pin num="6" name="-" type="input"/>
-        <pin num="7" name="" type="output"/>
-        <pin num="8" name="V+" type="power_in"/>
-      </pins>
-    </libpart>
     <libpart lib="Explorer" part="MMBD1503A">
       <description>Diode – Small Signal</description>
       <docs>https://www.onsemi.com/pdf/datasheet/mmbd1501-d.pdf</docs>
@@ -4937,6 +4903,40 @@
         <pin num="6" name="EN" type="input"/>
         <pin num="7" name="VCC" type="input"/>
         <pin num="8" name="FB" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Explorer" part="OPA2387DGKR">
+      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <docs>https://www.ti.com/lit/ds/symlink/opa387.pdf</docs>
+      <footprints>
+        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>TO*99*</fp>
+        <fp>OnSemi*Micro8*</fp>
+        <fp>TSSOP*3x3mm*P0.65mm*</fp>
+        <fp>TSSOP*4.4x3mm*P0.65mm*</fp>
+        <fp>MSOP*3x3mm*P0.65mm*</fp>
+        <fp>SSOP*3.9x4.9mm*P0.635mm*</fp>
+        <fp>LFCSP*2x2mm*P0.5mm*</fp>
+        <fp>*SIP*</fp>
+        <fp>SOIC*5.3x6.2mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">OPA2387DGKR</field>
+        <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
+        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="Explorer" part="SSD1306">
@@ -5645,12 +5645,12 @@
       <node ref="RV2" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="RV3" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="U13" pin="8" pinfunction="V+" pintype="power_in"/>
-      <node ref="U14" pin="8" pinfunction="V+" pintype="power_in"/>
-      <node ref="U15" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U17" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U18" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U19" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U20" pin="6" pinfunction="AVDD" pintype="power_in"/>
+      <node ref="U21" pin="8" pinfunction="V+" pintype="power_in"/>
+      <node ref="U22" pin="8" pinfunction="V+" pintype="power_in"/>
     </net>
     <net code="39" name="/Power Supply/A-2V5">
       <node ref="C62" pin="1" pintype="passive"/>
@@ -5670,12 +5670,12 @@
       <node ref="RV2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="RV3" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U13" pin="4" pinfunction="V-" pintype="power_in"/>
-      <node ref="U14" pin="4" pinfunction="V-" pintype="power_in"/>
-      <node ref="U15" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U17" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U18" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U19" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U20" pin="7" pinfunction="AVSS" pintype="power_in"/>
+      <node ref="U21" pin="4" pinfunction="V-" pintype="power_in"/>
+      <node ref="U22" pin="4" pinfunction="V-" pintype="power_in"/>
     </net>
     <net code="40" name="/Power Supply/VCC">
       <node ref="C1" pin="1" pintype="passive"/>
@@ -5724,13 +5724,13 @@
       <node ref="R62" pin="2" pintype="passive"/>
       <node ref="R65" pin="2" pintype="passive"/>
       <node ref="R73" pin="1" pintype="passive"/>
-      <node ref="U14" pin="7" pintype="output"/>
+      <node ref="U21" pin="7" pintype="output"/>
     </net>
     <net code="45" name="/Sensors/EHE_LP">
       <node ref="C53" pin="2" pintype="passive"/>
       <node ref="R46" pin="2" pintype="passive"/>
       <node ref="R71" pin="1" pintype="passive"/>
-      <node ref="U14" pin="1" pintype="output"/>
+      <node ref="U21" pin="1" pintype="output"/>
     </net>
     <net code="46" name="/Sensors/EHN">
       <node ref="D24" pin="3" pinfunction="A" pintype="passive"/>
@@ -5743,13 +5743,13 @@
       <node ref="R63" pin="2" pintype="passive"/>
       <node ref="R66" pin="2" pintype="passive"/>
       <node ref="R77" pin="1" pintype="passive"/>
-      <node ref="U15" pin="7" pintype="output"/>
+      <node ref="U22" pin="7" pintype="output"/>
     </net>
     <net code="48" name="/Sensors/EHN_LP">
       <node ref="C54" pin="2" pintype="passive"/>
       <node ref="R47" pin="2" pintype="passive"/>
       <node ref="R75" pin="1" pintype="passive"/>
-      <node ref="U15" pin="1" pintype="output"/>
+      <node ref="U22" pin="1" pintype="output"/>
     </net>
     <net code="49" name="/Sensors/EHZ">
       <node ref="D21" pin="3" pinfunction="A" pintype="passive"/>
@@ -6262,136 +6262,136 @@
       <node ref="R64" pin="1" pintype="passive"/>
       <node ref="U13" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="126" name="Net-(U14A-+)">
-      <node ref="C48" pin="1" pintype="passive"/>
-      <node ref="R40" pin="2" pintype="passive"/>
-      <node ref="U14" pin="3" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="127" name="Net-(U14A--)">
-      <node ref="R43" pin="1" pintype="passive"/>
-      <node ref="R46" pin="1" pintype="passive"/>
-      <node ref="U14" pin="2" pinfunction="-" pintype="input"/>
-    </net>
-    <net code="128" name="Net-(U14B-+)">
-      <node ref="C59" pin="2" pintype="passive"/>
-      <node ref="R56" pin="1" pintype="passive"/>
-      <node ref="U14" pin="5" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="129" name="Net-(U14B--)">
-      <node ref="R59" pin="1" pintype="passive"/>
-      <node ref="R65" pin="1" pintype="passive"/>
-      <node ref="U14" pin="6" pinfunction="-" pintype="input"/>
-    </net>
-    <net code="130" name="Net-(U15A-+)">
-      <node ref="C49" pin="1" pintype="passive"/>
-      <node ref="R41" pin="2" pintype="passive"/>
-      <node ref="U15" pin="3" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="131" name="Net-(U15A--)">
-      <node ref="R44" pin="1" pintype="passive"/>
-      <node ref="R47" pin="1" pintype="passive"/>
-      <node ref="U15" pin="2" pinfunction="-" pintype="input"/>
-    </net>
-    <net code="132" name="Net-(U15B-+)">
-      <node ref="C60" pin="2" pintype="passive"/>
-      <node ref="R57" pin="1" pintype="passive"/>
-      <node ref="U15" pin="5" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="133" name="Net-(U15B--)">
-      <node ref="R60" pin="1" pintype="passive"/>
-      <node ref="R66" pin="1" pintype="passive"/>
-      <node ref="U15" pin="6" pinfunction="-" pintype="input"/>
-    </net>
-    <net code="134" name="Net-(U16-AP_SDO{slash}AP_AD0)">
+    <net code="126" name="Net-(U16-AP_SDO{slash}AP_AD0)">
       <node ref="R48" pin="2" pintype="passive"/>
       <node ref="U16" pin="1" pinfunction="AP_SDO/AP_AD0" pintype="bidirectional"/>
     </net>
-    <net code="135" name="Net-(U16-~{AP_CS})">
+    <net code="127" name="Net-(U16-~{AP_CS})">
       <node ref="R51" pin="2" pintype="passive"/>
       <node ref="U16" pin="12" pinfunction="~{AP_CS}" pintype="input"/>
     </net>
-    <net code="136" name="Net-(U17A-+)">
+    <net code="128" name="Net-(U17A-+)">
       <node ref="R70" pin="2" pintype="passive"/>
       <node ref="R79" pin="1" pintype="passive"/>
       <node ref="U17" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="137" name="Net-(U17A--)">
+    <net code="129" name="Net-(U17A--)">
       <node ref="R67" pin="2" pintype="passive"/>
       <node ref="R68" pin="2" pintype="passive"/>
       <node ref="R69" pin="2" pintype="passive"/>
       <node ref="R82" pin="1" pintype="passive"/>
       <node ref="U17" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="138" name="Net-(U17B--)">
+    <net code="130" name="Net-(U17B--)">
       <node ref="R85" pin="2" pintype="passive"/>
       <node ref="R88" pin="1" pintype="passive"/>
       <node ref="U17" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="139" name="Net-(U18A-+)">
+    <net code="131" name="Net-(U18A-+)">
       <node ref="R74" pin="2" pintype="passive"/>
       <node ref="R80" pin="1" pintype="passive"/>
       <node ref="U18" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="140" name="Net-(U18A--)">
+    <net code="132" name="Net-(U18A--)">
       <node ref="R71" pin="2" pintype="passive"/>
       <node ref="R72" pin="2" pintype="passive"/>
       <node ref="R73" pin="2" pintype="passive"/>
       <node ref="R83" pin="1" pintype="passive"/>
       <node ref="U18" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="141" name="Net-(U18B--)">
+    <net code="133" name="Net-(U18B--)">
       <node ref="R86" pin="2" pintype="passive"/>
       <node ref="R89" pin="1" pintype="passive"/>
       <node ref="U18" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="142" name="Net-(U19A-+)">
+    <net code="134" name="Net-(U19A-+)">
       <node ref="R78" pin="2" pintype="passive"/>
       <node ref="R81" pin="1" pintype="passive"/>
       <node ref="U19" pin="3" pinfunction="+" pintype="input"/>
     </net>
-    <net code="143" name="Net-(U19A--)">
+    <net code="135" name="Net-(U19A--)">
       <node ref="R75" pin="2" pintype="passive"/>
       <node ref="R76" pin="2" pintype="passive"/>
       <node ref="R77" pin="2" pintype="passive"/>
       <node ref="R84" pin="1" pintype="passive"/>
       <node ref="U19" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="144" name="Net-(U19B--)">
+    <net code="136" name="Net-(U19B--)">
       <node ref="R87" pin="2" pintype="passive"/>
       <node ref="R90" pin="1" pintype="passive"/>
       <node ref="U19" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="145" name="Net-(U20-AIN6)">
+    <net code="137" name="Net-(U20-AIN6)">
       <node ref="R96" pin="1" pintype="passive"/>
       <node ref="U20" pin="27" pinfunction="AIN6" pintype="bidirectional"/>
     </net>
-    <net code="146" name="Net-(U20-AIN7)">
+    <net code="138" name="Net-(U20-AIN7)">
       <node ref="R95" pin="1" pintype="passive"/>
       <node ref="U20" pin="28" pinfunction="AIN7" pintype="bidirectional"/>
     </net>
-    <net code="147" name="Net-(U20-AIN8)">
+    <net code="139" name="Net-(U20-AIN8)">
       <node ref="R92" pin="2" pintype="passive"/>
       <node ref="U20" pin="1" pinfunction="AIN8" pintype="bidirectional"/>
     </net>
-    <net code="148" name="Net-(U20-AIN9)">
+    <net code="140" name="Net-(U20-AIN9)">
       <node ref="R93" pin="2" pintype="passive"/>
       <node ref="U20" pin="2" pinfunction="AIN9" pintype="bidirectional"/>
     </net>
-    <net code="149" name="Net-(U20-AINCOM)">
+    <net code="141" name="Net-(U20-AINCOM)">
       <node ref="R94" pin="2" pintype="passive"/>
       <node ref="U20" pin="3" pinfunction="AINCOM" pintype="bidirectional"/>
     </net>
-    <net code="150" name="Net-(U20-BYPASS)">
+    <net code="142" name="Net-(U20-BYPASS)">
       <node ref="C72" pin="1" pintype="passive"/>
       <node ref="U20" pin="17" pinfunction="BYPASS" pintype="output"/>
     </net>
-    <net code="151" name="Net-(U20-CAPN)">
+    <net code="143" name="Net-(U20-CAPN)">
       <node ref="C66" pin="2" pintype="passive"/>
       <node ref="U20" pin="5" pinfunction="CAPN" pintype="output"/>
     </net>
-    <net code="152" name="Net-(U20-CAPP)">
+    <net code="144" name="Net-(U20-CAPP)">
       <node ref="C66" pin="1" pintype="passive"/>
       <node ref="U20" pin="4" pinfunction="CAPP" pintype="output"/>
+    </net>
+    <net code="145" name="Net-(U21A-+)">
+      <node ref="C48" pin="1" pintype="passive"/>
+      <node ref="R40" pin="2" pintype="passive"/>
+      <node ref="U21" pin="3" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="146" name="Net-(U21A--)">
+      <node ref="R43" pin="1" pintype="passive"/>
+      <node ref="R46" pin="1" pintype="passive"/>
+      <node ref="U21" pin="2" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="147" name="Net-(U21B-+)">
+      <node ref="C59" pin="2" pintype="passive"/>
+      <node ref="R56" pin="1" pintype="passive"/>
+      <node ref="U21" pin="5" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="148" name="Net-(U21B--)">
+      <node ref="R59" pin="1" pintype="passive"/>
+      <node ref="R65" pin="1" pintype="passive"/>
+      <node ref="U21" pin="6" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="149" name="Net-(U22A-+)">
+      <node ref="C49" pin="1" pintype="passive"/>
+      <node ref="R41" pin="2" pintype="passive"/>
+      <node ref="U22" pin="3" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="150" name="Net-(U22A--)">
+      <node ref="R44" pin="1" pintype="passive"/>
+      <node ref="R47" pin="1" pintype="passive"/>
+      <node ref="U22" pin="2" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="151" name="Net-(U22B-+)">
+      <node ref="C60" pin="2" pintype="passive"/>
+      <node ref="R57" pin="1" pintype="passive"/>
+      <node ref="U22" pin="5" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="152" name="Net-(U22B--)">
+      <node ref="R60" pin="1" pintype="passive"/>
+      <node ref="R66" pin="1" pintype="passive"/>
+      <node ref="U22" pin="6" pinfunction="-" pintype="input"/>
     </net>
     <net code="153" name="unconnected-(J7-Pad1)">
       <node ref="J7" pin="1" pinfunction="1" pintype="passive+no_connect"/>

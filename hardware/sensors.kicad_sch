@@ -1950,259 +1950,6 @@
 				)
 			)
 		)
-		(symbol "Explorer:LMP2022"
-			(pin_names
-				(offset 0.127)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "LMP2022"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "dual opamp"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "LMP2022_1_1"
-				(polyline
-					(pts
-						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -2.54 0)
-					(length 2.54)
-					(name "-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 2.54 0)
-					(length 2.54)
-					(name "+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "LMP2022_2_1"
-				(polyline
-					(pts
-						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin input line
-					(at -7.62 2.54 0)
-					(length 2.54)
-					(name "+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -2.54 0)
-					(length 2.54)
-					(name "-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "LMP2022_3_1"
-				(pin power_in line
-					(at -2.54 -7.62 90)
-					(length 3.81)
-					(name "V-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -2.54 7.62 270)
-					(length 3.81)
-					(name "V+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Explorer:MMBD1503A"
 			(pin_names
 				(offset 1.016) hide)
@@ -2388,6 +2135,259 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Explorer:OPA2387DGKR"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "OPA2387DGKR"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "dual opamp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "OPA2387DGKR_1_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "OPA2387DGKR_2_1"
+				(polyline
+					(pts
+						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "OPA2387DGKR_3_1"
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8240,91 +8240,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 49.53 31.75 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "023b2a64-359b-467c-ae48-62775933b9cb")
-		(property "Reference" "U13"
-			(at 42.672 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 42.672 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 49.53 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 49.53 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 49.53 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6daa")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f6517")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bba")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce632e")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f48")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b0")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045a8")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e36")
-		)
-		(instances
-			(project ""
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small")
 		(at 99.06 63.5 90)
 		(unit 1)
@@ -9309,91 +9224,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 97.79 69.85 0)
-		(unit 2)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1ba4c27b-c3bc-43b8-bff3-6adc9d547cb2")
-		(property "Reference" "U14"
-			(at 90.932 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 90.932 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 97.79 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 97.79 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 97.79 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6dab")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f6518")
-		)
-		(pin "5"
-			(uuid "ea6a3926-7ba5-4981-afde-0abc36d0e2fa")
-		)
-		(pin "6"
-			(uuid "e475eb68-9be2-48ca-a837-a449f42e2b20")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f49")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b1")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045a9")
-		)
-		(pin "7"
-			(uuid "9c76dfa0-347a-49eb-a41a-0542860ee382")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small")
 		(at 138.43 78.74 0)
 		(unit 1)
@@ -9604,91 +9434,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 49.53 69.85 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2692e757-a6f8-4946-a5de-c3d25c42c871")
-		(property "Reference" "U14"
-			(at 42.672 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 42.672 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 49.53 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 49.53 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 49.53 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6dac")
-		)
-		(pin "2"
-			(uuid "daffe4b1-7b5d-4565-b98f-aad2f87ea3d9")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bbb")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce632f")
-		)
-		(pin "3"
-			(uuid "0ea1a435-1b6b-4422-a61b-1732448341b7")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b2")
-		)
-		(pin "1"
-			(uuid "80a8564c-b716-4832-811a-bfeaf4d16a7e")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e37")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Explorer:MMBD1503A")
 		(at 215.9 143.51 270)
 		(unit 1)
@@ -9835,41 +9580,32 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 49.53 107.95 0)
-		(unit 1)
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 97.79 107.95 0)
+		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "29541b55-592c-411e-a2b1-df82a85dfdeb")
-		(property "Reference" "U15"
-			(at 42.672 99.06 0)
+		(uuid "28961f06-7f37-4b8d-8561-691359c7cbe2")
+		(property "Reference" "U22"
+			(at 91.694 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "LMP2022"
-			(at 42.672 101.6 0)
+		(property "Value" "OPA2387DGKR"
+			(at 91.694 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 49.53 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 49.53 107.95 0)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 97.79 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9877,8 +9613,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 49.53 107.95 0)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 97.79 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9886,123 +9622,44 @@
 				(hide yes)
 			)
 		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6dad")
-		)
-		(pin "2"
-			(uuid "ac582578-ef89-4d53-a79d-d13f3d5cb376")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bbc")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce6330")
-		)
-		(pin "3"
-			(uuid "4f3087d3-b4bf-4a02-b28a-e3aa6f3fad1b")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b3")
-		)
-		(pin "1"
-			(uuid "417c9dda-8e7f-4284-a2b3-b164da1ff647")
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 97.79 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e38")
+			(uuid "484b1c13-54ce-4e36-a63b-432667d2f544")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b714")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21308")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6df")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa2f")
+		)
+		(pin "6"
+			(uuid "3d75b385-682c-4446-a97a-3e07cb99a98c")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664c")
+		)
+		(pin "5"
+			(uuid "d5490ff0-643f-4358-ab24-96991d551e49")
 		)
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 267.97 97.79 0)
-		(unit 3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "296a24a2-e9f5-474a-9255-d8cc4d6022d8")
-		(property "Reference" "U15"
-			(at 266.7 96.5199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 266.7 99.0599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 267.97 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 267.97 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 267.97 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "089d83f5-b088-4ff5-a844-d5ec863ed845")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f6519")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bbd")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce6331")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f4a")
-		)
-		(pin "8"
-			(uuid "907c7c6c-9976-4ba6-9f6d-86666aede7d3")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045aa")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e39")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
-					(unit 3)
+					(reference "U22")
+					(unit 2)
 				)
 			)
 		)
@@ -10749,6 +10406,91 @@
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
 					(reference "R83")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 49.53 31.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3c572221-d3c2-4ddc-8137-280074c2d057")
+		(property "Reference" "U13"
+			(at 42.926 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 42.926 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 49.53 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 49.53 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 49.53 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f3e")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b713")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21307")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6de")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa2e")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fa")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664b")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279a9")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U13")
 					(unit 1)
 				)
 			)
@@ -13390,6 +13132,91 @@
 		)
 	)
 	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 97.79 69.85 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "81ceca1d-a265-4aa9-aee4-9afff9a81ad9")
+		(property "Reference" "U21"
+			(at 91.694 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 91.694 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 97.79 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 97.79 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 97.79 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "f8dbe0f6-8b45-4f89-b664-33316e132809")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b714")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21308")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6df")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa2f")
+		)
+		(pin "6"
+			(uuid "63856fb2-35eb-4a0b-bf0f-bb50deb1093d")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664c")
+		)
+		(pin "5"
+			(uuid "ec3d34c0-4a8b-4958-973f-eec5b663193e")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U21")
+					(unit 2)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 129.54 63.5 90)
 		(unit 1)
@@ -13746,6 +13573,94 @@
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
 					(reference "U17")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 267.97 97.79 0)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "87457c80-d981-4fc5-8ed4-fcbeaf50f3e0")
+		(property "Reference" "U22"
+			(at 266.7 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 266.7 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 267.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 267.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 267.97 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f40")
+		)
+		(pin "4"
+			(uuid "f8df991f-9c7c-45af-9d3f-20b68f5d2622")
+		)
+		(pin "8"
+			(uuid "ff64f3c8-de57-4d49-849e-800590d51250")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6e0")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa30")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fc")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664d")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279ab")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U22")
+					(unit 3)
 				)
 			)
 		)
@@ -14180,6 +14095,91 @@
 		)
 	)
 	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 49.53 107.95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "938cbb80-208f-448c-85af-4894e439029d")
+		(property "Reference" "U22"
+			(at 42.926 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 42.926 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 49.53 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 49.53 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 49.53 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f3e")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b713")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21307")
+		)
+		(pin "1"
+			(uuid "c25bb81c-0069-474c-a0a2-576a73717646")
+		)
+		(pin "2"
+			(uuid "69d00586-a190-48ea-b35b-2489a2fd5a48")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fa")
+		)
+		(pin "3"
+			(uuid "62de8b60-16dd-4a46-8ff8-9d1202949573")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279a9")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 129.54 25.4 90)
 		(unit 1)
@@ -14379,94 +14379,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 240.03 97.79 0)
-		(unit 3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "993ffe20-271f-43d3-b90d-81a99a04d7e8")
-		(property "Reference" "U14"
-			(at 238.76 96.5199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 238.76 99.0599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 240.03 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 240.03 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 240.03 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "b369b4db-9264-4e7f-89eb-68a7acfd820b")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f651a")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bbe")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce6332")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f4b")
-		)
-		(pin "8"
-			(uuid "58ffc487-1c58-4ae5-9ef5-2e0f045b0079")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045ab")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e3a")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
-					(unit 3)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
 		(at 148.59 71.12 0)
 		(mirror x)
@@ -14548,91 +14460,6 @@
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
 					(reference "U18")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 97.79 107.95 0)
-		(unit 2)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9b258ce1-1ba0-468f-bd93-60cfcb86a31c")
-		(property "Reference" "U15"
-			(at 90.932 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 90.932 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 97.79 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 97.79 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 97.79 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6dae")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f651b")
-		)
-		(pin "5"
-			(uuid "db9637f8-73a0-497a-b4b4-350348bff79c")
-		)
-		(pin "6"
-			(uuid "b1720858-94b0-4f8f-bedf-c80d5f02acb9")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f4c")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b4")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045ac")
-		)
-		(pin "7"
-			(uuid "1442b74f-3c26-47c5-ade1-883247e786c6")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
-					(unit 2)
 				)
 			)
 		)
@@ -16537,6 +16364,91 @@
 		)
 	)
 	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 49.53 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c4a34b1f-cce0-41af-8b6f-c03cfb667015")
+		(property "Reference" "U21"
+			(at 42.926 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 42.926 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 49.53 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 49.53 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 49.53 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f3e")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b713")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21307")
+		)
+		(pin "1"
+			(uuid "94486402-2fdc-40a9-94eb-5e14d6357a55")
+		)
+		(pin "2"
+			(uuid "3bfa0f1e-8cbd-4dbd-8e59-d97c5ea520f4")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fa")
+		)
+		(pin "3"
+			(uuid "8247871b-8389-4afb-a57d-f0411ae5162e")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279a9")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Explorer:MMBD1503A")
 		(at 181.61 143.51 270)
 		(unit 1)
@@ -17335,91 +17247,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 97.79 31.75 0)
-		(unit 2)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ccaacf5a-7375-44c7-811f-e18564d6f48f")
-		(property "Reference" "U13"
-			(at 90.932 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 90.932 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 97.79 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 97.79 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 97.79 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6daf")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f651c")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bbf")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce6333")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f4d")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b5")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045ad")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e3b")
-		)
-		(instances
-			(project ""
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
-					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 36.83 72.39 0)
 		(unit 1)
@@ -18030,6 +17857,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 240.03 97.79 0)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d5fd8a62-61e7-48f3-81d6-22929e18e0b3")
+		(property "Reference" "U21"
+			(at 238.76 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 238.76 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 240.03 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 240.03 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 240.03 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f40")
+		)
+		(pin "4"
+			(uuid "90723ba0-7395-4896-b720-bce7b0187991")
+		)
+		(pin "8"
+			(uuid "5b2f13ac-75fa-4691-a3db-91012f1bbb0a")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6e0")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa30")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fc")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664d")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279ab")
+		)
+		(instances
+			(project "Explorer"
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U21")
+					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 104.14 115.57 90)
 		(unit 1)
@@ -18295,6 +18210,94 @@
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
 					(reference "D23")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 210.82 97.79 0)
+		(unit 3)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "df178056-8de9-4375-9cbe-00c00c75ae8c")
+		(property "Reference" "U13"
+			(at 209.55 96.5199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 209.55 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 210.82 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 210.82 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 210.82 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f3e")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b713")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21307")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6de")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa2e")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fa")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664b")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279a9")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U13")
+					(unit 3)
 				)
 			)
 		)
@@ -18568,94 +18571,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Explorer:LMP2022")
-		(at 210.82 97.79 0)
-		(unit 3)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "eb8f2766-845b-4762-896b-884c82097987")
-		(property "Reference" "U13"
-			(at 209.55 96.5199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LMP2022"
-			(at 209.55 99.0599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 210.82 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmp2022.pdf"
-			(at 210.82 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Zero-Drift, Low-Noise, EMI-Hardened Amplifiers"
-			(at 210.82 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "559da819-76d7-4209-a456-9acb552f6db0")
-		)
-		(pin "2"
-			(uuid "449fe47c-5c83-4d59-b6f6-c935967f651d")
-		)
-		(pin "5"
-			(uuid "26869122-7a21-4712-8a7f-49a7cab53bc0")
-		)
-		(pin "6"
-			(uuid "875ccbf4-a452-4f62-bdc1-085f6dce6334")
-		)
-		(pin "3"
-			(uuid "bcb282fc-264f-4953-be8f-884cf9386f4e")
-		)
-		(pin "8"
-			(uuid "f4f870e5-0f25-4405-8e12-0756cb3f16b6")
-		)
-		(pin "1"
-			(uuid "5157fe8d-238a-4167-a498-f79c26c045ae")
-		)
-		(pin "7"
-			(uuid "68aaa39a-3747-47a0-bd1e-69da39d31e3c")
-		)
-		(instances
-			(project ""
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
-					(unit 3)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GNDA")
 		(at 269.24 153.67 0)
 		(unit 1)
@@ -18717,6 +18632,91 @@
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
 					(reference "#PWR0101")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Explorer:OPA2387DGKR")
+		(at 97.79 31.75 0)
+		(unit 2)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ecd185ef-9b05-485c-ac5c-0e65b5084dfd")
+		(property "Reference" "U13"
+			(at 91.694 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OPA2387DGKR"
+			(at 91.694 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
+			(at 97.79 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
+			(at 97.79 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
+			(at 97.79 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "3919c2af-2412-4859-94c2-4dc64a047f3e")
+		)
+		(pin "4"
+			(uuid "387740c8-3b9b-4c98-a367-9b2b3f98b713")
+		)
+		(pin "8"
+			(uuid "0b6109e0-1c86-4248-aaa5-98c963c21307")
+		)
+		(pin "1"
+			(uuid "5796dbf4-6d2f-43b0-899e-05c21662f6de")
+		)
+		(pin "2"
+			(uuid "04ccd2f9-d2ec-40c2-9fbd-89157cc3fa2e")
+		)
+		(pin "6"
+			(uuid "e0ac38c2-154d-43d9-a9de-6b29d58146fa")
+		)
+		(pin "3"
+			(uuid "8a860490-7c86-4356-ab90-71a8b12d664b")
+		)
+		(pin "5"
+			(uuid "b4e4b4d9-fcc0-4f4e-a7dc-e00c203279a9")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
+					(reference "U13")
+					(unit 2)
 				)
 			)
 		)

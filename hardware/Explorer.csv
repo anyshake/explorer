@@ -80,7 +80,7 @@
 "79","U10","1","MAX3485","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",""
 "80","U11","1","STM32F103C8Tx","Package_QFP:LQFP-48_7x7mm_P0.5mm",""
 "81","U12","1","ADM3202ARN","Package_SO:SOIC-16_3.9x9.9mm_P1.27mm",""
-"82","U13, U14, U15","3","LMP2022","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",""
+"82","U13, U21, U22","3","OPA2387DGKR","Package_SO:MSOP-8_3x3mm_P0.65mm",""
 "83","U16","1","ICM-42688-P","Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",""
 "84","U17, U18, U19","3","ADA4528-2ARMZ","Package_SO:MSOP-8_3x3mm_P0.65mm",""
 "85","U20","1","ADS1262IPWR","Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm",""
