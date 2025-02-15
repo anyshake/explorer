@@ -31,6 +31,7 @@ typedef struct {
     int16_array_t* accel_acquisition_channel_buffer;
 
     uint8_t channel_chunk_length;
+    uint16_t packet_sending_interval;
     uint8_array_t* uart_packet_buffer;
 } explorer_states_t;
 

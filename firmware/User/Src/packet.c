@@ -37,21 +37,41 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
     }
 
     uint32_t device_config = 0x00;
-    device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 30;
-    switch (states->sample_rate) {
-        case 250:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 26;
+    switch (states->packet_sending_interval) {
+        case 100:
+            device_config |= PACKET_DEVICE_CONFIG_PACKET_INTERVAL_100MS << 30;
             break;
         case 200:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_200HZ << 26;
+            device_config |= PACKET_DEVICE_CONFIG_PACKET_INTERVAL_200MS << 30;
             break;
-        case 100:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_100HZ << 26;
+        case 500:
+            device_config |= PACKET_DEVICE_CONFIG_PACKET_INTERVAL_500MS << 30;
             break;
-        case 50:
-            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_50HZ << 26;
+        case 1000:
+            device_config |= PACKET_DEVICE_CONFIG_PACKET_INTERVAL_1000MS << 30;
             break;
     }
+    switch (states->sample_rate) {
+        case 10:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_10HZ << 27;
+            break;
+        case 20:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_20HZ << 27;
+            break;
+        case 50:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_50HZ << 27;
+            break;
+        case 100:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_100HZ << 27;
+            break;
+        case 200:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_200HZ << 27;
+            break;
+        case 250:
+            device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 27;
+            break;
+    }
+    device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 26;
     if (states->channel_6d) {
         device_config |= (PACKET_DEVICE_CONFIG_CHANNEL_1_INT32 << 24) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_2_INT32 << 22) |

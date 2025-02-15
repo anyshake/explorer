@@ -329,7 +329,8 @@ void system_setup(void) {
         mcu_utils_gpio_low(GNSS_CTL_PIN.rst);
     }
 
-    states.channel_chunk_length = PACKET_INTERVAL / (1000 / states.sample_rate);
+    states.packet_sending_interval = PACKET_INTERVAL;
+    states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);
     states.uart_packet_buffer = array_uint8_make(get_data_packet_size(states.use_accelerometer, states.channel_6d, states.channel_chunk_length));
 
     if (!states.use_accelerometer || states.channel_6d) {
