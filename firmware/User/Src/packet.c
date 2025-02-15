@@ -84,9 +84,9 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
         device_config |= (type << 24) | (type << 22) | (type << 20);
     }
     device_config |= (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
-                     (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED << 3) |
-                     (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_2_ENABLED : PACKET_VARIABLE_CONFIG_BIT_2_DISABLED << 2) |
-                     (states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_1_ENABLED : PACKET_VARIABLE_CONFIG_BIT_1_DISABLED << 1) |
+                     ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED) << 3) |
+                     ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_2_ENABLED : PACKET_VARIABLE_CONFIG_BIT_2_DISABLED) << 2) |
+                     ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_1_ENABLED : PACKET_VARIABLE_CONFIG_BIT_1_DISABLED) << 1) |
                      (PACKET_VARIABLE_CONFIG_BIT_0_ENABLED);
     bytes = (uint8_t*)&device_config;
     for (uint8_t i = 0; i < sizeof(packet_device_config_t); i++) {
@@ -136,7 +136,11 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
         }
 
         if (states->use_accelerometer || states->channel_6d) {
-            uint16_t accel_offset = offset + 3 * states->channel_chunk_length * sizeof(int32_t) + i * sizeof(int16_t);
+            uint16_t accel_offset = offset + i * sizeof(int16_t);
+            if (states->channel_6d) {
+                accel_offset += 3 * states->channel_chunk_length * sizeof(int32_t);
+            }
+
             bytes = (uint8_t*)&states->accel_acquisition_channel_buffer->data[i];
             for (uint8_t j = 0; j < sizeof(int16_t); j++) {
                 states->uart_packet_buffer->data[accel_offset + j] = bytes[j];
