@@ -23,10 +23,7 @@
 #include "User/Inc/lsm6ds3/utils.h"
 
 void get_adc_readout(ads1262_ctl_pin_t ctl_pin, int32_t arr[]);
-#ifndef USE_LSM6DS3
-void get_accel_readout(int16_t arr[], float* temp);
-#else
-void get_accel_readout(int16_t arr[], float* temp);
-#endif
+void get_accel_readout(int16_t arr[]);
+void get_env_temperature(float* temp);
 
 #endif

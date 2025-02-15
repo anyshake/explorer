@@ -124,12 +124,9 @@ void task_acquire_data(void* argument) {
         }
 
         if (states->use_accelerometer || states->channel_6d) {
-#ifndef USE_LSM6DS3
-            get_accel_readout(acq_msg.accel_data, &acq_msg.temperature);
-#else
-            get_accel_readout(acq_msg.accel_data, &acq_msg.temperature);
-#endif
+            get_accel_readout(acq_msg.accel_data);
         }
+        get_env_temperature(&acq_msg.temperature);
 
         osMessageQueuePut(states->acquisition_data_queue, &acq_msg, 0, 0);
 
@@ -232,11 +229,8 @@ void spirit_level_mode(void) {
     char display_buf[19];
     float temperature = 0;
     while (1) {
-#ifndef USE_LSM6DS3
-        get_accel_readout(result_arr, &temperature);
-#else
-        get_accel_readout(result_arr, &temperature);
-#endif
+        get_accel_readout(result_arr);
+        get_env_temperature(&temperature);
 
         int16_t acc_x = result_arr[1];
         int16_t acc_y = result_arr[2];
