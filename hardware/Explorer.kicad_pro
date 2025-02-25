@@ -58,7 +58,10 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_edge_clearance|45000000|106400000|6e0d2fb6-2af5-4419-a307-b84a823add91|487c193a-a591-4a2e-a652-9bcc5e1052a2",
+        "silk_edge_clearance|45000000|115600000|6e0d2fb6-2af5-4419-a307-b84a823add91|c4eca9a6-766d-47d6-856a-55a3e570541e"
+      ],
       "meta": {
         "version": 2
       },

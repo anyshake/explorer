@@ -9588,7 +9588,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "28961f06-7f37-4b8d-8561-691359c7cbe2")
-		(property "Reference" "U22"
+		(property "Reference" "U15"
 			(at 91.694 99.06 0)
 			(effects
 				(font
@@ -9658,7 +9658,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U22")
+					(reference "U15")
 					(unit 2)
 				)
 			)
@@ -13140,7 +13140,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "81ceca1d-a265-4aa9-aee4-9afff9a81ad9")
-		(property "Reference" "U21"
+		(property "Reference" "U14"
 			(at 91.694 60.96 0)
 			(effects
 				(font
@@ -13210,7 +13210,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U21")
+					(reference "U14")
 					(unit 2)
 				)
 			)
@@ -13587,7 +13587,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "87457c80-d981-4fc5-8ed4-fcbeaf50f3e0")
-		(property "Reference" "U22"
+		(property "Reference" "U15"
 			(at 266.7 96.5199 0)
 			(effects
 				(font
@@ -13659,7 +13659,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U22")
+					(reference "U15")
 					(unit 3)
 				)
 			)
@@ -14103,7 +14103,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "938cbb80-208f-448c-85af-4894e439029d")
-		(property "Reference" "U22"
+		(property "Reference" "U15"
 			(at 42.926 99.06 0)
 			(effects
 				(font
@@ -14173,7 +14173,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U22")
+					(reference "U15")
 					(unit 1)
 				)
 			)
@@ -16372,7 +16372,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c4a34b1f-cce0-41af-8b6f-c03cfb667015")
-		(property "Reference" "U21"
+		(property "Reference" "U14"
 			(at 42.926 60.96 0)
 			(effects
 				(font
@@ -16442,7 +16442,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U21")
+					(reference "U14")
 					(unit 1)
 				)
 			)
@@ -17866,7 +17866,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d5fd8a62-61e7-48f3-81d6-22929e18e0b3")
-		(property "Reference" "U21"
+		(property "Reference" "U14"
 			(at 238.76 96.5199 0)
 			(effects
 				(font
@@ -17938,7 +17938,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U21")
+					(reference "U14")
 					(unit 3)
 				)
 			)
