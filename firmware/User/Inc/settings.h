@@ -7,12 +7,7 @@
 #include "User/Inc/lsm6ds3/utils.h"
 #include "Utils/Inc/gpio.h"
 
-#ifndef FW_REV
-#define FW_REV "custombuild"
-#endif
-
 #define PACKET_INTERVAL 100
-#define GNSS_BAUDRATE 9600
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,

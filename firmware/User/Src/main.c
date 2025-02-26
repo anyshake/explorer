@@ -31,6 +31,14 @@
 #include "User/Inc/settings.h"
 #include "User/Inc/types.h"
 
+#ifndef FW_BUILD
+#define FW_BUILD "unknownbuild"
+#endif
+
+#ifndef FW_REV
+#define FW_REV "custombuild"
+#endif
+
 void task_calib_gnss(void* argument) {
     explorer_states_t* states = (explorer_states_t*)argument;
 
@@ -258,19 +266,19 @@ void spirit_level_mode(void) {
 void display_device_settings(explorer_states_t* states) {
     char display_buf[20];
 
-    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %hhu Hz", states->sample_rate);
+    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %3hhu Hz", states->sample_rate);
     ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "PORT BR: %lu bps", states->baud_rate);
+    snprintf(display_buf, sizeof(display_buf), "PORT BR: %6lu bps", states->baud_rate);
     ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "ACCEL ENABLE: %s", states->use_accelerometer || states->channel_6d ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "ACCEL ENABLE: %5s", states->use_accelerometer || states->channel_6d ? "YES" : "NO");
     ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %s", states->use_gnss_time ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %6s", states->use_gnss_time ? "YES" : "NO");
     ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "CHANNEL 6D: %s", states->channel_6d ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "CHANNEL 6D: %7s", states->channel_6d ? "YES" : "NO");
     ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "DEVICE ID: %08lX", states->device_id);
-    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "FW REV: %s", FW_REV);
+    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    snprintf(display_buf, sizeof(display_buf), "BUILD: %s", FW_BUILD);
     ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
