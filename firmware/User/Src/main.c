@@ -270,11 +270,11 @@ void display_device_settings(explorer_states_t* states) {
     ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "PORT BR: %6lu bps", states->baud_rate);
     ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "ACCEL ENABLE: %5s", states->use_accelerometer || states->channel_6d ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "ACCELERO ENABLE: %2s", states->use_accelerometer || states->channel_6d ? "Y" : "N");
     ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "GNSS ENABLE: %6s", states->use_gnss_time ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "GPS DATA ENABLE: %2s", states->use_gnss_time ? "Y" : "N");
     ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "CHANNEL 6D: %7s", states->channel_6d ? "YES" : "NO");
+    snprintf(display_buf, sizeof(display_buf), "6D CHANNEL MODE: %2s", states->channel_6d ? "Y" : "N");
     ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     snprintf(display_buf, sizeof(display_buf), "FW REV: %s", FW_REV);
     ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
