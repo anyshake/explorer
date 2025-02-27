@@ -321,7 +321,7 @@ void system_setup(void) {
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
-    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate);
+    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
     if (!states.use_accelerometer || states.channel_6d) {
         ssd1306_display_string(0, 0, "ADC Calibrating", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
         calibrate_adc_offset(ADS1262_CTL_PIN);

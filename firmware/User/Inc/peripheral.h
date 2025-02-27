@@ -34,6 +34,6 @@ void peri_gnss_init(void);
 void peri_screen_init(void);
 void peri_eeprom_init(void);
 void peri_imu_init(uint8_t sample_rate);
-void peri_adc_init(uint8_t control_type, uint8_t sample_rate);
+void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d);
 
 #endif
