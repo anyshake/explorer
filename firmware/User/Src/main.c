@@ -218,8 +218,7 @@ void read_gnss_data(explorer_states_t* states) {
             states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
         }
 
-        if (states->gnss_time.is_valid && states->gnss_location.is_valid &&
-            states->gnss_status.hdop <= 1) {
+        if (states->gnss_time.is_valid && states->gnss_location.is_valid && states->gnss_status.hdop <= 1.0) {
             ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
             mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
             mcu_utils_delay_ms(1000, false);
