@@ -2,3 +2,4 @@
 *-cache
 *.kicad_prl
 library/*.bak
+*.lck
