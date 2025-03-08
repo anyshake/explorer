@@ -11,9 +11,12 @@
 typedef struct {
     bool leveling_mode;
 
+    uint16_t accel_lsb_per_g;
     uint32_t device_id;
+
     uint32_t baud_rate;
     uint8_t sample_rate;
+
     bool use_accelerometer;
     bool use_gnss_time;
     bool channel_6d;

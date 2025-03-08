@@ -53,15 +53,15 @@ static const gnss_ctl_pin_t GNSS_CTL_PIN = {
     .pps = {.port = GPIOA, .pin = GPIO_PIN_8},
     .rst = {.port = GPIOA, .pin = GPIO_PIN_15},
 };
-#ifndef USE_LSM6DS3
+#ifdef USE_ICM42688
 static const icm42688_ints_pin_t ICM42688_INTS_PIN = {
     .int_1 = {.port = GPIOB, .pin = GPIO_PIN_1},
     .int_2 = {.port = GPIOB, .pin = GPIO_PIN_0},
 };
 #else
 static const lsm6ds3_ints_pin_t LSM6DS3_INTS_PIN = {
-    .int_1 = {.port = GPIOB, .pin = GPIO_PIN_1},
-    .int_2 = {.port = GPIOB, .pin = GPIO_PIN_0},
+    .int_1 = {.port = GPIOB, .pin = GPIO_PIN_0},
+    .int_2 = {.port = GPIOB, .pin = GPIO_PIN_1},
 };
 #endif
 static const ads1262_ctl_pin_t ADS1262_CTL_PIN = {

@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "5c8f7424-a999-476e-9d2c-ffb743590705")
 	(paper "A4")
 	(title_block
@@ -89,6 +89,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Mechanical:MountingHole"
 			(pin_names
@@ -171,6 +172,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -800,6 +802,10 @@
 	(sheet
 		(at 100.33 69.85)
 		(size 25.4 48.26)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -829,33 +835,33 @@
 		)
 		(pin "D+3V3" output
 			(at 100.33 107.95 180)
+			(uuid "2059147c-297e-4d9a-a8bf-67f76a70819e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "2059147c-297e-4d9a-a8bf-67f76a70819e")
 		)
 		(pin "A-2V5" output
 			(at 125.73 107.95 0)
+			(uuid "aca1eeb0-c33d-4de4-99e5-2b3def18d042")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "aca1eeb0-c33d-4de4-99e5-2b3def18d042")
 		)
 		(pin "A+2V5" output
 			(at 125.73 110.49 0)
+			(uuid "79658a12-57aa-4242-a4e7-babcd5815132")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "79658a12-57aa-4242-a4e7-babcd5815132")
 		)
 		(instances
 			(project "Explorer"
@@ -868,6 +874,10 @@
 	(sheet
 		(at 55.88 69.85)
 		(size 25.4 48.26)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -897,123 +907,123 @@
 		)
 		(pin "D+3V3" input
 			(at 81.28 107.95 0)
+			(uuid "0572e893-d452-4d27-b8bf-3d1f004fd5d4")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0572e893-d452-4d27-b8bf-3d1f004fd5d4")
 		)
 		(pin "MCU_SCLK" output
 			(at 81.28 92.71 0)
+			(uuid "5beb12ca-c247-45e4-acdb-45ef462b6bc1")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "5beb12ca-c247-45e4-acdb-45ef462b6bc1")
 		)
 		(pin "MCU_MISO" input
 			(at 81.28 95.25 0)
+			(uuid "2d496a27-237d-46f7-a2a0-234585020285")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "2d496a27-237d-46f7-a2a0-234585020285")
 		)
 		(pin "MCU_MOSI" output
 			(at 81.28 97.79 0)
+			(uuid "6f623db4-ae2e-4b0b-93fb-f64352b0ac19")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6f623db4-ae2e-4b0b-93fb-f64352b0ac19")
 		)
 		(pin "ADC_RESET" output
 			(at 81.28 77.47 0)
+			(uuid "8909cf1b-3719-46cf-ba20-c80bc122474c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "8909cf1b-3719-46cf-ba20-c80bc122474c")
 		)
 		(pin "MCU_CSEL" output
 			(at 81.28 90.17 0)
+			(uuid "3cfad249-d9ec-4e22-b956-e9cfac28854a")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3cfad249-d9ec-4e22-b956-e9cfac28854a")
 		)
 		(pin "ADC_DRDY" input
 			(at 81.28 80.01 0)
+			(uuid "6f3043c8-0961-4511-a8aa-52304832651b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6f3043c8-0961-4511-a8aa-52304832651b")
 		)
 		(pin "MCU_SCL" output
 			(at 81.28 101.6 0)
+			(uuid "88b46c71-c13e-4914-aff6-87a4c2a9f186")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "88b46c71-c13e-4914-aff6-87a4c2a9f186")
 		)
 		(pin "MCU_SDA" bidirectional
 			(at 81.28 104.14 0)
+			(uuid "3c8184db-7668-4772-b387-3eb9bd3269b8")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3c8184db-7668-4772-b387-3eb9bd3269b8")
 		)
 		(pin "ADC_START" output
 			(at 81.28 74.93 0)
+			(uuid "945b6774-6f5a-43cb-bf9a-31e5cb68665c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "945b6774-6f5a-43cb-bf9a-31e5cb68665c")
 		)
 		(pin "MEMS_INT2" input
 			(at 81.28 86.36 0)
+			(uuid "b15a1e95-e042-48bd-8f8a-b58730d68c26")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b15a1e95-e042-48bd-8f8a-b58730d68c26")
 		)
 		(pin "MEMS_INT1" input
 			(at 81.28 83.82 0)
+			(uuid "fe85b075-dc9c-4393-898e-43feefc33aef")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "fe85b075-dc9c-4393-898e-43feefc33aef")
 		)
 		(instances
 			(project "Explorer"
@@ -1026,6 +1036,10 @@
 	(sheet
 		(at 144.78 69.85)
 		(size 25.4 48.26)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1055,143 +1069,143 @@
 		)
 		(pin "D+3V3" input
 			(at 144.78 113.03 180)
+			(uuid "3360f3da-6aea-4925-bc76-ff477543035b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "3360f3da-6aea-4925-bc76-ff477543035b")
 		)
 		(pin "MCU_SCLK" input
 			(at 144.78 92.71 180)
+			(uuid "78a23a02-24b6-4778-b704-fe598a73123b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "78a23a02-24b6-4778-b704-fe598a73123b")
 		)
 		(pin "MCU_MISO" output
 			(at 144.78 95.25 180)
+			(uuid "5cc3429d-81e9-4550-9ac7-82847b8625c6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "5cc3429d-81e9-4550-9ac7-82847b8625c6")
 		)
 		(pin "MCU_MOSI" input
 			(at 144.78 97.79 180)
+			(uuid "8a6b447b-8c7a-4aad-b573-d2419247171f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "8a6b447b-8c7a-4aad-b573-d2419247171f")
 		)
 		(pin "MCU_CSEL" input
 			(at 144.78 90.17 180)
+			(uuid "b6d5e0f2-75f6-4f69-a0a3-9408c19b5e18")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "b6d5e0f2-75f6-4f69-a0a3-9408c19b5e18")
 		)
 		(pin "ADC_DRDY" output
 			(at 144.78 80.01 180)
+			(uuid "8fefd05e-7819-4d9b-bca8-4d58e47d6e9b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "8fefd05e-7819-4d9b-bca8-4d58e47d6e9b")
 		)
 		(pin "ADC_RESET" input
 			(at 144.78 77.47 180)
+			(uuid "c1fd6dce-bdfb-4bce-bee9-0d5a4abaacc9")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "c1fd6dce-bdfb-4bce-bee9-0d5a4abaacc9")
 		)
 		(pin "MCU_SCL" input
 			(at 144.78 101.6 180)
+			(uuid "c8bd4671-7987-4a48-ae1a-84329c869c09")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "c8bd4671-7987-4a48-ae1a-84329c869c09")
 		)
 		(pin "MCU_SDA" bidirectional
 			(at 144.78 104.14 180)
+			(uuid "601257c9-b1da-42c2-a8a3-b3f31ae0f83c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "601257c9-b1da-42c2-a8a3-b3f31ae0f83c")
 		)
 		(pin "ADC_START" input
 			(at 144.78 74.93 180)
+			(uuid "c3914779-4869-4f83-9925-dacff6f8582c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "c3914779-4869-4f83-9925-dacff6f8582c")
 		)
 		(pin "MEMS_INT1" output
 			(at 144.78 83.82 180)
+			(uuid "72cf2168-bcb1-401c-a3e3-0737d14317ee")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "72cf2168-bcb1-401c-a3e3-0737d14317ee")
 		)
 		(pin "MEMS_INT2" output
 			(at 144.78 86.36 180)
+			(uuid "7199abc2-cc1c-4f7e-838d-c03ed0c8675b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "7199abc2-cc1c-4f7e-838d-c03ed0c8675b")
 		)
 		(pin "A+2V5" input
 			(at 144.78 110.49 180)
+			(uuid "6dcf7220-4f2d-45a9-a8c9-0c7c3901e15f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "6dcf7220-4f2d-45a9-a8c9-0c7c3901e15f")
 		)
 		(pin "A-2V5" input
 			(at 144.78 107.95 180)
+			(uuid "150fade6-51e8-47ae-974a-e187a8a61a8f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "150fade6-51e8-47ae-974a-e187a8a61a8f")
 		)
 		(instances
 			(project "Explorer"
@@ -1206,4 +1220,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

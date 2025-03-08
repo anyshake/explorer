@@ -29,8 +29,8 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, int32_t arr[]) {
                  : 0;
 }
 
-#ifndef USE_LSM6DS3
-void get_accel_readout(int16_t arr[]) {
+#ifdef USE_ICM42688
+void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
     icm42688_reg_accel_data_x_t accel_data_x;
     icm42688_reg_accel_data_y_t accel_data_y;
     icm42688_reg_accel_data_z_t accel_data_z;
@@ -39,6 +39,7 @@ void get_accel_readout(int16_t arr[]) {
 
     icm42688_reg_get_accel_data_z(&accel_data_z);
     arr[0] = (int16_t)(accel_data_z.accel_data_z_h << 8 | accel_data_z.accel_data_z_l);
+    arr[0] -= lsb_per_g;
 
     icm42688_reg_get_accel_data_x(&accel_data_x);
     arr[1] = (int16_t)(accel_data_x.accel_data_x_h << 8 | accel_data_x.accel_data_x_l);
@@ -54,7 +55,7 @@ void get_env_temperature(float* temp) {
     *temp = (float)temp_raw / 132.48 + 25;
 }
 #else
-void get_accel_readout(int16_t arr[]) {
+void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
     lsm6ds3_reg_outz_xl_t outz_xl;
     lsm6ds3_reg_outx_xl_t outx_xl;
     lsm6ds3_reg_outy_xl_t outy_xl;
@@ -63,6 +64,7 @@ void get_accel_readout(int16_t arr[]) {
 
     lsm6ds3_reg_get_outz_xl(&outz_xl);
     arr[0] = (int16_t)(outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl);
+    arr[0] -= lsb_per_g;
 
     lsm6ds3_reg_get_outx_xl(&outx_xl);
     arr[1] = (int16_t)(outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl);

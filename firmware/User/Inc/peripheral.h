@@ -17,14 +17,14 @@
 #include "User/Inc/ads1262/regs/mode_0.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
 
+#include "User/Inc/icm42688/lsb_per_g.h"
 #include "User/Inc/icm42688/regs/accel_config0.h"
 #include "User/Inc/icm42688/regs/accel_config_static2.h"
 #include "User/Inc/icm42688/regs/gyro_accel_config0.h"
-#include "User/Inc/icm42688/regs/int_config.h"
-#include "User/Inc/icm42688/regs/int_config1.h"
-#include "User/Inc/icm42688/regs/int_source0.h"
 #include "User/Inc/icm42688/regs/pwr_mgmt0.h"
 #include "User/Inc/icm42688/utils.h"
+
+#include "User/Inc/lsm6ds3/lsb_per_g.h"
 #include "User/Inc/lsm6ds3/regs/ctrl1_xl.h"
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
 #include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
@@ -33,7 +33,7 @@
 void peri_gnss_init(void);
 void peri_screen_init(void);
 void peri_eeprom_init(void);
-void peri_imu_init(uint8_t sample_rate);
+uint16_t peri_imu_init(uint8_t sample_rate);
 void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d);
 
 #endif

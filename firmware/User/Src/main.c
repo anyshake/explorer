@@ -132,7 +132,7 @@ void task_acquire_data(void* argument) {
         }
 
         if (states->use_accelerometer || states->channel_6d) {
-            get_accel_readout(acq_msg.accel_data);
+            get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
         }
         get_env_temperature(&acq_msg.temperature);
 
@@ -236,7 +236,7 @@ void spirit_level_mode(void) {
     char display_buf[19];
     float temperature = 0;
     while (1) {
-        get_accel_readout(result_arr);
+        get_accel_readout(0, result_arr);
         get_env_temperature(&temperature);
 
         int16_t acc_x = result_arr[1];
@@ -245,11 +245,7 @@ void spirit_level_mode(void) {
         float x_angle = quick_atan2(-acc_x, quick_sqrt(acc_y * acc_y + acc_z * acc_z)) * 180.0 / MAGIC_PI;
         float y_angle = quick_atan2(acc_y, acc_z) * 180.0 / MAGIC_PI;
 
-#ifndef USE_LSM6DS3
         x_angle = -x_angle;
-#else
-        y_angle = -y_angle;
-#endif
 
         snprintf(display_buf, sizeof(display_buf), "TMP: %5.2f * C", temperature);
         ssd1306_display_string(20, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
@@ -306,12 +302,12 @@ void system_setup(void) {
     peri_eeprom_init();
     eeprom_read((uint8_t*)&states.device_id, sizeof(states.device_id));
 
-#ifndef USE_LSM6DS3
+#ifdef USE_ICM42688
     icm42688_reset(false);
 #else
     lsm6ds3_reset(false);
 #endif
-    peri_imu_init(states.sample_rate);
+    states.accel_lsb_per_g = peri_imu_init(states.sample_rate);
     mcu_utils_delay_ms(1000, false);
 
     if (states.leveling_mode) {

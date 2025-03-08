@@ -87,6 +87,7 @@
         "magic.h": "c",
         "types.h": "c",
         "stm32f1xx_hal_uart.h": "c",
-        "out_temp.h": "c"
+        "out_temp.h": "c",
+        "lsb_per_g.h": "c"
     }
 }
