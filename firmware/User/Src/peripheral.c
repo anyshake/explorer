@@ -70,7 +70,7 @@ void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
             ads1262_reg_mode_2.dr = channel_6d ? ADS1262_REG_MODE_2_DR_2400 : ADS1262_REG_MODE_2_DR_1200;
             break;
         case 250:
-            ads1262_reg_mode_2.dr = channel_6d ? ADS1262_REG_MODE_2_DR_4800 : ADS1262_REG_MODE_2_DR_2400;
+            ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_4800;
             break;
     }
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);

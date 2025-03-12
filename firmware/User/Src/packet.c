@@ -72,16 +72,15 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
             break;
     }
     device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 26;
-    if (states->channel_6d) {
+    if (!states->use_accelerometer || states->channel_6d) {
         device_config |= (PACKET_DEVICE_CONFIG_CHANNEL_1_INT32 << 24) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_2_INT32 << 22) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_3_INT32 << 20) |
-                         (PACKET_DEVICE_CONFIG_CHANNEL_4_INT16 << 18) |
+                         (PACKET_DEVICE_CONFIG_CHANNEL_3_INT32 << 20);
+    }
+    if (states->use_accelerometer || states->channel_6d) {
+        device_config |= (PACKET_DEVICE_CONFIG_CHANNEL_4_INT16 << 18) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_5_INT16 << 16) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_6_INT16 << 14);
-    } else {
-        uint32_t type = states->use_accelerometer ? PACKET_DEVICE_CONFIG_CHANNEL_1_INT16 : PACKET_DEVICE_CONFIG_CHANNEL_1_INT32;
-        device_config |= (type << 24) | (type << 22) | (type << 20);
     }
     device_config |= (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED) << 3) |
