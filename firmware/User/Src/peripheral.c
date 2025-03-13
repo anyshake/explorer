@@ -58,6 +58,9 @@ void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
     ads1262_reg_mode_0_t ads1262_reg_mode_0 = ads1262_reg_new_mode_0();
     ads1262_reg_mode_0.run_mode = ADS1262_REG_MODE_0_RUN_MODE_ONESHOT;
     ads1262_reg_set_mode_0(&ads1262_reg_mode_0);
+    ads1262_reg_mode_1_t ads1262_reg_mode_1 = ads1262_reg_new_mode_1();
+    ads1262_reg_mode_1.filter = ADS1262_REG_MODE_1_FILTER_SINC1;
+    ads1262_reg_set_mode_1(&ads1262_reg_mode_1);
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
     switch (sample_rate) {
         case 50:
