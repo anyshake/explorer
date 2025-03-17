@@ -3502,12 +3502,6 @@
 		(uuid "497c99ee-4c35-4626-9724-a4fc7da07ac8")
 	)
 	(junction
-		(at 25.4 154.94)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "52676261-7906-45bc-b8e5-f844649ee391")
-	)
-	(junction
 		(at 152.4 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3634,6 +3628,12 @@
 		(uuid "b93c852b-7e37-42a1-a717-27e899e59ac1")
 	)
 	(junction
+		(at 24.13 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c18ea91b-888a-48c0-9821-abb524fe665a")
+	)
+	(junction
 		(at 106.68 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3700,6 +3700,10 @@
 		(uuid "9b152997-7659-4ed6-9f5c-820391ebbc80")
 	)
 	(no_connect
+		(at 26.67 154.94)
+		(uuid "c78f954f-ac3c-4566-bc75-99988f23f61e")
+	)
+	(no_connect
 		(at 30.48 27.94)
 		(uuid "cf676e5b-fbb8-4259-93a0-fa1f96ac1c42")
 	)
@@ -3716,16 +3720,6 @@
 			(type default)
 		)
 		(uuid "003fd2cc-586a-49e3-b823-2ccfa16c15a5")
-	)
-	(wire
-		(pts
-			(xy 25.4 154.94) (xy 26.67 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00d63f3f-efc9-41b5-9dec-0c9f4b7678b9")
 	)
 	(wire
 		(pts
@@ -4109,16 +4103,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 154.94) (xy 25.4 168.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31b05599-4def-4040-b7f4-b8a356c38365")
-	)
-	(wire
-		(pts
 			(xy 73.66 87.63) (xy 78.74 87.63)
 		)
 		(stroke
@@ -4349,7 +4333,7 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 157.48) (xy 16.51 154.94)
+			(xy 16.51 152.4) (xy 16.51 144.78)
 		)
 		(stroke
 			(width 0)
@@ -4549,7 +4533,7 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 162.56) (xy 16.51 163.83)
+			(xy 16.51 157.48) (xy 16.51 163.83)
 		)
 		(stroke
 			(width 0)
@@ -4559,7 +4543,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 168.91) (xy 27.94 168.91)
+			(xy 24.13 168.91) (xy 27.94 168.91)
 		)
 		(stroke
 			(width 0)
@@ -4899,16 +4883,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 144.78) (xy 26.67 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9f5ed263-c924-43b2-87ac-054dd4587951")
-	)
-	(wire
-		(pts
 			(xy 223.52 46.99) (xy 223.52 57.15)
 		)
 		(stroke
@@ -5069,6 +5043,16 @@
 	)
 	(wire
 		(pts
+			(xy 24.13 144.78) (xy 26.67 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b4789c6e-8f8d-46f2-b71c-8e8591b1f0d9")
+	)
+	(wire
+		(pts
 			(xy 153.67 53.34) (xy 153.67 57.15)
 		)
 		(stroke
@@ -5169,7 +5153,7 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 154.94) (xy 25.4 154.94)
+			(xy 16.51 144.78) (xy 24.13 144.78)
 		)
 		(stroke
 			(width 0)
@@ -5259,7 +5243,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 144.78) (xy 25.4 154.94)
+			(xy 24.13 144.78) (xy 24.13 168.91)
 		)
 		(stroke
 			(width 0)
@@ -5718,7 +5702,7 @@
 		(uuid "7385bb53-eaa8-449e-9f78-7b712827b101")
 	)
 	(label "VCC"
-		(at 16.51 154.94 0)
+		(at 19.05 144.78 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12048,7 +12032,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Polarized_Small")
-		(at 16.51 160.02 0)
+		(at 16.51 154.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12056,7 +12040,7 @@
 		(dnp no)
 		(uuid "c4a9b295-8a61-45bd-bd4f-b1bcd02524c4")
 		(property "Reference" "C1"
-			(at 19.05 158.2038 0)
+			(at 19.05 153.1238 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12065,7 +12049,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 19.05 160.7438 0)
+			(at 19.05 155.6638 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12074,7 +12058,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T"
-			(at 16.51 160.02 0)
+			(at 16.51 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12083,7 +12067,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 16.51 160.02 0)
+			(at 16.51 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12092,7 +12076,7 @@
 			)
 		)
 		(property "Description" "Polarized capacitor, small symbol"
-			(at 16.51 160.02 0)
+			(at 16.51 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
