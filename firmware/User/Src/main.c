@@ -203,7 +203,7 @@ void read_gnss_data(explorer_states_t* states) {
         if (gnss_get_sentence(states->gnss_message_buffer, GNSS_SENTENCE_TYPE_GGA)) {
             gnss_padding_sentence(states->gnss_message_buffer);
             gnss_parse_gga(&states->gnss_status, &states->gnss_location, states->gnss_message_buffer);
-            snprintf(display_buf, sizeof(display_buf), "SAT: %d, HDOP: %.1f", states->gnss_status.satellites, states->gnss_status.hdop);
+            snprintf(display_buf, sizeof(display_buf), "SAT %2d, HDOP %5.1f", states->gnss_status.satellites, states->gnss_status.hdop);
             ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
         }
 
