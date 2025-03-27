@@ -3472,6 +3472,12 @@
 		(uuid "337fafac-946c-47fd-a5b1-41eab0e1e45f")
 	)
 	(junction
+		(at 39.37 168.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "33d038f9-7b1f-4479-8c6b-df0e31a45104")
+	)
+	(junction
 		(at 72.39 22.86)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4143,16 +4149,6 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 160.02) (xy 39.37 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3dbc8a25-f31d-4a38-82ac-402be3514de0")
-	)
-	(wire
-		(pts
 			(xy 184.15 46.99) (xy 184.15 57.15)
 		)
 		(stroke
@@ -4703,7 +4699,7 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 168.91) (xy 48.26 168.91)
+			(xy 36.83 168.91) (xy 39.37 168.91)
 		)
 		(stroke
 			(width 0)
@@ -4880,6 +4876,16 @@
 			(type default)
 		)
 		(uuid "9d2a2fff-af1c-4135-8fd9-3fc96fe74e07")
+	)
+	(wire
+		(pts
+			(xy 39.37 168.91) (xy 48.26 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9db27501-8d87-4f25-b671-35003c0a3e61")
 	)
 	(wire
 		(pts
@@ -5550,6 +5556,16 @@
 			(type default)
 		)
 		(uuid "f22fa258-44cd-401d-8d3e-71bf748a0c10")
+	)
+	(wire
+		(pts
+			(xy 39.37 160.02) (xy 39.37 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f247e627-f968-4e2f-a860-6f931ce63040")
 	)
 	(wire
 		(pts
@@ -10859,72 +10875,6 @@
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
 					(reference "R14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDA")
-		(at 39.37 162.56 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9df7e9fc-c62d-466e-bb4f-f0e5ec7f1ee2")
-		(property "Reference" "#PWR04"
-			(at 39.37 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDA"
-			(at 39.37 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 39.37 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 39.37 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
-			(at 39.37 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "313e71f9-0080-45ca-bce6-6629ecba6716")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "#PWR04")
 					(unit 1)
 				)
 			)
