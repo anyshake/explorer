@@ -9260,7 +9260,7 @@
 				)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "18k"
 			(at 134.112 29.21 90)
 			(effects
 				(font
@@ -13382,7 +13382,7 @@
 				)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "18k"
 			(at 134.112 67.31 90)
 			(effects
 				(font
@@ -17063,7 +17063,7 @@
 				)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "18k"
 			(at 134.112 105.41 90)
 			(effects
 				(font
