@@ -13,7 +13,7 @@
 // Enable this if you are using 4.5 Hz geophone (e.g. LGT-4.5)
 // this is useful for geophone low frequency response (<= 1.0 Hz)
 // see filter.h, filter.c for detailed implementation
-#define ENABLE_COMPENSATION false
+#define ENABLE_COMPENSATION true
 
 static const mcu_utils_gpio_t MCU_STATE_PIN = {
     .pin = 2,

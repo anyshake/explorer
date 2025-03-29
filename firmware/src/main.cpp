@@ -29,6 +29,12 @@ typedef struct {
     uint8_t sample_pos = 0;
     int32_t adc_data_buf[3];
 
+#if ENABLE_COMPENSATION == true
+    double compensation_lowpass_coeffs[FILTER_NUM_TAPS];
+    double compensation_bandpass_coeffs[FILTER_NUM_TAPS];
+    double compensation_highpass_coeffs[FILTER_NUM_TAPS];
+#endif
+
     int32_t adc_readout_z_axis[MAINLINE_PACKET_CHANNEL_SAMPLES];
     int32_t adc_readout_e_axis[MAINLINE_PACKET_CHANNEL_SAMPLES];
     int32_t adc_readout_n_axis[MAINLINE_PACKET_CHANNEL_SAMPLES];
@@ -42,6 +48,12 @@ void setup(void) {
     explorer_states.sample_time_span = 1000 / EXPLORER_SAMPLERATE;
     explorer_states.sample_pos = 0;
     explorer_states.timestamp = 0;
+
+#if ENABLE_COMPENSATION == true
+    generate_lowpass_coeffs(1.0, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_lowpass_coeffs);
+    generate_bandpass_coeffs(1.0, 4.5, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_bandpass_coeffs);
+    generate_highpass_coeffs(4.5, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_highpass_coeffs);
+#endif
 
     uint8_t packet_size = get_data_packet_size(MAINLINE_PACKET_CHANNEL_SAMPLES);
     explorer_states.uart_packet_buffer = array_uint8_make(packet_size);
@@ -108,9 +120,9 @@ void loop(void) {
 
     if (explorer_states.sample_pos >= MAINLINE_PACKET_CHANNEL_SAMPLES) {
 #if ENABLE_COMPENSATION == true
-        apply_compensation_filter(explorer_states.adc_readout_z_axis, MAINLINE_PACKET_CHANNEL_SAMPLES);
-        apply_compensation_filter(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES);
-        apply_compensation_filter(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES);
+        apply_data_compensation(explorer_states.adc_readout_z_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.compensation_lowpass_coeffs, explorer_states.compensation_bandpass_coeffs, explorer_states.compensation_highpass_coeffs);
+        apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.compensation_lowpass_coeffs, explorer_states.compensation_bandpass_coeffs, explorer_states.compensation_highpass_coeffs);
+        apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.compensation_lowpass_coeffs, explorer_states.compensation_bandpass_coeffs, explorer_states.compensation_highpass_coeffs);
 #endif
         send_data_packet(explorer_states.timestamp,
                          explorer_states.adc_readout_z_axis,

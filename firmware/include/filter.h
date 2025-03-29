@@ -4,10 +4,13 @@
 #include <stddef.h>
 #include <stdint.h>
 
-static const double LOWPASS_A[] = {0.0049854, 0.0099708, 0.0049854};
-static const double BANDPASS_A[] = {0.0423174, 0., -0.0423174};
-static const double HIGHPASS_A[] = {0.99778136, -1.99556272, 0.99778136};
+#define FILTER_NUM_TAPS 10
 
-void apply_compensation_filter(int32_t* arr, size_t len);
+void hamming_window(uint16_t n, double* window);
+void generate_lowpass_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs);
+void generate_highpass_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs);
+void generate_bandpass_coeffs(double low_cutoff_freq, double high_cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs);
+void apply_fir_filter(double* input, uint16_t input_size, double* coeffs, uint16_t num_taps, double* output);
+void apply_data_compensation(int32_t* arr, size_t len, double* lowpass_coeffs, double* bandpass_coeffs, double* highpass_coeffs);
 
 #endif
