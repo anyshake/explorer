@@ -6,17 +6,17 @@
 #include "ads1262/reg_map.h"
 #include "ads1262/utils.h"
 
-#define __ADS1262_REFMUX_DEFAULT_VALUE 0x00
+#define __ADS1262_REG_REFMUX_DEFAULT_VALUE 0x00
 
-#define ADS1262_REFMUX_INTREF 0x00
-#define ADS1262_REFMUX_EXTAIN0P 0x01
-#define ADS1262_REFMUX_EXTAIN1N 0x01
-#define ADS1262_REFMUX_EXTAIN2P 0x02
-#define ADS1262_REFMUX_EXTAIN3N 0x02
-#define ADS1262_REFMUX_EXTAIN4P 0x03
-#define ADS1262_REFMUX_EXTAIN5N 0x03
-#define ADS1262_REFMUX_INTAVDD 0x04
-#define ADS1262_REFMUX_INTAVSS 0x04
+#define ADS1262_REG_REFMUX_INTREF 0x00
+#define ADS1262_REG_REFMUX_EXTAIN0P 0x01
+#define ADS1262_REG_REFMUX_EXTAIN1N 0x01
+#define ADS1262_REG_REFMUX_EXTAIN2P 0x02
+#define ADS1262_REG_REFMUX_EXTAIN3N 0x02
+#define ADS1262_REG_REFMUX_EXTAIN4P 0x03
+#define ADS1262_REG_REFMUX_EXTAIN5N 0x03
+#define ADS1262_REG_REFMUX_INTAVDD 0x04
+#define ADS1262_REG_REFMUX_INTAVSS 0x04
 
 typedef struct {
     // Reference positive input, selects the positive reference input
@@ -35,6 +35,7 @@ typedef struct {
     uint8_t refmux_n;
 } ads1262_reg_refmux_t;
 
+ads1262_reg_refmux_t ads1262_reg_new_refmux(void);
 void ads1262_reg_set_refmux(ads1262_reg_refmux_t* refmux);
 void ads1262_reg_get_refmux(ads1262_reg_refmux_t* refmux);
 

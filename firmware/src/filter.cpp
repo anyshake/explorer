@@ -1,42 +1,50 @@
 #include "filter.h"
 
-void apply_compensation_filter(int32_t* arr, uint8_t len, filter_state_t* state) {
-    double y_lowpass[len];
-    y_lowpass[0] = state->prev_lowpass[0];
-    y_lowpass[1] = state->prev_lowpass[1];
+void apply_compensation_filter(int32_t* arr, size_t len) {
+    double yLow[len];
+    double yBand[len];
+    double yHigh[len];
 
-    double y_bandpass[len];
-    y_bandpass[0] = state->prev_bandpass[0];
-    y_bandpass[1] = state->prev_bandpass[1];
-
-    double y_highpass[len];
-    y_highpass[0] = state->prev_highpass[0];
-    y_highpass[1] = state->prev_highpass[1];
-
-    for (uint8_t i = 2; i < len; i++) {
-        double y_next_lowpass = -LOWPASS_A[0] * y_lowpass[i - 1] - LOWPASS_A[1] * y_lowpass[i - 2] +
-                                LOWPASS_B[0] * (double)arr[i] + LOWPASS_B[1] * (double)arr[i - 1] + LOWPASS_B[2] * (double)arr[i - 2];
-        y_lowpass[i] = y_next_lowpass;
-
-        double y_next_bandpass = -BANDPASS_A[0] * y_bandpass[i - 1] - BANDPASS_A[1] * y_bandpass[i - 2] +
-                                 BANDPASS_B[0] * (double)arr[i] + BANDPASS_B[1] * (double)arr[i - 1] + BANDPASS_B[2] * (double)arr[i - 2];
-        y_bandpass[i] = y_next_bandpass;
-
-        double y_next_highpass = -HIGHPASS_A[0] * y_highpass[i - 1] - HIGHPASS_A[1] * y_highpass[i - 2] +
-                                 HIGHPASS_B[0] * (double)arr[i] + HIGHPASS_B[1] * (double)arr[i - 1] + HIGHPASS_B[2] * (double)arr[i - 2];
-        y_highpass[i] = y_next_highpass;
+    for (size_t i = 0; i < len; i++) {
+        yLow[i] = 0.0;
+        yBand[i] = 0.0;
+        yHigh[i] = 0.0;
     }
 
-    for (uint8_t i = 0; i < len; i++) {
-        arr[i] = (int32_t)(y_lowpass[i] + y_bandpass[i] + y_highpass[i]);
+    for (size_t i = 0; i < len; i++) {
+        for (size_t j = 0; j < sizeof(LOWPASS_A) / sizeof(LOWPASS_A[0]); j++) {
+            if (i - j >= 0) {
+                yLow[i] += LOWPASS_A[j] * (double)arr[i - j];
+            }
+        }
+        yLow[i] *= 1000.0;
     }
 
-    state->prev_lowpass[0] = y_lowpass[len - 2];
-    state->prev_lowpass[1] = y_lowpass[len - 1];
+    for (size_t i = 0; i < len; i++) {
+        for (size_t j = 0; j < sizeof(BANDPASS_A) / sizeof(BANDPASS_A[0]); j++) {
+            if (i - j >= 0) {
+                yBand[i] += BANDPASS_A[j] * (double)arr[i - j];
+            }
+        }
+        yBand[i] *= 0.01;
+    }
 
-    state->prev_bandpass[0] = y_bandpass[len - 2];
-    state->prev_bandpass[1] = y_bandpass[len - 1];
+    for (size_t i = 0; i < len; i++) {
+        for (size_t j = 0; j < sizeof(HIGHPASS_A) / sizeof(HIGHPASS_A[0]); j++) {
+            if (i - j >= 0) {
+                yHigh[i] += HIGHPASS_A[j] * (double)arr[i - j];
+            }
+        }
+        yHigh[i] *= 0.001;
+    }
 
-    state->prev_highpass[0] = y_highpass[len - 2];
-    state->prev_highpass[1] = y_highpass[len - 1];
+    for (size_t i = 0; i < len; i++) {
+        double val = yLow[i] + yBand[i] + yHigh[i];
+        if (val > INT32_MAX) {
+            val = INT32_MAX;
+        } else if (val < INT32_MIN) {
+            val = INT32_MIN;
+        }
+        arr[i] = (int32_t)val;
+    }
 }

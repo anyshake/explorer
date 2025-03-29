@@ -6,27 +6,27 @@
 #include "ads1262/reg_map.h"
 #include "ads1262/utils.h"
 
-#define __ADS1262_MODE_1_DEFAULT_VALUE 0x80
+#define __ADS1262_REG_MODE_1_DEFAULT_VALUE 0x80
 
-#define ADS1262_MODE_1_FILTER_SINC1 0x00
-#define ADS1262_MODE_1_FILTER_SINC2 0x01
-#define ADS1262_MODE_1_FILTER_SINC3 0x02
-#define ADS1262_MODE_1_FILTER_SINC4 0x03
-#define ADS1262_MODE_1_FILTER_FIR 0x04
+#define ADS1262_REG_MODE_1_FILTER_SINC1 0x00
+#define ADS1262_REG_MODE_1_FILTER_SINC2 0x01
+#define ADS1262_REG_MODE_1_FILTER_SINC3 0x02
+#define ADS1262_REG_MODE_1_FILTER_SINC4 0x03
+#define ADS1262_REG_MODE_1_FILTER_FIR 0x04
 
-#define ADS1262_MODE_1_SB_ADC1 0x01
-#define ADS1262_MODE_1_SB_ADC2 0x02
+#define ADS1262_REG_MODE_1_SB_ADC1 0x01
+#define ADS1262_REG_MODE_1_SB_ADC2 0x02
 
-#define ADS1262_MODE_1_SB_POL_UP 0x01
-#define ADS1262_MODE_1_SB_POL_DOWN 0x02
+#define ADS1262_REG_MODE_1_SB_POL_UP 0x01
+#define ADS1262_REG_MODE_1_SB_POL_DOWN 0x02
 
-#define ADS1262_MODE_1_SB_MAG_NONE 0x00
-#define ADS1262_MODE_1_SB_MAG_0P5 0x01
-#define ADS1262_MODE_1_SB_MAG_2 0x02
-#define ADS1262_MODE_1_SB_MAG_10 0x03
-#define ADS1262_MODE_1_SB_MAG_50 0x04
-#define ADS1262_MODE_1_SB_MAG_200 0x05
-#define ADS1262_MODE_1_SB_MAG_10M 0x06
+#define ADS1262_REG_MODE_1_SB_MAG_NONE 0x00
+#define ADS1262_REG_MODE_1_SB_MAG_0P5 0x01
+#define ADS1262_REG_MODE_1_SB_MAG_2 0x02
+#define ADS1262_REG_MODE_1_SB_MAG_10 0x03
+#define ADS1262_REG_MODE_1_SB_MAG_50 0x04
+#define ADS1262_REG_MODE_1_SB_MAG_200 0x05
+#define ADS1262_REG_MODE_1_SB_MAG_10M 0x06
 
 typedef struct {
     // Digital filter, configures the ADC digital filter
@@ -56,6 +56,7 @@ typedef struct {
     uint8_t sb_mag;
 } ads1262_reg_mode_1_t;
 
+ads1262_reg_mode_1_t ads1262_reg_new_mode_1(void);
 void ads1262_reg_set_mode_1(ads1262_reg_mode_1_t* mode_1);
 void ads1262_reg_get_mode_1(ads1262_reg_mode_1_t* mode_1);
 

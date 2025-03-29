@@ -1,6 +1,7 @@
 #ifndef __ADS1262_CMDS_RDATA_H
 #define __ADS1262_CMDS_RDATA_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "ads1262/cmd_map.h"

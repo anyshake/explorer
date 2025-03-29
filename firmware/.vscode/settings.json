@@ -46,6 +46,26 @@
         "stdint.h": "c",
         "functional": "cpp",
         "*.tcc": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "cmd_map.h": "c",
+        "atomic": "cpp",
+        "concepts": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstring": "cpp",
+        "cwchar": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "random": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "system_error": "cpp",
+        "ratio": "cpp",
+        "typeinfo": "cpp",
+        "utility": "cpp",
+        "variant": "cpp"
     }
 }
