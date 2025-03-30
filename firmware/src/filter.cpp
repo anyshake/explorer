@@ -1,83 +1,79 @@
 #include "filter.h"
 
-#include <math.h>
-
-void hamming_window(uint16_t n, double* window) {
-    for (uint16_t i = 0; i < n; i++) {
-        window[i] = 0.54 - 0.46 * cos(2 * M_PI * (double)i / (double)(n - 1));
-    }
-}
-
-void generate_lowpass_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
+void filter_fir_lowpass_get_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
     double normalized_cutoff = 2 * M_PI * cutoff_freq / sample_rate;
-    double window[num_taps];
-
+    double middle = (double)(num_taps - 1) / 2.0;
     for (uint16_t i = 0; i < num_taps; i++) {
-        if (i == num_taps / 2) {
+        double n = (double)(i)-middle;
+        if (n == 0) {
             coeffs[i] = normalized_cutoff / M_PI;
         } else {
-            coeffs[i] = sin(normalized_cutoff * (i - num_taps / 2)) / (M_PI * (i - num_taps / 2));
+            coeffs[i] = sin(normalized_cutoff * n) / (M_PI * n);
         }
     }
 
-    hamming_window(num_taps, window);
-
     for (uint16_t i = 0; i < num_taps; i++) {
-        coeffs[i] *= window[i];
+        coeffs[i] *= 0.54 - 0.46 * cos(2 * M_PI * (double)(i) / (double)(num_taps - 1));
     }
 }
 
-void generate_highpass_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
-    double lowpass_coeffs[num_taps];
-    generate_lowpass_coeffs(cutoff_freq, sample_rate, num_taps, lowpass_coeffs);
+void filter_fir_highpass_get_coeffs(double cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
+    double low_pass_coeffs[num_taps];
+    filter_fir_lowpass_get_coeffs(cutoff_freq, sample_rate, num_taps, low_pass_coeffs);
 
     for (uint16_t i = 0; i < num_taps; i++) {
         if (i == num_taps / 2) {
-            coeffs[i] = 1 - lowpass_coeffs[i];
+            coeffs[i] = 1 - low_pass_coeffs[i];
         } else {
-            coeffs[i] = -lowpass_coeffs[i];
+            coeffs[i] = -low_pass_coeffs[i];
         }
     }
 }
 
-void generate_bandpass_coeffs(double low_cutoff_freq, double high_cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
-    double lowpass_coeffs[num_taps];
-    double highpass_coeffs[num_taps];
+void filter_fir_bandpass_get_coeffs(double low_cutoff_freq, double high_cutoff_freq, double sample_rate, uint16_t num_taps, double* coeffs) {
+    double low_pass_coeffs[num_taps];
+    double high_pass_coeffs[num_taps];
 
-    generate_lowpass_coeffs(high_cutoff_freq, sample_rate, num_taps, lowpass_coeffs);
-    generate_highpass_coeffs(low_cutoff_freq, sample_rate, num_taps, highpass_coeffs);
+    filter_fir_lowpass_get_coeffs(high_cutoff_freq, sample_rate, num_taps, low_pass_coeffs);
+    filter_fir_highpass_get_coeffs(low_cutoff_freq, sample_rate, num_taps, high_pass_coeffs);
 
     for (uint16_t i = 0; i < num_taps; i++) {
-        coeffs[i] = lowpass_coeffs[i] + highpass_coeffs[i];
+        coeffs[i] = low_pass_coeffs[i] + high_pass_coeffs[i];
     }
 }
 
-void apply_fir_filter(double* input, uint16_t input_size, double* coeffs, uint16_t num_taps, double* output) {
+void filter_fir_apply(filter_fir_t* filter, double* input, uint16_t input_size, double* output) {
+    double extended_input[(FILTER_NUM_TAPS - 1) + input_size];
+
+    memcpy(extended_input, filter->state, (FILTER_NUM_TAPS - 1) * sizeof(double));
+    memcpy(&extended_input[FILTER_NUM_TAPS - 1], input, input_size * sizeof(double));
+
     for (uint16_t i = 0; i < input_size; i++) {
         output[i] = 0.0;
-        for (uint16_t j = 0; j < num_taps; j++) {
-            if (i - j >= 0) {
-                output[i] += input[i - j] * coeffs[j];
-            }
+        for (uint16_t j = 0; j < FILTER_NUM_TAPS; j++) {
+            output[i] += extended_input[i + j] * filter->coeffs[j];
         }
     }
+
+    memcpy(filter->state, &extended_input[input_size], (FILTER_NUM_TAPS - 1) * sizeof(double));
 }
 
-void apply_data_compensation(int32_t* arr, size_t len, double* lowpass_coeffs, double* bandpass_coeffs, double* highpass_coeffs) {
-    double lp_output[len];
-    double bp_output[len];
-    double hp_output[len];
+void apply_data_compensation(int32_t* arr, uint16_t len, filter_fir_t* lowpass_filter, filter_fir_t* bandpass_filter, filter_fir_t* highpass_filter) {
     double input[len];
-
-    for (size_t i = 0; i < len; i++) {
+    for (uint16_t i = 0; i < len; i++) {
         input[i] = (double)arr[i];
     }
 
-    apply_fir_filter(input, len, lowpass_coeffs, len, lp_output);
-    apply_fir_filter(input, len, bandpass_coeffs, len, bp_output);
-    apply_fir_filter(input, len, highpass_coeffs, len, hp_output);
+    double lp_output[len];
+    filter_fir_apply(lowpass_filter, input, len, lp_output);
 
-    for (size_t i = 0; i < len; i++) {
-        arr[i] = (int32_t)(1000 * lp_output[i] + 10 * bp_output[i] + hp_output[i]);
+    double bp_output[len];
+    filter_fir_apply(bandpass_filter, input, len, bp_output);
+
+    double hp_output[len];
+    filter_fir_apply(highpass_filter, input, len, hp_output);
+
+    for (uint16_t i = 0; i < len; i++) {
+        arr[i] = (int32_t)(500 * lp_output[i] + 0.5 * bp_output[i] + 0.01 * hp_output[i]);
     }
 }

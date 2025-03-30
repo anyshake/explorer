@@ -34,7 +34,7 @@ void send_data_packet(int64_t timestamp,
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
             uart_packet_buffer->data[14 + channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
-        bytes = (uint8_t*)&adc_readout_e_axis[i];
+        bytes = (uint8_t*)&adc_readout_n_axis[i];
         for (uint8_t j = 0; j < sizeof(int32_t); j++) {
             uart_packet_buffer->data[14 + 2 * channel_samples * sizeof(int32_t) + i * sizeof(int32_t) + j] = bytes[j];
         }
