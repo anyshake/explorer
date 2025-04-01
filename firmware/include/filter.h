@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#define FILTER_NUM_TAPS 15
+#define FILTER_NUM_TAPS 101
 
 typedef struct {
     double coeffs[FILTER_NUM_TAPS];

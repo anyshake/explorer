@@ -74,6 +74,6 @@ void apply_data_compensation(int32_t* arr, uint16_t len, filter_fir_t* lowpass_f
     filter_fir_apply(highpass_filter, input, len, hp_output);
 
     for (uint16_t i = 0; i < len; i++) {
-        arr[i] = (int32_t)(500 * lp_output[i] + 0.5 * bp_output[i] + 0.01 * hp_output[i]);
+        arr[i] = (int32_t)(81.0000000000000 * lp_output[i] + 6.36492220650636 * bp_output[i] + 0.999953023310421 * hp_output[i]);
     }
 }

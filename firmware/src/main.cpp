@@ -50,9 +50,9 @@ void setup(void) {
     explorer_states.timestamp = 0;
 
 #if ENABLE_COMPENSATION == true
-    filter_fir_lowpass_get_coeffs(3, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_lowpass_filter.coeffs);
-    filter_fir_bandpass_get_coeffs(3, 5, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_bandpass_filter.coeffs);
-    filter_fir_highpass_get_coeffs(5, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_highpass_filter.coeffs);
+    filter_fir_lowpass_get_coeffs(0.353606773125176, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_lowpass_filter.coeffs);
+    filter_fir_bandpass_get_coeffs(0.146500000000000, 0.853500000000000, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_bandpass_filter.coeffs);
+    filter_fir_highpass_get_coeffs(0.353606773125176, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_highpass_filter.coeffs);
     for (uint16_t i = 0; i < FILTER_NUM_TAPS - 1; i++) {
         explorer_states.compensation_lowpass_filter.state[i] = 0.0;
         explorer_states.compensation_bandpass_filter.state[i] = 0.0;
