@@ -6,7 +6,7 @@
 #include "ads1262/utils.h"
 #include "utils/gpio.h"
 
-#define EXPLORER_SAMPLERATE 100
+#define EXPLORER_SAMPLERATE 50
 #define EXPLORER_BAUDRATE 115200
 
 // [Experimental Feature]

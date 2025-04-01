@@ -93,7 +93,7 @@ void setup(void) {
     ads1262_reg_set_mode_1(&ads1262_reg_mode_1);
 
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
-    ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_4800;
+    ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_1200;
     ads1262_reg_mode_2.gain = ADS1262_REG_MODE_2_GAIN_2;
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
 
