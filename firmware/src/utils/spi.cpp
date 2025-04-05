@@ -6,7 +6,7 @@ void mcu_utils_spi_init(bool is_rtos) {
 
     SPI.begin();
     SPI.setHwCs(false);
-    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE2));
+    SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE2));
 
     mcu_utils_delay_ms(100, is_rtos);
 }
