@@ -15,7 +15,6 @@
 
 #include "User/Inc/ads1262/regs/interface.h"
 #include "User/Inc/ads1262/regs/mode_0.h"
-#include "User/Inc/ads1262/regs/mode_1.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
 
 #include "User/Inc/icm42688/lsb_per_g.h"
