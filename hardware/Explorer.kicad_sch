@@ -12,7 +12,7 @@
 	)
 	(lib_symbols
 		(symbol "Mechanical:Fiducial"
-			(exclude_from_sim yes)
+			(exclude_from_sim no)
 			(in_bom no)
 			(on_board yes)
 			(property "Reference" "FID"
@@ -95,7 +95,7 @@
 			(pin_names
 				(offset 1.016)
 			)
-			(exclude_from_sim yes)
+			(exclude_from_sim no)
 			(in_bom no)
 			(on_board yes)
 			(property "Reference" "H"
@@ -443,7 +443,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
 			(at 186.69 80.01 0)
 			(effects
 				(font
@@ -571,7 +571,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
 			(at 186.69 99.06 0)
 			(effects
 				(font
@@ -635,7 +635,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
 			(at 186.69 92.71 0)
 			(effects
 				(font
@@ -699,7 +699,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
 			(at 186.69 86.36 0)
 			(effects
 				(font
