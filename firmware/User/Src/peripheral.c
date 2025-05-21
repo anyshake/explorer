@@ -34,18 +34,26 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     icm42688_reg_set_pwr_mgmt0(&icm42688_reg_pwr_mgmt0);
     return icm42688_get_lsb_per_g();
 #else
-    lsm6ds3_reg_int1_ctrl_t lsm6ds3_reg_int1_ctrl = lsm6ds3_reg_new_int1_ctrl();
-    lsm6ds3_reg_int1_ctrl.drdy_xl = LSM6DS3_REG_INT1_CTRL_DRDY_XL_ENABLED;
-    lsm6ds3_reg_set_int1_ctrl(&lsm6ds3_reg_int1_ctrl);
     lsm6ds3_reg_ctrl3_c_t lsm6ds3_reg_ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
     lsm6ds3_reg_ctrl3_c.bdu = LSM6DS3_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
     lsm6ds3_reg_ctrl3_c.if_inc = LSM6DS3_REG_CTRL3_C_IF_INC_ENABLED;
     lsm6ds3_reg_set_ctrl3_c(&lsm6ds3_reg_ctrl3_c);
     lsm6ds3_reg_ctrl1_xl_t lsm6ds3_reg_ctrl1_xl = lsm6ds3_reg_new_ctrl1_xl();
-    lsm6ds3_reg_ctrl1_xl.odr_xl = LSM6DS3_REG_CTRL1_XL_ODR_XL_833HZ;
+    lsm6ds3_reg_ctrl1_xl.odr_xl = LSM6DS3_REG_CTRL1_XL_ODR_XL_416HZ;
     lsm6ds3_reg_ctrl1_xl.fs_xl = LSM6DS3_REG_CTRL1_XL_FS_XL_2G;
-    lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_100HZ;
+    lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_50HZ;
     lsm6ds3_reg_set_ctrl1_xl(&lsm6ds3_reg_ctrl1_xl);
+    lsm6ds3_reg_ctrl4_c_t lsm6ds3_reg_ctrl4_c = lsm6ds3_reg_new_ctrl4_c();
+    lsm6ds3_reg_ctrl4_c.xl_bw_scal_odr = LSM6DS3_REG_CTRL4_C_XL_BW_SCAL_ODR_BW_XL;
+    lsm6ds3_reg_set_ctrl4_c(&lsm6ds3_reg_ctrl4_c);
+    lsm6ds3_reg_ctrl10_c_t lsm6ds3_reg_ctrl10_c = lsm6ds3_reg_new_ctrl10_c();
+    lsm6ds3_reg_ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_ENABLE;
+    lsm6ds3_reg_set_ctrl10_c(&lsm6ds3_reg_ctrl10_c);
+    lsm6ds3_reg_ctrl8_xl_t lsm6ds3_reg_ctrl8_xl = lsm6ds3_reg_new_ctrl8_xl();
+    lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_9;
+    lsm6ds3_reg_ctrl8_xl.lpf2_xl_en = LSM6DS3_REG_CTRL8_XL_LPF2_XL_EN_ENABLE;
+    lsm6ds3_reg_ctrl8_xl.hp_slope_xl_en = LSM6DS3_REG_CTRL8_XL_HP_SLOPE_XL_EN_ENABLE;
+    lsm6ds3_reg_set_ctrl8_xl(&lsm6ds3_reg_ctrl8_xl);
     return lsm6ds3_get_lsb_per_g();
 #endif
 }

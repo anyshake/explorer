@@ -6,6 +6,7 @@
 
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
 #include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
+#include "User/Inc/lsm6ds3/regs/status_reg.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/i2c.h"

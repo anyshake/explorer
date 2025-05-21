@@ -13,10 +13,10 @@ void lsm6ds3_reset(bool is_rtos) {
 }
 
 void lsm6ds3_wait(void) {
-    lsm6ds3_reg_int1_ctrl_t int1_ctrl;
+    lsm6ds3_reg_status_reg_t status_reg;
     do {
-        lsm6ds3_reg_get_int1_ctrl(&int1_ctrl);
-    } while (!int1_ctrl.drdy_xl);
+        lsm6ds3_reg_get_status_reg(&status_reg);
+    } while (!status_reg.xlda);
 }
 
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data) {

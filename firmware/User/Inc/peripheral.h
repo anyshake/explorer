@@ -25,9 +25,11 @@
 #include "User/Inc/icm42688/utils.h"
 
 #include "User/Inc/lsm6ds3/lsb_per_g.h"
+#include "User/Inc/lsm6ds3/regs/ctrl10_c.h"
 #include "User/Inc/lsm6ds3/regs/ctrl1_xl.h"
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
-#include "User/Inc/lsm6ds3/regs/int1_ctrl.h"
+#include "User/Inc/lsm6ds3/regs/ctrl4_c.h"
+#include "User/Inc/lsm6ds3/regs/ctrl8_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
 void peri_gnss_init(void);
