@@ -20,6 +20,8 @@
 #include "User/Inc/icm42688/lsb_per_g.h"
 #include "User/Inc/icm42688/regs/accel_config0.h"
 #include "User/Inc/icm42688/regs/accel_config_static2.h"
+#include "User/Inc/icm42688/regs/accel_config_static3.h"
+#include "User/Inc/icm42688/regs/accel_config_static4.h"
 #include "User/Inc/icm42688/regs/gyro_accel_config0.h"
 #include "User/Inc/icm42688/regs/pwr_mgmt0.h"
 #include "User/Inc/icm42688/utils.h"

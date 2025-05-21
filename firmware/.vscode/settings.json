@@ -92,6 +92,7 @@
         "status_reg.h": "c",
         "ctrl4_c.h": "c",
         "ctrl8_xl.h": "c",
-        "ctrl10_c.h": "c"
+        "ctrl10_c.h": "c",
+        "accel_config_static3.h": "c"
     }
 }

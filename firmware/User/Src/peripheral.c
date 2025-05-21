@@ -18,13 +18,20 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
 #ifdef USE_ICM42688
     icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
     icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;
-    icm42688_reg_accel_config0.accel_odr = ICM42688_REG_ACCEL_CONFIG0_ACCEL_ODR_1_KHZ;
+    icm42688_reg_accel_config0.accel_odr = ICM42688_REG_ACCEL_CONFIG0_ACCEL_ODR_500_HZ;
     icm42688_reg_set_accel_config0(&icm42688_reg_accel_config0);
     icm42688_reg_gyro_accel_config0_t icm42688_reg_gyro_accel_config0 = icm42688_reg_new_gyro_accel_config0();
-    icm42688_reg_gyro_accel_config0.accel_ui_filt_bw = ICM42688_REG_GYRO_ACCEL_CONFIG0_ACCEL_UI_FILT_BW_LOW_LATENCY_ODR_DEC2;
+    icm42688_reg_gyro_accel_config0.accel_ui_filt_bw = ICM42688_REG_GYRO_ACCEL_CONFIG0_ACCEL_UI_FILT_BW_MAX_400HZ_ODR_20;
     icm42688_reg_set_gyro_accel_config0(&icm42688_reg_gyro_accel_config0);
+    icm42688_reg_accel_config_static3_t icm42688_reg_accel_config_static3 = icm42688_reg_new_accel_config_static3();
+    icm42688_reg_accel_config_static3.accel_aaf_deltsqr_bit_0_to_7 = 1;
+    icm42688_reg_set_accel_config_static3(&icm42688_reg_accel_config_static3);
+    icm42688_reg_accel_config_static4_t icm42688_reg_accel_config_static4 = icm42688_reg_new_accel_config_static4();
+    icm42688_reg_accel_config_static4.accel_aaf_deltsqr_bit_8_to_11 = 0;
+    icm42688_reg_accel_config_static4.accel_aaf_bitshift = 15;
+    icm42688_reg_set_accel_config_static4(&icm42688_reg_accel_config_static4);
     icm42688_reg_accel_config_static2_t icm42688_reg_accel_config_static2 = icm42688_reg_new_accel_config_static2();
-    icm42688_reg_accel_config_static2.accel_aaf_delt = 100;
+    icm42688_reg_accel_config_static2.accel_aaf_delt = 1;
     icm42688_reg_accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_ENABLED;
     icm42688_reg_set_accel_config_static2(&icm42688_reg_accel_config_static2);
     icm42688_reg_pwr_mgmt0_t icm42688_reg_pwr_mgmt0 = icm42688_reg_new_pwr_mgmt0();

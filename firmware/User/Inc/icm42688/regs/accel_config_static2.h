@@ -13,9 +13,9 @@
 
 typedef struct {
     // Controls bandwidth of the accelerometer anti-alias filter
-    // 0x01 to 0x3F: Accelerometer anti-alias filter bandwidth setting in Hz
+    // 0x01 to 0x3F: See section 5.2 for details
     uint8_t accel_aaf_delt;
-    // Disables the Accelerometer Anti Alias Filte
+    // Disables the Accelerometer Anti Alias Filter
     // 0x00: Enable accelerometer anti-aliasing filter (default)
     // 0x01: Disable accelerometer anti-aliasing filter
     uint8_t accel_aaf_dis;
