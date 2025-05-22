@@ -23,7 +23,6 @@
 #include "User/Inc/gnss/utils.h"
 
 #include "User/Inc/array.h"
-#include "User/Inc/calibration.h"
 #include "User/Inc/magic.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/peripheral.h"
@@ -128,7 +127,7 @@ void task_acquire_data(void* argument) {
         acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
 
         if (!states->use_accelerometer || states->channel_6d) {
-            get_adc_readout(ADS1262_CTL_PIN, acq_msg.adc_data);
+            get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
         }
 
         if (states->use_accelerometer || states->channel_6d) {
@@ -300,7 +299,20 @@ void system_setup(void) {
     mcu_utils_delay_ms(1000, false);
 
     peri_eeprom_init();
-    eeprom_read((uint8_t*)&states.device_id, sizeof(states.device_id));
+    eeprom_read((uint8_t*)&states.device_id, 0, sizeof(states.device_id));
+
+    states.adc_calibration_offset = adc_calibration_offset_new();
+    uint8_t calib_factors_status = 0;
+    eeprom_read((uint8_t*)&calib_factors_status, 4, sizeof(calib_factors_status));
+    if (calib_factors_status == 1) {
+        eeprom_read(states.adc_calibration_offset.channel_1, 5, sizeof(states.adc_calibration_offset.channel_1));
+        eeprom_read(states.adc_calibration_offset.channel_2, 11, sizeof(states.adc_calibration_offset.channel_2));
+        eeprom_read(states.adc_calibration_offset.channel_3, 17, sizeof(states.adc_calibration_offset.channel_3));
+    } else {
+        ssd1306_display_string(0, 0, "No Calib Params", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        mcu_utils_led_blink(MCU_STATE_PIN, 100, false);
+        mcu_utils_delay_ms(1000, false);
+    }
 
 #ifdef USE_ICM42688
     icm42688_reset(false);
@@ -317,12 +329,6 @@ void system_setup(void) {
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
-    if (!states.use_accelerometer || states.channel_6d) {
-        ssd1306_display_string(0, 0, "ADC Calibrating", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        calibrate_adc_offset(ADS1262_CTL_PIN);
-        mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
-        mcu_utils_delay_ms(1000, false);
-    }
 
     peri_gnss_init();
     if (states.use_gnss_time) {

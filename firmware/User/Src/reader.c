@@ -1,9 +1,24 @@
 #include "User/Inc/reader.h"
 
-void get_adc_readout(ads1262_ctl_pin_t ctl_pin, int32_t arr[]) {
-    ads1262_reg_inpmux_t inpmux = ads1262_reg_new_inpmux();
+adc_calibration_offset_t adc_calibration_offset_new(void) {
+    adc_calibration_offset_t offset_cal;
+    for (int i = 0; i < 3; i++) {
+        offset_cal.channel_1[i] = 0x00;
+        offset_cal.channel_2[i] = 0x00;
+        offset_cal.channel_3[i] = 0x00;
+    }
+    return offset_cal;
+}
 
+void get_adc_readout(ads1262_ctl_pin_t ctl_pin, adc_calibration_offset_t offset_cal, int32_t arr[]) {
+    ads1262_reg_ofcal_t ofcal = ads1262_reg_new_ofcal();
+    ads1262_reg_inpmux_t inpmux = ads1262_reg_new_inpmux();
     ads1262_cmd_rdata_t rdata;
+
+    ofcal.ofcal_0 = offset_cal.channel_1[0];
+    ofcal.ofcal_1 = offset_cal.channel_1[1];
+    ofcal.ofcal_2 = offset_cal.channel_1[2];
+    ads1262_reg_set_ofcal(&ofcal);
     inpmux.mux_p = ADS1262_REG_INPMUX_AIN0;
     inpmux.mux_n = ADS1262_REG_INPMUX_AIN1;
     ads1262_reg_set_inpmux(&inpmux);
@@ -12,6 +27,10 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, int32_t arr[]) {
                  ? rdata.data
                  : 0;
 
+    ofcal.ofcal_0 = offset_cal.channel_2[0];
+    ofcal.ofcal_1 = offset_cal.channel_2[1];
+    ofcal.ofcal_2 = offset_cal.channel_2[2];
+    ads1262_reg_set_ofcal(&ofcal);
     inpmux.mux_p = ADS1262_REG_INPMUX_AIN2;
     inpmux.mux_n = ADS1262_REG_INPMUX_AIN3;
     ads1262_reg_set_inpmux(&inpmux);
@@ -20,6 +39,10 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, int32_t arr[]) {
                  ? rdata.data
                  : 0;
 
+    ofcal.ofcal_0 = offset_cal.channel_3[0];
+    ofcal.ofcal_1 = offset_cal.channel_3[1];
+    ofcal.ofcal_2 = offset_cal.channel_3[2];
+    ads1262_reg_set_ofcal(&ofcal);
     inpmux.mux_p = ADS1262_REG_INPMUX_AIN4;
     inpmux.mux_n = ADS1262_REG_INPMUX_AIN5;
     ads1262_reg_set_inpmux(&inpmux);
