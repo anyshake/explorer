@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/anyshake/logotype/master/banner_explorer.png" width="500"/>
+  <img src="https://raw.githubusercontent.com/anyshake/explorer/master/images/header.png" width="500"/>
 </p>
 
 ## Overview
@@ -20,7 +20,7 @@ See [README.md](https://github.com/anyshake/explorer/tree/v1/firmware/README.md)
 
 ## Documentation
 
-Please visit [anyshake.org/docs/introduction](https://anyshake.org/docs/introduction) for quick start guide and more information.
+Please visit [https://anyshake.org/docs/project-overview](https://anyshake.org/docs/project-overview/) for quick start guide and more information.
 
 ## Features
 
