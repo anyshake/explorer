@@ -21,6 +21,6 @@ If you don't have git installed, you can download the source code as a `.zip` or
 
 ## Open Project
 
-Open `firmware/Explorer.kicad_pro` with KiCAD to view the project, you can also open `firmware/Explorer.sch` or `firmware/Explorer.kicad_pcb` directly.
+Open `hardware/Explorer.kicad_pro` with KiCAD to view the project, you can also open `hardware/Explorer.sch` or `hardware/Explorer.kicad_pcb` directly.
 
 **Please note that the project is created with KiCAD 9.0.0, it may not be compatible with other versions, just ignore the warnings and continue.**
