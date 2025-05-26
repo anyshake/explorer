@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.1
+          "min_clearance": 0.2
         }
       },
       "diff_pair_dimensions": [
@@ -60,15 +60,31 @@
       ],
       "drc_exclusions": [
         [
-          "silk_edge_clearance|145204400|70092500|d27be979-b0e1-4e05-9af0-0d5d4aac41ea|5769cfe9-c48e-4323-8b51-1d5a4db0dc41",
+          "silk_edge_clearance|145204400|70092500|9daf34d4-7e03-4211-9d80-ee740939d794|2b65babe-944f-41a5-b65a-808f85fddcb1",
           ""
         ],
         [
-          "silk_edge_clearance|189745000|103671400|d27be979-b0e1-4e05-9af0-0d5d4aac41ea|49a586ac-8e64-4b79-86c2-91d035809524",
+          "silk_edge_clearance|189745000|103671400|55217231-0e97-4f81-b5e9-55b0bf12bce5|058d8cd3-b91a-41f0-903f-630c83ebd5da",
           ""
         ],
         [
-          "silk_edge_clearance|189745000|91451400|d27be979-b0e1-4e05-9af0-0d5d4aac41ea|0b9b4f66-64ad-4a14-9654-18c80a355a5d",
+          "silk_edge_clearance|189745000|91451400|55217231-0e97-4f81-b5e9-55b0bf12bce5|57a12ee5-5706-4efb-8cf1-1d28b6049599",
+          ""
+        ],
+        [
+          "silk_over_copper|145204400|74028111|2b65babe-944f-41a5-b65a-808f85fddcb1|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "solder_mask_bridge|117508547|71718554|dfa0eaff-b39d-4f6b-b597-adffbdd932fd|e3b3b617-c95f-4ee5-8baa-034bf5052b8a",
+          ""
+        ],
+        [
+          "solder_mask_bridge|118338547|124028554|72e12f5d-c0bb-4587-81a5-d88614ae92e1|e3b3b617-c95f-4ee5-8baa-034bf5052b8a",
+          ""
+        ],
+        [
+          "solder_mask_bridge|188738547|109448554|a3c1936b-379e-435f-9151-76101bef8962|e3b3b617-c95f-4ee5-8baa-034bf5052b8a",
           ""
         ]
       ],
@@ -121,6 +137,7 @@
         "solder_mask_bridge": "error",
         "starved_thermal": "error",
         "text_height": "warning",
+        "text_on_edge_cuts": "error",
         "text_thickness": "warning",
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
@@ -146,7 +163,7 @@
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
-        "min_text_height": 0.8,
+        "min_text_height": 0.5,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.0,
@@ -237,6 +254,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 0.6,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -462,7 +483,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "same_local_global_label": "warning",
       "similar_label_and_power": "warning",
@@ -518,7 +539,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "./",
-      "plot": "",
+      "plot": "gerber",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
