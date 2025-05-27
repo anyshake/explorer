@@ -13,13 +13,21 @@
 #include "ads1262/regs/mode_0.h"
 #include "ads1262/regs/mode_1.h"
 #include "ads1262/regs/mode_2.h"
+#include "ads1262/regs/power.h"
 
 #include "array.h"
-#include "calibration.h"
 #include "filter.h"
 #include "packet.h"
 #include "reader.h"
 #include "settings.h"
+
+#ifndef FW_BUILD
+#define FW_BUILD "unknownbuild"
+#endif
+
+#ifndef FW_REV
+#define FW_REV "custombuild"
+#endif
 
 typedef struct {
     uint8_t sample_time_span;
@@ -50,9 +58,11 @@ void setup(void) {
     explorer_states.timestamp = 0;
 
 #if ENABLE_COMPENSATION == true
-    filter_fir_lowpass_get_coeffs(0.353606773125176, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_lowpass_filter.coeffs);
-    filter_fir_bandpass_get_coeffs(0.146500000000000, 0.853500000000000, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_bandpass_filter.coeffs);
-    filter_fir_highpass_get_coeffs(0.353606773125176, EXPLORER_SAMPLERATE, FILTER_NUM_TAPS, explorer_states.compensation_highpass_filter.coeffs);
+    for (uint16_t i = 0; i < FILTER_NUM_TAPS; i++) {
+        explorer_states.compensation_lowpass_filter.coeffs[i] = LPF_COEFFS[i];
+        explorer_states.compensation_bandpass_filter.coeffs[i] = BPF_COEFFS[i];
+        explorer_states.compensation_highpass_filter.coeffs[i] = HPF_COEFFS[i];
+    }
     for (uint16_t i = 0; i < FILTER_NUM_TAPS - 1; i++) {
         explorer_states.compensation_lowpass_filter.state[i] = 0.0;
         explorer_states.compensation_bandpass_filter.state[i] = 0.0;
@@ -88,16 +98,15 @@ void setup(void) {
     ads1262_reg_mode_0.run_mode = ADS1262_REG_MODE_0_RUN_MODE_ONESHOT;
     ads1262_reg_set_mode_0(&ads1262_reg_mode_0);
 
-    ads1262_reg_mode_1_t ads1262_reg_mode_1 = ads1262_reg_new_mode_1();
-    ads1262_reg_mode_1.filter = ADS1262_REG_MODE_1_FILTER_SINC1;
-    ads1262_reg_set_mode_1(&ads1262_reg_mode_1);
-
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
+    ads1262_reg_mode_2.gain = ADS1262_REG_MODE_2_GAIN_8;
     ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_1200;
-    ads1262_reg_mode_2.gain = ADS1262_REG_MODE_2_GAIN_2;
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
 
-    calibrate_adc_offset(ADS1262_CTL_PIN);
+    ads1262_reg_power_t ads1262_reg_power = ads1262_reg_new_power();
+    ads1262_reg_power.vbias = ADS1262_REG_POWER_VBIAS_ENABLED;
+    ads1262_reg_set_power(&ads1262_reg_power);
+
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
 
     mcu_utils_delay_ms(1000, false);
@@ -129,12 +138,7 @@ void loop(void) {
         apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.compensation_lowpass_filter, &explorer_states.compensation_bandpass_filter, &explorer_states.compensation_highpass_filter);
         apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.compensation_lowpass_filter, &explorer_states.compensation_bandpass_filter, &explorer_states.compensation_highpass_filter);
 #endif
-        send_data_packet(explorer_states.timestamp,
-                         explorer_states.adc_readout_z_axis,
-                         explorer_states.adc_readout_e_axis,
-                         explorer_states.adc_readout_n_axis,
-                         MAINLINE_PACKET_CHANNEL_SAMPLES,
-                         explorer_states.uart_packet_buffer);
+        send_data_packet(explorer_states.timestamp, explorer_states.adc_readout_z_axis, explorer_states.adc_readout_e_axis, explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.uart_packet_buffer);
         explorer_states.sample_pos = 0;
     }
 }

@@ -6,14 +6,16 @@
 #include "ads1262/utils.h"
 #include "utils/gpio.h"
 
-#define EXPLORER_SAMPLERATE 50
-#define EXPLORER_BAUDRATE 115200
-
 // [Experimental Feature]
 // Enable this if you are using 4.5 Hz geophone (e.g. LGT-4.5)
 // this is useful for geophone low frequency response (<= 1.0 Hz)
 // see filter.h, filter.c for detailed implementation
 #define ENABLE_COMPENSATION true
+
+// If EXPLORER_SAMPLERATE changed and ENABLE_COMPENSATION is true
+// also remember to change LPF_COEFFS, BPF_COEFFS, HPF_COEFFS coefficients in filter.h
+#define EXPLORER_SAMPLERATE 100
+#define EXPLORER_BAUDRATE 115200
 
 static const mcu_utils_gpio_t MCU_STATE_PIN = {
     .pin = 2,
