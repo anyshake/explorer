@@ -58,12 +58,12 @@ void setup(void) {
     explorer_states.timestamp = 0;
 
 #if ENABLE_COMPENSATION == true
-    for (uint16_t i = 0; i < FILTER_NUM_TAPS; i++) {
+    for (uint16_t i = 0; i < NUM_TAPS; i++) {
         explorer_states.compensation_lowpass_filter.coeffs[i] = LPF_COEFFS[i];
         explorer_states.compensation_bandpass_filter.coeffs[i] = BPF_COEFFS[i];
         explorer_states.compensation_highpass_filter.coeffs[i] = HPF_COEFFS[i];
     }
-    for (uint16_t i = 0; i < FILTER_NUM_TAPS - 1; i++) {
+    for (uint16_t i = 0; i < NUM_TAPS - 1; i++) {
         explorer_states.compensation_lowpass_filter.state[i] = 0.0;
         explorer_states.compensation_bandpass_filter.state[i] = 0.0;
         explorer_states.compensation_highpass_filter.state[i] = 0.0;
