@@ -9653,7 +9653,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED_Small"
+		(property "Value" "Yellow"
 			(at 163.83 36.7664 90)
 			(effects
 				(font
@@ -11206,7 +11206,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED_Small"
+		(property "Value" "Yellow"
 			(at 128.27 36.7664 90)
 			(effects
 				(font
@@ -11722,7 +11722,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED_Small"
+		(property "Value" "Yellow"
 			(at 146.05 36.7664 90)
 			(effects
 				(font
@@ -12528,7 +12528,7 @@
 		(fields_autoplaced yes)
 		(uuid "ea5baafe-c7d3-4f83-88a8-ecdd18be4cc5")
 		(property "Reference" "C3"
-			(at 58.039 33.1002 0)
+			(at 58.42 32.4738 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12536,8 +12536,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470uF"
-			(at 58.039 35.0212 0)
+		(property "Value" "220uF"
+			(at 58.42 35.0138 0)
 			(effects
 				(font
 					(size 1.27 1.27)
