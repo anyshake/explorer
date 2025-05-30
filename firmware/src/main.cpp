@@ -157,8 +157,8 @@ void loop(void) {
     if (explorer_states.sample_pos == MAINLINE_PACKET_CHANNEL_SAMPLES) {
 #if ENABLE_COMPENSATION == true
         apply_data_compensation(explorer_states.adc_readout_z_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.z_axis_compensation_lowpass_filter, &explorer_states.z_axis_compensation_bandpass_filter, &explorer_states.z_axis_compensation_highpass_filter);
-        apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.z_axis_compensation_lowpass_filter, &explorer_states.e_axis_compensation_bandpass_filter, &explorer_states.e_axis_compensation_highpass_filter);
-        apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.z_axis_compensation_lowpass_filter, &explorer_states.n_axis_compensation_bandpass_filter, &explorer_states.n_axis_compensation_highpass_filter);
+        apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.e_axis_compensation_lowpass_filter, &explorer_states.e_axis_compensation_bandpass_filter, &explorer_states.e_axis_compensation_highpass_filter);
+        apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.n_axis_compensation_lowpass_filter, &explorer_states.n_axis_compensation_bandpass_filter, &explorer_states.n_axis_compensation_highpass_filter);
 #endif
         send_data_packet(explorer_states.timestamp, explorer_states.adc_readout_z_axis, explorer_states.adc_readout_e_axis, explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.uart_packet_buffer);
         explorer_states.sample_pos = 0;
