@@ -17355,7 +17355,7 @@
 		(layer "Edge.Cuts")
 		(uuid "f25b5765-1255-4107-8496-561a07cd1589")
 	)
-	(gr_text "TXD  RXD  GND"
+	(gr_text "GND  RXD  TXD"
 		(at 123.7748 89.328572 90)
 		(layer "F.SilkS")
 		(uuid "0b5a20fa-74d9-4f8e-bd12-7f0a45930595")
@@ -17472,7 +17472,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "HWREV: 20250528"
+	(gr_text "HWREV: 20250530"
 		(at 180 110 0)
 		(layer "F.SilkS" knockout)
 		(uuid "a491f88a-8196-4820-abd0-f3a12197a91a")

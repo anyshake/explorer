@@ -4237,7 +4237,7 @@
 		(uuid "59e7c6f9-6e46-453c-ac21-82d2d25d13d4")
 	)
 	(junction
-		(at 208.28 135.89)
+		(at 208.28 127)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "67772362-1ae7-4509-9b6f-ad14a2cc2490")
@@ -4273,7 +4273,7 @@
 		(uuid "90de5e83-545c-446a-831e-6110cbc2da94")
 	)
 	(junction
-		(at 208.28 146.05)
+		(at 208.28 137.16)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "964c5204-c7ef-44be-a418-741efc4637c8")
@@ -4420,7 +4420,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 146.05) (xy 217.17 146.05)
+			(xy 208.28 137.16) (xy 217.17 137.16)
 		)
 		(stroke
 			(width 0)
@@ -4480,7 +4480,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 135.89) (xy 208.28 135.89)
+			(xy 201.93 127) (xy 208.28 127)
 		)
 		(stroke
 			(width 0)
@@ -4490,7 +4490,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 139.7) (xy 217.17 135.89)
+			(xy 217.17 130.81) (xy 217.17 127)
 		)
 		(stroke
 			(width 0)
@@ -4720,7 +4720,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 143.51) (xy 189.23 146.05)
+			(xy 189.23 134.62) (xy 189.23 137.16)
 		)
 		(stroke
 			(width 0)
@@ -4850,7 +4850,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 142.24) (xy 219.71 142.24)
+			(xy 217.17 133.35) (xy 219.71 133.35)
 		)
 		(stroke
 			(width 0)
@@ -5470,7 +5470,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 135.89) (xy 189.23 138.43)
+			(xy 189.23 127) (xy 189.23 129.54)
 		)
 		(stroke
 			(width 0)
@@ -5720,7 +5720,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 146.05) (xy 217.17 142.24)
+			(xy 217.17 137.16) (xy 217.17 133.35)
 		)
 		(stroke
 			(width 0)
@@ -5990,7 +5990,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 135.89) (xy 217.17 135.89)
+			(xy 208.28 127) (xy 217.17 127)
 		)
 		(stroke
 			(width 0)
@@ -6260,7 +6260,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 135.89) (xy 196.85 135.89)
+			(xy 189.23 127) (xy 196.85 127)
 		)
 		(stroke
 			(width 0)
@@ -6310,7 +6310,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 143.51) (xy 208.28 146.05)
+			(xy 208.28 134.62) (xy 208.28 137.16)
 		)
 		(stroke
 			(width 0)
@@ -6370,7 +6370,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 135.89) (xy 208.28 138.43)
+			(xy 208.28 127) (xy 208.28 129.54)
 		)
 		(stroke
 			(width 0)
@@ -6380,7 +6380,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 139.7) (xy 217.17 139.7)
+			(xy 219.71 130.81) (xy 217.17 130.81)
 		)
 		(stroke
 			(width 0)
@@ -6400,7 +6400,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 146.05) (xy 208.28 146.05)
+			(xy 189.23 137.16) (xy 208.28 137.16)
 		)
 		(stroke
 			(width 0)
@@ -6529,7 +6529,7 @@
 		(uuid "2ca80012-c6ed-4254-b9e0-7fdaf5ddcf7f")
 	)
 	(label "EHE"
-		(at 189.23 135.89 0)
+		(at 189.23 127 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6739,7 +6739,7 @@
 		(uuid "92318a4a-d477-4345-9727-4ecfce001190")
 	)
 	(label "AINCOM"
-		(at 196.85 146.05 0)
+		(at 196.85 137.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9783,7 +9783,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 189.23 140.97 180)
+		(at 189.23 132.08 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9792,7 +9792,7 @@
 		(fields_autoplaced yes)
 		(uuid "57789ee6-9dd6-48ef-95be-21e28c960e8c")
 		(property "Reference" "C14"
-			(at 191.77 139.6935 0)
+			(at 191.77 130.8035 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9801,7 +9801,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 191.77 142.2335 0)
+			(at 191.77 133.3435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9810,7 +9810,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
-			(at 189.23 140.97 0)
+			(at 189.23 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -9820,7 +9820,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 189.23 140.97 0)
+			(at 189.23 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -9830,7 +9830,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 189.23 140.97 0)
+			(at 189.23 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -10716,7 +10716,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 224.79 139.7 0)
+		(at 224.79 130.81 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10725,7 +10725,7 @@
 		(fields_autoplaced yes)
 		(uuid "ab72f442-a5e4-42e1-8887-3a65f447967f")
 		(property "Reference" "J6"
-			(at 226.822 140.3263 0)
+			(at 226.822 131.4363 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10734,7 +10734,7 @@
 			)
 		)
 		(property "Value" "EHE"
-			(at 226.822 142.2473 0)
+			(at 226.822 133.3573 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10743,7 +10743,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
-			(at 224.79 139.7 0)
+			(at 224.79 130.81 0)
 			(show_name yes)
 			(effects
 				(font
@@ -10753,7 +10753,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 224.79 139.7 0)
+			(at 224.79 130.81 0)
 			(show_name yes)
 			(effects
 				(font
@@ -10763,7 +10763,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 224.79 139.7 0)
+			(at 224.79 130.81 0)
 			(show_name yes)
 			(effects
 				(font
@@ -11116,7 +11116,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 208.28 140.97 180)
+		(at 208.28 132.08 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11125,7 +11125,7 @@
 		(fields_autoplaced yes)
 		(uuid "bb38ec65-e247-4825-8c9a-c9938c644be0")
 		(property "Reference" "R13"
-			(at 210.82 139.6999 0)
+			(at 210.82 130.8099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11134,7 +11134,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 210.82 142.2399 0)
+			(at 210.82 133.3499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11143,7 +11143,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1210_3225Metric_Pad1.30x2.65mm_HandSolder"
-			(at 208.28 140.97 0)
+			(at 208.28 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -11153,7 +11153,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 208.28 140.97 0)
+			(at 208.28 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -11163,7 +11163,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 208.28 140.97 0)
+			(at 208.28 132.08 0)
 			(show_name yes)
 			(effects
 				(font
@@ -12134,7 +12134,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 199.39 135.89 90)
+		(at 199.39 127 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12143,7 +12143,7 @@
 		(fields_autoplaced yes)
 		(uuid "e136bb55-d28e-4c39-af53-6c52f24e1fb6")
 		(property "Reference" "R11"
-			(at 199.39 130.175 90)
+			(at 199.39 121.285 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12151,7 +12151,7 @@
 			)
 		)
 		(property "Value" "5.9k"
-			(at 199.39 132.715 90)
+			(at 199.39 123.825 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12159,7 +12159,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1210_3225Metric_Pad1.30x2.65mm_HandSolder"
-			(at 199.39 135.89 0)
+			(at 199.39 127 0)
 			(show_name yes)
 			(effects
 				(font
@@ -12169,7 +12169,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 199.39 135.89 0)
+			(at 199.39 127 0)
 			(show_name yes)
 			(effects
 				(font
@@ -12179,7 +12179,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 199.39 135.89 0)
+			(at 199.39 127 0)
 			(show_name yes)
 			(effects
 				(font
