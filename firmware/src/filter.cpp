@@ -32,7 +32,7 @@ void apply_data_compensation(int32_t* arr, uint16_t len, filter_fir_t* lowpass_f
     filter_fir_apply(highpass_filter, input, len, hp_output);
 
     for (uint16_t i = 0; i < len; i++) {
-        float result = (130.0 * lp_output[i] + 5.0 * bp_output[i] + hp_output[i]) * 2;
+        float result = (LPF_MAG * lp_output[i] + BPF_MAG * bp_output[i] + HPF_MAG * hp_output[i]) * 2;
         arr[i] = (int32_t)result;
     }
 }
