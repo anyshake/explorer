@@ -9942,15 +9942,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 97.79 107.95 0)
+		(at 179.07 107.95 0)
+		(mirror x)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "28961f06-7f37-4b8d-8561-691359c7cbe2")
-		(property "Reference" "U15"
-			(at 91.694 99.06 0)
+		(property "Reference" "U19"
+			(at 185.928 109.728 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9958,7 +9959,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 91.694 101.6 0)
+			(at 185.928 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9966,7 +9967,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 97.79 107.95 0)
+			(at 179.07 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9975,7 +9976,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 97.79 107.95 0)
+			(at 179.07 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9984,7 +9985,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 97.79 107.95 0)
+			(at 179.07 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10019,7 +10020,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
+					(reference "U19")
 					(unit 2)
 				)
 			)
@@ -10707,15 +10708,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 49.53 31.75 0)
+		(at 148.59 33.02 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "3c572221-d3c2-4ddc-8137-280074c2d057")
-		(property "Reference" "U13"
-			(at 42.926 22.86 0)
+		(property "Reference" "U17"
+			(at 154.94 35.052 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10723,7 +10725,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 42.926 25.4 0)
+			(at 154.94 37.084 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10731,7 +10733,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 49.53 31.75 0)
+			(at 148.59 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10740,7 +10742,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 49.53 31.75 0)
+			(at 148.59 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10749,7 +10751,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 49.53 31.75 0)
+			(at 148.59 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10784,7 +10786,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
+					(reference "U17")
 					(unit 1)
 				)
 			)
@@ -11477,16 +11479,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 148.59 109.22 0)
-		(mirror x)
+		(at 49.53 107.95 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "4c1d0177-b823-467a-8d22-c1cb9e228e6c")
-		(property "Reference" "U19"
-			(at 154.432 111.76 0)
+		(property "Reference" "U15"
+			(at 43.688 99.822 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11494,7 +11495,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 154.432 114.3 0)
+			(at 43.434 102.108 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11502,7 +11503,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 148.59 109.22 0)
+			(at 49.53 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11511,7 +11512,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 148.59 109.22 0)
+			(at 49.53 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11520,7 +11521,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 148.59 109.22 0)
+			(at 49.53 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11555,7 +11556,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U19")
+					(reference "U15")
 					(unit 1)
 				)
 			)
@@ -12778,16 +12779,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 179.07 31.75 0)
-		(mirror x)
+		(at 97.79 31.75 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "7934d5fb-4978-4a30-b7bc-4f185411939a")
-		(property "Reference" "U17"
-			(at 184.912 34.29 0)
+		(property "Reference" "U13"
+			(at 93.218 23.622 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12795,7 +12795,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 184.912 36.83 0)
+			(at 92.964 25.654 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12803,7 +12803,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 179.07 31.75 0)
+			(at 97.79 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12812,7 +12812,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 179.07 31.75 0)
+			(at 97.79 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12821,7 +12821,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 179.07 31.75 0)
+			(at 97.79 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12856,7 +12856,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U17")
+					(reference "U13")
 					(unit 2)
 				)
 			)
@@ -13423,15 +13423,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 97.79 69.85 0)
+		(at 179.07 69.85 0)
+		(mirror x)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "81ceca1d-a265-4aa9-aee4-9afff9a81ad9")
-		(property "Reference" "U14"
-			(at 91.694 60.96 0)
+		(property "Reference" "U18"
+			(at 185.674 71.882 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13439,7 +13440,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 91.694 63.5 0)
+			(at 185.674 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13447,7 +13448,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 97.79 69.85 0)
+			(at 179.07 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13456,7 +13457,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 97.79 69.85 0)
+			(at 179.07 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13465,7 +13466,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 97.79 69.85 0)
+			(at 179.07 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13500,7 +13501,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
+					(reference "U18")
 					(unit 2)
 				)
 			)
@@ -13783,16 +13784,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 148.59 33.02 0)
-		(mirror x)
+		(at 49.53 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "87011673-f050-414e-878f-542068c6abfc")
-		(property "Reference" "U17"
-			(at 154.432 35.56 0)
+		(property "Reference" "U13"
+			(at 43.688 23.368 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13800,7 +13800,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 154.432 38.1 0)
+			(at 44.704 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13808,7 +13808,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 148.59 33.02 0)
+			(at 49.53 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13817,7 +13817,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 148.59 33.02 0)
+			(at 49.53 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13826,7 +13826,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 148.59 33.02 0)
+			(at 49.53 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13861,7 +13861,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U17")
+					(reference "U13")
 					(unit 1)
 				)
 			)
@@ -13877,7 +13877,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "87457c80-d981-4fc5-8ed4-fcbeaf50f3e0")
-		(property "Reference" "U15"
+		(property "Reference" "U19"
 			(at 266.7 96.5199 0)
 			(effects
 				(font
@@ -13949,7 +13949,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
+					(reference "U19")
 					(unit 3)
 				)
 			)
@@ -14522,15 +14522,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 49.53 107.95 0)
+		(at 148.59 109.22 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "938cbb80-208f-448c-85af-4894e439029d")
-		(property "Reference" "U15"
-			(at 42.926 99.06 0)
+		(property "Reference" "U19"
+			(at 155.194 111.252 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14538,7 +14539,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 42.926 101.6 0)
+			(at 155.194 113.538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14546,7 +14547,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 49.53 107.95 0)
+			(at 148.59 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14555,7 +14556,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 49.53 107.95 0)
+			(at 148.59 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14564,7 +14565,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 49.53 107.95 0)
+			(at 148.59 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14599,7 +14600,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U15")
+					(reference "U19")
 					(unit 1)
 				)
 			)
@@ -14806,16 +14807,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 148.59 71.12 0)
-		(mirror x)
+		(at 49.53 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "99c29057-51c3-4017-acd6-620532bb54a8")
-		(property "Reference" "U18"
-			(at 154.432 73.66 0)
+		(property "Reference" "U14"
+			(at 43.434 61.976 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14823,7 +14823,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 154.432 76.2 0)
+			(at 43.688 64.008 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14831,7 +14831,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 148.59 71.12 0)
+			(at 49.53 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14840,7 +14840,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 148.59 71.12 0)
+			(at 49.53 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14849,7 +14849,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 148.59 71.12 0)
+			(at 49.53 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14884,7 +14884,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U18")
+					(reference "U14")
 					(unit 1)
 				)
 			)
@@ -15027,16 +15027,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 179.07 69.85 0)
-		(mirror x)
+		(at 97.79 69.85 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "9dc2e447-5d32-44f8-897d-055dc3489e89")
-		(property "Reference" "U18"
-			(at 184.912 72.39 0)
+		(property "Reference" "U14"
+			(at 92.202 61.468 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15044,7 +15043,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 184.912 74.93 0)
+			(at 92.456 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15052,7 +15051,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 179.07 69.85 0)
+			(at 97.79 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15061,7 +15060,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 179.07 69.85 0)
+			(at 97.79 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15070,7 +15069,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 179.07 69.85 0)
+			(at 97.79 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15105,7 +15104,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U18")
+					(reference "U14")
 					(unit 2)
 				)
 			)
@@ -15467,7 +15466,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a86a6c74-6b87-43ab-9cfa-89b7634186a4")
-		(property "Reference" "U18"
+		(property "Reference" "U14"
 			(at 238.76 119.3799 0)
 			(effects
 				(font
@@ -15539,7 +15538,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U18")
+					(reference "U14")
 					(unit 3)
 				)
 			)
@@ -15761,7 +15760,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "abbc0824-3be6-4f0d-8717-48476c1b332f")
-		(property "Reference" "U17"
+		(property "Reference" "U13"
 			(at 209.55 119.3799 0)
 			(effects
 				(font
@@ -15833,7 +15832,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U17")
+					(reference "U13")
 					(unit 3)
 				)
 			)
@@ -16791,15 +16790,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 49.53 69.85 0)
+		(at 148.59 71.12 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "c4a34b1f-cce0-41af-8b6f-c03cfb667015")
-		(property "Reference" "U14"
-			(at 42.926 60.96 0)
+		(property "Reference" "U18"
+			(at 153.67 73.406 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16807,7 +16807,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 42.926 63.5 0)
+			(at 153.67 75.438 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16815,7 +16815,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 49.53 69.85 0)
+			(at 148.59 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16824,7 +16824,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 49.53 69.85 0)
+			(at 148.59 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16833,7 +16833,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 49.53 69.85 0)
+			(at 148.59 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16868,7 +16868,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
+					(reference "U18")
 					(unit 1)
 				)
 			)
@@ -17240,7 +17240,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c7a47ab3-48b8-40c1-b5ca-e32b00c7f15a")
-		(property "Reference" "U19"
+		(property "Reference" "U15"
 			(at 266.7 119.3799 0)
 			(effects
 				(font
@@ -17312,7 +17312,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U19")
+					(reference "U15")
 					(unit 3)
 				)
 			)
@@ -17522,16 +17522,15 @@
 	)
 	(symbol
 		(lib_id "Explorer:ADA4528-2ARMZ")
-		(at 179.07 107.95 0)
-		(mirror x)
+		(at 97.79 107.95 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "cb3eacac-7307-4dea-8d59-d110d38cd8d7")
-		(property "Reference" "U19"
-			(at 184.912 110.49 0)
+		(property "Reference" "U15"
+			(at 92.456 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17539,7 +17538,7 @@
 			)
 		)
 		(property "Value" "ADA4528-2ARMZ"
-			(at 184.912 113.03 0)
+			(at 93.472 101.854 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17547,7 +17546,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 179.07 107.95 0)
+			(at 97.79 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17556,7 +17555,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf"
-			(at 179.07 107.95 0)
+			(at 97.79 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17565,7 +17564,7 @@
 			)
 		)
 		(property "Description" "Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"
-			(at 179.07 107.95 0)
+			(at 97.79 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17600,7 +17599,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U19")
+					(reference "U15")
 					(unit 2)
 				)
 			)
@@ -18227,7 +18226,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d5fd8a62-61e7-48f3-81d6-22929e18e0b3")
-		(property "Reference" "U14"
+		(property "Reference" "U18"
 			(at 238.76 96.5199 0)
 			(effects
 				(font
@@ -18299,7 +18298,7 @@
 		(instances
 			(project "Explorer"
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U14")
+					(reference "U18")
 					(unit 3)
 				)
 			)
@@ -18657,7 +18656,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "df178056-8de9-4375-9cbe-00c00c75ae8c")
-		(property "Reference" "U13"
+		(property "Reference" "U17"
 			(at 209.55 96.5199 0)
 			(effects
 				(font
@@ -18729,7 +18728,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
+					(reference "U17")
 					(unit 3)
 				)
 			)
@@ -19206,15 +19205,16 @@
 	)
 	(symbol
 		(lib_id "Explorer:OPA2387DGKR")
-		(at 97.79 31.75 0)
+		(at 179.07 31.75 0)
+		(mirror x)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ecd185ef-9b05-485c-ac5c-0e65b5084dfd")
-		(property "Reference" "U13"
-			(at 91.694 22.86 0)
+		(property "Reference" "U17"
+			(at 186.182 33.528 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19222,7 +19222,7 @@
 			)
 		)
 		(property "Value" "OPA2387DGKR"
-			(at 91.694 25.4 0)
+			(at 185.928 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19230,7 +19230,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm"
-			(at 97.79 31.75 0)
+			(at 179.07 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19239,7 +19239,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/opa387.pdf"
-			(at 97.79 31.75 0)
+			(at 179.07 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19248,7 +19248,7 @@
 			)
 		)
 		(property "Description" "Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"
-			(at 97.79 31.75 0)
+			(at 179.07 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19283,7 +19283,7 @@
 		(instances
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/f5de9976-2d5a-4764-868a-75612195ab17"
-					(reference "U13")
+					(reference "U17")
 					(unit 2)
 				)
 			)
