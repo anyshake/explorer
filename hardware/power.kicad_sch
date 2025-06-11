@@ -2100,7 +2100,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Regulator_Linear:LP2985-5.0"
+		(symbol "Regulator_Linear:LP2985-2.5"
 			(pin_names
 				(offset 0.254)
 			)
@@ -2115,7 +2115,7 @@
 					)
 				)
 			)
-			(property "Value" "LP2985-5.0"
+			(property "Value" "LP2985-2.5"
 				(at 0 5.715 0)
 				(effects
 					(font
@@ -2142,7 +2142,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "150mA 16V Low-noise Low-dropout Regulator With Shutdown, 5.0V output voltage, SOT-23-5"
+			(property "Description" "150mA 16V Low-noise Low-dropout Regulator With Shutdown, 2.5V output voltage, SOT-23-5"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2169,7 +2169,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "LP2985-5.0_0_1"
+			(symbol "LP2985-2.5_0_1"
 				(rectangle
 					(start -7.62 -5.08)
 					(end 7.62 4.445)
@@ -2182,7 +2182,7 @@
 					)
 				)
 			)
-			(symbol "LP2985-5.0_1_1"
+			(symbol "LP2985-2.5_1_1"
 				(pin power_in line
 					(at -10.16 2.54 0)
 					(length 2.54)
@@ -8696,83 +8696,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Regulator_Linear:LP2985-5.0")
-		(at 68.58 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6255fcf0-4436-4340-9c29-7988e3ad4c8c")
-		(property "Reference" "U2"
-			(at 68.58 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LP2985-5.0"
-			(at 68.58 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-			(at 68.58 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lp2985.pdf"
-			(at 68.58 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "150mA 16V Low-noise Low-dropout Regulator With Shutdown, 5.0V output voltage, SOT-23-5"
-			(at 68.58 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0ff5d4a0-77d2-4fa2-b926-bc7f368bddb1")
-		)
-		(pin "3"
-			(uuid "66e97cdc-366a-4447-a389-c9422ea14d1e")
-		)
-		(pin "2"
-			(uuid "bac45531-6b63-4116-b5db-f300a40ef92d")
-		)
-		(pin "5"
-			(uuid "2766d42a-b57d-4da1-8da0-703f1866e685")
-		)
-		(pin "4"
-			(uuid "6bf52eea-fa3f-4df0-b639-17bc0f816d0c")
-		)
-		(instances
-			(project "Explorer"
-				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
-					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 46.99 97.79 0)
 		(unit 1)
@@ -10029,6 +9952,83 @@
 			(project ""
 				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
 					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Regulator_Linear:LP2985-2.5")
+		(at 68.58 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "88d6dfa6-0822-4bb7-8de8-ed25e2ec21ab")
+		(property "Reference" "U2"
+			(at 68.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LP2985-2.5"
+			(at 68.58 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+			(at 68.58 81.915 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lp2985.pdf"
+			(at 68.58 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "150mA 16V Low-noise Low-dropout Regulator With Shutdown, 2.5V output voltage, SOT-23-5"
+			(at 68.58 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b28da00-73d2-4803-ba47-23e0fda24e0a")
+		)
+		(pin "2"
+			(uuid "285ad8d2-bf2f-45b5-8221-ae3711782ae4")
+		)
+		(pin "5"
+			(uuid "2f248a79-2330-4cbc-9030-d33a89a8abd1")
+		)
+		(pin "4"
+			(uuid "8eea3460-f571-4695-99ca-3552c1f8d163")
+		)
+		(pin "3"
+			(uuid "58281262-5449-4f16-bfe2-c03bdccb249d")
+		)
+		(instances
+			(project ""
+				(path "/5c8f7424-a999-476e-9d2c-ffb743590705/a7e3d273-2a1f-4b4e-9a06-2eb3ecb68384"
+					(reference "U2")
 					(unit 1)
 				)
 			)
