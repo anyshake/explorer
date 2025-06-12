@@ -124,15 +124,20 @@ void task_acquire_data(void* argument) {
 
     acquisition_message_t acq_msg;
     while (true) {
-        acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
-
         if (!states->use_accelerometer || states->channel_6d) {
             get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
+            if (states->channel_6d) {
+                acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
+            }
         }
 
         if (states->use_accelerometer || states->channel_6d) {
             get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
         }
+        if (!states->channel_6d) {
+            acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
+        }
+
         get_env_temperature(&acq_msg.temperature);
 
         osMessageQueuePut(states->acquisition_data_queue, &acq_msg, 0, 0);
