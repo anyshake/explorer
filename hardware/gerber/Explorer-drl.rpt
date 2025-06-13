@@ -1,5 +1,5 @@
 Drill report for Explorer.kicad_pcb
-Created on 2025-05-26T01:43:56+0800
+Created on 2025-06-13T16:19:23+0800
 
 Copper Layer Stackup:
     =============================================================
@@ -11,7 +11,7 @@ Drill file 'Explorer-PTH.drl' contains
     plated through holes:
     =============================================================
     T1  0.300mm  0.0118"  (8 holes)
-    T2  0.400mm  0.0157"  (1078 holes)
+    T2  0.400mm  0.0157"  (1093 holes)
     T3  0.900mm  0.0354"  (6 holes)
     T4  1.000mm  0.0394"  (43 holes)  (with 3 slots)
     T5  1.100mm  0.0433"  (4 holes)
@@ -20,7 +20,7 @@ Drill file 'Explorer-PTH.drl' contains
     T8  1.700mm  0.0669"  (4 holes)
     T9  3.200mm  0.1260"  (8 holes)
 
-    Total plated holes count 1160
+    Total plated holes count 1175
 
 
 Drill file 'Explorer-NPTH.drl' contains
