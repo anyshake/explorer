@@ -31,6 +31,7 @@ typedef struct {
     gnss_time_t gnss_time;
 
     osMessageQueueId_t acquisition_data_queue;
+    int16_t adc_sample_time_correction;
     int32_array_t* adc_acquisition_channel_buffer;
     int16_array_t* accel_acquisition_channel_buffer;
     adc_calibration_offset_t adc_calibration_offset;

@@ -65,7 +65,7 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
 #endif
 }
 
-void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
+int16_t peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
     ads1262_reg_interface_t ads1262_reg_interface = ads1262_reg_new_interface();
     ads1262_reg_interface.status = ADS1262_REG_INTERFACE_STATUS_ENABLED;
     ads1262_reg_interface.crc = ADS1262_REG_INTERFACE_CRC_CRC;
@@ -76,4 +76,10 @@ void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
     ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_4800;
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
+
+    // Due to the single time-division multiplexing sampling method in ADS1262,
+    // testing shows that at a data rate of 4800, the sampling consistently
+    // occurs 6 ms earlier than the reference time. This fixed 6 ms offset
+    // should be compensated during sampling.
+    return 6;
 }

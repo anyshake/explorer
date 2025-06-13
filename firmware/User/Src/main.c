@@ -128,6 +128,7 @@ void task_acquire_data(void* argument) {
             get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
             if (states->channel_6d) {
                 acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
+                acq_msg.timestamp += states->adc_sample_time_correction;
             }
         }
 
@@ -136,6 +137,7 @@ void task_acquire_data(void* argument) {
         }
         if (!states->channel_6d) {
             acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
+            acq_msg.timestamp += states->adc_sample_time_correction;
         }
 
         get_env_temperature(&acq_msg.temperature);
@@ -333,7 +335,7 @@ void system_setup(void) {
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
-    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
+    states.adc_sample_time_correction = peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
 
     peri_gnss_init();
     if (states.use_gnss_time) {
