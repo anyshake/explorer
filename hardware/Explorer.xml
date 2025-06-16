@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/yuki/Devel/Hardware/explorer/hardware/Explorer.kicad_sch</source>
-    <date>2025-06-16T11:44:43+0800</date>
+    <date>2025-06-16T17:24:19+0800</date>
     <tool>Eeschema 9.0.2</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -2432,7 +2432,7 @@
       <property name="ki_keywords" value="HCMOS not inverter"/>
       <property name="ki_fp_filters" value="DIP*W7.62mm*"/>
       <sheetpath names="/MCU Controller/" tstamps="/e18fc294-84d1-4936-8800-6a2f75cce34e/"/>
-      <tstamps>17b60ef6-93fc-4558-a980-0e5a4f17b4d9 06a02ac1-2116-4e29-a57c-03a1dacbe494 e6be41ea-fff1-49a1-a936-8abc4876ee9a 4b15048c-cca3-42f1-b463-21d60ade7b1e 451dc38c-d0d3-445a-a7ef-49df4ced11d9 b61f67e3-98e6-419a-bf13-44dcc5de04e4 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
+      <tstamps>17b60ef6-93fc-4558-a980-0e5a4f17b4d9 451dc38c-d0d3-445a-a7ef-49df4ced11d9 e6be41ea-fff1-49a1-a936-8abc4876ee9a 06a02ac1-2116-4e29-a57c-03a1dacbe494 4b15048c-cca3-42f1-b463-21d60ade7b1e b61f67e3-98e6-419a-bf13-44dcc5de04e4 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
     </comp>
     <comp ref="U10">
       <value>MAX3485</value>
@@ -4314,7 +4314,7 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>cb3eacac-7307-4dea-8d59-d110d38cd8d7 c7a47ab3-48b8-40c1-b5ca-e32b00c7f15a 4c1d0177-b823-467a-8d22-c1cb9e228e6c</tstamps>
+      <tstamps>c7a47ab3-48b8-40c1-b5ca-e32b00c7f15a cb3eacac-7307-4dea-8d59-d110d38cd8d7 4c1d0177-b823-467a-8d22-c1cb9e228e6c</tstamps>
     </comp>
     <comp ref="U16">
       <value>LSM6DS3</value>
@@ -4335,60 +4335,60 @@
       <tstamps>1f839f30-569c-48a7-9854-973a2a952f65</tstamps>
     </comp>
     <comp ref="U17">
-      <value>OPA2387DGKR</value>
+      <value>ADA4528-2ARMZ</value>
       <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
-      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</datasheet>
+      <description>Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</description>
       <fields>
         <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
-        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</field>
+        <field name="Description">Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</field>
       </fields>
-      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
+      <libsource lib="Explorer" part="ADA4528-2ARMZ" description="Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"/>
       <property name="Sheetname" value="Sensors"/>
       <property name="Sheetfile" value="sensors.kicad_sch"/>
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>ecd185ef-9b05-485c-ac5c-0e65b5084dfd df178056-8de9-4375-9cbe-00c00c75ae8c 3c572221-d3c2-4ddc-8137-280074c2d057</tstamps>
+      <tstamps>6ba6d353-61ca-4e11-a6ca-e0f10132487a ad14ab2d-76e8-47af-9279-73a1a6ba818f 3fdf996b-2ac9-46a6-8470-68d31061e1b2</tstamps>
     </comp>
     <comp ref="U18">
-      <value>OPA2387DGKR</value>
+      <value>ADA4528-2ARMZ</value>
       <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
-      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</datasheet>
+      <description>Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</description>
       <fields>
         <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
-        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</field>
+        <field name="Description">Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</field>
       </fields>
-      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
+      <libsource lib="Explorer" part="ADA4528-2ARMZ" description="Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"/>
       <property name="Sheetname" value="Sensors"/>
       <property name="Sheetfile" value="sensors.kicad_sch"/>
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>d5fd8a62-61e7-48f3-81d6-22929e18e0b3 c4a34b1f-cce0-41af-8b6f-c03cfb667015 81ceca1d-a265-4aa9-aee4-9afff9a81ad9</tstamps>
+      <tstamps>e7d4630a-b24e-47e9-a360-f76f8d65db38 bbb358d7-4e42-4ce7-8041-f25667f408f1 24e2eb8e-3377-4f96-85ca-a1fcbee32afc</tstamps>
     </comp>
     <comp ref="U19">
-      <value>OPA2387DGKR</value>
+      <value>ADA4528-2ARMZ</value>
       <footprint>Package_SO:MSOP-8_3x3mm_P0.65mm</footprint>
-      <datasheet>https://www.ti.com/lit/ds/symlink/opa387.pdf</datasheet>
-      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</datasheet>
+      <description>Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</description>
       <fields>
         <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
-        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4528-1_4528-2.pdf</field>
+        <field name="Description">Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp</field>
       </fields>
-      <libsource lib="Explorer" part="OPA2387DGKR" description="Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps"/>
+      <libsource lib="Explorer" part="ADA4528-2ARMZ" description="Precision, Ultralow Noise, RRIO, Zero-Drift Op Amp"/>
       <property name="Sheetname" value="Sensors"/>
       <property name="Sheetfile" value="sensors.kicad_sch"/>
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>938cbb80-208f-448c-85af-4894e439029d 87457c80-d981-4fc5-8ed4-fcbeaf50f3e0 28961f06-7f37-4b8d-8561-691359c7cbe2</tstamps>
+      <tstamps>99acc59e-b3dd-4898-9c99-8213805acfb6 6d27f42c-058c-46b6-9c62-32c75cfc4f23 07376bfe-d4a8-42b1-b148-761ffe1b0931</tstamps>
     </comp>
-    <comp ref="U20">
+    <comp ref="U22">
       <value>ADS1262IPWR</value>
       <footprint>Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm</footprint>
       <datasheet>https://www.ti.com/lit/ds/symlink/ads1262.pdf</datasheet>
@@ -4933,40 +4933,6 @@
         <pin num="8" name="FB" type="input"/>
       </pins>
     </libpart>
-    <libpart lib="Explorer" part="OPA2387DGKR">
-      <description>Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</description>
-      <docs>https://www.ti.com/lit/ds/symlink/opa387.pdf</docs>
-      <footprints>
-        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
-        <fp>DIP*W7.62mm*</fp>
-        <fp>TO*99*</fp>
-        <fp>OnSemi*Micro8*</fp>
-        <fp>TSSOP*3x3mm*P0.65mm*</fp>
-        <fp>TSSOP*4.4x3mm*P0.65mm*</fp>
-        <fp>MSOP*3x3mm*P0.65mm*</fp>
-        <fp>SSOP*3.9x4.9mm*P0.635mm*</fp>
-        <fp>LFCSP*2x2mm*P0.5mm*</fp>
-        <fp>*SIP*</fp>
-        <fp>SOIC*5.3x6.2mm*P1.27mm*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">OPA2387DGKR</field>
-        <field name="Footprint">Package_SO:MSOP-8_3x3mm_P0.65mm</field>
-        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/opa387.pdf</field>
-        <field name="Description">Ultra-High Precision, Zero-Drift, Low-Input-Bias-Current Op Amps</field>
-      </fields>
-      <pins>
-        <pin num="1" name="" type="output"/>
-        <pin num="2" name="-" type="input"/>
-        <pin num="3" name="+" type="input"/>
-        <pin num="4" name="V-" type="power_in"/>
-        <pin num="5" name="+" type="input"/>
-        <pin num="6" name="-" type="input"/>
-        <pin num="7" name="" type="output"/>
-        <pin num="8" name="V+" type="power_in"/>
-      </pins>
-    </libpart>
     <libpart lib="Explorer" part="SSD1306">
       <docs>https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf</docs>
       <fields>
@@ -5491,15 +5457,15 @@
     <net code="1" name="/MCU Controller/ADC_DRDY" class="Default">
       <node ref="R91" pin="2" pintype="passive"/>
       <node ref="U11" pin="32" pinfunction="PA11" pintype="bidirectional"/>
-      <node ref="U20" pin="14" pinfunction="~{DRDY}" pintype="output"/>
+      <node ref="U22" pin="14" pinfunction="~{DRDY}" pintype="output"/>
     </net>
     <net code="2" name="/MCU Controller/ADC_RESET" class="Default">
       <node ref="U11" pin="11" pinfunction="PA1" pintype="bidirectional"/>
-      <node ref="U20" pin="20" pinfunction="~{RESET}/~{PWDN}" pintype="input"/>
+      <node ref="U22" pin="20" pinfunction="~{RESET}/~{PWDN}" pintype="input"/>
     </net>
     <net code="3" name="/MCU Controller/ADC_START" class="Default">
       <node ref="U11" pin="33" pinfunction="PA12" pintype="bidirectional"/>
-      <node ref="U20" pin="9" pinfunction="START" pintype="input"/>
+      <node ref="U22" pin="9" pinfunction="START" pintype="input"/>
     </net>
     <net code="4" name="/MCU Controller/BAUD_RATE_B1" class="Default">
       <node ref="R32" pin="1" pintype="passive"/>
@@ -5555,7 +5521,7 @@
       <node ref="U12" pin="16" pinfunction="VCC" pintype="power_in"/>
       <node ref="U16" pin="5" pinfunction="VDDIO" pintype="power_in"/>
       <node ref="U16" pin="8" pinfunction="VDD" pintype="power_in"/>
-      <node ref="U20" pin="19" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U22" pin="19" pinfunction="DVDD" pintype="power_in"/>
       <node ref="U6" pin="8" pinfunction="VCC" pintype="power_in"/>
       <node ref="U7" pin="2" pinfunction="VCC" pintype="power_in"/>
       <node ref="U8" pin="23" pinfunction="VCC" pintype="power_in"/>
@@ -5589,15 +5555,15 @@
     </net>
     <net code="13" name="/MCU Controller/MCU_CSEL" class="Default">
       <node ref="U11" pin="14" pinfunction="PA4" pintype="bidirectional"/>
-      <node ref="U20" pin="10" pinfunction="~{CS}" pintype="input"/>
+      <node ref="U22" pin="10" pinfunction="~{CS}" pintype="input"/>
     </net>
     <net code="14" name="/MCU Controller/MCU_MISO" class="Default">
       <node ref="U11" pin="16" pinfunction="PA6" pintype="bidirectional"/>
-      <node ref="U20" pin="13" pinfunction="DOUT/~{DRDY}" pintype="output"/>
+      <node ref="U22" pin="13" pinfunction="DOUT/~{DRDY}" pintype="output"/>
     </net>
     <net code="15" name="/MCU Controller/MCU_MOSI" class="Default">
       <node ref="U11" pin="17" pinfunction="PA7" pintype="bidirectional"/>
-      <node ref="U20" pin="12" pinfunction="DIN" pintype="input"/>
+      <node ref="U22" pin="12" pinfunction="DIN" pintype="input"/>
     </net>
     <net code="16" name="/MCU Controller/MCU_RXD" class="Default">
       <node ref="D14" pin="2" pinfunction="A" pintype="passive"/>
@@ -5617,7 +5583,7 @@
     </net>
     <net code="18" name="/MCU Controller/MCU_SCLK" class="Default">
       <node ref="U11" pin="15" pinfunction="PA5" pintype="bidirectional"/>
-      <node ref="U20" pin="11" pinfunction="SCLK" pintype="input"/>
+      <node ref="U22" pin="11" pinfunction="SCLK" pintype="input"/>
     </net>
     <net code="19" name="/MCU Controller/MCU_SDA" class="Default">
       <node ref="R15" pin="2" pintype="passive"/>
@@ -5727,7 +5693,7 @@
       <node ref="U17" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U18" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U19" pin="8" pinfunction="V+" pintype="power_in"/>
-      <node ref="U20" pin="6" pinfunction="AVDD" pintype="power_in"/>
+      <node ref="U22" pin="6" pinfunction="AVDD" pintype="power_in"/>
     </net>
     <net code="38" name="/Power Supply/A-2V5" class="Default">
       <node ref="C67" pin="1" pintype="passive"/>
@@ -5749,7 +5715,7 @@
       <node ref="U17" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U18" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U19" pin="4" pinfunction="V-" pintype="power_in"/>
-      <node ref="U20" pin="7" pinfunction="AVSS" pintype="power_in"/>
+      <node ref="U22" pin="7" pinfunction="AVSS" pintype="power_in"/>
     </net>
     <net code="39" name="/Power Supply/VCC" class="Default">
       <node ref="C1" pin="1" pintype="passive"/>
@@ -5781,32 +5747,32 @@
     <net code="41" name="/Sensors/AAF_EN" class="Default">
       <node ref="C65" pin="1" pintype="passive"/>
       <node ref="R83" pin="2" pintype="passive"/>
-      <node ref="U20" pin="24" pinfunction="AIN3" pintype="bidirectional"/>
+      <node ref="U22" pin="24" pinfunction="AIN3" pintype="bidirectional"/>
     </net>
     <net code="42" name="/Sensors/AAF_EP" class="Default">
       <node ref="C62" pin="1" pintype="passive"/>
       <node ref="R65" pin="2" pintype="passive"/>
-      <node ref="U20" pin="23" pinfunction="AIN2" pintype="bidirectional"/>
+      <node ref="U22" pin="23" pinfunction="AIN2" pintype="bidirectional"/>
     </net>
     <net code="43" name="/Sensors/AAF_NN" class="Default">
       <node ref="C66" pin="1" pintype="passive"/>
       <node ref="R84" pin="2" pintype="passive"/>
-      <node ref="U20" pin="26" pinfunction="AIN5" pintype="bidirectional"/>
+      <node ref="U22" pin="26" pinfunction="AIN5" pintype="bidirectional"/>
     </net>
     <net code="44" name="/Sensors/AAF_NP" class="Default">
       <node ref="C63" pin="1" pintype="passive"/>
       <node ref="R66" pin="2" pintype="passive"/>
-      <node ref="U20" pin="25" pinfunction="AIN4" pintype="bidirectional"/>
+      <node ref="U22" pin="25" pinfunction="AIN4" pintype="bidirectional"/>
     </net>
     <net code="45" name="/Sensors/AAF_ZN" class="Default">
       <node ref="C64" pin="1" pintype="passive"/>
       <node ref="R82" pin="2" pintype="passive"/>
-      <node ref="U20" pin="22" pinfunction="AIN1" pintype="bidirectional"/>
+      <node ref="U22" pin="22" pinfunction="AIN1" pintype="bidirectional"/>
     </net>
     <net code="46" name="/Sensors/AAF_ZP" class="Default">
       <node ref="C61" pin="1" pintype="passive"/>
       <node ref="R64" pin="2" pintype="passive"/>
-      <node ref="U20" pin="21" pinfunction="AIN0" pintype="bidirectional"/>
+      <node ref="U22" pin="21" pinfunction="AIN0" pintype="bidirectional"/>
     </net>
     <net code="47" name="/Sensors/ADC_REFOUT" class="Default">
       <node ref="C74" pin="1" pintype="passive"/>
@@ -5815,10 +5781,10 @@
       <node ref="R94" pin="1" pintype="passive"/>
       <node ref="R95" pin="2" pintype="passive"/>
       <node ref="R96" pin="2" pintype="passive"/>
-      <node ref="U20" pin="8" pinfunction="REFOUT" pintype="output"/>
+      <node ref="U22" pin="8" pinfunction="REFOUT" pintype="output"/>
     </net>
     <net code="48" name="/Sensors/EHE" class="Default">
-      <node ref="D22" pin="3" pinfunction="A" pintype="passive"/>
+      <node ref="D22" pin="3" pinfunction="K" pintype="passive"/>
       <node ref="J10" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R35" pin="1" pintype="passive"/>
       <node ref="R50" pin="1" pintype="passive"/>
@@ -5837,7 +5803,7 @@
       <node ref="U14" pin="1" pintype="output"/>
     </net>
     <net code="51" name="/Sensors/EHN" class="Default">
-      <node ref="D24" pin="3" pinfunction="A" pintype="passive"/>
+      <node ref="D24" pin="3" pinfunction="K" pintype="passive"/>
       <node ref="J11" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R36" pin="1" pintype="passive"/>
       <node ref="R51" pin="1" pintype="passive"/>
@@ -5856,7 +5822,7 @@
       <node ref="U15" pin="1" pintype="output"/>
     </net>
     <net code="54" name="/Sensors/EHZ" class="Default">
-      <node ref="D21" pin="3" pinfunction="K" pintype="passive"/>
+      <node ref="D21" pin="3" pinfunction="A" pintype="passive"/>
       <node ref="J9" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R34" pin="1" pintype="passive"/>
       <node ref="R49" pin="1" pintype="passive"/>
@@ -6184,8 +6150,8 @@
       <node ref="C78" pin="2" pintype="passive"/>
       <node ref="D23" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R97" pin="1" pintype="passive"/>
-      <node ref="U20" pin="15" pinfunction="XTAL1/CLKIN" pintype="input"/>
-      <node ref="U20" pin="18" pinfunction="DGND" pintype="power_in"/>
+      <node ref="U22" pin="15" pinfunction="XTAL1/CLKIN" pintype="input"/>
+      <node ref="U22" pin="18" pinfunction="DGND" pintype="power_in"/>
     </net>
     <net code="93" name="Net-(J2-Pin_3)" class="Default">
       <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
@@ -6446,37 +6412,37 @@
       <node ref="R90" pin="1" pintype="passive"/>
       <node ref="U19" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="145" name="Net-(U20-AIN6)" class="Default">
+    <net code="145" name="Net-(U22-AIN6)" class="Default">
       <node ref="R96" pin="1" pintype="passive"/>
-      <node ref="U20" pin="27" pinfunction="AIN6" pintype="bidirectional"/>
+      <node ref="U22" pin="27" pinfunction="AIN6" pintype="bidirectional"/>
     </net>
-    <net code="146" name="Net-(U20-AIN7)" class="Default">
+    <net code="146" name="Net-(U22-AIN7)" class="Default">
       <node ref="R95" pin="1" pintype="passive"/>
-      <node ref="U20" pin="28" pinfunction="AIN7" pintype="bidirectional"/>
+      <node ref="U22" pin="28" pinfunction="AIN7" pintype="bidirectional"/>
     </net>
-    <net code="147" name="Net-(U20-AIN8)" class="Default">
+    <net code="147" name="Net-(U22-AIN8)" class="Default">
       <node ref="R92" pin="2" pintype="passive"/>
-      <node ref="U20" pin="1" pinfunction="AIN8" pintype="bidirectional"/>
+      <node ref="U22" pin="1" pinfunction="AIN8" pintype="bidirectional"/>
     </net>
-    <net code="148" name="Net-(U20-AIN9)" class="Default">
+    <net code="148" name="Net-(U22-AIN9)" class="Default">
       <node ref="R93" pin="2" pintype="passive"/>
-      <node ref="U20" pin="2" pinfunction="AIN9" pintype="bidirectional"/>
+      <node ref="U22" pin="2" pinfunction="AIN9" pintype="bidirectional"/>
     </net>
-    <net code="149" name="Net-(U20-AINCOM)" class="Default">
+    <net code="149" name="Net-(U22-AINCOM)" class="Default">
       <node ref="R94" pin="2" pintype="passive"/>
-      <node ref="U20" pin="3" pinfunction="AINCOM" pintype="bidirectional"/>
+      <node ref="U22" pin="3" pinfunction="AINCOM" pintype="bidirectional"/>
     </net>
-    <net code="150" name="Net-(U20-BYPASS)" class="Default">
+    <net code="150" name="Net-(U22-BYPASS)" class="Default">
       <node ref="C77" pin="1" pintype="passive"/>
-      <node ref="U20" pin="17" pinfunction="BYPASS" pintype="output"/>
+      <node ref="U22" pin="17" pinfunction="BYPASS" pintype="output"/>
     </net>
-    <net code="151" name="Net-(U20-CAPN)" class="Default">
+    <net code="151" name="Net-(U22-CAPN)" class="Default">
       <node ref="C71" pin="2" pintype="passive"/>
-      <node ref="U20" pin="5" pinfunction="CAPN" pintype="output"/>
+      <node ref="U22" pin="5" pinfunction="CAPN" pintype="output"/>
     </net>
-    <net code="152" name="Net-(U20-CAPP)" class="Default">
+    <net code="152" name="Net-(U22-CAPP)" class="Default">
       <node ref="C71" pin="1" pintype="passive"/>
-      <node ref="U20" pin="4" pinfunction="CAPP" pintype="output"/>
+      <node ref="U22" pin="4" pinfunction="CAPP" pintype="output"/>
     </net>
     <net code="153" name="Net-(Y1-OUT)" class="Default">
       <node ref="R22" pin="2" pintype="passive"/>
@@ -6626,8 +6592,8 @@
     <net code="201" name="unconnected-(U16-SDX-Pad2)" class="Default">
       <node ref="U16" pin="2" pinfunction="SDX" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="202" name="unconnected-(U20-XTAL2-Pad16)" class="Default">
-      <node ref="U20" pin="16" pinfunction="XTAL2" pintype="input+no_connect"/>
+    <net code="202" name="unconnected-(U22-XTAL2-Pad16)" class="Default">
+      <node ref="U22" pin="16" pinfunction="XTAL2" pintype="input+no_connect"/>
     </net>
     <net code="203" name="unconnected-(Y1-OE-Pad1)" class="Default">
       <node ref="Y1" pin="1" pinfunction="OE" pintype="input+no_connect"/>
