@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -76,7 +76,7 @@
           ""
         ],
         [
-          "solder_mask_bridge|143481449|121981449|ffaff5cc-e743-46c8-8af6-a582b34c572c|02a09182-3691-4f63-8b48-b3fa3ad9a31e",
+          "solder_mask_bridge|143799996|122750499|ffaff5cc-e743-46c8-8af6-a582b34c572c|02a09182-3691-4f63-8b48-b3fa3ad9a31e",
           ""
         ],
         [
