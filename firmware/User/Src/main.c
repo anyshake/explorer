@@ -233,9 +233,9 @@ void read_gnss_data(explorer_states_t* states) {
     }
 }
 
-void spirit_level_mode(void) {
+void leveling_mode_handler(void) {
     ssd1306_clear();
-    ssd1306_display_string(0, 0, "> Spirit Level", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(15, 0, "Inclinometer", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
     ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 
     int16_t result_arr[3];
@@ -330,7 +330,7 @@ void system_setup(void) {
     mcu_utils_delay_ms(1000, false);
 
     if (states.leveling_mode) {
-        spirit_level_mode();
+        leveling_mode_handler();
     }
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
