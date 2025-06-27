@@ -13,7 +13,7 @@
 #define ENABLE_COMPENSATION true
 
 // If EXPLORER_SAMPLERATE changed and ENABLE_COMPENSATION is true
-// also remember to change LPF_COEFFS, BPF_COEFFS, HPF_COEFFS coefficients in filter.h
+// also remember to change the filter coefficients in filter.h
 #define EXPLORER_SAMPLERATE 100
 #define EXPLORER_BAUDRATE 115200
 

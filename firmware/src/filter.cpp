@@ -1,39 +1,62 @@
 #include "filter.h"
 
-void filter_fir_apply(filter_fir_t* filter, float* input, uint16_t input_size, float* output) {
-    float extended_input[(FIR_NUM_TAPS - 1) + input_size];
-
-    memcpy(extended_input, filter->state, (FIR_NUM_TAPS - 1) * sizeof(float));
-    memcpy(&extended_input[FIR_NUM_TAPS - 1], input, input_size * sizeof(float));
-
-    for (uint16_t i = 0; i < input_size; i++) {
-        output[i] = 0.0;
-        for (uint16_t j = 0; j < FIR_NUM_TAPS; j++) {
-            output[i] += extended_input[i + j] * filter->coeffs[j];
-        }
+void filter_iir_df1_new(filter_iir_df1_t* filter, const float* b, const float* a) {
+    for (uint8_t i = 0; i < IIR_DF1_ORDER; i++) {
+        filter->b[i] = b[i];
+        filter->a[i] = a[i];
+        filter->x_h[i] = 0.0;
+        filter->y_h[i] = 0.0;
     }
-
-    memcpy(filter->state, &extended_input[input_size], (FIR_NUM_TAPS - 1) * sizeof(float));
 }
 
-void apply_data_compensation(int32_t* arr, uint16_t len, filter_fir_t* lowpass_filter, filter_fir_t* bandpass_filter, filter_fir_t* highpass_filter) {
+void filter_iir_df1_apply(filter_iir_df1_t* f, const float* input, float* output, uint16_t length) {
+    for (uint16_t n = 0; n < length; n++) {
+        for (uint8_t i = IIR_DF1_ORDER - 1; i > 0; i--) {
+            f->x_h[i] = f->x_h[i - 1];
+            f->y_h[i] = f->y_h[i - 1];
+        }
+        f->x_h[0] = input[n];
+
+        float yn = 0.0f;
+        for (uint8_t i = 0; i < IIR_DF1_ORDER; i++) {
+            yn += f->b[i] * f->x_h[i];
+        }
+        for (uint8_t i = 1; i < IIR_DF1_ORDER; i++) {
+            yn -= f->a[i] * f->y_h[i];
+        }
+
+        f->y_h[0] = yn;
+
+        if (isnan(yn) || isinf(yn)) {
+            yn = 0.0f;
+        }
+
+        output[n] = yn;
+    }
+}
+
+void apply_data_compensation(int32_t* arr, uint16_t len, filter_iir_df1_t* df1_filter) {
     float input[len];
     for (uint16_t i = 0; i < len; i++) {
         input[i] = (float)arr[i];
     }
 
-    float lp_output[len];
-    filter_fir_apply(lowpass_filter, input, len, lp_output);
-
-    float bp_output[len];
-    filter_fir_apply(bandpass_filter, input, len, bp_output);
-
-    float hp_output[len];
-    filter_fir_apply(highpass_filter, input, len, hp_output);
+    float comp_output[len];
+    filter_iir_df1_apply(df1_filter, input, comp_output, len);
 
     for (uint16_t i = 0; i < len; i++) {
-        float result = (LPF_MAG * lp_output[i] + BPF_MAG * bp_output[i] + HPF_MAG * hp_output[i]) * 2;
-        arr[i] = (int32_t)result;
+        arr[i] = (int32_t)(comp_output[i] * 2.0f);
+    }
+}
+
+void filter_iir_sos_new(filter_iir_sos_t* filter, const float sos[2][6]) {
+    for (uint8_t i = 0; i < IIR_SOS_SECTIONS; i++) {
+        for (uint8_t j = 0; j < 6; j++) {
+            filter->sos[i][j] = sos[i][j];
+        }
+        for (uint8_t j = 0; j < 2; j++) {
+            filter->state[i][j] = 0.0;
+        }
     }
 }
 

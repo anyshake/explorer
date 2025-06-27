@@ -42,15 +42,9 @@ typedef struct {
     filter_iir_sos_t n_axis_pre_processing_highpass_filter;
 
 #if ENABLE_COMPENSATION == true
-    filter_fir_t z_axis_compensation_lowpass_filter;
-    filter_fir_t z_axis_compensation_bandpass_filter;
-    filter_fir_t z_axis_compensation_highpass_filter;
-    filter_fir_t e_axis_compensation_lowpass_filter;
-    filter_fir_t e_axis_compensation_bandpass_filter;
-    filter_fir_t e_axis_compensation_highpass_filter;
-    filter_fir_t n_axis_compensation_lowpass_filter;
-    filter_fir_t n_axis_compensation_bandpass_filter;
-    filter_fir_t n_axis_compensation_highpass_filter;
+    filter_iir_df1_t z_axis_compensation_filter;
+    filter_iir_df1_t e_axis_compensation_filter;
+    filter_iir_df1_t n_axis_compensation_filter;
 #endif
 
     int32_t adc_readout_z_axis[MAINLINE_PACKET_CHANNEL_SAMPLES];
@@ -67,46 +61,14 @@ void setup(void) {
     explorer_states.sample_pos = 0;
     explorer_states.timestamp = 0;
 
-    for (uint8_t i = 0; i < IIR_SOS_SECTIONS; i++) {
-        for (uint8_t j = 0; j < 6; j++) {
-            explorer_states.z_axis_pre_processing_highpass_filter.sos[i][j] = PRE_PROC_HPF_COEFFS[i][j];
-            explorer_states.e_axis_pre_processing_highpass_filter.sos[i][j] = PRE_PROC_HPF_COEFFS[i][j];
-            explorer_states.n_axis_pre_processing_highpass_filter.sos[i][j] = PRE_PROC_HPF_COEFFS[i][j];
-        }
-        for (uint8_t j = 0; j < 2; j++) {
-            explorer_states.z_axis_pre_processing_highpass_filter.state[i][j] = 0.0;
-            explorer_states.e_axis_pre_processing_highpass_filter.state[i][j] = 0.0;
-            explorer_states.n_axis_pre_processing_highpass_filter.state[i][j] = 0.0;
-        }
-    }
+    filter_iir_sos_new(&explorer_states.z_axis_pre_processing_highpass_filter, PRE_PROC_HPF_COEFFS);
+    filter_iir_sos_new(&explorer_states.e_axis_pre_processing_highpass_filter, PRE_PROC_HPF_COEFFS);
+    filter_iir_sos_new(&explorer_states.n_axis_pre_processing_highpass_filter, PRE_PROC_HPF_COEFFS);
 
 #if ENABLE_COMPENSATION == true
-    for (uint16_t i = 0; i < FIR_NUM_TAPS; i++) {
-        explorer_states.z_axis_compensation_lowpass_filter.coeffs[i] = LPF_COEFFS[i];
-        explorer_states.z_axis_compensation_bandpass_filter.coeffs[i] = BPF_COEFFS[i];
-        explorer_states.z_axis_compensation_highpass_filter.coeffs[i] = HPF_COEFFS[i];
-
-        explorer_states.e_axis_compensation_lowpass_filter.coeffs[i] = LPF_COEFFS[i];
-        explorer_states.e_axis_compensation_bandpass_filter.coeffs[i] = BPF_COEFFS[i];
-        explorer_states.e_axis_compensation_highpass_filter.coeffs[i] = HPF_COEFFS[i];
-
-        explorer_states.n_axis_compensation_lowpass_filter.coeffs[i] = LPF_COEFFS[i];
-        explorer_states.n_axis_compensation_bandpass_filter.coeffs[i] = BPF_COEFFS[i];
-        explorer_states.n_axis_compensation_highpass_filter.coeffs[i] = HPF_COEFFS[i];
-    }
-    for (uint16_t i = 0; i < FIR_NUM_TAPS - 1; i++) {
-        explorer_states.z_axis_compensation_lowpass_filter.state[i] = 0.0;
-        explorer_states.z_axis_compensation_bandpass_filter.state[i] = 0.0;
-        explorer_states.z_axis_compensation_highpass_filter.state[i] = 0.0;
-
-        explorer_states.e_axis_compensation_lowpass_filter.state[i] = 0.0;
-        explorer_states.e_axis_compensation_bandpass_filter.state[i] = 0.0;
-        explorer_states.e_axis_compensation_highpass_filter.state[i] = 0.0;
-
-        explorer_states.n_axis_compensation_lowpass_filter.state[i] = 0.0;
-        explorer_states.n_axis_compensation_bandpass_filter.state[i] = 0.0;
-        explorer_states.n_axis_compensation_highpass_filter.state[i] = 0.0;
-    }
+    filter_iir_df1_new(&explorer_states.z_axis_compensation_filter, COMPENSATION_COEFFS_B, COMPENSATION_COEFFS_A);
+    filter_iir_df1_new(&explorer_states.e_axis_compensation_filter, COMPENSATION_COEFFS_B, COMPENSATION_COEFFS_A);
+    filter_iir_df1_new(&explorer_states.n_axis_compensation_filter, COMPENSATION_COEFFS_B, COMPENSATION_COEFFS_A);
 #endif
 
     uint8_t packet_size = get_data_packet_size(MAINLINE_PACKET_CHANNEL_SAMPLES);
@@ -177,9 +139,9 @@ void loop(void) {
         apply_data_pre_processing(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.n_axis_pre_processing_highpass_filter);
 
 #if ENABLE_COMPENSATION == true
-        apply_data_compensation(explorer_states.adc_readout_z_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.z_axis_compensation_lowpass_filter, &explorer_states.z_axis_compensation_bandpass_filter, &explorer_states.z_axis_compensation_highpass_filter);
-        apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.e_axis_compensation_lowpass_filter, &explorer_states.e_axis_compensation_bandpass_filter, &explorer_states.e_axis_compensation_highpass_filter);
-        apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.n_axis_compensation_lowpass_filter, &explorer_states.n_axis_compensation_bandpass_filter, &explorer_states.n_axis_compensation_highpass_filter);
+        apply_data_compensation(explorer_states.adc_readout_z_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.z_axis_compensation_filter);
+        apply_data_compensation(explorer_states.adc_readout_e_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.e_axis_compensation_filter);
+        apply_data_compensation(explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, &explorer_states.n_axis_compensation_filter);
 #endif
 
         send_data_packet(explorer_states.timestamp, explorer_states.adc_readout_z_axis, explorer_states.adc_readout_e_axis, explorer_states.adc_readout_n_axis, MAINLINE_PACKET_CHANNEL_SAMPLES, explorer_states.uart_packet_buffer);
