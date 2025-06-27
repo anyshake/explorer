@@ -4,11 +4,11 @@
 
 ## 🚀 **Join the Open Science Movement!** 🚀
 
-> 🌟 **AnyShake Explorer is currently in pre-launch! We're working hard to bring the **AnyShake Project** to life, but we need your support to reach our goal of 200 subscribers.** 🌟
+AnyShake Explorer is now **live on Crowd Supply**! This open-source, next-generation seismic monitoring system is officially available for crowdfunding.
 
-> 👉 **[Go and subscribe us on Crowd Supply](https://www.crowdsupply.com/senseplex/anyshake-explorer)** and be a part of the first wave of users to get hands-on with this revolutionary open-source seismic monitoring system!
+👉 **[Order now on Crowd Supply](https://www.crowdsupply.com/senseplex/anyshake-explorer)** and be among the first to experience real-time seismic data visualization, analysis, and export with professional-grade performance.
 
-> Also help us spread the word by sharing this page: 👉 **[www.crowdsupply.com/senseplex/anyshake-explorer](https://www.crowdsupply.com/senseplex/anyshake-explorer)**
+📣 **Help us spread the word and grow the open science community: [www.crowdsupply.com/senseplex/anyshake-explorer](https://www.crowdsupply.com/senseplex/anyshake-explorer)**
 
 ---
 
