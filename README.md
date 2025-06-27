@@ -83,7 +83,7 @@ Whether you're monitoring **earthquake activity**, conducting **structural healt
 - [**Hardware**](https://github.com/anyshake/explorer/tree/master/hardware): Schematics, PCB layout, BOM
 - [**Firmware**](https://github.com/anyshake/explorer/tree/master/firmware): MCU code (PlatformIO)
 - [**Software**](https://github.com/anyshake/observer): Cross-platform visualization & analysis
-- [**Docs**](https://anyshake.org/docs/project-overview/): Quick start and configuration guides
+- [**Docs**](https://anyshake.org/docs/anyshake-explorer/product-overview/): Quick start and configuration guides
 
 ## Credits
 
