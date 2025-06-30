@@ -4,6 +4,6 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-int64_t mcu_utils_uptime_ms(void);
+uint64_t mcu_utils_uptime_ms(void);
 
 #endif

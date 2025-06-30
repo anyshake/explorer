@@ -1,6 +1,6 @@
 #include "utils/uptime.h"
 
-int64_t mcu_utils_uptime_ms(void) {
+uint64_t mcu_utils_uptime_ms(void) {
     static uint32_t low32 = 0;
     static uint32_t high32 = 0;
 

@@ -115,8 +115,8 @@ void setup(void) {
 }
 
 void loop(void) {
-    static uint32_t next_sample_time = 0;
-    uint32_t now = mcu_utils_uptime_ms();
+    static uint64_t next_sample_time = 0;
+    uint64_t now = mcu_utils_uptime_ms();
 
     if (now < next_sample_time) {
         return;
