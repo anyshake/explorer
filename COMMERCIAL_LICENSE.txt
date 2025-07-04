@@ -1,0 +1,45 @@
+SensePlex Commercial License Agreement
+======================================
+
+This file describes the commercial licensing terms for the AnyShake Project,
+developed and maintained by SensePlex Limited.
+
+Overview
+--------
+
+The AnyShake project (including all related software, firmware, hardware designs, and documentation) is made available under a **dual-license model**.
+
+- You may use AnyShake under the terms of the GNU Affero General Public License v3.0 (AGPLv3) for open-source purposes.
+- For any proprietary, closed-source, or commercial use, a commercial license is required.
+
+When a Commercial License Is Required
+-------------------------------------
+
+A commercial license is required if:
+
+- You wish to integrate AnyShake software, firmware, or hardware into a closed-source product.
+- You want to redistribute AnyShake as part of a proprietary system.
+- You are providing paid services or commercial applications (e.g., SaaS, OEM sales) using AnyShake.
+- You are using AnyShake in a product that is not open-sourced under AGPLv3 or compatible terms.
+
+Benefits of a Commercial License
+--------------------------------
+
+- Legal right to use AnyShake in proprietary or commercial applications.
+- No copyleft obligations (i.e., you don’t have to release your source code).
+- Optional access to premium technical support or feature customization.
+- Flexible terms for OEMs, academic labs, startups, and integrators.
+
+Contact
+-------
+
+To obtain a commercial license or discuss your use case, please contact:
+
+Email: anyshake@senseplex.net
+
+We offer custom licensing options for enterprise, research, and product integration.
+
+Disclaimer
+----------
+
+This license file is a summary. Final commercial license terms will be provided as part of a signed agreement tailored to your needs.

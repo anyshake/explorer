@@ -87,10 +87,18 @@ Whether you're monitoring **earthquake activity**, conducting **structural healt
 
 ## Credits
 
-The project is maintained by **SensePlex Limited**, a UK-based company dedicated to developing open-source hardware and software.
+This project is maintained by **SensePlex Limited**, a UK-based company dedicated to developing open-source hardware and software.
 
-All rights, including the right of interpretation, reproduction, distribution, and commercial use, are reserved by **SensePlex Limited**.
+## License
 
-For any inquiries, please refer to the contact information provided on the [AnyShake GitHub organization page](https://github.com/anyshake).
+This project is dual-licensed:
+
+1. **Open Source License (AGPLv3):**  
+   You may use, modify, and redistribute this project under the terms of the GNU Affero General Public License version 3.0. This license requires that any derivative works also be released under the same license.
+
+2. **Commercial License:**  
+   If you intend to use this project in closed-source, commercial, or proprietary applications, please contact us at [anyshake@senseplex.net](mailto:anyshake@senseplex.net) to obtain a commercial license.
+
+---
 
 ![Star History Chart](https://api.star-history.com/svg?repos=anyshake/explorer&type=Date)
