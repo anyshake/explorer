@@ -49,12 +49,34 @@ void ssd1306_display_bitmap(uint8_t start_x,
                             uint8_t start_y,
                             uint8_t width,
                             uint8_t height,
-                            const uint8_t bitmap[],
+                            const uint8_t* bitmap_rle,
                             uint8_t color) {
-    for (uint8_t y = 0; y < height; y++) {
-        ssd1306_set_position(start_x, start_y + y);
-        for (uint8_t x = 0; x < width; x++) {
-            ssd1306_write_data((color == SSD1306_FONT_DISPLAY_COLOR_WHITE) ? bitmap[y * width + x] : ~bitmap[y * width + x]);
+    uint16_t total_bytes = width * height;
+    uint16_t rendered = 0;
+    uint16_t i = 0;
+
+    uint8_t y = 0;
+    uint8_t x = 0;
+
+    while (rendered < total_bytes) {
+        uint8_t count = bitmap_rle[i++];
+        uint8_t value = bitmap_rle[i++];
+
+        uint8_t final_value = (color == SSD1306_FONT_DISPLAY_COLOR_WHITE) ? value : ~value;
+
+        for (uint8_t j = 0; j < count; j++) {
+            ssd1306_set_position(start_x + x, start_y + y);
+            ssd1306_write_data(final_value);
+            rendered++;
+
+            x++;
+            if (x >= width) {
+                x = 0;
+                y++;
+                if (y >= height) {
+                    return;
+                }
+            }
         }
     }
 }
