@@ -173,12 +173,12 @@ void task_gnss_discipline(void* argument) {
 
 void task_gnss_acquire(void* argument) {
     explorer_global_states_t* states = (explorer_global_states_t*)argument;
-    if (!states->use_gnss_time) {
-        osThreadExit();
-    }
-    osThreadFlagsWait(GNSS_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
 
-    for (bool first_run = true;;) {
+    for (bool first_run = true; states->use_gnss_time;) {
+        if (first_run) {
+            osThreadFlagsWait(GNSS_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
+        }
+
         bool got_valid_fix = false;
         uint8_t consecutive_valid_count = 0;
         int64_t prev_time_diff = INT64_MAX;
@@ -249,6 +249,10 @@ void task_gnss_acquire(void* argument) {
             gnss_discipline_status.task_disabled = true;
         }
     }
+
+    ssd1306_clear();
+    display_device_settings(states);
+    osThreadExit();
 }
 
 void task_send_packet(void* argument) {
@@ -296,7 +300,9 @@ void task_sensor_acquire(void* argument) {
     explorer_acquisition_message_t acq_msg;
     uint32_t time_span = 1000 / states->sample_rate;
 
-    osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
+    if (states->use_gnss_time) {
+        osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
+    }
     mcu_utils_iwdg_init();
 
     for (uint32_t prev_timestamp = 0;;) {
