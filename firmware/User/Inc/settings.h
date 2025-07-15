@@ -8,6 +8,10 @@
 #include "Utils/Inc/gpio.h"
 
 #define PACKET_INTERVAL 100
+#define TEMP_PPM_SLOPE -1.0f
+#define TEMP_REF_CELSIUS 25.0f
+#define GNSS_REQUIRED_HDOP 2.0
+#define GNSS_RESYNC_INTERVAL 86400000
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,

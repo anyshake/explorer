@@ -32,14 +32,24 @@ void ssd1306_display_string(uint8_t x,
                             uint8_t y,
                             const char* str,
                             uint8_t font,
-                            uint8_t color) {
+                            uint8_t color,
+                            bool clear) {
+        uint8_t char_width = (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 8 : 6;
+    uint8_t char_height = (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 2 : 1;
+
+    if (clear) {
+        for (uint8_t col = 0; col < 128; col += char_width) {
+            ssd1306_display_char(col, y, ' ', font, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        }
+    }
+
     uint8_t i = 0;
     while (str[i] != '\0') {
         ssd1306_display_char(x, y, str[i], font, color);
-        x += (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 8 : 6;
-        if (x > 112) {
+        x += char_width;
+        if (x > 128 - char_width) {
             x = 0;
-            y += (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 2 : 1;
+            y += char_height;
         }
         i++;
     }

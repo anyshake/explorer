@@ -103,11 +103,7 @@ typedef uint8_t packet_trailer_t[2];
 #define PACKET_VARIABLE_CONFIG_BIT_9_DISABLED 0x00
 #define PACKET_VARIABLE_CONFIG_BIT_9_ENABLED 0x01
 
-uint16_t get_data_packet_size(bool use_accelerometer,
-                              bool channel_6d,
-                              uint8_t channel_chunk_length);
-void send_data_packet(explorer_states_t* states,
-                      float temperature,
-                      int64_t timestamp);
+uint16_t get_data_packet_size(bool use_accelerometer, bool channel_6d, uint8_t channel_chunk_length);
+void send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp);
 
 #endif

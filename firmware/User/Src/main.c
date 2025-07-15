@@ -1,9 +1,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "Core/Inc/dma.h"
 #include "Core/Inc/main.h"
+#include "Core/Inc/tim.h"
+#include "FreeRTOS.h"
 #include "cmsis_os2.h"
 
 #include "Utils/Inc/delay.h"
@@ -23,12 +26,13 @@
 #include "User/Inc/gnss/utils.h"
 
 #include "User/Inc/array.h"
-#include "User/Inc/magic.h"
+#include "User/Inc/leveling.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/peripheral.h"
 #include "User/Inc/reader.h"
 #include "User/Inc/settings.h"
 #include "User/Inc/types.h"
+#include "User/Inc/utils.h"
 
 #ifndef FW_BUILD
 #define FW_BUILD "unknownbuild"
@@ -38,254 +42,295 @@
 #define FW_REV "custombuild"
 #endif
 
-void task_calib_gnss(void* argument) {
-    explorer_states_t* states = (explorer_states_t*)argument;
+static volatile explorer_gnss_discipline_t gnss_discipline_status = {0};
 
-    while (true) {
-        int64_t timestamp_sec = gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) / 1000;
+static uint8_t gnss_discipline_task_stack[768];
+static StaticTask_t gnss_discipline_task_cb;
 
-        // Calibrate GNSS time at UTC 00:00:00 every day
-        if (timestamp_sec % 86400 == 0) {
-            uint8_t attempts = 0;
-            bool success = false;
+static uint8_t gnss_acquire_task_stack[1024];
+static StaticTask_t gnss_acquire_task_cb;
+static osThreadId_t gnss_acquire_task_handle;
 
-            while (attempts < 3 && !success) {
-                if (gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, false)) {
-                    if (gnss_get_sentence(states->gnss_message_buffer, GNSS_SENTENCE_TYPE_RMC)) {
-                        gnss_padding_sentence(states->gnss_message_buffer);
-                        gnss_parse_rmc(&states->gnss_location, &states->gnss_time, states->gnss_message_buffer);
-                        states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
-                        success = true;
-                    }
-                }
+static uint8_t send_packet_task_stack[1024];
+static StaticTask_t send_packet_task_cb;
 
-                if (!success) {
-                    attempts++;
-                    if (attempts < 3) {
-                        mcu_utils_delay_ms(500, true);
-                    }
+static uint8_t sensor_acquire_task_stack[768];
+static StaticTask_t sensor_acquire_task_cb;
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
+    if (htim->Instance == TIM1 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
+        gnss_discipline_status.updated_at_us = mcu_utils_uptime_get_us();
+        osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
+
+        uint16_t high = __HAL_TIM_GET_COUNTER(&htim2);
+        uint16_t low = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+
+        if (__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_UPDATE)) {
+            if (low < 0x8000) {
+                high++;
+            }
+            __HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_UPDATE);
+        }
+
+        gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
+        osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
+    }
+}
+
+void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float ppm_f, float* temperature) {
+    if (temperature != NULL) {
+        ppm_f += (*temperature - TEMP_REF_CELSIUS) * TEMP_PPM_SLOPE;
+    }
+
+    float correction = 1.0f / (1.0f + ppm_f / 1e6f);
+    float new_arr_f = (((float)(clk_freq * (uint32_t)tick_step) / 1e6f) * correction) - 1.0f;
+    uint32_t new_arr = (uint32_t)(new_arr_f + 0.5f);
+
+    if (new_arr < 1) {
+        new_arr = 1;
+    } else if (new_arr > 0xFFFF) {
+        new_arr = 0xFFFF;
+    }
+
+    if (new_arr != htim3.Init.Period) {
+        __HAL_TIM_SET_AUTORELOAD(&htim3, new_arr);
+        htim3.Instance->EGR = TIM_EGR_UG;
+        htim3.Init.Period = new_arr;
+    }
+}
+
+void task_gnss_discipline(void* argument) {
+    explorer_global_states_t* states = (explorer_global_states_t*)argument;
+    const uint32_t clk = get_tim3_clk_freq();
+    const float clk_f = (float)clk;
+
+    if (states->use_gnss_time) {
+        ssd1306_display_string(0, 0, "Fetch GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        ssd1306_display_string(0, 2, "Wait for 1PPS Signal", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        mcu_utils_gpio_high(MCU_STATE_PIN);
+        peri_gnss_init();
+        gnss_reset(GNSS_CTL_PIN, true);
+        MX_TIM2_Init();
+        MX_TIM1_Init();
+        HAL_TIM_Base_Start(&htim2);
+        HAL_TIM_Base_Start(&htim1);
+        HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
+    } else {
+        mcu_utils_gpio_low(GNSS_CTL_PIN.rst);
+    }
+
+    uint32_t prev_gnss_1pps_tick = 0;
+    uint64_t prev_updated_at_us = 0;
+
+    for (uint8_t pps_init_counter = 0; states->use_gnss_time;) {
+        uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
+        if (flags & 0x01) {
+            if (gnss_discipline_status.task_disabled) {
+                set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 0.0f, states->current_board_temp);
+                continue;
+            }
+
+            if (prev_gnss_1pps_tick == 0 || prev_updated_at_us == 0) {
+                prev_gnss_1pps_tick = gnss_discipline_status.gnss_1pps_tick;
+                prev_updated_at_us = gnss_discipline_status.updated_at_us;
+                continue;
+            }
+
+            if (pps_init_counter < 31) {
+                pps_init_counter++;
+                if (pps_init_counter == 31) {
+                    gnss_discipline_status.task_disabled = true;
+                    osThreadFlagsSet(gnss_acquire_task_handle, GNSS_ACQUIRE_ACT);
+                    continue;
+                } else {
+                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "1PPS Captured: %2d/30", pps_init_counter);
+                    ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
             }
 
-            if (!success) {
+            uint32_t delta = gnss_discipline_status.gnss_1pps_tick - prev_gnss_1pps_tick;
+            uint64_t pps_update_diff_ms = (gnss_discipline_status.updated_at_us - prev_updated_at_us) / 1000;
+
+            prev_gnss_1pps_tick = gnss_discipline_status.gnss_1pps_tick;
+            prev_updated_at_us = gnss_discipline_status.updated_at_us;
+
+            if (pps_update_diff_ms <= 990 || pps_update_diff_ms >= 1010) {
                 continue;
+            }
+            float err = (float)delta - clk_f;
+            float ppm = (err * 1.0e6f) / clk_f;
+
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, ppm, states->current_board_temp);
+            mcu_utils_led_blink(MCU_STATE_PIN, 1, true);
+        } else {
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 0.0f, states->current_board_temp);
+            mcu_utils_gpio_high(MCU_STATE_PIN);
+        }
+    }
+
+    osThreadExit();
+}
+
+void task_gnss_acquire(void* argument) {
+    explorer_global_states_t* states = (explorer_global_states_t*)argument;
+    if (!states->use_gnss_time) {
+        osThreadExit();
+    }
+    osThreadFlagsWait(GNSS_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
+
+    for (bool first_run = true;;) {
+        bool got_valid_fix = false;
+        uint8_t consecutive_valid_count = 0;
+        int64_t prev_time_diff = INT64_MAX;
+        int64_t current_time_diff = INT64_MAX;
+
+        for (int64_t local_timestamp_ms;;) {
+            uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
+            if (flags & 0x01) {
+                local_timestamp_ms = (gnss_discipline_status.updated_at_us + 500) / 1000;
+                if (mcu_utils_uptime_get_ms() - local_timestamp_ms >= 1000) {
+                    continue;
+                }
+
+                gnss_status_t gnss_status;
+                gnss_time_t gnss_time;
+
+                bool ok = fetch_gnss_sentences(states->message_buf, &gnss_status, &states->gnss_location, &gnss_time, local_timestamp_ms, &current_time_diff);
+                if (!ok) {
+                    if (first_run) {
+                        ssd1306_display_string(0, 2, "Error Reading GNSS!", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                    }
+                    continue;
+                }
+
+                if (first_run) {
+                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "SAT %2d, HDOP %5.1f", gnss_status.satellites, gnss_status.hdop);
+                    ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                }
+
+                if (gnss_time.is_valid && states->gnss_location.is_valid && gnss_status.satellites > 0 && gnss_status.hdop <= GNSS_REQUIRED_HDOP) {
+                    if (prev_time_diff == INT64_MAX || current_time_diff == prev_time_diff) {
+                        consecutive_valid_count++;
+                    } else {
+                        consecutive_valid_count = 1;
+                    }
+                    prev_time_diff = current_time_diff;
+
+                    if (consecutive_valid_count >= 3) {
+                        states->gnss_time_diff = current_time_diff;
+                        got_valid_fix = true;
+                        if (first_run) {
+                            ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                            mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
+                            mcu_utils_delay_ms(1000, false);
+                        }
+                        break;
+                    }
+                }
+            } else if (!first_run) {
+                got_valid_fix = false;
+                break;
             }
         }
 
-        mcu_utils_delay_ms(500, true);
+        if (got_valid_fix) {
+            if (first_run) {
+                first_run = false;
+                ssd1306_clear();
+                display_device_settings(states);
+            }
+
+            osThreadFlagsSet(states->sensor_acquire_task_handle, SENSOR_ACQUIRE_ACT);
+        }
+
+        if (!first_run) {
+            gnss_discipline_status.task_disabled = false;
+            mcu_utils_delay_ms(GNSS_RESYNC_INTERVAL + 777, true);
+            gnss_discipline_status.task_disabled = true;
+        }
     }
 }
 
 void task_send_packet(void* argument) {
-    explorer_states_t* states = (explorer_states_t*)argument;
+    explorer_global_states_t* states = (explorer_global_states_t*)argument;
 
-    mcu_utils_iwdg_init();
-
-    acquisition_message_t acquisition_message;
+    explorer_acquisition_message_t acq_msg;
     int64_t message_timestamp = 0;
 
     for (uint8_t message_idx = 0;;) {
-        if (osMessageQueueGet(states->acquisition_data_queue, &acquisition_message, NULL, osWaitForever) == osOK) {
-            if (message_timestamp == 0) {
-                message_timestamp = acquisition_message.timestamp;
+        if (osMessageQueueGet(states->sensor_acquisition_queue, &acq_msg, NULL, osWaitForever) == osOK) {
+            if (message_idx == 0) {
+                message_timestamp = acq_msg.timestamp;
             }
 
             uint8_t message_idx_offset1 = message_idx + states->channel_chunk_length;
             uint8_t message_idx_offset2 = message_idx_offset1 + states->channel_chunk_length;
 
             if (!states->use_accelerometer || states->channel_6d) {
-                states->adc_acquisition_channel_buffer->data[message_idx] = acquisition_message.adc_data[0];
-                states->adc_acquisition_channel_buffer->data[message_idx_offset1] = acquisition_message.adc_data[1];
-                states->adc_acquisition_channel_buffer->data[message_idx_offset2] = acquisition_message.adc_data[2];
+                states->adc_acquisition_channel_buffer->data[message_idx] = acq_msg.adc_data[0];
+                states->adc_acquisition_channel_buffer->data[message_idx_offset1] = acq_msg.adc_data[1];
+                states->adc_acquisition_channel_buffer->data[message_idx_offset2] = acq_msg.adc_data[2];
             }
 
             if (states->use_accelerometer || states->channel_6d) {
-                states->accel_acquisition_channel_buffer->data[message_idx] = acquisition_message.accel_data[0];
-                states->accel_acquisition_channel_buffer->data[message_idx_offset1] = acquisition_message.accel_data[1];
-                states->accel_acquisition_channel_buffer->data[message_idx_offset2] = acquisition_message.accel_data[2];
+                states->accel_acquisition_channel_buffer->data[message_idx] = acq_msg.accel_data[0];
+                states->accel_acquisition_channel_buffer->data[message_idx_offset1] = acq_msg.accel_data[1];
+                states->accel_acquisition_channel_buffer->data[message_idx_offset2] = acq_msg.accel_data[2];
             }
 
             message_idx++;
             if (message_idx == states->channel_chunk_length) {
-                send_data_packet(states, acquisition_message.temperature, message_timestamp);
-                message_timestamp = 0;
+                if (!gnss_discipline_status.task_disabled) {
+                    send_data_packet(states, acq_msg.temperature, message_timestamp);
+                }
                 message_idx = 0;
+                mcu_utils_iwdg_feed();
             }
         }
-
-        mcu_utils_iwdg_feed();
     }
 }
 
-void task_acquire_data(void* argument) {
-    explorer_states_t* states = (explorer_states_t*)argument;
-    uint32_t time_span = 1000 / states->sample_rate;
-    uint32_t last_tick = osKernelGetTickCount();
+void task_sensor_acquire(void* argument) {
+    explorer_global_states_t* states = (explorer_global_states_t*)argument;
 
-    acquisition_message_t acq_msg;
-    while (true) {
+    explorer_acquisition_message_t acq_msg;
+    uint32_t time_span = 1000 / states->sample_rate;
+
+    osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
+    mcu_utils_iwdg_init();
+
+    for (uint32_t prev_timestamp = 0;;) {
         if (!states->use_accelerometer || states->channel_6d) {
-            get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
             if (states->channel_6d) {
-                acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
-                acq_msg.timestamp += states->adc_sample_time_correction;
+                acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
             }
+            get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
         }
 
+        if (!states->channel_6d) {
+            acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
+        }
         if (states->use_accelerometer || states->channel_6d) {
             get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
         }
-        if (!states->channel_6d) {
-            acq_msg.timestamp = states->use_gnss_time ? gnss_get_current_timestamp(states->local_base_timestamp, states->gnss_ref_timestamp) : mcu_utils_uptime_ms();
-            acq_msg.timestamp += states->adc_sample_time_correction;
-        }
 
         get_env_temperature(&acq_msg.temperature);
+        states->current_board_temp = &acq_msg.temperature;
 
-        osMessageQueuePut(states->acquisition_data_queue, &acq_msg, 0, 0);
+        osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
 
-        uint32_t elapsed_time = osKernelGetTickCount() - last_tick;
-        if (elapsed_time < time_span) {
-            mcu_utils_delay_ms(time_span - elapsed_time, true);
+        uint64_t current_timestamp = mcu_utils_uptime_get_ms();
+        while (current_timestamp - prev_timestamp < time_span) {
+            current_timestamp = mcu_utils_uptime_get_ms();
         }
-        last_tick = osKernelGetTickCount();
+        prev_timestamp = mcu_utils_uptime_get_ms();
     }
-}
-
-void read_device_settings(explorer_states_t* states) {
-    mcu_utils_gpio_mode(MCU_BOOT1_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->leveling_mode = mcu_utils_gpio_read(MCU_BOOT1_PIN);
-
-    mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
-    mcu_utils_gpio_mode(SAMPLERATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
-    switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 | mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
-        case 0:
-            states->sample_rate = 250;
-            break;
-        case 1:
-            states->sample_rate = 200;
-            break;
-        case 2:
-            states->sample_rate = 100;
-            break;
-        case 3:
-            states->sample_rate = 50;
-            break;
-    }
-
-    mcu_utils_gpio_mode(BAUDRATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
-    mcu_utils_gpio_mode(BAUDRATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
-    switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 | mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {
-        case 0:
-            states->baud_rate = 57600;
-            break;
-        case 1:
-            states->baud_rate = 115200;
-            break;
-        case 2:
-            states->baud_rate = 230400;
-            break;
-        case 3:
-            states->baud_rate = 460800;
-            break;
-    }
-
-    mcu_utils_gpio_mode(OPTIONS_USE_ACCELEROMETER_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->use_accelerometer = mcu_utils_gpio_read(OPTIONS_USE_ACCELEROMETER_PIN);
-
-    mcu_utils_gpio_mode(OPTIONS_USE_GNSS_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->use_gnss_time = mcu_utils_gpio_read(OPTIONS_USE_GNSS_PIN);
-
-    mcu_utils_gpio_mode(OPTIONS_CHANNEL_6D_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->channel_6d = mcu_utils_gpio_read(OPTIONS_CHANNEL_6D_PIN);
-}
-
-void read_gnss_data(explorer_states_t* states) {
-    ssd1306_display_string(0, 0, "Fetch GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-
-    for (char display_buf[20];;) {
-        mcu_utils_led_blink(MCU_STATE_PIN, 5, false);
-
-        if (gnss_get_sentence(states->gnss_message_buffer, GNSS_SENTENCE_TYPE_GGA)) {
-            gnss_padding_sentence(states->gnss_message_buffer);
-            gnss_parse_gga(&states->gnss_status, &states->gnss_location, states->gnss_message_buffer);
-            snprintf(display_buf, sizeof(display_buf), "SAT %2d, HDOP %5.1f", states->gnss_status.satellites, states->gnss_status.hdop);
-            ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        }
-
-        if (!gnss_get_0pps(GNSS_CTL_PIN, &states->local_base_timestamp, true)) {
-            ssd1306_display_string(0, 0, "GNSS Not Ready!", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-            continue;
-        }
-
-        if (gnss_get_sentence(states->gnss_message_buffer, GNSS_SENTENCE_TYPE_RMC)) {
-            gnss_padding_sentence(states->gnss_message_buffer);
-            gnss_parse_rmc(&states->gnss_location, &states->gnss_time, states->gnss_message_buffer);
-            states->gnss_ref_timestamp = gnss_get_timestamp(&states->gnss_time);
-        }
-
-        if (states->gnss_time.is_valid && states->gnss_location.is_valid && states->gnss_status.satellites > 0 && states->gnss_status.hdop <= 1.0) {
-            ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-            mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
-            mcu_utils_delay_ms(1000, false);
-            break;
-        }
-    }
-}
-
-void leveling_mode_handler(void) {
-    ssd1306_clear();
-    ssd1306_display_string(15, 0, "Inclinometer", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-
-    int16_t result_arr[3];
-    char display_buf[19];
-    float temperature = 0;
-    while (1) {
-        get_accel_readout(0, result_arr);
-        get_env_temperature(&temperature);
-
-        int16_t acc_x = result_arr[1];
-        int16_t acc_y = result_arr[2];
-        int16_t acc_z = result_arr[0];
-        float x_angle = quick_atan2(-acc_x, quick_sqrt(acc_y * acc_y + acc_z * acc_z)) * 180.0 / MAGIC_PI;
-        float y_angle = quick_atan2(acc_y, acc_z) * 180.0 / MAGIC_PI;
-
-        x_angle = -x_angle;
-
-        snprintf(display_buf, sizeof(display_buf), "TMP: %5.2f * C", temperature);
-        ssd1306_display_string(20, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        snprintf(display_buf, sizeof(display_buf), "X: %7.2f deg", x_angle);
-        ssd1306_display_string(20, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-        snprintf(display_buf, sizeof(display_buf), "Y: %7.2f deg", y_angle);
-        ssd1306_display_string(20, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-
-        mcu_utils_delay_ms(100, false);
-    }
-}
-
-void display_device_settings(explorer_states_t* states) {
-    char display_buf[20];
-
-    snprintf(display_buf, sizeof(display_buf), "SAMPLE RATE: %3hhu Hz", states->sample_rate);
-    ssd1306_display_string(0, 0, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "PORT BR: %6lu bps", states->baud_rate);
-    ssd1306_display_string(0, 1, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "ACCELERO ENABLE: %2s", states->use_accelerometer || states->channel_6d ? "Y" : "N");
-    ssd1306_display_string(0, 2, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "GPS DATA ENABLE: %2s", states->use_gnss_time ? "Y" : "N");
-    ssd1306_display_string(0, 3, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "6D CHANNEL MODE: %2s", states->channel_6d ? "Y" : "N");
-    ssd1306_display_string(0, 4, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "FW REV: %s", FW_REV);
-    ssd1306_display_string(0, 5, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    snprintf(display_buf, sizeof(display_buf), "BUILD: %s", FW_BUILD);
-    ssd1306_display_string(0, 6, display_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE);
 }
 
 void system_setup(void) {
     MX_DMA_Init();
+    MX_TIM3_Init();
+    HAL_TIM_Base_Start_IT(&htim3);
 
     mcu_utils_gpio_init(false);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
@@ -295,13 +340,13 @@ void system_setup(void) {
     mcu_utils_spi_init(false);
     mcu_utils_uart2_init(GNSS_BAUDRATE, false);
 
-    static explorer_states_t states;
+    static explorer_global_states_t states;
     read_device_settings(&states);
     mcu_utils_uart_init(states.baud_rate, false);
 
     peri_screen_init();
     ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP_RLE, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(0, 0, "Peripheral Init", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, "Peripheral Init", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
@@ -316,7 +361,7 @@ void system_setup(void) {
         eeprom_read(states.adc_calibration_offset.channel_2, 11, sizeof(states.adc_calibration_offset.channel_2));
         eeprom_read(states.adc_calibration_offset.channel_3, 17, sizeof(states.adc_calibration_offset.channel_3));
     } else {
-        ssd1306_display_string(0, 0, "No Calib Params", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+        ssd1306_display_string(0, 0, "No Calib Params", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
         mcu_utils_led_blink(MCU_STATE_PIN, 100, false);
         mcu_utils_delay_ms(1000, false);
     }
@@ -330,20 +375,12 @@ void system_setup(void) {
     mcu_utils_delay_ms(1000, false);
 
     if (states.leveling_mode) {
-        leveling_mode_handler();
+        leveling_mode_entry();
     }
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
-    states.adc_sample_time_correction = peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
-
-    peri_gnss_init();
-    if (states.use_gnss_time) {
-        gnss_reset(GNSS_CTL_PIN, false);
-        read_gnss_data(&states);
-    } else {
-        mcu_utils_gpio_low(GNSS_CTL_PIN.rst);
-    }
+    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
 
     states.packet_sending_interval = PACKET_INTERVAL;
     states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);
@@ -356,26 +393,80 @@ void system_setup(void) {
         states.accel_acquisition_channel_buffer = array_int16_make(states.channel_chunk_length * 3);
     }
 
-    ssd1306_display_string(0, 0, "Device Starting", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE);
+    ssd1306_display_string(0, 0, "Starting Tasks", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
-    if (states.use_gnss_time) {
-        const osThreadAttr_t task_calib_gnss_attr = {.name = "calibrate_gnss", .stack_size = 128 * 4};
-        osThreadNew(task_calib_gnss, &states, &task_calib_gnss_attr);
+    const static osMessageQueueAttr_t sensor_acquisition_queue_attr = {.name = "sensor_acquisition_data"};
+    states.sensor_acquisition_queue = osMessageQueueNew(1, sizeof(explorer_acquisition_message_t), &sensor_acquisition_queue_attr);
+
+    const static osThreadAttr_t gnss_discipline_task_attr = {
+        .name = "gnss_discipline",
+        .cb_mem = &gnss_discipline_task_cb,
+        .cb_size = sizeof(gnss_discipline_task_cb),
+        .stack_mem = gnss_discipline_task_stack,
+        .stack_size = sizeof(gnss_discipline_task_stack),
+        .priority = osPriorityNormal,
+    };
+    gnss_discipline_status.task_handle = osThreadNew(task_gnss_discipline, &states, &gnss_discipline_task_attr);
+    if (gnss_discipline_status.task_handle == NULL) {
+        ssd1306_display_string(0, 0, "Error Code 0x1", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        mcu_utils_gpio_high(MCU_STATE_PIN);
+        while (1) {
+            ;
+        }
     }
 
-    const osMessageQueueAttr_t acquisition_data_queue_attr = {.name = "acquisition_data"};
-    states.acquisition_data_queue = osMessageQueueNew(states.channel_chunk_length, sizeof(acquisition_message_t), &acquisition_data_queue_attr);
+    const static osThreadAttr_t gnss_acquire_task_attr = {
+        .name = "gnss_acquire",
+        .cb_mem = &gnss_acquire_task_cb,
+        .cb_size = sizeof(gnss_acquire_task_cb),
+        .stack_mem = gnss_acquire_task_stack,
+        .stack_size = sizeof(gnss_acquire_task_stack),
+        .priority = osPriorityNormal,
+    };
+    gnss_acquire_task_handle = osThreadNew(task_gnss_acquire, &states, &gnss_acquire_task_attr);
+    if (gnss_acquire_task_handle == NULL) {
+        ssd1306_display_string(0, 0, "Error Code 0x2", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        mcu_utils_gpio_high(MCU_STATE_PIN);
+        while (1) {
+            ;
+        }
+    }
 
-    const osThreadAttr_t task_send_packet_attr = {.name = "send_packet", .stack_size = 128 * 4};
-    osThreadNew(task_send_packet, &states, &task_send_packet_attr);
+    const static osThreadAttr_t send_packet_task_attr = {
+        .name = "send_packet",
+        .cb_mem = &send_packet_task_cb,
+        .cb_size = sizeof(send_packet_task_cb),
+        .stack_mem = send_packet_task_stack,
+        .stack_size = sizeof(send_packet_task_stack),
+        .priority = osPriorityNormal,
+    };
+    states.send_packet_task_handle = osThreadNew(task_send_packet, &states, &send_packet_task_attr);
+    if (states.send_packet_task_handle == NULL) {
+        ssd1306_display_string(0, 0, "Error Code 0x3", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        mcu_utils_gpio_high(MCU_STATE_PIN);
+        while (1) {
+            ;
+        }
+    }
 
-    const osThreadAttr_t task_acquire_data_attr = {.name = "acquire_data", .stack_size = 128 * 4};
-    osThreadNew(task_acquire_data, &states, &task_acquire_data_attr);
-
-    ssd1306_clear();
-    display_device_settings(&states);
+    const static osThreadAttr_t sensor_acquire_task_attr = {
+        .name = "sensor_acquire",
+        .cb_mem = &sensor_acquire_task_cb,
+        .cb_size = sizeof(sensor_acquire_task_cb),
+        .stack_mem = sensor_acquire_task_stack,
+        .stack_size = sizeof(sensor_acquire_task_stack),
+        .priority = osPriorityNormal,
+    };
+    states.sensor_acquire_task_handle = osThreadNew(task_sensor_acquire, &states, &sensor_acquire_task_attr);
+    if (states.sensor_acquire_task_handle == NULL) {
+        ssd1306_display_string(0, 0, "Error Code 0x4", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        mcu_utils_gpio_high(MCU_STATE_PIN);
+        while (1) {
+            ;
+        }
+    }
 }
 
 int main(void) {
@@ -386,7 +477,7 @@ int main(void) {
     system_setup();
     osKernelStart();
 
-    while (true) {
+    while (1) {
         ;
     }
 }

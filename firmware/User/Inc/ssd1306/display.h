@@ -16,7 +16,8 @@ void ssd1306_display_string(uint8_t x,
                             uint8_t y,
                             const char* str,
                             uint8_t font,
-                            uint8_t color);
+                            uint8_t color,
+                            bool clear);
 void ssd1306_display_bitmap(uint8_t start_x,
                             uint8_t start_y,
                             uint8_t width,

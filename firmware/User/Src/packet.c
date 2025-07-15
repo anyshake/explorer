@@ -20,7 +20,7 @@ uint16_t get_data_packet_size(bool use_accelerometer,
     return base_size;
 }
 
-void send_data_packet(explorer_states_t* states, float temperature, int64_t timestamp) {
+void send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp) {
     uint16_t offset = 0;
     uint8_t* bytes;
 
@@ -120,7 +120,6 @@ void send_data_packet(explorer_states_t* states, float temperature, int64_t time
     }
 
     offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + sizeof(packet_variable_data_t);
-    states->uart_packet_buffer->data[offset] = 0xFF;
     for (uint8_t i = 0; i < states->channel_chunk_length; i++) {
         if (!states->use_accelerometer || states->channel_6d) {
             uint16_t adc_offset = offset + i * sizeof(int32_t);

@@ -28,14 +28,14 @@ typedef struct {
 } gnss_ctl_pin_t;
 
 typedef struct {
-    double hdop;
+    float hdop;
     uint8_t satellites;
 } gnss_status_t;
 
 typedef struct {
-    double latitude;
-    double longitude;
-    double elevation;
+    float latitude;
+    float longitude;
+    float elevation;
     bool is_valid;
 } gnss_location_t;
 
@@ -52,9 +52,9 @@ typedef struct {
 
 void gnss_init(gnss_ctl_pin_t pin);
 void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos);
-bool gnss_get_0pps(gnss_ctl_pin_t pin, int64_t* base_time, bool wait);
-bool gnss_get_sentence(uint8_t* str_buf, const char* keyword);
+uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms);
 uint8_t gnss_padding_sentence(uint8_t* str_buf);
-bool gnss_check_checksum(uint8_t* str_buf);
+bool gnss_verify_checksum(uint8_t* str_buf);
+bool gnss_match_keyword(uint8_t* sentence, const char* keyword);
 
 #endif

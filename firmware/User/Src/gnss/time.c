@@ -1,6 +1,6 @@
 #include "User/Inc/gnss/time.h"
 
-bool is_leap_year(uint16_t year) {
+static bool is_leap_year(uint16_t year) {
     if (year % 4 == 0) {
         if (year % 100 == 0) {
             return year % 400 == 0;
@@ -11,7 +11,7 @@ bool is_leap_year(uint16_t year) {
     return false;
 };
 
-uint32_t days_before_year(uint16_t year) {
+static uint32_t days_before_year(uint16_t year) {
     uint32_t days = 0;
     for (uint16_t y = 1970; y < year; y++) {
         days += is_leap_year(y) ? 366 : 365;
@@ -20,10 +20,8 @@ uint32_t days_before_year(uint16_t year) {
     return days;
 };
 
-int64_t gnss_get_timestamp(gnss_time_t* time) {
-    const uint8_t days_in_month[] = {
-        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
-    };
+int64_t gnss_get_time_obj(gnss_time_t* time) {
+    const uint8_t days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     uint16_t year = time->year + 2000;
     uint16_t month = time->month;
@@ -50,12 +48,4 @@ int64_t gnss_get_timestamp(gnss_time_t* time) {
     total_miliseconds += milisecond;
 
     return total_miliseconds;
-}
-
-int64_t gnss_get_current_timestamp(int64_t base_time, int64_t ref_time) {
-    if (!base_time || !ref_time) {
-        return 0;
-    }
-    int64_t elapsed = mcu_utils_uptime_ms() - base_time;
-    return ref_time + elapsed;
 }

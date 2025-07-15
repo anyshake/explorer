@@ -18,5 +18,6 @@ void ssd1306_disable(void);
 void ssd1306_clear(void);
 void ssd1306_write_cmd(uint8_t dat);
 void ssd1306_write_data(uint8_t dat);
+void ssd1306_set_brightness(uint8_t brightness);
 
 #endif
