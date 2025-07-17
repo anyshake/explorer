@@ -7,17 +7,17 @@ void gnss_init(gnss_ctl_pin_t pin) {
 }
 
 void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
-    // Common type reset
     mcu_utils_gpio_low(pin.rst);
     mcu_utils_delay_ms(100, is_rtos);
     mcu_utils_gpio_high(pin.rst);
     mcu_utils_delay_ms(100, is_rtos);
 
-    // For AT6558R based GNSS receivers, a special command needs to be sent to perform a hot restart
-    // reference: https://wiki.millerjs.org/atgm336h
-    uint8_t restart_cmd_at6558r[] = "$PCAS10,0*1C\r\n";
-    mcu_utils_uart2_write(restart_cmd_at6558r, strlen((char*)restart_cmd_at6558r), true);
-    mcu_utils_delay_ms(3000, is_rtos);
+#if GNSS_MODEL != GENERIC
+    if (GNSS_INIT_COMMAND) {
+        mcu_utils_uart2_write((uint8_t*)gnss_init_cmd, sizeof(gnss_init_cmd), true);
+        mcu_utils_delay_ms(GNSS_INIT_DELAY_MS, is_rtos);
+    }
+#endif
 }
 
 uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms) {

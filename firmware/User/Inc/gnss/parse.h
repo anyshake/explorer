@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "User/Inc/gnss/model.h"
 #include "User/Inc/gnss/utils.h"
 
 void gnss_parse_rmc(uint8_t* str_buf, gnss_location_t* location, gnss_time_t* time);

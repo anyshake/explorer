@@ -84,7 +84,11 @@ bool fetch_gnss_sentences(uint8_t* message_buf, gnss_status_t* gnss_status, gnss
             got_gga = true;
         } else if (!got_rmc && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_RMC)) {
             gnss_parse_rmc(message_buf, gnss_location, gnss_time);
-            *gnss_time_diff = gnss_get_time_obj(gnss_time) - local_timestamp;
+            int64_t gnss_message_timestamp = gnss_get_timestamp(gnss_time);
+            if (GNSS_ROUND_TIMESTAMP) {
+                gnss_message_timestamp = (gnss_message_timestamp + 500) / 1000 * 1000;
+            }
+            *gnss_time_diff = gnss_message_timestamp - local_timestamp;
             got_rmc = true;
         }
     }

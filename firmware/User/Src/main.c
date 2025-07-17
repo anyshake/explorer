@@ -245,7 +245,9 @@ void task_gnss_acquire(void* argument) {
 
         if (!first_run) {
             gnss_discipline_status.task_disabled = false;
-            mcu_utils_delay_ms(GNSS_RESYNC_INTERVAL + 777, true);
+            int64_t current_time_ms = (mcu_utils_uptime_get_ms() + states->gnss_time_diff + 777);
+            int64_t delay_until_next_midnight_ms = 86400000 - (current_time_ms % 86400000);
+            mcu_utils_delay_ms(delay_until_next_midnight_ms, true);
             gnss_discipline_status.task_disabled = true;
         }
     }

@@ -20,7 +20,7 @@ static uint32_t days_before_year(uint16_t year) {
     return days;
 };
 
-int64_t gnss_get_time_obj(gnss_time_t* time) {
+int64_t gnss_get_timestamp(gnss_time_t* time) {
     const uint8_t days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     uint16_t year = time->year + 2000;

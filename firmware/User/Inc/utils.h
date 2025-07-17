@@ -8,6 +8,7 @@
 #include "stm32f103xb.h"
 #include "stm32f1xx_hal_rcc.h"
 
+#include "User/Inc/gnss/model.h"
 #include "User/Inc/gnss/parse.h"
 #include "User/Inc/gnss/time.h"
 #include "User/Inc/gnss/utils.h"
