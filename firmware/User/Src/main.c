@@ -59,21 +59,22 @@ static StaticTask_t sensor_acquire_task_cb;
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
     if (htim->Instance == TIM1 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
-        gnss_discipline_status.updated_at_us = mcu_utils_uptime_get_us();
-        osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
-
         uint16_t high = __HAL_TIM_GET_COUNTER(&htim2);
         uint16_t low = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+        int64_t updated_at_us = mcu_utils_uptime_get_us();
 
         if (__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_UPDATE)) {
             if (low < 0x8000) {
                 high++;
             }
             __HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_UPDATE);
-        }
 
-        gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
-        osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
+            gnss_discipline_status.updated_at_us = updated_at_us;
+            gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
+
+            osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
+            osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
+        }
     }
 }
 
@@ -157,9 +158,8 @@ void task_gnss_discipline(void* argument) {
             if (pps_update_diff_ms <= 990 || pps_update_diff_ms >= 1010) {
                 continue;
             }
-            float err = (float)delta - clk_f;
-            float ppm = (err * 1.0e6f) / clk_f;
 
+            float ppm = (((float)delta - clk_f) * 1.0e6f) / clk_f;
             set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, ppm, states->current_board_temp);
             mcu_utils_led_blink(MCU_STATE_PIN, 1, true);
         } else {

@@ -1,8 +1,6 @@
 #include "User/Inc/packet.h"
 
-uint16_t get_data_packet_size(bool use_accelerometer,
-                              bool channel_6d,
-                              uint8_t channel_chunk_length) {
+uint16_t get_data_packet_size(bool use_accelerometer, bool channel_6d, uint8_t channel_chunk_length) {
     uint16_t base_size = sizeof(packet_header_t) +
                          sizeof(packet_timestamp_t) +
                          sizeof(packet_device_config_t) +
