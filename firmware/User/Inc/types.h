@@ -9,7 +9,14 @@
 #include "User/Inc/reader.h"
 #include "cmsis_os2.h"
 
+#define PPM_WINDOW_SIZE 10
+
 typedef struct {
+    float ppm_window[PPM_WINDOW_SIZE];
+    uint8_t ppm_index;
+    float avg_ppm;
+    float current_ppm;
+
     volatile bool task_disabled;
     volatile uint64_t updated_at_us;
     volatile uint32_t gnss_1pps_tick;
@@ -36,7 +43,6 @@ typedef struct {
     bool use_gnss_time;
     bool channel_6d;
 
-    float* current_board_temp;
     int64_t gnss_time_diff;
     gnss_location_t gnss_location;
     uint8_t message_buf[GNSS_SENTENCE_BUFFER_SIZE];

@@ -59,38 +59,53 @@ static StaticTask_t sensor_acquire_task_cb;
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
     if (htim->Instance == TIM1 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
-        uint16_t high = __HAL_TIM_GET_COUNTER(&htim2);
+        uint16_t high_before = __HAL_TIM_GET_COUNTER(&htim2);
         uint16_t low = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+        uint16_t high_after = __HAL_TIM_GET_COUNTER(&htim2);
+
         int64_t updated_at_us = mcu_utils_uptime_get_us();
-
-        if (__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_UPDATE)) {
-            if (low < 0x8000) {
-                high++;
-            }
-            __HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_UPDATE);
-
-            gnss_discipline_status.updated_at_us = updated_at_us;
-            gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
-
-            osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
-            osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
+        uint16_t high;
+        if (high_before == high_after) {
+            high = high_before;
+        } else {
+            high = low < 0x8000 ? high_after : high_before;
         }
+
+        gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
+        gnss_discipline_status.updated_at_us = updated_at_us;
+
+        osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
+        osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
     }
 }
 
-void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float ppm_f, float* temperature) {
-    if (temperature != NULL) {
-        ppm_f += (*temperature - TEMP_REF_CELSIUS) * TEMP_PPM_SLOPE;
+void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float tick_step_size, float ppm_f, uint32_t delta_us) {
+    static float acc_ppm_tick = 0.0f;
+
+    float base_ticks = ((float)(clk_freq * tick_step)) / 1e6f;
+    float ideal_arr_f = base_ticks - 1.0f;
+
+    float ppm_tick_per_us = base_ticks * ppm_f / 1e12f;
+    acc_ppm_tick += ppm_tick_per_us * (float)delta_us;
+
+    int32_t tick_adjust = 0;
+    if (acc_ppm_tick >= tick_step_size) {
+        tick_adjust = (int32_t)(tick_step_size + 0.5f);
+        acc_ppm_tick -= tick_step_size;
+    } else if (acc_ppm_tick <= -tick_step_size) {
+        tick_adjust = -(int32_t)(tick_step_size + 0.5f);
+        acc_ppm_tick += tick_step_size;
     }
 
-    float correction = 1.0f / (1.0f + ppm_f / 1e6f);
-    float new_arr_f = (((float)(clk_freq * (uint32_t)tick_step) / 1e6f) * correction) - 1.0f;
+    float new_arr_f = ideal_arr_f + tick_adjust;
     uint32_t new_arr = (uint32_t)(new_arr_f + 0.5f);
 
     if (new_arr < 1) {
         new_arr = 1;
+        acc_ppm_tick = 0;
     } else if (new_arr > 0xFFFF) {
         new_arr = 0xFFFF;
+        acc_ppm_tick = 0;
     }
 
     if (new_arr != htim3.Init.Period) {
@@ -122,12 +137,21 @@ void task_gnss_discipline(void* argument) {
 
     uint32_t prev_gnss_1pps_tick = 0;
     uint64_t prev_updated_at_us = 0;
+    uint64_t prev_called_at_us = 0;
+    uint8_t ppm_avg_counter = 0;
 
     for (uint8_t pps_init_counter = 0; states->use_gnss_time;) {
         uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
+        uint64_t current_time_us = mcu_utils_uptime_get_us();
         if (flags & 0x01) {
+            if (prev_called_at_us == 0) {
+                prev_called_at_us = current_time_us;
+                continue;
+            }
+
             if (gnss_discipline_status.task_disabled) {
-                set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 0.0f, states->current_board_temp);
+                set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 2.0f, gnss_discipline_status.avg_ppm, current_time_us - prev_called_at_us);
+                prev_called_at_us = current_time_us;
                 continue;
             }
 
@@ -137,14 +161,14 @@ void task_gnss_discipline(void* argument) {
                 continue;
             }
 
-            if (pps_init_counter < 31) {
+            if (pps_init_counter < (PPM_WINDOW_SIZE * 2 + 1)) {
                 pps_init_counter++;
-                if (pps_init_counter == 31) {
+                if (pps_init_counter == (PPM_WINDOW_SIZE * 2 + 1)) {
                     gnss_discipline_status.task_disabled = true;
                     osThreadFlagsSet(gnss_acquire_task_handle, GNSS_ACQUIRE_ACT);
                     continue;
                 } else {
-                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "1PPS Captured: %2d/30", pps_init_counter);
+                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "1PPS Captured: %2d/%2d", pps_init_counter, PPM_WINDOW_SIZE * 2);
                     ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
             }
@@ -156,14 +180,28 @@ void task_gnss_discipline(void* argument) {
             prev_updated_at_us = gnss_discipline_status.updated_at_us;
 
             if (pps_update_diff_ms <= 990 || pps_update_diff_ms >= 1010) {
+                prev_called_at_us = current_time_us;
                 continue;
             }
 
-            float ppm = (((float)delta - clk_f) * 1.0e6f) / clk_f;
-            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, ppm, states->current_board_temp);
+            gnss_discipline_status.current_ppm = (((float)delta - clk_f) * 1.0e6f) / clk_f;
+            gnss_discipline_status.ppm_window[gnss_discipline_status.ppm_index] = gnss_discipline_status.current_ppm;
+            gnss_discipline_status.ppm_index = (gnss_discipline_status.ppm_index + 1) % PPM_WINDOW_SIZE;
+            if (ppm_avg_counter < PPM_WINDOW_SIZE) {
+                ppm_avg_counter++;
+            }
+            float ppm_sum = 0.0f;
+            for (uint8_t i = 0; i < ppm_avg_counter; i++) {
+                ppm_sum += gnss_discipline_status.ppm_window[i];
+            }
+            gnss_discipline_status.avg_ppm = ppm_sum / (float)ppm_avg_counter;
+
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 3.0f, gnss_discipline_status.current_ppm, current_time_us - prev_called_at_us);
+            prev_called_at_us = current_time_us;
             mcu_utils_led_blink(MCU_STATE_PIN, 1, true);
         } else {
-            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 0.0f, states->current_board_temp);
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 2.0f, gnss_discipline_status.avg_ppm, current_time_us - prev_called_at_us);
+            prev_called_at_us = current_time_us;
             mcu_utils_gpio_high(MCU_STATE_PIN);
         }
     }
@@ -321,9 +359,7 @@ void task_sensor_acquire(void* argument) {
         if (states->use_accelerometer || states->channel_6d) {
             get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
         }
-
         get_env_temperature(&acq_msg.temperature);
-        states->current_board_temp = &acq_msg.temperature;
 
         osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
 
@@ -354,7 +390,11 @@ void system_setup(void) {
 
     peri_screen_init();
     ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP_RLE, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-    ssd1306_display_string(0, 0, "Peripheral Init", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+#ifdef USE_ICM42688
+    ssd1306_display_string(0, 0, "E-C121G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+#else
+    ssd1306_display_string(0, 0, "E-C111G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+#endif
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
