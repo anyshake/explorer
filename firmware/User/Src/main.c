@@ -271,13 +271,10 @@ void task_gnss_acquire(void* argument) {
             }
         }
 
-        if (got_valid_fix) {
-            if (first_run) {
-                first_run = false;
-                ssd1306_clear();
-                display_device_settings(states);
-            }
-
+        if (got_valid_fix && first_run) {
+            first_run = false;
+            ssd1306_clear();
+            display_device_settings(states);
             osThreadFlagsSet(states->sensor_acquire_task_handle, SENSOR_ACQUIRE_ACT);
         }
 
@@ -292,6 +289,7 @@ void task_gnss_acquire(void* argument) {
 
     ssd1306_clear();
     display_device_settings(states);
+    osThreadFlagsSet(states->sensor_acquire_task_handle, SENSOR_ACQUIRE_ACT);
     osThreadExit();
 }
 
@@ -340,9 +338,7 @@ void task_sensor_acquire(void* argument) {
     explorer_acquisition_message_t acq_msg;
     uint32_t time_span = 1000 / states->sample_rate;
 
-    if (states->use_gnss_time) {
-        osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
-    }
+    osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
     for (uint32_t prev_timestamp = 0;;) {
