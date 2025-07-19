@@ -65,7 +65,7 @@ void display_device_settings(explorer_global_states_t* states) {
     ssd1306_display_string(0, 6, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, false);
     ssd1306_display_string(14, 7, "- anyshake.org -", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, false);
 
-    ssd1306_set_brightness(0);  // Set minimum brightness
+    ssd1306_set_brightness(1);  // Set minimum brightness
 }
 
 bool fetch_gnss_sentences(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff) {
