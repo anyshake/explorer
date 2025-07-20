@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "User/Inc/settings.h"
+#include "User/Inc/types.h"
 
 #include "User/Inc/gnss/utils.h"
 

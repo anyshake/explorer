@@ -9,6 +9,7 @@
 #include "stm32f1xx_hal_uart.h"
 
 #define MCU_UTILS_UART2_BUFFER_SIZE 256
+#define MCU_UTILS_UART2_DMA_RX_SIZE 128
 
 typedef struct {
     volatile uint16_t head;

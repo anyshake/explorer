@@ -5,6 +5,7 @@
 #include "User/Inc/gnss/utils.h"
 #include "User/Inc/icm42688/utils.h"
 #include "User/Inc/lsm6ds3/utils.h"
+#include "User/Inc/types.h"
 #include "Utils/Inc/gpio.h"
 
 #define PACKET_SENDING_INTERVAL 100

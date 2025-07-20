@@ -22,15 +22,10 @@
 #include "User/Inc/lsm6ds3/regs/outy_xl.h"
 #include "User/Inc/lsm6ds3/regs/outz_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
+#include "User/Inc/types.h"
 
-typedef struct {
-    uint8_t channel_1[3];
-    uint8_t channel_2[3];
-    uint8_t channel_3[3];
-} adc_calibration_offset_t;
-
-adc_calibration_offset_t adc_calibration_offset_new(void);
-void get_adc_readout(ads1262_ctl_pin_t ctl_pin, adc_calibration_offset_t offset_cal, int32_t arr[]);
+explorer_adc_calibration_offset_t adc_calibration_offset_new(void);
+void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]);
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]);
 void get_env_temperature(float* temp);
 

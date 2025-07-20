@@ -282,8 +282,8 @@ void task_gnss_acquire(void* argument) {
         if (!first_run) {
             gnss_discipline_status.task_disabled = false;
             int64_t current_time_ms = (mcu_utils_uptime_get_ms() + states->gnss_time_diff + 777);
-            int64_t delay_until_next_midnight_ms = 86400000 - (current_time_ms % 86400000);
-            mcu_utils_delay_ms(delay_until_next_midnight_ms, true);
+            int64_t delay_until_next_hour_ms = 86400000 - (current_time_ms % 86400000);
+            mcu_utils_delay_ms(delay_until_next_hour_ms, true);
             gnss_discipline_status.task_disabled = true;
         }
     }
@@ -323,9 +323,7 @@ void task_send_packet(void* argument) {
 
             message_idx++;
             if (message_idx == states->channel_chunk_length) {
-                if (!gnss_discipline_status.task_disabled) {
-                    send_data_packet(states, acq_msg.temperature, message_timestamp);
-                }
+                send_data_packet(states, acq_msg.temperature, message_timestamp);
                 message_idx = 0;
                 mcu_utils_iwdg_feed();
             }
@@ -342,7 +340,7 @@ void task_sensor_acquire(void* argument) {
     osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
-    for (uint32_t prev_timestamp = 0;;) {
+    for (uint32_t prev_sys_tick = 0;;) {
         if (!states->use_accelerometer || states->channel_6d) {
             if (states->channel_6d) {
                 acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
@@ -360,11 +358,11 @@ void task_sensor_acquire(void* argument) {
 
         osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
 
-        uint64_t current_timestamp = mcu_utils_uptime_get_ms();
-        while (current_timestamp - prev_timestamp < time_span) {
-            current_timestamp = mcu_utils_uptime_get_ms();
+        uint32_t elapsed_time = osKernelGetTickCount() - prev_sys_tick;
+        if (elapsed_time < time_span) {
+            mcu_utils_delay_ms(time_span - elapsed_time, true);
         }
-        prev_timestamp = mcu_utils_uptime_get_ms();
+        prev_sys_tick = osKernelGetTickCount();
     }
 }
 

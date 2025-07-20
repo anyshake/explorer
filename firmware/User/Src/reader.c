@@ -1,7 +1,7 @@
 #include "User/Inc/reader.h"
 
-adc_calibration_offset_t adc_calibration_offset_new(void) {
-    adc_calibration_offset_t offset_cal;
+explorer_adc_calibration_offset_t adc_calibration_offset_new(void) {
+    explorer_adc_calibration_offset_t offset_cal;
     for (int i = 0; i < 3; i++) {
         offset_cal.channel_1[i] = 0x00;
         offset_cal.channel_2[i] = 0x00;
@@ -10,7 +10,7 @@ adc_calibration_offset_t adc_calibration_offset_new(void) {
     return offset_cal;
 }
 
-void get_adc_readout(ads1262_ctl_pin_t ctl_pin, adc_calibration_offset_t offset_cal, int32_t arr[]) {
+void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]) {
     ads1262_reg_ofcal_t ofcal = ads1262_reg_new_ofcal();
     ads1262_reg_inpmux_t inpmux = ads1262_reg_new_inpmux();
     ads1262_cmd_rdata_t rdata;

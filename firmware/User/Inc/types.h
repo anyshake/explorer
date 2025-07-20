@@ -6,8 +6,10 @@
 
 #include "User/Inc/array.h"
 #include "User/Inc/gnss/utils.h"
-#include "User/Inc/reader.h"
 #include "cmsis_os2.h"
+
+#define E_C111G 0
+#define E_C121G 1
 
 #define PPM_WINDOW_SIZE 10
 
@@ -31,6 +33,12 @@ typedef struct {
 } explorer_acquisition_message_t;
 
 typedef struct {
+    uint8_t channel_1[3];
+    uint8_t channel_2[3];
+    uint8_t channel_3[3];
+} explorer_adc_calibration_offset_t;
+
+typedef struct {
     bool leveling_mode;
 
     uint16_t accel_lsb_per_g;
@@ -47,7 +55,7 @@ typedef struct {
     gnss_location_t gnss_location;
     uint8_t message_buf[GNSS_SENTENCE_BUFFER_SIZE];
 
-    adc_calibration_offset_t adc_calibration_offset;
+    explorer_adc_calibration_offset_t adc_calibration_offset;
     int32_array_t* adc_acquisition_channel_buffer;
     int16_array_t* accel_acquisition_channel_buffer;
 
