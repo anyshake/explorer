@@ -7,8 +7,7 @@
 #include "User/Inc/lsm6ds3/utils.h"
 #include "Utils/Inc/gpio.h"
 
-#define PACKET_INTERVAL 100
-#define GNSS_REQUIRED_HDOP 2.0f
+#define PACKET_SENDING_INTERVAL 100
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,
@@ -54,15 +53,15 @@ static const gnss_ctl_pin_t GNSS_CTL_PIN = {
     .pps = {.port = GPIOA, .pin = GPIO_PIN_8},
     .rst = {.port = GPIOA, .pin = GPIO_PIN_15},
 };
-#ifdef USE_ICM42688
-static const icm42688_ints_pin_t ICM42688_INTS_PIN = {
-    .int_1 = {.port = GPIOB, .pin = GPIO_PIN_1},
-    .int_2 = {.port = GPIOB, .pin = GPIO_PIN_0},
-};
-#else
+#if DEVICE_MODEL == E_C111G
 static const lsm6ds3_ints_pin_t LSM6DS3_INTS_PIN = {
     .int_1 = {.port = GPIOB, .pin = GPIO_PIN_0},
     .int_2 = {.port = GPIOB, .pin = GPIO_PIN_1},
+};
+#elif DEVICE_MODEL == E_C121G
+static const icm42688_ints_pin_t ICM42688_INTS_PIN = {
+    .int_1 = {.port = GPIOB, .pin = GPIO_PIN_1},
+    .int_2 = {.port = GPIOB, .pin = GPIO_PIN_0},
 };
 #endif
 static const ads1262_ctl_pin_t ADS1262_CTL_PIN = {

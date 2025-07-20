@@ -52,32 +52,7 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, adc_calibration_offset_t offset_
                  : 0;
 }
 
-#ifdef USE_ICM42688
-void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
-    icm42688_reg_accel_data_x_t accel_data_x;
-    icm42688_reg_accel_data_y_t accel_data_y;
-    icm42688_reg_accel_data_z_t accel_data_z;
-
-    icm42688_wait();
-
-    icm42688_reg_get_accel_data_z(&accel_data_z);
-    arr[0] = (int16_t)(accel_data_z.accel_data_z_h << 8 | accel_data_z.accel_data_z_l);
-    arr[0] -= lsb_per_g;
-
-    icm42688_reg_get_accel_data_x(&accel_data_x);
-    arr[1] = (int16_t)(accel_data_x.accel_data_x_h << 8 | accel_data_x.accel_data_x_l);
-
-    icm42688_reg_get_accel_data_y(&accel_data_y);
-    arr[2] = (int16_t)(accel_data_y.accel_data_y_h << 8 | accel_data_y.accel_data_y_l);
-}
-
-void get_env_temperature(float* temp) {
-    icm42688_reg_temp_data_t temp_data;
-    icm42688_reg_get_temp_data(&temp_data);
-    int16_t temp_raw = temp_data.temp_data_h << 8 | temp_data.temp_data_l;
-    *temp = (float)temp_raw / 132.48 + 25;
-}
-#else
+#if DEVICE_MODEL == E_C111G
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
     lsm6ds3_reg_outz_xl_t outz_xl;
     lsm6ds3_reg_outx_xl_t outx_xl;
@@ -101,5 +76,30 @@ void get_env_temperature(float* temp) {
     lsm6ds3_reg_get_out_temp(&out_temp);
     int16_t temp_raw = out_temp.out_temp_h << 8 | out_temp.out_temp_l;
     *temp = (float)temp_raw / 16.0 + 25.0;
+}
+#elif DEVICE_MODEL == E_C121G
+void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    icm42688_reg_accel_data_x_t accel_data_x;
+    icm42688_reg_accel_data_y_t accel_data_y;
+    icm42688_reg_accel_data_z_t accel_data_z;
+
+    icm42688_wait();
+
+    icm42688_reg_get_accel_data_z(&accel_data_z);
+    arr[0] = (int16_t)(accel_data_z.accel_data_z_h << 8 | accel_data_z.accel_data_z_l);
+    arr[0] -= lsb_per_g;
+
+    icm42688_reg_get_accel_data_x(&accel_data_x);
+    arr[1] = (int16_t)(accel_data_x.accel_data_x_h << 8 | accel_data_x.accel_data_x_l);
+
+    icm42688_reg_get_accel_data_y(&accel_data_y);
+    arr[2] = (int16_t)(accel_data_y.accel_data_y_h << 8 | accel_data_y.accel_data_y_l);
+}
+
+void get_env_temperature(float* temp) {
+    icm42688_reg_temp_data_t temp_data;
+    icm42688_reg_get_temp_data(&temp_data);
+    int16_t temp_raw = temp_data.temp_data_h << 8 | temp_data.temp_data_l;
+    *temp = (float)temp_raw / 132.48 + 25;
 }
 #endif

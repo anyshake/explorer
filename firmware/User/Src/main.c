@@ -21,6 +21,7 @@
 
 #include "User/Inc/eeprom/read.h"
 
+#include "User/Inc/gnss/model.h"
 #include "User/Inc/gnss/parse.h"
 #include "User/Inc/gnss/time.h"
 #include "User/Inc/gnss/utils.h"
@@ -386,10 +387,10 @@ void system_setup(void) {
 
     peri_screen_init();
     ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP_RLE, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-#ifdef USE_ICM42688
-    ssd1306_display_string(0, 0, "E-C121G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-#else
+#if DEVICE_MODEL == E_C111G
     ssd1306_display_string(0, 0, "E-C111G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+#elif DEVICE_MODEL == E_C121G
+    ssd1306_display_string(0, 0, "E-C121G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
 #endif
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
@@ -410,10 +411,10 @@ void system_setup(void) {
         mcu_utils_delay_ms(1000, false);
     }
 
-#ifdef USE_ICM42688
-    icm42688_reset(false);
-#else
+#if DEVICE_MODEL == E_C111G
     lsm6ds3_reset(false);
+#elif DEVICE_MODEL == E_C121G
+    icm42688_reset(false);
 #endif
     states.accel_lsb_per_g = peri_imu_init(states.sample_rate);
     mcu_utils_delay_ms(1000, false);
@@ -426,7 +427,7 @@ void system_setup(void) {
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
 
-    states.packet_sending_interval = PACKET_INTERVAL;
+    states.packet_sending_interval = PACKET_SENDING_INTERVAL;
     states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);
     states.uart_packet_buffer = array_uint8_make(get_data_packet_size(states.use_accelerometer, states.channel_6d, states.channel_chunk_length));
 

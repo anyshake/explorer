@@ -34,8 +34,6 @@ After dependencies are installed, you can build the firmware with PlatformIO.
 
 ## Flash Firmware
 
-### Burn with ST-Link
-
 Ensure the ST-Link is connected to the device correctly (SWCLK->CLK, SWDIO->DIO, GND->GND), then connect the ST-Link to your PC with USB.
 
 Make sure the ST-Link is recognized by your PC, then you can flash the firmware with PlatformIO.
@@ -44,20 +42,3 @@ Make sure the ST-Link is recognized by your PC, then you can flash the firmware 
 - Click Default > General > Upload
 
 The device will be reset after the firmware is uploaded.
-
-### Burn with Serial Port
-
-Toggling the BOOT0 jumper to right side, connect the board to your PC by RS232 serial port or USB to TTL converter, then power on the device.
-
-Make sure the serial port is recognized by your PC, modify the `upload_protocol` field in `platformio.ini` to the correct serial port.
-
-```ini
-upload_protocol = serial
-```
-
-After saving the configuration, you can flash the firmware with PlatformIO.
-
-- Click PlatformIO icon on the left sidebar
-- Click Default > General > Upload
-
-After the firmware is uploaded, toggle the BOOT0 jumper left size, then reset the device manually.

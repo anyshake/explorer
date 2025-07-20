@@ -11,13 +11,7 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
     mcu_utils_gpio_high(pin.rst);
     mcu_utils_delay_ms(100, is_rtos);
-
-#if GNSS_MODEL != GENERIC
-    if (GNSS_INIT_COMMAND) {
-        mcu_utils_uart2_write((uint8_t*)gnss_init_cmd, sizeof(gnss_init_cmd), true);
-        mcu_utils_delay_ms(GNSS_INIT_DELAY_MS, is_rtos);
-    }
-#endif
+    gnss_model_reset(is_rtos);
 }
 
 uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms) {
