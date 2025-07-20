@@ -11121,7 +11121,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bb38ec65-e247-4825-8c9a-c9938c644be0")
 		(property "Reference" "R13"
@@ -11564,7 +11564,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ccf56933-400c-40b3-b2ff-d2f8f761aca4")
 		(property "Reference" "R12"
@@ -13178,7 +13178,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fdde1bcd-242e-476b-a551-d1d5c52b4ada")
 		(property "Reference" "R15"
