@@ -340,7 +340,7 @@ void task_sensor_acquire(void* argument) {
     osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
-    for (uint32_t prev_sys_tick = 0;;) {
+    for (uint32_t prev_timestamp = 0;;) {
         if (!states->use_accelerometer || states->channel_6d) {
             if (states->channel_6d) {
                 acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
@@ -358,11 +358,11 @@ void task_sensor_acquire(void* argument) {
 
         osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
 
-        uint32_t elapsed_time = osKernelGetTickCount() - prev_sys_tick;
-        if (elapsed_time < time_span) {
-            mcu_utils_delay_ms(time_span - elapsed_time, true);
-        }
-        prev_sys_tick = osKernelGetTickCount();
+        uint64_t current_timestamp;
+        do {
+            current_timestamp = mcu_utils_uptime_get_ms();
+        } while (current_timestamp - prev_timestamp < time_span);
+        prev_timestamp = current_timestamp;
     }
 }
 
