@@ -16,10 +16,10 @@ void gnss_model_reset(bool is_rtos) {
     // gnss_warm_start: warm start command for AT6558R based GNSS
     // set_satellite_system: set satellite system to GPS L1, BDS B1, Galileo E1, QZSS L1, SBAS L1, BDS B1C enabled
     // reference: https://wiki.millerjs.org/atgm336h
-    const char gnss_warm_start[] = "$PCAS00,0*1C\r\n";
+    const char gnss_warm_start[] = "$PCAS10,0*1C\r\n";
     const char set_satellite_system[] = "$PCAS04,3*1A\r\n";
 
-    mcu_utils_uart2_write((uint8_t*)gnss_warm_start, sizeof(set_satellite_system), true);
+    mcu_utils_uart2_write((uint8_t*)gnss_warm_start, sizeof(gnss_warm_start), true);
     mcu_utils_delay_ms(1000, is_rtos);
     mcu_utils_uart2_write((uint8_t*)set_satellite_system, sizeof(set_satellite_system), true);
     mcu_utils_delay_ms(5000, is_rtos);
