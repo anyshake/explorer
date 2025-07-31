@@ -68,7 +68,7 @@ void display_device_settings(explorer_global_states_t* states) {
     ssd1306_set_brightness(1);  // Set minimum brightness
 }
 
-bool fetch_gnss_sentences(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff) {
+bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff) {
     bool got_gga = false;
     bool got_rmc = false;
 
@@ -80,7 +80,7 @@ bool fetch_gnss_sentences(uint8_t* message_buf, gnss_status_t* gnss_status, gnss
         gnss_padding_sentence(message_buf);
 
         if (!got_gga && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_GGA)) {
-            gnss_parse_gga(message_buf, gnss_status, NULL);
+            gnss_parse_gga(message_buf, gnss_status, gnss_location);
             got_gga = true;
         } else if (!got_rmc && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_RMC)) {
             gnss_parse_rmc(message_buf, gnss_location, gnss_time);

@@ -23,6 +23,6 @@
 uint32_t get_tim3_clk_freq(void);
 void display_device_settings(explorer_global_states_t* states);
 void read_device_settings(explorer_global_states_t* states);
-bool fetch_gnss_sentences(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff);
+bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff);
 
 #endif

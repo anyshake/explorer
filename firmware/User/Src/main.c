@@ -122,7 +122,7 @@ void task_gnss_discipline(void* argument) {
     const float clk_f = (float)clk;
 
     if (states->use_gnss_time) {
-        ssd1306_display_string(0, 0, "Fetch GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        ssd1306_display_string(0, 0, "Parse GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
         ssd1306_display_string(0, 2, "Wait for 1PPS Signal", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
         mcu_utils_gpio_high(MCU_STATE_PIN);
         peri_gnss_init();
@@ -234,7 +234,7 @@ void task_gnss_acquire(void* argument) {
                 gnss_status_t gnss_status;
                 gnss_time_t gnss_time;
 
-                bool ok = fetch_gnss_sentences(states->message_buf, &gnss_status, &states->gnss_location, &gnss_time, local_timestamp_ms, &current_time_diff);
+                bool ok = parse_gnss_message(states->message_buf, &gnss_status, &states->gnss_location, &gnss_time, local_timestamp_ms, &current_time_diff);
                 if (!ok) {
                     if (first_run) {
                         ssd1306_display_string(0, 2, "Error Reading GNSS!", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
