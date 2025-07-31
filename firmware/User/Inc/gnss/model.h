@@ -28,6 +28,6 @@
 
 #endif
 
-void gnss_model_reset(bool is_rtos);
+void gnss_model_setup(bool is_rtos);
 
 #endif

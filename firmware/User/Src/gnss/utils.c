@@ -11,7 +11,7 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
     mcu_utils_gpio_high(pin.rst);
     mcu_utils_delay_ms(100, is_rtos);
-    gnss_model_reset(is_rtos);
+    gnss_model_setup(is_rtos);
 }
 
 uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms) {
