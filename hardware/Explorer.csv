@@ -12,6 +12,7 @@
 "C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59","4.7uF","~","Capacitor_SMD:C_1210_3225Metric","12",""
 "C61,C62,C63,C64,C65,C66,C74,C77","1uF","~","Capacitor_SMD:C_1210_3225Metric","8",""
 "C71","4700pF","~","Capacitor_SMD:C_0603_1608Metric","1",""
+"C79,C80,C81,C82,C83,C84","22pF","~","Capacitor_SMD:C_0603_1608Metric","6",""
 "D1,D3,D7","SS34","https://www.vishay.com/docs/88751/ss32.pdf","Diode_SMD:D_SMA","3",""
 "D2","SMAJ12A","https://www.littelfuse.com/media?resourcetype=datasheets&itemid=75e32973-b177-4ee3-a0ff-cedaf1abdb93&filename=smaj-datasheet","Diode_SMD:D_SMA","1",""
 "D4,D5,D6,D11,D12,D13,D23","Yellow","~","LED_SMD:LED_0603_1608Metric","7",""

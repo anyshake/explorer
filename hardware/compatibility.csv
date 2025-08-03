@@ -2,9 +2,9 @@ MCU model,Status,Result,Remark
 STM32F103C8T6,finished,pass,
 STM32F103CBT6,finished,pass,
 GD32F103C8T6,finished,pass,
-GD32F103CBT6,finished,pass,
-HK32F103C8T6,finished,pass,
-HK32F103CBT6,finished,pass,
+GD32F103CBT6,finished,pass,nnnnnn
+HK32F103C8T6,finished,failed,SPI  bus error
+HK32F103CBT6,finished,failed,SPI  bus error
 CKS32F103C8T6,finished,pass,
 CKS32F103CBT6,finished,pass,
 APM32F103C8T6,finished,pass,
