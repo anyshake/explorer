@@ -27,6 +27,7 @@
 #include "User/Inc/gnss/utils.h"
 
 #include "User/Inc/array.h"
+#include "User/Inc/filter.h"
 #include "User/Inc/leveling.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/peripheral.h"
@@ -346,6 +347,12 @@ void task_sensor_acquire(void* argument) {
                 acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
             }
             get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
+
+#if HARDWARE_REV >= 20250804
+            acq_msg.adc_data[0] = apply_data_compensation(acq_msg.adc_data[0], &states->df1_filter_ch1);
+            acq_msg.adc_data[1] = apply_data_compensation(acq_msg.adc_data[1], &states->df1_filter_ch2);
+            acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
+#endif
         }
 
         if (!states->channel_6d) {
@@ -424,6 +431,30 @@ void system_setup(void) {
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
+#if HARDWARE_REV >= 20250804
+    switch (states.sample_rate) {
+        case 50:
+            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+            break;
+        case 100:
+            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+            break;
+        case 200:
+            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+            break;
+        case 250:
+            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+            break;
+    }
+#endif
 
     states.packet_sending_interval = PACKET_SENDING_INTERVAL;
     states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);

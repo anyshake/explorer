@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "User/Inc/array.h"
+#include "User/Inc/filter.h"
 #include "User/Inc/gnss/utils.h"
 #include "cmsis_os2.h"
 
@@ -58,6 +59,10 @@ typedef struct {
     explorer_adc_calibration_offset_t adc_calibration_offset;
     int32_array_t* adc_acquisition_channel_buffer;
     int16_array_t* accel_acquisition_channel_buffer;
+
+    filter_iir_df1_t df1_filter_ch1;
+    filter_iir_df1_t df1_filter_ch2;
+    filter_iir_df1_t df1_filter_ch3;
 
     uint8_t channel_chunk_length;
     uint16_t packet_sending_interval;
