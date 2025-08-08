@@ -14,6 +14,7 @@
 #include "Utils/Inc/iwdg.h"
 #include "Utils/Inc/led.h"
 #include "Utils/Inc/uart.h"
+#include "Utils/Inc/uart2.h"
 #include "Utils/Inc/uptime.h"
 
 #include "User/Inc/ssd1306/display.h"
@@ -75,6 +76,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
 
         gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
         gnss_discipline_status.updated_at_us = updated_at_us;
+        mcu_utils_uart2_flush();
 
         osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
         osThreadFlagsSet(gnss_discipline_status.task_handle, GNSS_1PPS_UPDATED);
