@@ -8,26 +8,22 @@
 #include "Utils/Inc/uart2.h"
 
 #define GENERIC 0
+
 #define QUECTEL_LC260Z 1
-#define ZHONGKEWEI_ATGM332D 2
+#define QUECTEL_LC261Z 2
+#define QUECTEL_LC760Z 3
+#define QUECTEL_LC761Z 4
 
-#if GNSS_MODEL == GENERIC
+#define ZHONGKEWEI_ATGM332D 5
+#define ZHONGKEWEI_ATGM336H 6
+#define QUECTEL_L26K 7
+#define QUECTEL_L76K 8
 
-#define GNSS_ROUND_TIMESTAMP false
-#define GNSS_REQUIRED_HDOP 2.0f
-
-#elif GNSS_MODEL == QUECTEL_LC260Z
-
-#define GNSS_ROUND_TIMESTAMP true
-#define GNSS_REQUIRED_HDOP 2.0f
-
-#elif GNSS_MODEL == ZHONGKEWEI_ATGM332D
-
-#define GNSS_ROUND_TIMESTAMP false
-#define GNSS_REQUIRED_HDOP 2.0f
-
-#endif
+#define ALLYSTAR_TAU812S 9
+#define ALLYSTAR_TAU1113 10
+#define ALLYSTAR_TAU1114 11
 
 void gnss_model_setup(bool is_rtos);
+int64_t gnss_model_handle_timestamp(int64_t timestamp);
 
 #endif

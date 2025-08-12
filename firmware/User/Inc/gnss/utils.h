@@ -6,7 +6,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "User/Inc/gnss/model.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/uart2.h"

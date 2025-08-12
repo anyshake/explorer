@@ -130,6 +130,7 @@ void task_gnss_discipline(void* argument) {
         mcu_utils_gpio_high(MCU_STATE_PIN);
         peri_gnss_init();
         gnss_reset(GNSS_CTL_PIN, true);
+        gnss_model_setup(true);
         MX_TIM2_Init();
         MX_TIM1_Init();
         HAL_TIM_Base_Start(&htim2);
@@ -250,7 +251,7 @@ void task_gnss_acquire(void* argument) {
                     ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
 
-                if (gnss_time.is_valid && states->gnss_location.is_valid && gnss_status.satellites > 0 && gnss_status.hdop <= GNSS_REQUIRED_HDOP) {
+                if (gnss_time.is_valid && states->gnss_location.is_valid && gnss_status.satellites > 0 && gnss_status.hdop <= GNSS_REQUIRED_VALID_HDOP) {
                     if (prev_time_diff == INT64_MAX || current_time_diff == prev_time_diff) {
                         consecutive_valid_count++;
                     } else {

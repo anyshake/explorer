@@ -85,9 +85,9 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
         } else if (!got_rmc && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_RMC)) {
             gnss_parse_rmc(message_buf, gnss_location, gnss_time);
             int64_t gnss_message_timestamp = gnss_get_timestamp(gnss_time);
-            if (GNSS_ROUND_TIMESTAMP) {
-                gnss_message_timestamp = (gnss_message_timestamp + 500) / 1000 * 1000;
-            }
+            // some GNSS module such as Quectel LC260Z and Quectel LC761Z have a wrong timestamp
+            // with an offset of 1 second, already confirmed by Quectel support team
+            gnss_message_timestamp = gnss_model_handle_timestamp(gnss_message_timestamp);
             *gnss_time_diff = gnss_message_timestamp - local_timestamp;
             got_rmc = true;
         }

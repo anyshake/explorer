@@ -9,6 +9,7 @@
 #include "Utils/Inc/gpio.h"
 
 #define PACKET_SENDING_INTERVAL 100
+#define GNSS_REQUIRED_VALID_HDOP 2.0f
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,
