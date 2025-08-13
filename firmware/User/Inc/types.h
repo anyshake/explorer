@@ -12,7 +12,7 @@
 #define E_C111G 0
 #define E_C121G 1
 
-#define PPM_WINDOW_SIZE 10
+#define PPM_WINDOW_SIZE 15
 
 typedef struct {
     float ppm_window[PPM_WINDOW_SIZE];

@@ -34,7 +34,7 @@ void ssd1306_display_string(uint8_t x,
                             uint8_t font,
                             uint8_t color,
                             bool clear) {
-        uint8_t char_width = (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 8 : 6;
+    uint8_t char_width = (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 8 : 6;
     uint8_t char_height = (font == SSD1306_FONT_TYPE_ASCII_8X16) ? 2 : 1;
 
     if (clear) {

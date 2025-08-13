@@ -175,6 +175,8 @@ void task_gnss_discipline(void* argument) {
                 } else {
                     snprintf((char*)states->message_buf, sizeof(states->message_buf), "1PPS Captured: %2d/%2d", pps_init_counter, PPM_WINDOW_SIZE * 2);
                     ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "Avg Dev: %3.3f ppm", gnss_discipline_status.avg_ppm);
+                    ssd1306_display_string(0, 3, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
             }
 
