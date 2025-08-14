@@ -1,8 +1,9 @@
 #include "User/Inc/gnss/parse.h"
 
-float quick_atof(const char* str) {
-    if (!str)
+static inline float quick_atof(const char* str) {
+    if (str == NULL) {
         return 0.0f;
+    }
 
     float result = 0.0f;
     float fraction = 0.1f;
@@ -38,7 +39,11 @@ float quick_atof(const char* str) {
     return negative ? -result : result;
 }
 
-int32_t quick_atoi(char* str) {
+static inline int32_t quick_atoi(char* str) {
+    if (str == NULL) {
+        return 0;
+    }
+
     int32_t data = 0;
     int32_t sign = 1;
 
@@ -145,11 +150,26 @@ void gnss_parse_rmc(uint8_t* str_buf, gnss_location_t* location, gnss_time_t* ti
     }
 }
 
-void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* location) {
+void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* location, gnss_time_t* time) {
     char* token = strtok((char*)str_buf, ",");
 
     for (uint8_t i = 0; token != NULL; i++) {
         switch (i) {
+            case 1:
+                if (time != NULL) {
+                    if (*token != GNSS_SENTENCE_PADDING_CHAR) {
+                        float result = quick_atof(token);
+                        int32_t result_int = (int32_t)result;
+                        time->hour = result_int / 10000;
+                        time->minute = (result_int / 100) % 100;
+                        time->second = result_int % 100;
+                        time->milisecond = (result - result_int) * 1000;
+                        time->is_valid = true;
+                    } else {
+                        time->is_valid = false;
+                    }
+                }
+                break;
             case 2:
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {

@@ -171,6 +171,7 @@ void task_gnss_discipline(void* argument) {
             if (pps_init_counter < (PPM_WINDOW_SIZE * 2 + 1)) {
                 pps_init_counter++;
                 if (pps_init_counter == (PPM_WINDOW_SIZE * 2 + 1)) {
+                    ssd1306_display_string(0, 2, "Reading GNSS Message", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                     gnss_discipline_status.task_disabled = true;
                     osThreadFlagsSet(gnss_acquire_task_handle, GNSS_ACQUIRE_ACT);
                     continue;
@@ -225,15 +226,17 @@ void task_gnss_discipline(void* argument) {
 void task_gnss_acquire(void* argument) {
     explorer_global_states_t* states = (explorer_global_states_t*)argument;
 
-    for (bool first_run = true; states->use_gnss_time;) {
-        if (first_run) {
+    for (bool first_sync = true; states->use_gnss_time;) {
+        if (first_sync) {
             osThreadFlagsWait(GNSS_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
         }
 
         bool got_valid_fix = false;
-        int64_t current_time_diff = 0;
+        uint8_t consecutive_valid_count = 0;
+        int64_t prev_time_diff = INT64_MAX;
+        int64_t current_time_diff = INT64_MAX;
 
-        for (int64_t local_timestamp_ms;;) {
+        for (int64_t local_timestamp_ms = 0;;) {
             uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
             if (flags & 0x01) {
                 local_timestamp_ms = (gnss_discipline_status.updated_at_us + 500) / 1000;
@@ -243,48 +246,64 @@ void task_gnss_acquire(void* argument) {
 
                 gnss_status_t gnss_status;
                 gnss_time_t gnss_time;
+                gnss_location_t gnss_location;
 
-                bool ok = parse_gnss_message(states->message_buf, &gnss_status, &states->gnss_location, &gnss_time, local_timestamp_ms, &current_time_diff);
+                bool ok = parse_gnss_message(states->message_buf, &gnss_status, &gnss_location, &gnss_time, local_timestamp_ms, &current_time_diff, true);
                 if (!ok) {
-                    if (first_run) {
-                        ssd1306_display_string(0, 2, "Error Reading GNSS!", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                    if (first_sync) {
+                        ssd1306_display_string(0, 2, "Timeout Reading GNSS!", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                     }
                     continue;
                 }
 
-                if (first_run) {
+                if (first_sync) {
                     snprintf((char*)states->message_buf, sizeof(states->message_buf), "SAT %2d, HDOP %5.1f", gnss_status.satellites, gnss_status.hdop);
                     ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
 
-                if (gnss_time.is_valid && states->gnss_location.is_valid && gnss_status.satellites > 0 && gnss_status.hdop <= GNSS_REQUIRED_VALID_HDOP) {
-                    states->gnss_time_diff = current_time_diff;
-                    got_valid_fix = true;
-                    if (first_run) {
-                        ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-                        mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
-                        mcu_utils_delay_ms(1000, false);
+                if (gnss_time.is_valid && gnss_status.satellites > 0) {
+                    if (prev_time_diff == INT64_MAX || current_time_diff == prev_time_diff) {
+                        consecutive_valid_count++;
+                    } else {
+                        consecutive_valid_count = 1;
                     }
-                    break;
+                    prev_time_diff = current_time_diff;
+
+                    if (consecutive_valid_count >= 3) {
+                        consecutive_valid_count = 0;
+                        got_valid_fix = true;
+                        states->gnss_time_diff = current_time_diff;
+                        if (gnss_location.is_valid && gnss_status.hdop <= GNSS_REQUIRED_VALID_HDOP) {
+                            states->gnss_location = gnss_location;
+                            if (first_sync) {
+                                ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                                mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
+                                mcu_utils_delay_ms(1000, true);
+                            }
+                            break;
+                        } else if (!first_sync) {
+                            break;
+                        }
+                    }
                 }
-            } else if (!first_run) {
+            } else if (!first_sync) {
                 got_valid_fix = false;
                 break;
             }
         }
 
-        if (got_valid_fix && first_run) {
-            first_run = false;
+        if (got_valid_fix && first_sync) {
+            first_sync = false;
             ssd1306_clear();
             display_device_settings(states);
             osThreadFlagsSet(states->sensor_acquire_task_handle, SENSOR_ACQUIRE_ACT);
         }
 
-        if (!first_run) {
+        if (!first_sync) {
             gnss_discipline_status.task_disabled = false;
-            int64_t current_time_ms = (mcu_utils_uptime_get_ms() + states->gnss_time_diff + 777);
-            int64_t next_sync_duration_ms = get_next_sync_duration_ms(current_time_ms, gnss_discipline_status.avg_ppm);
-            mcu_utils_delay_ms(next_sync_duration_ms, true);
+            int64_t current_time_ms = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
+            int64_t delay_until_next_sync_ms = GNSS_RESYNC_INTERVAL_MS - (current_time_ms % GNSS_RESYNC_INTERVAL_MS);
+            mcu_utils_delay_ms(delay_until_next_sync_ms, true);
             gnss_discipline_status.task_disabled = true;
         }
     }

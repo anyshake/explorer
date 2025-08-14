@@ -13,40 +13,28 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms) {
+bool gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms, bool is_rtos) {
     uint8_t line_buf[GNSS_SENTENCE_BUFFER_SIZE];
-    uint8_t line_idx = 0;
+    int16_t line_len = 0;
 
-    for (int64_t start_time = mcu_utils_uptime_get_ms();;) {
-        if (mcu_utils_uart2_hasdata()) {
-            uint8_t ch = mcu_utils_uart2_read();
-
-            if (ch >= 32 && ch <= 126) {
-                if (ch == '$') {
-                    line_idx = 0;
-                }
-
-                if (line_idx < GNSS_SENTENCE_BUFFER_SIZE - 1) {
-                    line_buf[line_idx++] = ch;
+    for (int64_t start_time = mcu_utils_uptime_get_ms(); mcu_utils_uptime_get_ms() - start_time < timeout_ms;) {
+        line_len = mcu_utils_uart2_read_line(line_buf, GNSS_SENTENCE_BUFFER_SIZE);
+        if (line_len > 0) {
+            if (gnss_verify_checksum(line_buf)) {
+                if ((uint16_t)line_len < GNSS_SENTENCE_BUFFER_SIZE) {
+                    strncpy((char*)str_buf, (char*)line_buf, line_len);
+                    str_buf[line_len] = '\0';
+                    return true;
                 }
             }
-
-            if (ch == '\n' || line_idx >= GNSS_SENTENCE_BUFFER_SIZE - 1) {
-                line_buf[line_idx] = '\0';
-
-                if (gnss_verify_checksum(line_buf)) {
-                    strncpy((char*)str_buf, (char*)line_buf, line_idx + 1);
-                    return 0;
-                }
-
-                line_idx = 0;
-            }
+        } else if (line_len == -1) {
+            line_len = 0;
         }
 
-        if ((mcu_utils_uptime_get_ms() - start_time) >= timeout_ms) {
-            return -1;
-        }
+        mcu_utils_delay_ms(100, is_rtos);
     }
+
+    return false;
 }
 
 uint8_t gnss_padding_sentence(uint8_t* str_buf) {

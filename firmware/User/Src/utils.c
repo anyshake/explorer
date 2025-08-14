@@ -68,32 +68,46 @@ void display_device_settings(explorer_global_states_t* states) {
     ssd1306_set_brightness(1);  // Set minimum brightness
 }
 
-bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff) {
+bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff, bool is_rtos) {
     bool got_gga = false;
     bool got_rmc = false;
 
-    for (uint8_t attempt = 0; !got_gga || !got_rmc; attempt++) {
-        uint8_t ret = gnss_get_sentence(message_buf, 1000);
-        if (ret != 0) {
+    gnss_time_t rmc_time;
+    gnss_time_t gga_time;
+
+    while (!got_gga || !got_rmc) {
+        bool ok = gnss_get_sentence(message_buf, 990, is_rtos);
+        if (!ok) {
             return false;
         }
         gnss_padding_sentence(message_buf);
 
         if (!got_gga && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_GGA)) {
-            gnss_parse_gga(message_buf, gnss_status, gnss_location);
+            gnss_parse_gga(message_buf, gnss_status, gnss_location, &gga_time);
             got_gga = true;
         } else if (!got_rmc && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_RMC)) {
-            gnss_parse_rmc(message_buf, gnss_location, gnss_time);
-            int64_t gnss_message_timestamp = gnss_get_timestamp(gnss_time);
-            // some GNSS module such as Quectel LC260Z and Quectel LC761Z have a wrong timestamp
-            // with an offset of 1 second, already confirmed by Quectel support team
-            gnss_message_timestamp = gnss_model_handle_timestamp(gnss_message_timestamp);
-            *gnss_time_diff = gnss_message_timestamp - local_timestamp;
+            gnss_parse_rmc(message_buf, gnss_location, &rmc_time);
             got_rmc = true;
+        }
+
+        if (got_gga && got_rmc && gga_time.hour == rmc_time.hour && gga_time.minute == rmc_time.minute && gga_time.second == rmc_time.second && gga_time.milisecond == rmc_time.milisecond) {
+            if (gnss_time != NULL && gnss_time_diff != NULL) {
+                int64_t gnss_message_timestamp = gnss_get_timestamp(&rmc_time);
+                // some GNSS module such as Quectel LC260Z and Quectel LC761Z have a wrong timestamp
+                // with an offset of 1 second, already confirmed by Quectel support team
+                gnss_message_timestamp = gnss_model_handle_timestamp(gnss_message_timestamp);
+                *gnss_time_diff = gnss_message_timestamp - local_timestamp;
+                *gnss_time = rmc_time;
+            }
+            return true;
+        } else if (got_gga && got_rmc) {
+            got_gga = false;
+            got_rmc = false;
+            mcu_utils_uart2_flush();
         }
     }
 
-    return got_gga && got_rmc;
+    return false;
 }
 
 uint32_t get_tim3_clk_freq(void) {
@@ -123,21 +137,4 @@ float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us,
     }
 
     return tick_step;
-}
-
-uint32_t get_next_sync_duration_ms(int64_t current_time_ms, float avg_ppm) {
-    avg_ppm = avg_ppm > 0.0f ? avg_ppm : -avg_ppm;
-
-    uint32_t interval_ms = 21600000;
-    if (avg_ppm >= 50.0f) {
-        interval_ms = 3600000;
-    } else if (avg_ppm >= 20.0f && avg_ppm < 50.0f) {
-        interval_ms = 7200000;
-    } else if (avg_ppm >= 10.0f && avg_ppm < 20.0f) {
-        interval_ms = 10800000;
-    } else if (avg_ppm >= 5.0f && avg_ppm < 10.0f) {
-        interval_ms = 14400000;
-    }
-
-    return (uint32_t)(interval_ms - (current_time_ms % interval_ms));
 }

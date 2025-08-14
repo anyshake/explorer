@@ -8,7 +8,7 @@
 #include "Utils/Inc/delay.h"
 #include "stm32f1xx_hal_uart.h"
 
-#define MCU_UTILS_UART_BUFFER_SIZE 256
+#define MCU_UTILS_UART_BUFFER_SIZE 64
 
 typedef struct {
     volatile uint16_t head;
@@ -22,5 +22,7 @@ void mcu_utils_uart_end(void);
 void mcu_utils_uart_flush(void);
 uint8_t mcu_utils_uart_read(void);
 bool mcu_utils_uart_hasdata(void);
+int32_t mcu_utils_uart_read_buf(uint8_t* dat, uint16_t len);
+int32_t mcu_utils_uart_read_line(uint8_t* str, uint16_t len);
 
 #endif

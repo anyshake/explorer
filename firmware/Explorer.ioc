@@ -100,6 +100,7 @@ NVIC.TIM3_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true\:true
 NVIC.TIM4_IRQn=true\:15\:0\:false\:false\:true\:false\:false\:true\:true
 NVIC.TimeBase=TIM4_IRQn
 NVIC.TimeBaseIP=TIM4
+NVIC.USART1_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true\:true
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false\:false
 PA10.Mode=Asynchronous
 PA10.Signal=USART1_RX

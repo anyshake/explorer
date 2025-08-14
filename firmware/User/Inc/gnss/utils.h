@@ -52,7 +52,7 @@ typedef struct {
 
 void gnss_init(gnss_ctl_pin_t pin);
 void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos);
-uint8_t gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms);
+bool gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms, bool is_rtos);
 uint8_t gnss_padding_sentence(uint8_t* str_buf);
 bool gnss_verify_checksum(uint8_t* str_buf);
 bool gnss_match_keyword(uint8_t* sentence, const char* keyword);
