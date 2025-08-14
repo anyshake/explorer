@@ -231,9 +231,7 @@ void task_gnss_acquire(void* argument) {
         }
 
         bool got_valid_fix = false;
-        uint8_t consecutive_valid_count = 0;
-        int64_t prev_time_diff = INT64_MAX;
-        int64_t current_time_diff = INT64_MAX;
+        int64_t current_time_diff = 0;
 
         for (int64_t local_timestamp_ms;;) {
             uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
@@ -260,24 +258,14 @@ void task_gnss_acquire(void* argument) {
                 }
 
                 if (gnss_time.is_valid && states->gnss_location.is_valid && gnss_status.satellites > 0 && gnss_status.hdop <= GNSS_REQUIRED_VALID_HDOP) {
-                    if (prev_time_diff == INT64_MAX || current_time_diff == prev_time_diff) {
-                        consecutive_valid_count++;
-                    } else {
-                        consecutive_valid_count = 1;
+                    states->gnss_time_diff = current_time_diff;
+                    got_valid_fix = true;
+                    if (first_run) {
+                        ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+                        mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
+                        mcu_utils_delay_ms(1000, false);
                     }
-                    prev_time_diff = current_time_diff;
-
-                    if (consecutive_valid_count >= 2) {
-                        states->gnss_time_diff = current_time_diff;
-                        consecutive_valid_count = 0;
-                        got_valid_fix = true;
-                        if (first_run) {
-                            ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-                            mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
-                            mcu_utils_delay_ms(1000, false);
-                        }
-                        break;
-                    }
+                    break;
                 }
             } else if (!first_run) {
                 got_valid_fix = false;
@@ -295,8 +283,8 @@ void task_gnss_acquire(void* argument) {
         if (!first_run) {
             gnss_discipline_status.task_disabled = false;
             int64_t current_time_ms = (mcu_utils_uptime_get_ms() + states->gnss_time_diff + 777);
-            int64_t delay_until_next_hour_ms = 86400000 - (current_time_ms % 86400000);
-            mcu_utils_delay_ms(delay_until_next_hour_ms, true);
+            int64_t next_sync_duration_ms = get_next_sync_duration_ms(current_time_ms, gnss_discipline_status.avg_ppm);
+            mcu_utils_delay_ms(next_sync_duration_ms, true);
             gnss_discipline_status.task_disabled = true;
         }
     }

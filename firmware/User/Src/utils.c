@@ -124,3 +124,20 @@ float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us,
 
     return tick_step;
 }
+
+uint32_t get_next_sync_duration_ms(int64_t current_time_ms, float avg_ppm) {
+    avg_ppm = avg_ppm > 0.0f ? avg_ppm : -avg_ppm;
+
+    uint32_t interval_ms = 21600000;
+    if (avg_ppm >= 50.0f) {
+        interval_ms = 3600000;
+    } else if (avg_ppm >= 20.0f && avg_ppm < 50.0f) {
+        interval_ms = 7200000;
+    } else if (avg_ppm >= 10.0f && avg_ppm < 20.0f) {
+        interval_ms = 10800000;
+    } else if (avg_ppm >= 5.0f && avg_ppm < 10.0f) {
+        interval_ms = 14400000;
+    }
+
+    return (uint32_t)(interval_ms - (current_time_ms % interval_ms));
+}

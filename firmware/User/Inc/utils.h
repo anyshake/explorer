@@ -21,6 +21,7 @@
 #include "Utils/Inc/gpio.h"
 
 uint32_t get_tim3_clk_freq(void);
+uint32_t get_next_sync_duration_ms(int64_t current_timestamp, float avg_ppm);
 float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us, uint32_t delta_us);
 void display_device_settings(explorer_global_states_t* states);
 void read_device_settings(explorer_global_states_t* states);
