@@ -52,7 +52,7 @@ typedef struct {
     bool use_gnss_time;
     bool channel_6d;
 
-    int64_t gnss_time_diff;
+    volatile int64_t gnss_time_diff;
     gnss_location_t gnss_location;
     uint8_t message_buf[GNSS_SENTENCE_BUFFER_SIZE];
 
