@@ -105,3 +105,22 @@ uint32_t get_tim3_clk_freq(void) {
     }
     return pclk2;
 }
+
+float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us, uint32_t delta_us) {
+    const float tick_step_min = 4.0f;
+    const float tick_step_max = 25.0f;
+    const float slope = 10.0f;  // aggressiveness of adjustment
+
+    float smoothed_ppm = 0.7f * current_ppm + 0.3f * avg_ppm;
+    float tick_estimate = (smoothed_ppm > 0.0f ? smoothed_ppm : -smoothed_ppm) * delta_us / 1e6f / tick_step_us;
+    float tick_step = slope * tick_estimate;
+
+    if (tick_step < tick_step_min) {
+        tick_step = tick_step_min;
+    }
+    if (tick_step > tick_step_max) {
+        tick_step = tick_step_max;
+    }
+
+    return tick_step;
+}

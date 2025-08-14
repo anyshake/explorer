@@ -83,7 +83,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
     }
 }
 
-void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float tick_step_size, float ppm_f, uint32_t delta_us) {
+void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float adjust_step_size, float ppm_f, uint32_t delta_us) {
     static float acc_ppm_tick = 0.0f;
 
     float base_ticks = ((float)(clk_freq * tick_step)) / 1e6f;
@@ -93,12 +93,12 @@ void set_tim3_arr(uint32_t clk_freq, uint16_t tick_step, float tick_step_size, f
     acc_ppm_tick += ppm_tick_per_us * (float)delta_us;
 
     int32_t tick_adjust = 0;
-    if (acc_ppm_tick >= tick_step_size) {
-        tick_adjust = (int32_t)(tick_step_size + 0.5f);
-        acc_ppm_tick -= tick_step_size;
-    } else if (acc_ppm_tick <= -tick_step_size) {
-        tick_adjust = -(int32_t)(tick_step_size + 0.5f);
-        acc_ppm_tick += tick_step_size;
+    if (acc_ppm_tick >= adjust_step_size) {
+        tick_adjust = (int32_t)(adjust_step_size + 0.5f);
+        acc_ppm_tick -= adjust_step_size;
+    } else if (acc_ppm_tick <= -adjust_step_size) {
+        tick_adjust = -(int32_t)(adjust_step_size + 0.5f);
+        acc_ppm_tick += adjust_step_size;
     }
 
     float new_arr_f = ideal_arr_f + tick_adjust;
@@ -155,7 +155,9 @@ void task_gnss_discipline(void* argument) {
             }
 
             if (gnss_discipline_status.task_disabled) {
-                set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 2.0f, gnss_discipline_status.avg_ppm, current_time_us - prev_called_at_us);
+                uint32_t delta_us = current_time_us - prev_called_at_us;
+                float adjust_step_size = get_adjust_step_size(gnss_discipline_status.avg_ppm, gnss_discipline_status.avg_ppm, MCU_UTILS_UPTIME_TICK_STEP_US, delta_us);
+                set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, adjust_step_size, gnss_discipline_status.avg_ppm, delta_us);
                 prev_called_at_us = current_time_us;
                 continue;
             }
@@ -175,7 +177,7 @@ void task_gnss_discipline(void* argument) {
                 } else {
                     snprintf((char*)states->message_buf, sizeof(states->message_buf), "1PPS Captured: %2d/%2d", pps_init_counter, PPM_WINDOW_SIZE * 2);
                     ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "Avg Dev: %3.3f ppm", gnss_discipline_status.avg_ppm);
+                    snprintf((char*)states->message_buf, sizeof(states->message_buf), "Avg Dev: %3.2f ppm", gnss_discipline_status.avg_ppm);
                     ssd1306_display_string(0, 3, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                 }
             }
@@ -203,11 +205,15 @@ void task_gnss_discipline(void* argument) {
             }
             gnss_discipline_status.avg_ppm = ppm_sum / (float)ppm_avg_counter;
 
-            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 3.0f, gnss_discipline_status.current_ppm, current_time_us - prev_called_at_us);
+            uint32_t delta_us = current_time_us - prev_called_at_us;
+            float adjust_step_size = get_adjust_step_size(gnss_discipline_status.current_ppm, gnss_discipline_status.avg_ppm, MCU_UTILS_UPTIME_TICK_STEP_US, delta_us);
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, adjust_step_size, gnss_discipline_status.current_ppm, delta_us);
             prev_called_at_us = current_time_us;
             mcu_utils_led_blink(MCU_STATE_PIN, 1, true);
         } else {
-            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, 2.0f, gnss_discipline_status.avg_ppm, current_time_us - prev_called_at_us);
+            uint32_t delta_us = current_time_us - prev_called_at_us;
+            float adjust_step_size = get_adjust_step_size(gnss_discipline_status.avg_ppm, gnss_discipline_status.avg_ppm, MCU_UTILS_UPTIME_TICK_STEP_US, delta_us);
+            set_tim3_arr(clk, MCU_UTILS_UPTIME_TICK_STEP_US, adjust_step_size, gnss_discipline_status.avg_ppm, delta_us);
             prev_called_at_us = current_time_us;
             mcu_utils_gpio_high(MCU_STATE_PIN);
         }
@@ -261,8 +267,9 @@ void task_gnss_acquire(void* argument) {
                     }
                     prev_time_diff = current_time_diff;
 
-                    if (consecutive_valid_count >= 3) {
+                    if (consecutive_valid_count >= 2) {
                         states->gnss_time_diff = current_time_diff;
+                        consecutive_valid_count = 0;
                         got_valid_fix = true;
                         if (first_run) {
                             ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);

@@ -21,6 +21,7 @@
 #include "Utils/Inc/gpio.h"
 
 uint32_t get_tim3_clk_freq(void);
+float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us, uint32_t delta_us);
 void display_device_settings(explorer_global_states_t* states);
 void read_device_settings(explorer_global_states_t* states);
 bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff);
