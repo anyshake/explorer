@@ -2,18 +2,17 @@ MCU model,Status,Result,Remark
 STM32F103C8T6,finished,pass,
 STM32F103CBT6,finished,pass,
 GD32F103C8T6,finished,pass,
-GD32F103CBT6,finished,pass,nnnnnn
-HK32F103C8T6,finished,failed,SPI  bus error
-HK32F103CBT6,finished,failed,SPI  bus error
+GD32F103CBT6,finished,pass,
+HK32F103C8T6,finished,failed,SPI bus error
+HK32F103CBT6,finished,failed,SPI bus error
 CKS32F103C8T6,finished,pass,
 CKS32F103CBT6,finished,pass,
 APM32F103C8T6,finished,pass,
 APM32F103CBT6,finished,pass,
 MM32F103C8T6,finished,failed,"STLink: Unknown chip, use Jlink OB instead"
 MM32F103CBT6,finished,failed,"STLink: Unknown chip, use Jlink OB instead"
-AIR32F103CBT6,finished,failed,"SPI, IIC bus error"
-AIR32F103CCT6,finished,failed,"Alternative to STM32F103CBT6, 256 KB flash version
-SPI, IIC bus error"
+AIR32F103CBT6,finished,failed,"Alternative to STM32F103C8T6, SPI, IIC bus error"
+AIR32F103CCT6,finished,failed,"Alternative to STM32F103CBT6, 256 KB flash version, SPI, IIC bus error"
 N32G452CBL7,finished,failed,"Alternative to STM32F103CBT6, Stlink not recognize, use Jlink OB instead"
 N32G452CCL7,finished,failed,"Alternative to STM32F103CBT6, 256 KB flash version, Stlink not recognize, use Jlink OB instead"
 AT32F413C8T7,finished,failed,"Alternative to STM32F103C8T6, Stlink not recognize, use Jlink OB instead"

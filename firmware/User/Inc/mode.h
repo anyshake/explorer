@@ -1,5 +1,5 @@
-#ifndef __LEVELING_H
-#define __LEVELING_H
+#ifndef __MODE_H
+#define __MODE_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -10,9 +10,13 @@
 #include "User/Inc/ssd1306/display.h"
 #include "User/Inc/ssd1306/font.h"
 #include "User/Inc/ssd1306/utils.h"
+#include "User/Inc/types.h"
 
 #include "Utils/Inc/delay.h"
+#include "Utils/Inc/uart.h"
+#include "Utils/Inc/uart2.h"
 
-void leveling_mode_entry(void);
+void mode_entry_gnss_debug(explorer_global_states_t* states);
+void mode_entry_leveling(explorer_global_states_t* states);
 
 #endif

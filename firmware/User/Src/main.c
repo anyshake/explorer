@@ -29,7 +29,7 @@
 
 #include "User/Inc/array.h"
 #include "User/Inc/filter.h"
-#include "User/Inc/leveling.h"
+#include "User/Inc/mode.h"
 #include "User/Inc/packet.h"
 #include "User/Inc/peripheral.h"
 #include "User/Inc/reader.h"
@@ -128,9 +128,6 @@ void task_gnss_discipline(void* argument) {
         ssd1306_display_string(0, 0, "Parse GNSS Data", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
         ssd1306_display_string(0, 2, "Wait for 1PPS Signal", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
         mcu_utils_gpio_high(MCU_STATE_PIN);
-        peri_gnss_init();
-        gnss_reset(GNSS_CTL_PIN, true);
-        gnss_model_setup(true);
         MX_TIM2_Init();
         MX_TIM1_Init();
         HAL_TIM_Base_Start(&htim2);
@@ -419,19 +416,23 @@ void system_setup(void) {
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
+    peri_gnss_init();
+    gnss_reset(GNSS_CTL_PIN, false);
+    gnss_model_setup(false);
+
     peri_eeprom_init();
     eeprom_read((uint8_t*)&states.device_id, 0, sizeof(states.device_id));
 
     states.adc_calibration_offset = adc_calibration_offset_new();
     uint8_t calib_factors_status = 0;
-    eeprom_read((uint8_t*)&calib_factors_status, 4, sizeof(calib_factors_status));
+    eeprom_read(&calib_factors_status, 4, sizeof(calib_factors_status));
     if (calib_factors_status == 1) {
         eeprom_read(states.adc_calibration_offset.channel_1, 5, sizeof(states.adc_calibration_offset.channel_1));
         eeprom_read(states.adc_calibration_offset.channel_2, 11, sizeof(states.adc_calibration_offset.channel_2));
         eeprom_read(states.adc_calibration_offset.channel_3, 17, sizeof(states.adc_calibration_offset.channel_3));
     } else {
         ssd1306_display_string(0, 0, "No Calib Params", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-        mcu_utils_led_blink(MCU_STATE_PIN, 100, false);
+        mcu_utils_led_blink(MCU_STATE_PIN, 50, false);
         mcu_utils_delay_ms(1000, false);
     }
 
@@ -444,36 +445,15 @@ void system_setup(void) {
     mcu_utils_delay_ms(1000, false);
 
     if (states.leveling_mode) {
-        leveling_mode_entry();
+        mode_entry_leveling(&states);
+    } else if (states.gnss_debug_mode) {
+        gnss_model_factory_reset(false);
+        mode_entry_gnss_debug(&states);
     }
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
-#if HARDWARE_REV >= 20250804
-    switch (states.sample_rate) {
-        case 50:
-            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
-            break;
-        case 100:
-            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
-            break;
-        case 200:
-            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
-            break;
-        case 250:
-            filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-            filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-            break;
-    }
-#endif
 
     states.packet_sending_interval = PACKET_SENDING_INTERVAL;
     states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);
@@ -504,10 +484,7 @@ void system_setup(void) {
     gnss_discipline_status.task_handle = osThreadNew(task_gnss_discipline, &states, &gnss_discipline_task_attr);
     if (gnss_discipline_status.task_handle == NULL) {
         ssd1306_display_string(0, 0, "Error Code 0x1", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-        mcu_utils_gpio_high(MCU_STATE_PIN);
-        while (1) {
-            ;
-        }
+        Error_Handler();
     }
 
     const static osThreadAttr_t gnss_acquire_task_attr = {
@@ -521,10 +498,7 @@ void system_setup(void) {
     gnss_acquire_task_handle = osThreadNew(task_gnss_acquire, &states, &gnss_acquire_task_attr);
     if (gnss_acquire_task_handle == NULL) {
         ssd1306_display_string(0, 0, "Error Code 0x2", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-        mcu_utils_gpio_high(MCU_STATE_PIN);
-        while (1) {
-            ;
-        }
+        Error_Handler();
     }
 
     const static osThreadAttr_t send_packet_task_attr = {
@@ -538,10 +512,7 @@ void system_setup(void) {
     states.send_packet_task_handle = osThreadNew(task_send_packet, &states, &send_packet_task_attr);
     if (states.send_packet_task_handle == NULL) {
         ssd1306_display_string(0, 0, "Error Code 0x3", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-        mcu_utils_gpio_high(MCU_STATE_PIN);
-        while (1) {
-            ;
-        }
+        Error_Handler();
     }
 
     const static osThreadAttr_t sensor_acquire_task_attr = {
@@ -555,10 +526,7 @@ void system_setup(void) {
     states.sensor_acquire_task_handle = osThreadNew(task_sensor_acquire, &states, &sensor_acquire_task_attr);
     if (states.sensor_acquire_task_handle == NULL) {
         ssd1306_display_string(0, 0, "Error Code 0x4", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-        mcu_utils_gpio_high(MCU_STATE_PIN);
-        while (1) {
-            ;
-        }
+        Error_Handler();
     }
 }
 

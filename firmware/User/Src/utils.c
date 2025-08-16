@@ -1,22 +1,39 @@
 #include "User/Inc/utils.h"
 
 void read_device_settings(explorer_global_states_t* states) {
-    mcu_utils_gpio_mode(MCU_BOOT1_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->leveling_mode = mcu_utils_gpio_read(MCU_BOOT1_PIN);
-
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(SAMPLERATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
     switch (mcu_utils_gpio_read(SAMPLERATE_SELECT_P1) << 1 | mcu_utils_gpio_read(SAMPLERATE_SELECT_P2)) {
         case 0:
             states->sample_rate = 250;
+#if HARDWARE_REV >= 20250804
+            filter_iir_df1_new(&states->df1_filter_ch1, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch2, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch3, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+#endif
             break;
         case 1:
             states->sample_rate = 200;
+#if HARDWARE_REV >= 20250804
+            filter_iir_df1_new(&states->df1_filter_ch1, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch2, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch3, IIR_DF1_B_COEFFS_200_HZ, IIR_DF1_A_COEFFS_200_HZ);
+#endif
             break;
         case 2:
             states->sample_rate = 100;
+#if HARDWARE_REV >= 20250804
+            filter_iir_df1_new(&states->df1_filter_ch1, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch2, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch3, IIR_DF1_B_COEFFS_100_HZ, IIR_DF1_A_COEFFS_100_HZ);
+#endif
             break;
         case 3:
+#if HARDWARE_REV >= 20250804
+            filter_iir_df1_new(&states->df1_filter_ch1, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch2, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+            filter_iir_df1_new(&states->df1_filter_ch3, IIR_DF1_B_COEFFS_50_HZ, IIR_DF1_A_COEFFS_50_HZ);
+#endif
             states->sample_rate = 50;
             break;
     }
@@ -39,13 +56,22 @@ void read_device_settings(explorer_global_states_t* states) {
     }
 
     mcu_utils_gpio_mode(OPTIONS_USE_ACCELEROMETER_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->use_accelerometer = mcu_utils_gpio_read(OPTIONS_USE_ACCELEROMETER_PIN);
+    uint8_t use_accelerometer_bit = mcu_utils_gpio_read(OPTIONS_USE_ACCELEROMETER_PIN);
+    states->use_accelerometer = use_accelerometer_bit == 1 ? true : false;
 
     mcu_utils_gpio_mode(OPTIONS_USE_GNSS_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->use_gnss_time = mcu_utils_gpio_read(OPTIONS_USE_GNSS_PIN);
+    uint8_t use_gnss_bit = mcu_utils_gpio_read(OPTIONS_USE_GNSS_PIN);
+    states->use_gnss_time = use_gnss_bit == 1 ? true : false;
 
     mcu_utils_gpio_mode(OPTIONS_CHANNEL_6D_PIN, MCU_UTILS_GPIO_MODE_INPUT);
-    states->channel_6d = mcu_utils_gpio_read(OPTIONS_CHANNEL_6D_PIN);
+    uint8_t channel_6d_bit = mcu_utils_gpio_read(OPTIONS_CHANNEL_6D_PIN);
+    states->channel_6d = channel_6d_bit == 1 ? true : false;
+
+    mcu_utils_gpio_mode(MCU_BOOT1_PIN, MCU_UTILS_GPIO_MODE_INPUT);
+    uint8_t boot1_enabled = mcu_utils_gpio_read(MCU_BOOT1_PIN);
+    uint8_t options_bits = use_accelerometer_bit << 2 | use_gnss_bit << 1 | channel_6d_bit;
+    states->leveling_mode = boot1_enabled && (options_bits == 0);
+    states->gnss_debug_mode = boot1_enabled && (options_bits == 1);
 }
 
 void display_device_settings(explorer_global_states_t* states) {

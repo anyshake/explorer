@@ -24,6 +24,7 @@
 #define ALLYSTAR_TAU1114 11
 
 void gnss_model_setup(bool is_rtos);
+void gnss_model_factory_reset(bool is_rtos);
 int64_t gnss_model_handle_timestamp(int64_t timestamp);
 
 #endif
