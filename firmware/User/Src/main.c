@@ -66,7 +66,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
         uint16_t low = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
         uint16_t high_after = __HAL_TIM_GET_COUNTER(&htim2);
 
-        int64_t updated_at_us = mcu_utils_uptime_get_us();
+        int64_t updated_at_ms = mcu_utils_uptime_get_ms();
         uint16_t high;
         if (high_before == high_after) {
             high = high_before;
@@ -75,7 +75,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
         }
 
         gnss_discipline_status.gnss_1pps_tick = ((uint32_t)high << 16) | low;
-        gnss_discipline_status.updated_at_us = updated_at_us;
+        gnss_discipline_status.updated_at_ms = updated_at_ms;
         mcu_utils_uart2_flush();
 
         osThreadFlagsSet(gnss_acquire_task_handle, GNSS_1PPS_UPDATED);
@@ -138,7 +138,7 @@ void task_gnss_discipline(void* argument) {
     }
 
     uint32_t prev_gnss_1pps_tick = 0;
-    uint64_t prev_updated_at_us = 0;
+    uint64_t prev_updated_at_ms = 0;
     uint64_t prev_called_at_us = 0;
     uint8_t ppm_avg_counter = 0;
 
@@ -159,9 +159,9 @@ void task_gnss_discipline(void* argument) {
                 continue;
             }
 
-            if (prev_gnss_1pps_tick == 0 || prev_updated_at_us == 0) {
+            if (prev_gnss_1pps_tick == 0 || prev_updated_at_ms == 0) {
                 prev_gnss_1pps_tick = gnss_discipline_status.gnss_1pps_tick;
-                prev_updated_at_us = gnss_discipline_status.updated_at_us;
+                prev_updated_at_ms = gnss_discipline_status.updated_at_ms;
                 continue;
             }
 
@@ -181,10 +181,10 @@ void task_gnss_discipline(void* argument) {
             }
 
             uint32_t delta = gnss_discipline_status.gnss_1pps_tick - prev_gnss_1pps_tick;
-            uint64_t pps_update_diff_ms = (gnss_discipline_status.updated_at_us - prev_updated_at_us) / 1000;
+            uint64_t pps_update_diff_ms = gnss_discipline_status.updated_at_ms - prev_updated_at_ms;
 
             prev_gnss_1pps_tick = gnss_discipline_status.gnss_1pps_tick;
-            prev_updated_at_us = gnss_discipline_status.updated_at_us;
+            prev_updated_at_ms = gnss_discipline_status.updated_at_ms;
 
             if (pps_update_diff_ms <= 990 || pps_update_diff_ms >= 1010) {
                 prev_called_at_us = current_time_us;
@@ -236,8 +236,8 @@ void task_gnss_acquire(void* argument) {
         for (int64_t local_timestamp_ms = 0;;) {
             uint8_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
             if (flags & 0x01) {
-                local_timestamp_ms = (gnss_discipline_status.updated_at_us + 500) / 1000;
-                if (mcu_utils_uptime_get_ms() - local_timestamp_ms >= 1000) {
+                local_timestamp_ms = gnss_discipline_status.updated_at_ms;
+                if (mcu_utils_uptime_get_ms() - local_timestamp_ms >= 500) {
                     continue;
                 }
 

@@ -10,7 +10,7 @@
 
 #define PACKET_SENDING_INTERVAL 100
 #define GNSS_REQUIRED_VALID_HDOP 2.0f
-#define GNSS_RESYNC_INTERVAL_MS (5 * 60 * 1000)
+#define GNSS_RESYNC_INTERVAL_MS (10 * 60 * 1000)
 
 static const mcu_utils_gpio_t BAUDRATE_SELECT_P1 = {
     .port = GPIOB,

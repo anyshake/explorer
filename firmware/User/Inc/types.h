@@ -12,7 +12,7 @@
 #define E_C111G 0
 #define E_C121G 1
 
-#define PPM_WINDOW_SIZE 15
+#define PPM_WINDOW_SIZE 30
 
 typedef struct {
     float ppm_window[PPM_WINDOW_SIZE];
@@ -21,7 +21,7 @@ typedef struct {
     float current_ppm;
 
     volatile bool task_disabled;
-    volatile uint64_t updated_at_us;
+    volatile uint64_t updated_at_ms;
     volatile uint32_t gnss_1pps_tick;
     osThreadId_t task_handle;
 } explorer_gnss_discipline_t;
