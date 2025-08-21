@@ -26,13 +26,14 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_50HZ;
     lsm6ds3_reg_set_ctrl1_xl(&lsm6ds3_reg_ctrl1_xl);
     lsm6ds3_reg_ctrl4_c_t lsm6ds3_reg_ctrl4_c = lsm6ds3_reg_new_ctrl4_c();
-    lsm6ds3_reg_ctrl4_c.xl_bw_scal_odr = LSM6DS3_REG_CTRL4_C_XL_BW_SCAL_ODR_BW_XL;
+    lsm6ds3_reg_ctrl4_c.xl_bw_scal_odr = LSM6DS3_REG_CTRL4_C_XL_BW_SCAL_ODR_BYPASS;
+    lsm6ds3_reg_ctrl4_c.drdy_mask = LSM6DS3_REG_CTRL4_C_DRDY_MASK_ENABLE;
     lsm6ds3_reg_set_ctrl4_c(&lsm6ds3_reg_ctrl4_c);
     lsm6ds3_reg_ctrl10_c_t lsm6ds3_reg_ctrl10_c = lsm6ds3_reg_new_ctrl10_c();
     lsm6ds3_reg_ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_ENABLE;
     lsm6ds3_reg_set_ctrl10_c(&lsm6ds3_reg_ctrl10_c);
     lsm6ds3_reg_ctrl8_xl_t lsm6ds3_reg_ctrl8_xl = lsm6ds3_reg_new_ctrl8_xl();
-    lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_9;
+    lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_50;
     lsm6ds3_reg_ctrl8_xl.lpf2_xl_en = LSM6DS3_REG_CTRL8_XL_LPF2_XL_EN_ENABLE;
     lsm6ds3_reg_ctrl8_xl.hp_slope_xl_en = LSM6DS3_REG_CTRL8_XL_HP_SLOPE_XL_EN_ENABLE;
     lsm6ds3_reg_set_ctrl8_xl(&lsm6ds3_reg_ctrl8_xl);
