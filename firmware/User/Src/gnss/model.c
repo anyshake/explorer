@@ -114,15 +114,46 @@ int64_t gnss_model_handle_timestamp(int64_t timestamp) {
 #elif GNSS_MODEL == ALLYSTAR_TAU812S || GNSS_MODEL == ALLYSTAR_TAU1113 || GNSS_MODEL == ALLYSTAR_TAU1114
 // reference: https://archive.org/download/4c-6k-4oyd-63bikyc-9c-33jgbz-19kc-1aois/4c6k4oyd63bikyc9c33jgbz19kc1aois.pdf
 // reference: https://archive.org/download/tau-1113/TAU1113%E6%A8%A1%E7%BB%84%E8%A7%84%E6%A0%BC%E4%B9%A6_%E6%B6%82%E9%B8%A6%E5%BC%80%E5%8F%91%E8%80%85%E5%B9%B3%E5%8F%B0_%E6%B6%82%E9%B8%A6%E5%BC%80%E5%8F%91%E8%80%85%E5%B9%B3%E5%8F%B0.pdf
+// note: the command format of TAU812S, TAU1113, and TAU1114 are very similar to those of the Quectel LC26xZ series, and it has been verified that most of them are universal.
 
 void gnss_model_setup(bool is_rtos) {
-    // disable ZDA message
-    uint8_t set_zda_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x07, 0x00, 0x01, 0x1D, 0x0D, 0x0A};
+    // disable GLL messages
+    uint8_t set_gll_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x01, 0x00, 0x00, 0x0D};
+    mcu_utils_uart2_write(set_gll_disabled, sizeof(set_gll_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable GSA messages
+    uint8_t set_gsa_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x02, 0x00, 0xFC, 0x13};
+    mcu_utils_uart2_write(set_gsa_disabled, sizeof(set_gsa_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable GRS messages
+    uint8_t set_grs_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x03, 0x00, 0xFD, 0x15};
+    mcu_utils_uart2_write(set_grs_disabled, sizeof(set_grs_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable GSV messages
+    uint8_t set_gsv_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x04, 0x00, 0xFE, 0x17};
+    mcu_utils_uart2_write(set_gsv_disabled, sizeof(set_gsv_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable VTG messages
+    uint8_t set_vtg_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x06, 0x00, 0x00, 0x1B};
+    mcu_utils_uart2_write(set_vtg_disabled, sizeof(set_vtg_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable ZDA messages
+    uint8_t set_zda_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x07, 0x00, 0x01, 0x1D};
     mcu_utils_uart2_write(set_zda_disabled, sizeof(set_zda_disabled), true);
-    mcu_utils_delay_ms(500, is_rtos);
+    mcu_utils_delay_ms(200, is_rtos);
+
+    // disable GST messages
+    uint8_t set_gst_disabled[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x08, 0x00, 0x02, 0x1F};
+    mcu_utils_uart2_write(set_gst_disabled, sizeof(set_gst_disabled), true);
+    mcu_utils_delay_ms(200, is_rtos);
 
     // set GPS L1, BDS B1 enabled
-    uint8_t set_satellite_system[] = {0xF1, 0xD9, 0x06, 0x0C, 0x04, 0x00, 0x05, 0x00, 0x00, 0x00, 0x1B, 0xB0, 0x0D, 0x0A};
+    uint8_t set_satellite_system[] = {0xF1, 0xD9, 0x06, 0x0C, 0x04, 0x00, 0x05, 0x00, 0x00, 0x00, 0x1B, 0xB0};
     mcu_utils_uart2_write(set_satellite_system, sizeof(set_satellite_system), true);
     mcu_utils_delay_ms(500, is_rtos);
 }
