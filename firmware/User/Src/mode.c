@@ -43,6 +43,9 @@ void mode_entry_leveling(explorer_global_states_t* states) {
         snprintf((char*)states->message_buf, sizeof(states->message_buf), "Y: %7.2f deg", y_angle);
         ssd1306_display_string(20, 5, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, false);
 
+        snprintf((char*)states->message_buf, sizeof(states->message_buf), "Raw X: %d; Raw Y: %d; Raw Z: %d\r\n", result_arr[1], result_arr[2], result_arr[0]);
+        mcu_utils_uart_write((uint8_t*)states->message_buf, strlen((char*)states->message_buf), false);
+
         mcu_utils_delay_ms(100, false);
     }
 }
