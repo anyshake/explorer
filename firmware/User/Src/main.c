@@ -358,11 +358,16 @@ void task_sensor_acquire(void* argument) {
     mcu_utils_iwdg_init();
 
     for (uint32_t prev_timestamp = 0;;) {
+        int64_t temp_timestamp = 0;
+
         if (!states->use_accelerometer || states->channel_6d) {
             if (states->channel_6d) {
-                acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
+                temp_timestamp = mcu_utils_uptime_get_ms();
             }
             get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
+            if (states->channel_6d) {
+                acq_msg.timestamp = ((temp_timestamp + mcu_utils_uptime_get_ms()) / 2) + states->gnss_time_diff;
+            }
 
 #if HARDWARE_REV >= 20250804
             acq_msg.adc_data[0] = apply_data_compensation(acq_msg.adc_data[0], &states->df1_filter_ch1);
@@ -372,10 +377,13 @@ void task_sensor_acquire(void* argument) {
         }
 
         if (!states->channel_6d) {
-            acq_msg.timestamp = mcu_utils_uptime_get_ms() + states->gnss_time_diff;
+            temp_timestamp = mcu_utils_uptime_get_ms();
         }
         if (states->use_accelerometer || states->channel_6d) {
             get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
+        }
+        if (!states->channel_6d) {
+            acq_msg.timestamp = ((temp_timestamp + mcu_utils_uptime_get_ms()) / 2) + states->gnss_time_diff;
         }
         get_env_temperature(&acq_msg.temperature);
 
