@@ -368,12 +368,6 @@ void task_sensor_acquire(void* argument) {
             if (states->channel_6d) {
                 acq_msg.timestamp = ((temp_timestamp + mcu_utils_uptime_get_ms()) / 2) + states->gnss_time_diff;
             }
-
-#if HARDWARE_REV >= 20250804
-            acq_msg.adc_data[0] = apply_data_compensation(acq_msg.adc_data[0], &states->df1_filter_ch1);
-            acq_msg.adc_data[1] = apply_data_compensation(acq_msg.adc_data[1], &states->df1_filter_ch2);
-            acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
-#endif
         }
 
         if (!states->channel_6d) {
@@ -387,6 +381,13 @@ void task_sensor_acquire(void* argument) {
         }
         get_env_temperature(&acq_msg.temperature);
 
+#if HARDWARE_REV >= 20250804
+        if (!states->use_accelerometer || states->channel_6d) {
+            acq_msg.adc_data[0] = apply_data_compensation(acq_msg.adc_data[0], &states->df1_filter_ch1);
+            acq_msg.adc_data[1] = apply_data_compensation(acq_msg.adc_data[1], &states->df1_filter_ch2);
+            acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
+        }
+#endif
         osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
 
         uint64_t current_timestamp;
