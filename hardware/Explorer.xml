@@ -2,8 +2,8 @@
 <export version="E">
   <design>
     <source>/home/yuki/Devel/Hardware/explorer/hardware/Explorer.kicad_sch</source>
-    <date>2025-06-16T17:24:19+0800</date>
-    <tool>Eeschema 9.0.2</tool>
+    <date>2025-09-27T00:35:56+0800</date>
+    <tool>Eeschema 9.0.4</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>AnyShake Explorer</title>
@@ -81,10 +81,11 @@
     <comp ref="C1">
       <value>4.7uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -98,10 +99,11 @@
     <comp ref="C2">
       <value>1uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -115,10 +117,11 @@
     <comp ref="C3">
       <value>10uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -132,10 +135,11 @@
     <comp ref="C4">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -149,10 +153,11 @@
     <comp ref="C5">
       <value>0.01uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -166,10 +171,11 @@
     <comp ref="C6">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -183,10 +189,11 @@
     <comp ref="C7">
       <value>220uF</value>
       <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:CP_Elec_6.3x7.7</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -200,10 +207,11 @@
     <comp ref="C8">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -217,10 +225,11 @@
     <comp ref="C9">
       <value>1uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -234,10 +243,11 @@
     <comp ref="C10">
       <value>1uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -251,10 +261,11 @@
     <comp ref="C11">
       <value>0.01uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -268,10 +279,11 @@
     <comp ref="C12">
       <value>1uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -285,10 +297,11 @@
     <comp ref="C13">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -302,10 +315,11 @@
     <comp ref="C14">
       <value>4.7uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -319,10 +333,11 @@
     <comp ref="C15">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -336,10 +351,11 @@
     <comp ref="C16">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -353,10 +369,11 @@
     <comp ref="C17">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -370,10 +387,11 @@
     <comp ref="C18">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -387,10 +405,11 @@
     <comp ref="C19">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -404,10 +423,11 @@
     <comp ref="C20">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -421,10 +441,11 @@
     <comp ref="C21">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -438,10 +459,11 @@
     <comp ref="C22">
       <value>1uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -455,10 +477,11 @@
     <comp ref="C23">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -472,10 +495,11 @@
     <comp ref="C24">
       <value>220pF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -489,10 +513,11 @@
     <comp ref="C25">
       <value>10uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -506,10 +531,11 @@
     <comp ref="C26">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -523,10 +549,11 @@
     <comp ref="C27">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -540,10 +567,11 @@
     <comp ref="C28">
       <value>22uF</value>
       <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</footprint>
+      <datasheet>~</datasheet>
       <description>Polarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_Tantalum_SMD:CP_EIA-3528-12_Kemet-T</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Polarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
@@ -611,11 +639,12 @@
     <comp ref="D4">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -630,11 +659,12 @@
     <comp ref="D5">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -649,11 +679,12 @@
     <comp ref="D6">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -668,10 +699,11 @@
     <comp ref="J1">
       <value>DC_IN</value>
       <footprint>Connector_BarrelJack:BarrelJack_Horizontal</footprint>
+      <datasheet>~</datasheet>
       <description>DC Barrel Jack with an internal switch</description>
       <fields>
         <field name="Footprint">Connector_BarrelJack:BarrelJack_Horizontal</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">DC Barrel Jack with an internal switch</field>
       </fields>
       <libsource lib="Connector" part="Barrel_Jack_Switch" description="DC Barrel Jack with an internal switch"/>
@@ -685,10 +717,11 @@
     <comp ref="JP1">
       <value>JUMPER_A+2V5</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Jumper, 2-pole, open</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Jumper, 2-pole, open</field>
       </fields>
       <libsource lib="Jumper" part="Jumper_2_Open" description="Jumper, 2-pole, open"/>
@@ -702,10 +735,11 @@
     <comp ref="JP2">
       <value>JUMPER_A-2V5</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Jumper, 2-pole, open</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Jumper, 2-pole, open</field>
       </fields>
       <libsource lib="Jumper" part="Jumper_2_Open" description="Jumper, 2-pole, open"/>
@@ -719,10 +753,11 @@
     <comp ref="JP3">
       <value>JUMPER_D+3V3</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Jumper, 2-pole, open</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Jumper, 2-pole, open</field>
       </fields>
       <libsource lib="Jumper" part="Jumper_2_Open" description="Jumper, 2-pole, open"/>
@@ -736,10 +771,11 @@
     <comp ref="L1">
       <value>22uH</value>
       <footprint>Inductor_SMD:L_Abracon_ASPI-0630LR</footprint>
+      <datasheet>~</datasheet>
       <description>Inductor with ferrite core, small symbol</description>
       <fields>
         <field name="Footprint">Inductor_SMD:L_Abracon_ASPI-0630LR</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Inductor with ferrite core, small symbol</field>
       </fields>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
@@ -753,10 +789,11 @@
     <comp ref="L2">
       <value>1uH</value>
       <footprint>Inductor_SMD:L_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Inductor with ferrite core, small symbol</description>
       <fields>
         <field name="Footprint">Inductor_SMD:L_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Inductor with ferrite core, small symbol</field>
       </fields>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
@@ -770,10 +807,11 @@
     <comp ref="L3">
       <value>4.7uH</value>
       <footprint>Inductor_SMD:L_Abracon_ASPI-0630LR</footprint>
+      <datasheet>~</datasheet>
       <description>Inductor with ferrite core, small symbol</description>
       <fields>
         <field name="Footprint">Inductor_SMD:L_Abracon_ASPI-0630LR</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Inductor with ferrite core, small symbol</field>
       </fields>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
@@ -787,10 +825,11 @@
     <comp ref="L4">
       <value>1uH</value>
       <footprint>Inductor_SMD:L_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Inductor with ferrite core, small symbol</description>
       <fields>
         <field name="Footprint">Inductor_SMD:L_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Inductor with ferrite core, small symbol</field>
       </fields>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
@@ -804,10 +843,11 @@
     <comp ref="R1">
       <value>330k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -821,10 +861,11 @@
     <comp ref="R2">
       <value>510k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -838,10 +879,11 @@
     <comp ref="R3">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -855,10 +897,11 @@
     <comp ref="R4">
       <value>3.3k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -872,10 +915,11 @@
     <comp ref="R5">
       <value>10</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -889,10 +933,11 @@
     <comp ref="R6">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -906,10 +951,11 @@
     <comp ref="R7">
       <value>100k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -923,10 +969,11 @@
     <comp ref="R8">
       <value>12k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -940,10 +987,11 @@
     <comp ref="R9">
       <value>680</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -957,10 +1005,11 @@
     <comp ref="R10">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -974,10 +1023,11 @@
     <comp ref="R11">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -991,10 +1041,11 @@
     <comp ref="R12">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -1008,10 +1059,11 @@
     <comp ref="SW1">
       <value>POWER</value>
       <footprint>Button_Switch_THT:SW_Push_2P2T_Toggle_CK_PVA2OAH5xxxxxxV2</footprint>
+      <datasheet>~</datasheet>
       <description>Switch, dual pole double throw, separate symbols</description>
       <fields>
         <field name="Footprint">Button_Switch_THT:SW_Push_2P2T_Toggle_CK_PVA2OAH5xxxxxxV2</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Switch, dual pole double throw, separate symbols</field>
       </fields>
       <libsource lib="Switch" part="SW_DPDT_x2" description="Switch, dual pole double throw, separate symbols"/>
@@ -1025,10 +1077,11 @@
     <comp ref="TP1">
       <value>TP_A-5V</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -1042,10 +1095,11 @@
     <comp ref="TP2">
       <value>TP_A+2V5</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -1059,10 +1113,11 @@
     <comp ref="TP3">
       <value>TP_A-2V5</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -1076,10 +1131,11 @@
     <comp ref="TP4">
       <value>TP_VCC</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -1093,10 +1149,11 @@
     <comp ref="TP5">
       <value>TP_D+3V3</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -1198,10 +1255,11 @@
     <comp ref="BT1">
       <value>DMS3R3</value>
       <footprint>Battery:BatteryHolder_Seiko_MS621F</footprint>
+      <datasheet>~</datasheet>
       <description>Single-cell battery</description>
       <fields>
         <field name="Footprint">Battery:BatteryHolder_Seiko_MS621F</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Single-cell battery</field>
       </fields>
       <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
@@ -1214,10 +1272,11 @@
     <comp ref="C29">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1231,10 +1290,11 @@
     <comp ref="C30">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1248,10 +1308,11 @@
     <comp ref="C31">
       <value>100pF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1265,10 +1326,11 @@
     <comp ref="C32">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1282,10 +1344,11 @@
     <comp ref="C33">
       <value>100pF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1299,10 +1362,11 @@
     <comp ref="C34">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1316,10 +1380,11 @@
     <comp ref="C35">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1333,10 +1398,11 @@
     <comp ref="C36">
       <value>0.01uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1350,10 +1416,11 @@
     <comp ref="C37">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1367,10 +1434,11 @@
     <comp ref="C38">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1384,10 +1452,11 @@
     <comp ref="C39">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1401,10 +1470,11 @@
     <comp ref="C40">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1418,10 +1488,11 @@
     <comp ref="C41">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1435,10 +1506,11 @@
     <comp ref="C42">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1452,10 +1524,11 @@
     <comp ref="C43">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1469,10 +1542,11 @@
     <comp ref="C44">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1486,10 +1560,11 @@
     <comp ref="C45">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1503,10 +1578,11 @@
     <comp ref="C46">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -1596,11 +1672,12 @@
     <comp ref="D11">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -1615,11 +1692,12 @@
     <comp ref="D12">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -1634,11 +1712,12 @@
     <comp ref="D13">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -1791,10 +1870,11 @@
     <comp ref="J2">
       <value>BOOT</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_02x03_Odd_Even" description="Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -1808,10 +1888,11 @@
     <comp ref="J3">
       <value>SMA</value>
       <footprint>Connector_Coaxial:SMA_Amphenol_901-144_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)</description>
       <fields>
         <field name="Footprint">Connector_Coaxial:SMA_Amphenol_901-144_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)</field>
       </fields>
       <libsource lib="Connector" part="Conn_Coaxial" description="coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"/>
@@ -1825,10 +1906,11 @@
     <comp ref="J4">
       <value>RS485</value>
       <footprint>TerminalBlock:TerminalBlock_bornier-2_P5.08mm</footprint>
+      <datasheet>~</datasheet>
       <description>Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">TerminalBlock:TerminalBlock_bornier-2_P5.08mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector" part="Screw_Terminal_01x02" description="Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -1842,10 +1924,11 @@
     <comp ref="J5">
       <value>STLINK</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -1859,10 +1942,11 @@
     <comp ref="J6">
       <value>TTL</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
       <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -1876,10 +1960,11 @@
     <comp ref="J7">
       <value>RS232_F</value>
       <footprint>Connector_Dsub:DSUB-9_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm</footprint>
+      <datasheet>~</datasheet>
       <description>9-pin D-SUB connector, socket (female), Mounting Hole</description>
       <fields>
         <field name="Footprint">Connector_Dsub:DSUB-9_Socket_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">9-pin D-SUB connector, socket (female), Mounting Hole</field>
       </fields>
       <libsource lib="Connector" part="DE9_Socket_MountingHoles" description="9-pin D-SUB connector, socket (female), Mounting Hole"/>
@@ -1893,10 +1978,11 @@
     <comp ref="J8">
       <value>RS232_M</value>
       <footprint>Connector_Dsub:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm</footprint>
+      <datasheet>~</datasheet>
       <description>9-pin D-SUB connector, pins (male), Mounting Hole</description>
       <fields>
         <field name="Footprint">Connector_Dsub:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">9-pin D-SUB connector, pins (male), Mounting Hole</field>
       </fields>
       <libsource lib="Connector" part="DE9_Pins_MountingHoles" description="9-pin D-SUB connector, pins (male), Mounting Hole"/>
@@ -1910,10 +1996,11 @@
     <comp ref="L5">
       <value>1uH</value>
       <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Inductor with ferrite core, small symbol</description>
       <fields>
         <field name="Footprint">Inductor_SMD:L_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Inductor with ferrite core, small symbol</field>
       </fields>
       <libsource lib="Device" part="L_Ferrite_Small" description="Inductor with ferrite core, small symbol"/>
@@ -1927,10 +2014,11 @@
     <comp ref="R13">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -1944,10 +2032,11 @@
     <comp ref="R14">
       <value>4.7k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -1961,10 +2050,11 @@
     <comp ref="R15">
       <value>4.7k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -1978,10 +2068,11 @@
     <comp ref="R16">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -1995,10 +2086,11 @@
     <comp ref="R17">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2012,10 +2104,11 @@
     <comp ref="R18">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2029,10 +2122,11 @@
     <comp ref="R19">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2046,10 +2140,11 @@
     <comp ref="R20">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2063,10 +2158,11 @@
     <comp ref="R21">
       <value>120</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2080,10 +2176,11 @@
     <comp ref="R22">
       <value>10</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2097,10 +2194,11 @@
     <comp ref="R23">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2114,10 +2212,11 @@
     <comp ref="R24">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2131,10 +2230,11 @@
     <comp ref="R25">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2148,10 +2248,11 @@
     <comp ref="R26">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2165,10 +2266,11 @@
     <comp ref="R27">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2182,10 +2284,11 @@
     <comp ref="R28">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2199,10 +2302,11 @@
     <comp ref="R29">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2216,10 +2320,11 @@
     <comp ref="R30">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2233,10 +2338,11 @@
     <comp ref="R31">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2250,10 +2356,11 @@
     <comp ref="R32">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2267,10 +2374,11 @@
     <comp ref="R33">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -2284,10 +2392,11 @@
     <comp ref="SW2">
       <value>RESET</value>
       <footprint>Button_Switch_THT:SW_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
       <description>Push button switch, generic, two pins</description>
       <fields>
         <field name="Footprint">Button_Switch_THT:SW_PUSH_6mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Push button switch, generic, two pins</field>
       </fields>
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
@@ -2300,10 +2409,11 @@
     <comp ref="SW3">
       <value>SAMPLERATE</value>
       <footprint>Button_Switch_SMD:SW_DIP_SPSTx02_Slide_6.7x6.64mm_W8.61mm_P2.54mm_LowProfile</footprint>
+      <datasheet>~</datasheet>
       <description>2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</description>
       <fields>
         <field name="Footprint">Button_Switch_SMD:SW_DIP_SPSTx02_Slide_6.7x6.64mm_W8.61mm_P2.54mm_LowProfile</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</field>
       </fields>
       <libsource lib="Switch" part="SW_DIP_x02" description="2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"/>
@@ -2317,10 +2427,11 @@
     <comp ref="SW4">
       <value>OPTIONS</value>
       <footprint>Button_Switch_SMD:SW_DIP_SPSTx03_Slide_6.7x9.18mm_W8.61mm_P2.54mm_LowProfile</footprint>
+      <datasheet>~</datasheet>
       <description>3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</description>
       <fields>
         <field name="Footprint">Button_Switch_SMD:SW_DIP_SPSTx03_Slide_6.7x9.18mm_W8.61mm_P2.54mm_LowProfile</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</field>
       </fields>
       <libsource lib="Switch" part="SW_DIP_x03" description="3x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"/>
@@ -2334,10 +2445,11 @@
     <comp ref="SW5">
       <value>BAUDRATE</value>
       <footprint>Button_Switch_SMD:SW_DIP_SPSTx02_Slide_6.7x6.64mm_W8.61mm_P2.54mm_LowProfile</footprint>
+      <datasheet>~</datasheet>
       <description>2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</description>
       <fields>
         <field name="Footprint">Button_Switch_SMD:SW_DIP_SPSTx02_Slide_6.7x6.64mm_W8.61mm_P2.54mm_LowProfile</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol</field>
       </fields>
       <libsource lib="Switch" part="SW_DIP_x02" description="2x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"/>
@@ -2351,10 +2463,11 @@
     <comp ref="TP6">
       <value>GNSS_TXD</value>
       <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
+      <datasheet>~</datasheet>
       <description>test point</description>
       <fields>
         <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">test point</field>
       </fields>
       <libsource lib="Connector" part="TestPoint" description="test point"/>
@@ -2432,7 +2545,7 @@
       <property name="ki_keywords" value="HCMOS not inverter"/>
       <property name="ki_fp_filters" value="DIP*W7.62mm*"/>
       <sheetpath names="/MCU Controller/" tstamps="/e18fc294-84d1-4936-8800-6a2f75cce34e/"/>
-      <tstamps>17b60ef6-93fc-4558-a980-0e5a4f17b4d9 451dc38c-d0d3-445a-a7ef-49df4ced11d9 e6be41ea-fff1-49a1-a936-8abc4876ee9a 06a02ac1-2116-4e29-a57c-03a1dacbe494 4b15048c-cca3-42f1-b463-21d60ade7b1e b61f67e3-98e6-419a-bf13-44dcc5de04e4 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
+      <tstamps>17b60ef6-93fc-4558-a980-0e5a4f17b4d9 451dc38c-d0d3-445a-a7ef-49df4ced11d9 06a02ac1-2116-4e29-a57c-03a1dacbe494 4b15048c-cca3-42f1-b463-21d60ade7b1e e6be41ea-fff1-49a1-a936-8abc4876ee9a b61f67e3-98e6-419a-bf13-44dcc5de04e4 0045f984-25f8-4230-8b9c-009354aa52bd</tstamps>
     </comp>
     <comp ref="U10">
       <value>MAX3485</value>
@@ -2509,10 +2622,11 @@
     <comp ref="C47">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2526,10 +2640,11 @@
     <comp ref="C48">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2543,10 +2658,11 @@
     <comp ref="C49">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2560,10 +2676,11 @@
     <comp ref="C50">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2577,10 +2694,11 @@
     <comp ref="C51">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2594,10 +2712,11 @@
     <comp ref="C52">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2611,10 +2730,11 @@
     <comp ref="C53">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2626,12 +2746,67 @@
       <tstamps>d14e7206-c9e8-48ac-8f89-c5ccbfa1b487</tstamps>
     </comp>
     <comp ref="C54">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>4d3ec1ab-1531-4549-9117-d27efc6d4d15</tstamps>
+    </comp>
+    <comp ref="C55">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>65bff136-1e95-475c-874a-e89d0acf299b</tstamps>
+    </comp>
+    <comp ref="C56">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>a83ae287-74c7-4ed4-9487-8b9dc3ea0ddb</tstamps>
+    </comp>
+    <comp ref="C57">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2642,13 +2817,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>b7b753e4-1933-481f-98f1-ce9ea73b3941</tstamps>
     </comp>
-    <comp ref="C55">
+    <comp ref="C58">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2659,13 +2835,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>c8edf498-86fa-4ca2-83ad-41bcfbb9f292</tstamps>
     </comp>
-    <comp ref="C56">
+    <comp ref="C59">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2676,13 +2853,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>d1a9aa57-5372-49f6-9757-d809ae556a02</tstamps>
     </comp>
-    <comp ref="C57">
+    <comp ref="C60">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2693,13 +2871,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>fd0a3308-c818-4757-b723-4621de6d588f</tstamps>
     </comp>
-    <comp ref="C58">
+    <comp ref="C61">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2710,13 +2889,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>3255321d-6efe-439a-8c94-2dfef3226513</tstamps>
     </comp>
-    <comp ref="C59">
+    <comp ref="C62">
       <value>4.7uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2727,13 +2907,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>39cb44e8-39a7-47b2-932f-951fb5d9746a</tstamps>
     </comp>
-    <comp ref="C60">
+    <comp ref="C63">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2744,13 +2925,68 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>80af8498-e993-48d1-9faf-fe0c84ae72d9</tstamps>
     </comp>
-    <comp ref="C61">
+    <comp ref="C64">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>c5edbcb3-4bad-43a0-bfb5-d1e4a25105dc</tstamps>
+    </comp>
+    <comp ref="C65">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>c8ef7c4d-d081-4bbe-92eb-84dd5be5df28</tstamps>
+    </comp>
+    <comp ref="C66">
+      <value>22pF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <description>Unpolarized capacitor, small symbol</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Unpolarized capacitor, small symbol</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <property name="Sheetname" value="Sensors"/>
+      <property name="Sheetfile" value="sensors.kicad_sch"/>
+      <property name="ki_keywords" value="capacitor cap"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
+      <tstamps>c906c539-60d0-43d2-9983-76dad805ff65</tstamps>
+    </comp>
+    <comp ref="C67">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2761,13 +2997,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>9edbe47e-6f14-4afa-abfd-d99cb32d6d7b</tstamps>
     </comp>
-    <comp ref="C62">
+    <comp ref="C68">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2778,13 +3015,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>8ef59a32-26d4-4df8-ba3d-3430c0569b53</tstamps>
     </comp>
-    <comp ref="C63">
+    <comp ref="C69">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2795,13 +3033,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>d83a2188-c444-4abf-89c6-0c99723b560f</tstamps>
     </comp>
-    <comp ref="C64">
+    <comp ref="C70">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2812,13 +3051,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>d7f8b065-b699-4db7-832a-52b5019dbc8c</tstamps>
     </comp>
-    <comp ref="C65">
+    <comp ref="C71">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2829,13 +3069,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>fc344b6f-71a5-4e55-8388-fa4bd609db24</tstamps>
     </comp>
-    <comp ref="C66">
+    <comp ref="C72">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2846,13 +3087,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>89f18c9b-844d-4ced-adb8-f2fec173a8cc</tstamps>
     </comp>
-    <comp ref="C67">
+    <comp ref="C73">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2863,13 +3105,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>83ad453a-ce14-4052-8bf9-419db795d9dc</tstamps>
     </comp>
-    <comp ref="C68">
+    <comp ref="C74">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2880,13 +3123,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>8faedcb9-f50a-444e-a32a-f944fd0711b7</tstamps>
     </comp>
-    <comp ref="C69">
+    <comp ref="C75">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2897,13 +3141,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>c6d0aadd-3411-4821-b740-ea79e321152f</tstamps>
     </comp>
-    <comp ref="C70">
+    <comp ref="C76">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2914,13 +3159,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>32e79e2c-9b0a-4108-9d95-9a37d037a18c</tstamps>
     </comp>
-    <comp ref="C71">
+    <comp ref="C77">
       <value>4700pF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2931,13 +3177,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>4ba38038-a78c-4598-8ed5-d9175e8506b1</tstamps>
     </comp>
-    <comp ref="C72">
+    <comp ref="C78">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2948,13 +3195,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>1981bef7-1976-44be-887d-f525ddd3c1c6</tstamps>
     </comp>
-    <comp ref="C73">
+    <comp ref="C79">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2965,13 +3213,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>b4a21d5a-a026-4d96-b2a3-9ecb0f0cec6a</tstamps>
     </comp>
-    <comp ref="C74">
+    <comp ref="C80">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2982,13 +3231,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>18734219-cce2-4dca-a433-4cba6e7d6106</tstamps>
     </comp>
-    <comp ref="C75">
+    <comp ref="C81">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -2999,13 +3249,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>cf1c4043-7c35-4723-9aae-4d8db1b54850</tstamps>
     </comp>
-    <comp ref="C76">
+    <comp ref="C82">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -3016,13 +3267,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>5ee307dd-2f1a-4b4c-886d-3f2aa74f7fe6</tstamps>
     </comp>
-    <comp ref="C77">
+    <comp ref="C83">
       <value>1uF</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -3033,13 +3285,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>3070bea8-e7b1-45a1-a611-039c65f8b6bb</tstamps>
     </comp>
-    <comp ref="C78">
+    <comp ref="C84">
       <value>0.1uF</value>
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Unpolarized capacitor, small symbol</description>
       <fields>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Unpolarized capacitor, small symbol</field>
       </fields>
       <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
@@ -3089,11 +3342,12 @@
     <comp ref="D23">
       <value>Yellow</value>
       <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Light emitting diode, small symbol</description>
       <fields>
         <field name="Sim.Pin">1=K 2=A</field>
         <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Light emitting diode, small symbol</field>
       </fields>
       <libsource lib="Device" part="LED_Small" description="Light emitting diode, small symbol"/>
@@ -3126,10 +3380,11 @@
     <comp ref="J9">
       <value>LGT-4.5C</value>
       <footprint>TerminalBlock:TerminalBlock_bornier-2_P5.08mm</footprint>
+      <datasheet>~</datasheet>
       <description>Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">TerminalBlock:TerminalBlock_bornier-2_P5.08mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector" part="Screw_Terminal_01x02" description="Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -3143,10 +3398,11 @@
     <comp ref="J10">
       <value>LGT-4.5C/H</value>
       <footprint>TerminalBlock:TerminalBlock_bornier-2_P5.08mm</footprint>
+      <datasheet>~</datasheet>
       <description>Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">TerminalBlock:TerminalBlock_bornier-2_P5.08mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector" part="Screw_Terminal_01x02" description="Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -3160,10 +3416,11 @@
     <comp ref="J11">
       <value>LGT-4.5C/H</value>
       <footprint>TerminalBlock:TerminalBlock_bornier-2_P5.08mm</footprint>
+      <datasheet>~</datasheet>
       <description>Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <fields>
         <field name="Footprint">TerminalBlock:TerminalBlock_bornier-2_P5.08mm</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <libsource lib="Connector" part="Screw_Terminal_01x02" description="Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
@@ -3175,12 +3432,13 @@
       <tstamps>7b02a2e4-6f71-4fc3-81ea-e4a1f1c73ef6</tstamps>
     </comp>
     <comp ref="R34">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3192,12 +3450,13 @@
       <tstamps>b085900f-8efd-4869-bd9a-bc5eee02d7a7</tstamps>
     </comp>
     <comp ref="R35">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3209,12 +3468,13 @@
       <tstamps>fa5be8ea-dc11-4b8c-b3a2-6638db0b72b1</tstamps>
     </comp>
     <comp ref="R36">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3228,10 +3488,11 @@
     <comp ref="R37">
       <value>4.7k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3245,10 +3506,11 @@
     <comp ref="R38">
       <value>4.7k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3262,10 +3524,11 @@
     <comp ref="R39">
       <value>4.7k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3277,12 +3540,13 @@
       <tstamps>f69fbd10-ee2c-45f9-81e4-c127425f90f6</tstamps>
     </comp>
     <comp ref="R40">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3294,12 +3558,13 @@
       <tstamps>c798f47a-8f8f-4c87-b584-fe9df8ba81af</tstamps>
     </comp>
     <comp ref="R41">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3311,12 +3576,13 @@
       <tstamps>ba4af813-2dd0-40c9-b82b-a69d725a99df</tstamps>
     </comp>
     <comp ref="R42">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3330,10 +3596,11 @@
     <comp ref="R43">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3347,10 +3614,11 @@
     <comp ref="R44">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3364,10 +3632,11 @@
     <comp ref="R45">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3381,10 +3650,11 @@
     <comp ref="R46">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3398,10 +3668,11 @@
     <comp ref="R47">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3415,10 +3686,11 @@
     <comp ref="R48">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3430,12 +3702,13 @@
       <tstamps>ab2146ad-f2d6-4b44-8433-a053794aebb9</tstamps>
     </comp>
     <comp ref="R49">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3447,12 +3720,13 @@
       <tstamps>2ce4434e-09f0-4207-bec4-cfe804fd69a0</tstamps>
     </comp>
     <comp ref="R50">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3464,12 +3738,13 @@
       <tstamps>5682d2b6-3209-41d2-8c7d-9739c85a8d1f</tstamps>
     </comp>
     <comp ref="R51">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3481,12 +3756,13 @@
       <tstamps>f0100004-f631-48ac-804d-e36f9d9b8854</tstamps>
     </comp>
     <comp ref="R52">
-      <value>130k</value>
+      <value>82k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3498,12 +3774,13 @@
       <tstamps>ab7ac2c1-6448-4f5c-8f90-ea3402dbd93b</tstamps>
     </comp>
     <comp ref="R53">
-      <value>130k</value>
+      <value>82k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3515,12 +3792,13 @@
       <tstamps>6b19de42-0b44-4348-b4f8-2db31330e706</tstamps>
     </comp>
     <comp ref="R54">
-      <value>130k</value>
+      <value>82k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3534,10 +3812,11 @@
     <comp ref="R55">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3551,10 +3830,11 @@
     <comp ref="R56">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3568,10 +3848,11 @@
     <comp ref="R57">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3583,12 +3864,13 @@
       <tstamps>afd08f20-235b-4a7a-8f9d-1d48e768da73</tstamps>
     </comp>
     <comp ref="R58">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3600,12 +3882,13 @@
       <tstamps>492e46e5-db01-4b2b-a881-4d1d578f6115</tstamps>
     </comp>
     <comp ref="R59">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3617,12 +3900,13 @@
       <tstamps>02f469db-1d99-4983-aa11-c930a36dec74</tstamps>
     </comp>
     <comp ref="R60">
-      <value>68k</value>
+      <value>43k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3636,10 +3920,11 @@
     <comp ref="R61">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3653,10 +3938,11 @@
     <comp ref="R62">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3670,10 +3956,11 @@
     <comp ref="R63">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3687,10 +3974,11 @@
     <comp ref="R64">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3704,10 +3992,11 @@
     <comp ref="R65">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3721,10 +4010,11 @@
     <comp ref="R66">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3736,12 +4026,13 @@
       <tstamps>cc456230-56a6-4e93-b482-9b7ab2207c50</tstamps>
     </comp>
     <comp ref="R67">
-      <value>2.2k</value>
+      <value>5.6k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3755,10 +4046,11 @@
     <comp ref="R68">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3770,12 +4062,13 @@
       <tstamps>c0d811c2-e1aa-4847-851c-d2f6b164c152</tstamps>
     </comp>
     <comp ref="R69">
-      <value>18k</value>
+      <value>30k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3787,12 +4080,13 @@
       <tstamps>0fe7ec95-d17c-4d4c-81cb-5de91bd22bce</tstamps>
     </comp>
     <comp ref="R70">
-      <value>2.2k</value>
+      <value>5.6k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3806,10 +4100,11 @@
     <comp ref="R71">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3821,12 +4116,13 @@
       <tstamps>f6ed02d1-dbd4-4a46-832f-3d6515004834</tstamps>
     </comp>
     <comp ref="R72">
-      <value>18k</value>
+      <value>30k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3838,12 +4134,13 @@
       <tstamps>77752617-7c1e-4ca9-b09b-147cf8bea547</tstamps>
     </comp>
     <comp ref="R73">
-      <value>2.2k</value>
+      <value>5.6k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3857,10 +4154,11 @@
     <comp ref="R74">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3872,12 +4170,13 @@
       <tstamps>4d301439-4836-4cdc-b10d-1caf31dc9edf</tstamps>
     </comp>
     <comp ref="R75">
-      <value>18k</value>
+      <value>30k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3889,63 +4188,13 @@
       <tstamps>b8e3c924-2750-45c8-a302-145521a726fd</tstamps>
     </comp>
     <comp ref="R76">
-      <value>1k</value>
-      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
-      <description>Resistor, small symbol</description>
-      <fields>
-        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">Resistor, small symbol</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <property name="Sheetname" value="Sensors"/>
-      <property name="Sheetfile" value="sensors.kicad_sch"/>
-      <property name="ki_keywords" value="R resistor"/>
-      <property name="ki_fp_filters" value="R_*"/>
-      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>238231b9-885f-4553-b736-bb620d2c7b0c</tstamps>
-    </comp>
-    <comp ref="R77">
-      <value>1k</value>
-      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
-      <description>Resistor, small symbol</description>
-      <fields>
-        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">Resistor, small symbol</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <property name="Sheetname" value="Sensors"/>
-      <property name="Sheetfile" value="sensors.kicad_sch"/>
-      <property name="ki_keywords" value="R resistor"/>
-      <property name="ki_fp_filters" value="R_*"/>
-      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>1c611404-02ee-4046-ba60-64971180cc99</tstamps>
-    </comp>
-    <comp ref="R78">
-      <value>1k</value>
-      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
-      <description>Resistor, small symbol</description>
-      <fields>
-        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
-        <field name="Description">Resistor, small symbol</field>
-      </fields>
-      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
-      <property name="Sheetname" value="Sensors"/>
-      <property name="Sheetfile" value="sensors.kicad_sch"/>
-      <property name="ki_keywords" value="R resistor"/>
-      <property name="ki_fp_filters" value="R_*"/>
-      <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>486965e9-fbb6-4745-8e70-3058fec77146</tstamps>
-    </comp>
-    <comp ref="R79">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3956,13 +4205,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>a5747ec6-24d3-47d5-8816-d875a9b75325</tstamps>
     </comp>
-    <comp ref="R80">
+    <comp ref="R77">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3973,13 +4223,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>3a923243-6903-4793-800d-12412e7bc2d8</tstamps>
     </comp>
-    <comp ref="R81">
+    <comp ref="R78">
       <value>110k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -3990,13 +4241,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>7ed3b5fc-7306-4bc9-85e9-719c5b439ddf</tstamps>
     </comp>
-    <comp ref="R82">
+    <comp ref="R79">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4007,13 +4259,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>08920a7d-a516-4c52-92b5-90445ac506e5</tstamps>
     </comp>
-    <comp ref="R83">
+    <comp ref="R80">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4024,13 +4277,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>5a1b28e9-933d-4227-85c1-429c7ccd78cd</tstamps>
     </comp>
-    <comp ref="R84">
+    <comp ref="R81">
       <value>5.9k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4041,13 +4295,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>9cfba500-af95-43a5-bb11-012974cf13a4</tstamps>
     </comp>
-    <comp ref="R85">
+    <comp ref="R82">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4058,13 +4313,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>d536d762-1ed8-4216-96a4-337c8baad5d5</tstamps>
     </comp>
-    <comp ref="R86">
+    <comp ref="R83">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4075,13 +4331,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>36e99837-9423-4f3b-9282-5e02be679f77</tstamps>
     </comp>
-    <comp ref="R87">
+    <comp ref="R84">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4092,13 +4349,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>dae6a3a8-26df-4fe6-89a4-1786db72b8e0</tstamps>
     </comp>
-    <comp ref="R88">
+    <comp ref="R85">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4109,13 +4367,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>bcbade2b-7c7d-43fe-9170-707672aea392</tstamps>
     </comp>
-    <comp ref="R89">
+    <comp ref="R86">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4126,13 +4385,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>c5f82a86-8160-4073-8d1d-4635ac83d88b</tstamps>
     </comp>
-    <comp ref="R90">
+    <comp ref="R87">
       <value>2k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4143,13 +4403,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>eb139b47-4c6d-4867-9188-b2e1a1a771a6</tstamps>
     </comp>
-    <comp ref="R91">
+    <comp ref="R88">
       <value>1k</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4160,13 +4421,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>3fc2cb79-8b65-4997-bbad-508bd768bdc2</tstamps>
     </comp>
-    <comp ref="R92">
+    <comp ref="R89">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4177,13 +4439,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>193ba081-0d81-4934-a402-ce8cde0edd62</tstamps>
     </comp>
-    <comp ref="R93">
+    <comp ref="R90">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4194,13 +4457,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>9771a930-16ba-456d-824f-61e2248601e7</tstamps>
     </comp>
-    <comp ref="R94">
+    <comp ref="R91">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4211,13 +4475,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>3e6d0d48-239e-49ae-b0be-1df0b83a1e39</tstamps>
     </comp>
-    <comp ref="R95">
+    <comp ref="R92">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4228,13 +4493,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>e9f2bd5d-88d2-4f39-b3ae-be4429d496d3</tstamps>
     </comp>
-    <comp ref="R96">
+    <comp ref="R93">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4245,13 +4511,14 @@
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
       <tstamps>eb897230-0451-4e2e-9727-c2bd15c1cf61</tstamps>
     </comp>
-    <comp ref="R97">
+    <comp ref="R94">
       <value>0</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
       <description>Resistor, small symbol</description>
       <fields>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
-        <field name="Datasheet"/>
+        <field name="Datasheet">~</field>
         <field name="Description">Resistor, small symbol</field>
       </fields>
       <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
@@ -4278,7 +4545,7 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>abbc0824-3be6-4f0d-8717-48476c1b332f 87011673-f050-414e-878f-542068c6abfc 7934d5fb-4978-4a30-b7bc-4f185411939a</tstamps>
+      <tstamps>87011673-f050-414e-878f-542068c6abfc 7934d5fb-4978-4a30-b7bc-4f185411939a 6ba6d353-61ca-4e11-a6ca-e0f10132487a</tstamps>
     </comp>
     <comp ref="U14">
       <value>ADA4528-2ARMZ</value>
@@ -4296,7 +4563,7 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>a86a6c74-6b87-43ab-9cfa-89b7634186a4 9dc2e447-5d32-44f8-897d-055dc3489e89 99c29057-51c3-4017-acd6-620532bb54a8</tstamps>
+      <tstamps>9dc2e447-5d32-44f8-897d-055dc3489e89 abbc0824-3be6-4f0d-8717-48476c1b332f 99c29057-51c3-4017-acd6-620532bb54a8</tstamps>
     </comp>
     <comp ref="U15">
       <value>ADA4528-2ARMZ</value>
@@ -4314,16 +4581,16 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>c7a47ab3-48b8-40c1-b5ca-e32b00c7f15a cb3eacac-7307-4dea-8d59-d110d38cd8d7 4c1d0177-b823-467a-8d22-c1cb9e228e6c</tstamps>
+      <tstamps>cb3eacac-7307-4dea-8d59-d110d38cd8d7 bbb358d7-4e42-4ce7-8041-f25667f408f1 4c1d0177-b823-467a-8d22-c1cb9e228e6c</tstamps>
     </comp>
     <comp ref="U16">
-      <value>LSM6DS3</value>
+      <value>LSM6DSR</value>
       <footprint>Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y</footprint>
-      <datasheet>https://www.st.com/resource/en/datasheet/lsm6ds3tr-c.pdf</datasheet>
+      <datasheet>https://www.st.com.cn/resource/en/datasheet/lsm6dsr.pdf</datasheet>
       <description>I2C/SPI, iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope</description>
       <fields>
         <field name="Footprint">Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y</field>
-        <field name="Datasheet">https://www.st.com/resource/en/datasheet/lsm6ds3tr-c.pdf</field>
+        <field name="Datasheet">https://www.st.com.cn/resource/en/datasheet/lsm6dsr.pdf</field>
         <field name="Description">I2C/SPI, iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope</field>
       </fields>
       <libsource lib="Sensor_Motion" part="LSM6DS3" description="I2C/SPI, iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope"/>
@@ -4350,7 +4617,7 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>6ba6d353-61ca-4e11-a6ca-e0f10132487a ad14ab2d-76e8-47af-9279-73a1a6ba818f 3fdf996b-2ac9-46a6-8470-68d31061e1b2</tstamps>
+      <tstamps>ad14ab2d-76e8-47af-9279-73a1a6ba818f a86a6c74-6b87-43ab-9cfa-89b7634186a4 3fdf996b-2ac9-46a6-8470-68d31061e1b2</tstamps>
     </comp>
     <comp ref="U18">
       <value>ADA4528-2ARMZ</value>
@@ -4368,7 +4635,7 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>e7d4630a-b24e-47e9-a360-f76f8d65db38 bbb358d7-4e42-4ce7-8041-f25667f408f1 24e2eb8e-3377-4f96-85ca-a1fcbee32afc</tstamps>
+      <tstamps>e7d4630a-b24e-47e9-a360-f76f8d65db38 99acc59e-b3dd-4898-9c99-8213805acfb6 24e2eb8e-3377-4f96-85ca-a1fcbee32afc</tstamps>
     </comp>
     <comp ref="U19">
       <value>ADA4528-2ARMZ</value>
@@ -4386,9 +4653,9 @@
       <property name="ki_keywords" value="dual opamp"/>
       <property name="ki_fp_filters" value="SOIC*3.9x4.9mm*P1.27mm* DIP*W7.62mm* TO*99* OnSemi*Micro8* TSSOP*3x3mm*P0.65mm* TSSOP*4.4x3mm*P0.65mm* MSOP*3x3mm*P0.65mm* SSOP*3.9x4.9mm*P0.635mm* LFCSP*2x2mm*P0.5mm* *SIP* SOIC*5.3x6.2mm*P1.27mm*"/>
       <sheetpath names="/Sensors/" tstamps="/f5de9976-2d5a-4764-868a-75612195ab17/"/>
-      <tstamps>99acc59e-b3dd-4898-9c99-8213805acfb6 6d27f42c-058c-46b6-9c62-32c75cfc4f23 07376bfe-d4a8-42b1-b148-761ffe1b0931</tstamps>
+      <tstamps>6d27f42c-058c-46b6-9c62-32c75cfc4f23 c7a47ab3-48b8-40c1-b5ca-e32b00c7f15a 07376bfe-d4a8-42b1-b148-761ffe1b0931</tstamps>
     </comp>
-    <comp ref="U22">
+    <comp ref="U20">
       <value>ADS1262IPWR</value>
       <footprint>Package_SO:TSSOP-28_4.4x9.7mm_P0.65mm</footprint>
       <datasheet>https://www.ti.com/lit/ds/symlink/ads1262.pdf</datasheet>
@@ -5455,17 +5722,17 @@
   </libraries>
   <nets>
     <net code="1" name="/MCU Controller/ADC_DRDY" class="Default">
-      <node ref="R91" pin="2" pintype="passive"/>
+      <node ref="R88" pin="2" pintype="passive"/>
       <node ref="U11" pin="32" pinfunction="PA11" pintype="bidirectional"/>
-      <node ref="U22" pin="14" pinfunction="~{DRDY}" pintype="output"/>
+      <node ref="U20" pin="14" pinfunction="~{DRDY}" pintype="output"/>
     </net>
     <net code="2" name="/MCU Controller/ADC_RESET" class="Default">
       <node ref="U11" pin="11" pinfunction="PA1" pintype="bidirectional"/>
-      <node ref="U22" pin="20" pinfunction="~{RESET}/~{PWDN}" pintype="input"/>
+      <node ref="U20" pin="20" pinfunction="~{RESET}/~{PWDN}" pintype="input"/>
     </net>
     <net code="3" name="/MCU Controller/ADC_START" class="Default">
       <node ref="U11" pin="33" pinfunction="PA12" pintype="bidirectional"/>
-      <node ref="U22" pin="9" pinfunction="START" pintype="input"/>
+      <node ref="U20" pin="9" pinfunction="START" pintype="input"/>
     </net>
     <net code="4" name="/MCU Controller/BAUD_RATE_B1" class="Default">
       <node ref="R32" pin="1" pintype="passive"/>
@@ -5489,8 +5756,8 @@
       <node ref="C41" pin="2" pintype="passive"/>
       <node ref="C43" pin="2" pintype="passive"/>
       <node ref="C47" pin="1" pintype="passive"/>
-      <node ref="C60" pin="1" pintype="passive"/>
-      <node ref="C78" pin="1" pintype="passive"/>
+      <node ref="C63" pin="1" pintype="passive"/>
+      <node ref="C84" pin="1" pintype="passive"/>
       <node ref="D11" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D12" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="D7" pin="2" pinfunction="A" pintype="passive"/>
@@ -5521,7 +5788,7 @@
       <node ref="U12" pin="16" pinfunction="VCC" pintype="power_in"/>
       <node ref="U16" pin="5" pinfunction="VDDIO" pintype="power_in"/>
       <node ref="U16" pin="8" pinfunction="VDD" pintype="power_in"/>
-      <node ref="U22" pin="19" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U20" pin="19" pinfunction="DVDD" pintype="power_in"/>
       <node ref="U6" pin="8" pinfunction="VCC" pintype="power_in"/>
       <node ref="U7" pin="2" pinfunction="VCC" pintype="power_in"/>
       <node ref="U8" pin="23" pinfunction="VCC" pintype="power_in"/>
@@ -5555,15 +5822,15 @@
     </net>
     <net code="13" name="/MCU Controller/MCU_CSEL" class="Default">
       <node ref="U11" pin="14" pinfunction="PA4" pintype="bidirectional"/>
-      <node ref="U22" pin="10" pinfunction="~{CS}" pintype="input"/>
+      <node ref="U20" pin="10" pinfunction="~{CS}" pintype="input"/>
     </net>
     <net code="14" name="/MCU Controller/MCU_MISO" class="Default">
       <node ref="U11" pin="16" pinfunction="PA6" pintype="bidirectional"/>
-      <node ref="U22" pin="13" pinfunction="DOUT/~{DRDY}" pintype="output"/>
+      <node ref="U20" pin="13" pinfunction="DOUT/~{DRDY}" pintype="output"/>
     </net>
     <net code="15" name="/MCU Controller/MCU_MOSI" class="Default">
       <node ref="U11" pin="17" pinfunction="PA7" pintype="bidirectional"/>
-      <node ref="U22" pin="12" pinfunction="DIN" pintype="input"/>
+      <node ref="U20" pin="12" pinfunction="DIN" pintype="input"/>
     </net>
     <net code="16" name="/MCU Controller/MCU_RXD" class="Default">
       <node ref="D14" pin="2" pinfunction="A" pintype="passive"/>
@@ -5583,7 +5850,7 @@
     </net>
     <net code="18" name="/MCU Controller/MCU_SCLK" class="Default">
       <node ref="U11" pin="15" pinfunction="PA5" pintype="bidirectional"/>
-      <node ref="U22" pin="11" pinfunction="SCLK" pintype="input"/>
+      <node ref="U20" pin="11" pinfunction="SCLK" pintype="input"/>
     </net>
     <net code="19" name="/MCU Controller/MCU_SDA" class="Default">
       <node ref="R15" pin="2" pintype="passive"/>
@@ -5675,13 +5942,13 @@
       <node ref="U11" pin="40" pinfunction="PB4" pintype="bidirectional"/>
     </net>
     <net code="37" name="/Power Supply/A+2V5" class="Default">
-      <node ref="C67" pin="2" pintype="passive"/>
-      <node ref="C68" pin="2" pintype="passive"/>
-      <node ref="C69" pin="2" pintype="passive"/>
-      <node ref="C72" pin="2" pintype="passive"/>
       <node ref="C73" pin="2" pintype="passive"/>
+      <node ref="C74" pin="2" pintype="passive"/>
       <node ref="C75" pin="2" pintype="passive"/>
-      <node ref="C76" pin="2" pintype="passive"/>
+      <node ref="C78" pin="2" pintype="passive"/>
+      <node ref="C79" pin="2" pintype="passive"/>
+      <node ref="C81" pin="2" pintype="passive"/>
+      <node ref="C82" pin="2" pintype="passive"/>
       <node ref="D21" pin="2" pinfunction="K" pintype="passive"/>
       <node ref="D22" pin="2" pinfunction="K" pintype="passive"/>
       <node ref="D24" pin="2" pinfunction="K" pintype="passive"/>
@@ -5693,17 +5960,17 @@
       <node ref="U17" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U18" pin="8" pinfunction="V+" pintype="power_in"/>
       <node ref="U19" pin="8" pinfunction="V+" pintype="power_in"/>
-      <node ref="U22" pin="6" pinfunction="AVDD" pintype="power_in"/>
+      <node ref="U20" pin="6" pinfunction="AVDD" pintype="power_in"/>
     </net>
     <net code="38" name="/Power Supply/A-2V5" class="Default">
-      <node ref="C67" pin="1" pintype="passive"/>
-      <node ref="C68" pin="1" pintype="passive"/>
-      <node ref="C70" pin="2" pintype="passive"/>
-      <node ref="C72" pin="1" pintype="passive"/>
       <node ref="C73" pin="1" pintype="passive"/>
-      <node ref="C74" pin="2" pintype="passive"/>
-      <node ref="C75" pin="1" pintype="passive"/>
-      <node ref="C76" pin="1" pintype="passive"/>
+      <node ref="C74" pin="1" pintype="passive"/>
+      <node ref="C76" pin="2" pintype="passive"/>
+      <node ref="C78" pin="1" pintype="passive"/>
+      <node ref="C79" pin="1" pintype="passive"/>
+      <node ref="C80" pin="2" pintype="passive"/>
+      <node ref="C81" pin="1" pintype="passive"/>
+      <node ref="C82" pin="1" pintype="passive"/>
       <node ref="D21" pin="1" pinfunction="A" pintype="passive"/>
       <node ref="D22" pin="1" pinfunction="A" pintype="passive"/>
       <node ref="D24" pin="1" pinfunction="A" pintype="passive"/>
@@ -5715,7 +5982,7 @@
       <node ref="U17" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U18" pin="4" pinfunction="V-" pintype="power_in"/>
       <node ref="U19" pin="4" pinfunction="V-" pintype="power_in"/>
-      <node ref="U22" pin="7" pinfunction="AVSS" pintype="power_in"/>
+      <node ref="U20" pin="7" pinfunction="AVSS" pintype="power_in"/>
     </net>
     <net code="39" name="/Power Supply/VCC" class="Default">
       <node ref="C1" pin="1" pintype="passive"/>
@@ -5745,52 +6012,53 @@
       <node ref="U3" pin="2" pinfunction="IN" pintype="power_in"/>
     </net>
     <net code="41" name="/Sensors/AAF_EN" class="Default">
-      <node ref="C65" pin="1" pintype="passive"/>
-      <node ref="R83" pin="2" pintype="passive"/>
-      <node ref="U22" pin="24" pinfunction="AIN3" pintype="bidirectional"/>
+      <node ref="C71" pin="1" pintype="passive"/>
+      <node ref="R80" pin="2" pintype="passive"/>
+      <node ref="U20" pin="24" pinfunction="AIN3" pintype="bidirectional"/>
     </net>
     <net code="42" name="/Sensors/AAF_EP" class="Default">
-      <node ref="C62" pin="1" pintype="passive"/>
+      <node ref="C68" pin="1" pintype="passive"/>
       <node ref="R65" pin="2" pintype="passive"/>
-      <node ref="U22" pin="23" pinfunction="AIN2" pintype="bidirectional"/>
+      <node ref="U20" pin="23" pinfunction="AIN2" pintype="bidirectional"/>
     </net>
     <net code="43" name="/Sensors/AAF_NN" class="Default">
-      <node ref="C66" pin="1" pintype="passive"/>
-      <node ref="R84" pin="2" pintype="passive"/>
-      <node ref="U22" pin="26" pinfunction="AIN5" pintype="bidirectional"/>
+      <node ref="C72" pin="1" pintype="passive"/>
+      <node ref="R81" pin="2" pintype="passive"/>
+      <node ref="U20" pin="26" pinfunction="AIN5" pintype="bidirectional"/>
     </net>
     <net code="44" name="/Sensors/AAF_NP" class="Default">
-      <node ref="C63" pin="1" pintype="passive"/>
+      <node ref="C69" pin="1" pintype="passive"/>
       <node ref="R66" pin="2" pintype="passive"/>
-      <node ref="U22" pin="25" pinfunction="AIN4" pintype="bidirectional"/>
+      <node ref="U20" pin="25" pinfunction="AIN4" pintype="bidirectional"/>
     </net>
     <net code="45" name="/Sensors/AAF_ZN" class="Default">
-      <node ref="C64" pin="1" pintype="passive"/>
-      <node ref="R82" pin="2" pintype="passive"/>
-      <node ref="U22" pin="22" pinfunction="AIN1" pintype="bidirectional"/>
+      <node ref="C70" pin="1" pintype="passive"/>
+      <node ref="R79" pin="2" pintype="passive"/>
+      <node ref="U20" pin="22" pinfunction="AIN1" pintype="bidirectional"/>
     </net>
     <net code="46" name="/Sensors/AAF_ZP" class="Default">
-      <node ref="C61" pin="1" pintype="passive"/>
+      <node ref="C67" pin="1" pintype="passive"/>
       <node ref="R64" pin="2" pintype="passive"/>
-      <node ref="U22" pin="21" pinfunction="AIN0" pintype="bidirectional"/>
+      <node ref="U20" pin="21" pinfunction="AIN0" pintype="bidirectional"/>
     </net>
     <net code="47" name="/Sensors/ADC_REFOUT" class="Default">
-      <node ref="C74" pin="1" pintype="passive"/>
-      <node ref="R92" pin="1" pintype="passive"/>
-      <node ref="R93" pin="1" pintype="passive"/>
-      <node ref="R94" pin="1" pintype="passive"/>
-      <node ref="R95" pin="2" pintype="passive"/>
-      <node ref="R96" pin="2" pintype="passive"/>
-      <node ref="U22" pin="8" pinfunction="REFOUT" pintype="output"/>
+      <node ref="C80" pin="1" pintype="passive"/>
+      <node ref="R89" pin="1" pintype="passive"/>
+      <node ref="R90" pin="1" pintype="passive"/>
+      <node ref="R91" pin="1" pintype="passive"/>
+      <node ref="R92" pin="2" pintype="passive"/>
+      <node ref="R93" pin="2" pintype="passive"/>
+      <node ref="U20" pin="8" pinfunction="REFOUT" pintype="output"/>
     </net>
     <net code="48" name="/Sensors/EHE" class="Default">
-      <node ref="D22" pin="3" pinfunction="K" pintype="passive"/>
+      <node ref="D22" pin="3" pinfunction="A" pintype="passive"/>
       <node ref="J10" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R35" pin="1" pintype="passive"/>
       <node ref="R50" pin="1" pintype="passive"/>
       <node ref="R71" pin="1" pintype="passive"/>
     </net>
     <net code="49" name="/Sensors/EHE_BP" class="Default">
+      <node ref="C65" pin="2" pintype="passive"/>
       <node ref="R59" pin="2" pintype="passive"/>
       <node ref="R62" pin="2" pintype="passive"/>
       <node ref="R72" pin="1" pintype="passive"/>
@@ -5798,18 +6066,20 @@
     </net>
     <net code="50" name="/Sensors/EHE_LP" class="Default">
       <node ref="C52" pin="2" pintype="passive"/>
+      <node ref="C55" pin="2" pintype="passive"/>
       <node ref="R47" pin="2" pintype="passive"/>
       <node ref="R70" pin="1" pintype="passive"/>
       <node ref="U14" pin="1" pintype="output"/>
     </net>
     <net code="51" name="/Sensors/EHN" class="Default">
-      <node ref="D24" pin="3" pinfunction="K" pintype="passive"/>
+      <node ref="D24" pin="3" pinfunction="A" pintype="passive"/>
       <node ref="J11" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R36" pin="1" pintype="passive"/>
       <node ref="R51" pin="1" pintype="passive"/>
       <node ref="R74" pin="1" pintype="passive"/>
     </net>
     <net code="52" name="/Sensors/EHN_BP" class="Default">
+      <node ref="C66" pin="2" pintype="passive"/>
       <node ref="R60" pin="2" pintype="passive"/>
       <node ref="R63" pin="2" pintype="passive"/>
       <node ref="R75" pin="1" pintype="passive"/>
@@ -5817,6 +6087,7 @@
     </net>
     <net code="53" name="/Sensors/EHN_LP" class="Default">
       <node ref="C53" pin="2" pintype="passive"/>
+      <node ref="C56" pin="2" pintype="passive"/>
       <node ref="R48" pin="2" pintype="passive"/>
       <node ref="R73" pin="1" pintype="passive"/>
       <node ref="U15" pin="1" pintype="output"/>
@@ -5829,6 +6100,7 @@
       <node ref="R68" pin="1" pintype="passive"/>
     </net>
     <net code="55" name="/Sensors/EHZ_BP" class="Default">
+      <node ref="C64" pin="2" pintype="passive"/>
       <node ref="R58" pin="2" pintype="passive"/>
       <node ref="R61" pin="2" pintype="passive"/>
       <node ref="R69" pin="1" pintype="passive"/>
@@ -5836,41 +6108,42 @@
     </net>
     <net code="56" name="/Sensors/EHZ_LP" class="Default">
       <node ref="C51" pin="2" pintype="passive"/>
+      <node ref="C54" pin="2" pintype="passive"/>
       <node ref="R46" pin="2" pintype="passive"/>
       <node ref="R67" pin="1" pintype="passive"/>
       <node ref="U13" pin="1" pintype="output"/>
     </net>
     <net code="57" name="/Sensors/PREAMP_EN" class="Default">
-      <node ref="R80" pin="2" pintype="passive"/>
+      <node ref="R77" pin="2" pintype="passive"/>
+      <node ref="R80" pin="1" pintype="passive"/>
       <node ref="R83" pin="1" pintype="passive"/>
-      <node ref="R86" pin="1" pintype="passive"/>
       <node ref="U18" pin="1" pintype="output"/>
     </net>
     <net code="58" name="/Sensors/PREAMP_EP" class="Default">
       <node ref="R65" pin="1" pintype="passive"/>
-      <node ref="R89" pin="2" pintype="passive"/>
+      <node ref="R86" pin="2" pintype="passive"/>
       <node ref="U18" pin="7" pintype="output"/>
     </net>
     <net code="59" name="/Sensors/PREAMP_NN" class="Default">
-      <node ref="R81" pin="2" pintype="passive"/>
+      <node ref="R78" pin="2" pintype="passive"/>
+      <node ref="R81" pin="1" pintype="passive"/>
       <node ref="R84" pin="1" pintype="passive"/>
-      <node ref="R87" pin="1" pintype="passive"/>
       <node ref="U19" pin="1" pintype="output"/>
     </net>
     <net code="60" name="/Sensors/PREAMP_NP" class="Default">
       <node ref="R66" pin="1" pintype="passive"/>
-      <node ref="R90" pin="2" pintype="passive"/>
+      <node ref="R87" pin="2" pintype="passive"/>
       <node ref="U19" pin="7" pintype="output"/>
     </net>
     <net code="61" name="/Sensors/PREAMP_ZN" class="Default">
-      <node ref="R79" pin="2" pintype="passive"/>
+      <node ref="R76" pin="2" pintype="passive"/>
+      <node ref="R79" pin="1" pintype="passive"/>
       <node ref="R82" pin="1" pintype="passive"/>
-      <node ref="R85" pin="1" pintype="passive"/>
       <node ref="U17" pin="1" pintype="output"/>
     </net>
     <net code="62" name="/Sensors/PREAMP_ZP" class="Default">
       <node ref="R64" pin="1" pintype="passive"/>
-      <node ref="R88" pin="2" pintype="passive"/>
+      <node ref="R85" pin="2" pintype="passive"/>
       <node ref="U17" pin="7" pintype="output"/>
     </net>
     <net code="63" name="GND" class="Default">
@@ -5906,18 +6179,18 @@
       <node ref="C48" pin="2" pintype="passive"/>
       <node ref="C49" pin="2" pintype="passive"/>
       <node ref="C50" pin="2" pintype="passive"/>
-      <node ref="C54" pin="2" pintype="passive"/>
-      <node ref="C55" pin="2" pintype="passive"/>
-      <node ref="C56" pin="2" pintype="passive"/>
-      <node ref="C61" pin="2" pintype="passive"/>
-      <node ref="C62" pin="2" pintype="passive"/>
-      <node ref="C63" pin="2" pintype="passive"/>
-      <node ref="C64" pin="2" pintype="passive"/>
-      <node ref="C65" pin="2" pintype="passive"/>
-      <node ref="C66" pin="2" pintype="passive"/>
-      <node ref="C69" pin="1" pintype="passive"/>
+      <node ref="C57" pin="2" pintype="passive"/>
+      <node ref="C58" pin="2" pintype="passive"/>
+      <node ref="C59" pin="2" pintype="passive"/>
+      <node ref="C67" pin="2" pintype="passive"/>
+      <node ref="C68" pin="2" pintype="passive"/>
+      <node ref="C69" pin="2" pintype="passive"/>
       <node ref="C7" pin="1" pintype="passive"/>
-      <node ref="C70" pin="1" pintype="passive"/>
+      <node ref="C70" pin="2" pintype="passive"/>
+      <node ref="C71" pin="2" pintype="passive"/>
+      <node ref="C72" pin="2" pintype="passive"/>
+      <node ref="C75" pin="1" pintype="passive"/>
+      <node ref="C76" pin="1" pintype="passive"/>
       <node ref="D4" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D5" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J10" pin="1" pinfunction="Pin_1" pintype="passive"/>
@@ -5935,11 +6208,11 @@
       <node ref="R55" pin="2" pintype="passive"/>
       <node ref="R56" pin="2" pintype="passive"/>
       <node ref="R57" pin="2" pintype="passive"/>
-      <node ref="R76" pin="2" pintype="passive"/>
-      <node ref="R77" pin="2" pintype="passive"/>
-      <node ref="R78" pin="2" pintype="passive"/>
+      <node ref="U17" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U17" pin="5" pinfunction="+" pintype="input"/>
+      <node ref="U18" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U18" pin="5" pinfunction="+" pintype="input"/>
+      <node ref="U19" pin="3" pinfunction="+" pintype="input"/>
       <node ref="U19" pin="5" pinfunction="+" pintype="input"/>
       <node ref="U2" pin="2" pinfunction="GND" pintype="power_in"/>
       <node ref="U4" pin="1" pinfunction="GND" pintype="power_in"/>
@@ -5966,7 +6239,7 @@
       <node ref="C44" pin="2" pintype="passive"/>
       <node ref="C45" pin="2" pintype="passive"/>
       <node ref="C47" pin="2" pintype="passive"/>
-      <node ref="C60" pin="2" pintype="passive"/>
+      <node ref="C63" pin="2" pintype="passive"/>
       <node ref="D10" pin="1" pinfunction="A1" pintype="passive"/>
       <node ref="D13" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D17" pin="2" pinfunction="A2" pintype="passive"/>
@@ -5994,7 +6267,7 @@
       <node ref="R31" pin="2" pintype="passive"/>
       <node ref="R32" pin="2" pintype="passive"/>
       <node ref="R33" pin="2" pintype="passive"/>
-      <node ref="R97" pin="2" pintype="passive"/>
+      <node ref="R94" pin="2" pintype="passive"/>
       <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U10" pin="4" pinfunction="DI" pintype="input"/>
       <node ref="U10" pin="5" pinfunction="GND" pintype="power_in"/>
@@ -6045,21 +6318,21 @@
       <node ref="R36" pin="2" pintype="passive"/>
       <node ref="R42" pin="1" pintype="passive"/>
     </net>
-    <net code="72" name="Net-(C54-Pad1)" class="Default">
-      <node ref="C54" pin="1" pintype="passive"/>
+    <net code="72" name="Net-(C57-Pad1)" class="Default">
       <node ref="C57" pin="1" pintype="passive"/>
+      <node ref="C60" pin="1" pintype="passive"/>
       <node ref="R49" pin="2" pintype="passive"/>
       <node ref="R58" pin="1" pintype="passive"/>
     </net>
-    <net code="73" name="Net-(C55-Pad1)" class="Default">
-      <node ref="C55" pin="1" pintype="passive"/>
+    <net code="73" name="Net-(C58-Pad1)" class="Default">
       <node ref="C58" pin="1" pintype="passive"/>
+      <node ref="C61" pin="1" pintype="passive"/>
       <node ref="R50" pin="2" pintype="passive"/>
       <node ref="R59" pin="1" pintype="passive"/>
     </net>
-    <net code="74" name="Net-(C56-Pad1)" class="Default">
-      <node ref="C56" pin="1" pintype="passive"/>
+    <net code="74" name="Net-(C59-Pad1)" class="Default">
       <node ref="C59" pin="1" pintype="passive"/>
+      <node ref="C62" pin="1" pintype="passive"/>
       <node ref="R51" pin="2" pintype="passive"/>
       <node ref="R60" pin="1" pintype="passive"/>
     </net>
@@ -6143,15 +6416,15 @@
     </net>
     <net code="91" name="Net-(D23-A)" class="Default">
       <node ref="D23" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="R91" pin="1" pintype="passive"/>
+      <node ref="R88" pin="1" pintype="passive"/>
     </net>
     <net code="92" name="Net-(D23-K)" class="Default">
-      <node ref="C77" pin="2" pintype="passive"/>
-      <node ref="C78" pin="2" pintype="passive"/>
+      <node ref="C83" pin="2" pintype="passive"/>
+      <node ref="C84" pin="2" pintype="passive"/>
       <node ref="D23" pin="1" pinfunction="K" pintype="passive"/>
-      <node ref="R97" pin="1" pintype="passive"/>
-      <node ref="U22" pin="15" pinfunction="XTAL1/CLKIN" pintype="input"/>
-      <node ref="U22" pin="18" pinfunction="DGND" pintype="power_in"/>
+      <node ref="R94" pin="1" pintype="passive"/>
+      <node ref="U20" pin="15" pinfunction="XTAL1/CLKIN" pintype="input"/>
+      <node ref="U20" pin="18" pinfunction="DGND" pintype="power_in"/>
     </net>
     <net code="93" name="Net-(J2-Pin_3)" class="Default">
       <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
@@ -6306,16 +6579,18 @@
       <node ref="U13" pin="3" pinfunction="+" pintype="input"/>
     </net>
     <net code="124" name="Net-(U13A--)" class="Default">
+      <node ref="C54" pin="1" pintype="passive"/>
       <node ref="R43" pin="1" pintype="passive"/>
       <node ref="R46" pin="1" pintype="passive"/>
       <node ref="U13" pin="2" pinfunction="-" pintype="input"/>
     </net>
     <net code="125" name="Net-(U13B-+)" class="Default">
-      <node ref="C57" pin="2" pintype="passive"/>
+      <node ref="C60" pin="2" pintype="passive"/>
       <node ref="R52" pin="1" pintype="passive"/>
       <node ref="U13" pin="5" pinfunction="+" pintype="input"/>
     </net>
     <net code="126" name="Net-(U13B--)" class="Default">
+      <node ref="C64" pin="1" pintype="passive"/>
       <node ref="R55" pin="1" pintype="passive"/>
       <node ref="R61" pin="1" pintype="passive"/>
       <node ref="U13" pin="6" pinfunction="-" pintype="input"/>
@@ -6326,16 +6601,18 @@
       <node ref="U14" pin="3" pinfunction="+" pintype="input"/>
     </net>
     <net code="128" name="Net-(U14A--)" class="Default">
+      <node ref="C55" pin="1" pintype="passive"/>
       <node ref="R44" pin="1" pintype="passive"/>
       <node ref="R47" pin="1" pintype="passive"/>
       <node ref="U14" pin="2" pinfunction="-" pintype="input"/>
     </net>
     <net code="129" name="Net-(U14B-+)" class="Default">
-      <node ref="C58" pin="2" pintype="passive"/>
+      <node ref="C61" pin="2" pintype="passive"/>
       <node ref="R53" pin="1" pintype="passive"/>
       <node ref="U14" pin="5" pinfunction="+" pintype="input"/>
     </net>
     <net code="130" name="Net-(U14B--)" class="Default">
+      <node ref="C65" pin="1" pintype="passive"/>
       <node ref="R56" pin="1" pintype="passive"/>
       <node ref="R62" pin="1" pintype="passive"/>
       <node ref="U14" pin="6" pinfunction="-" pintype="input"/>
@@ -6346,16 +6623,18 @@
       <node ref="U15" pin="3" pinfunction="+" pintype="input"/>
     </net>
     <net code="132" name="Net-(U15A--)" class="Default">
+      <node ref="C56" pin="1" pintype="passive"/>
       <node ref="R45" pin="1" pintype="passive"/>
       <node ref="R48" pin="1" pintype="passive"/>
       <node ref="U15" pin="2" pinfunction="-" pintype="input"/>
     </net>
     <net code="133" name="Net-(U15B-+)" class="Default">
-      <node ref="C59" pin="2" pintype="passive"/>
+      <node ref="C62" pin="2" pintype="passive"/>
       <node ref="R54" pin="1" pintype="passive"/>
       <node ref="U15" pin="5" pinfunction="+" pintype="input"/>
     </net>
     <net code="134" name="Net-(U15B--)" class="Default">
+      <node ref="C66" pin="1" pintype="passive"/>
       <node ref="R57" pin="1" pintype="passive"/>
       <node ref="R63" pin="1" pintype="passive"/>
       <node ref="U15" pin="6" pinfunction="-" pintype="input"/>
@@ -6364,238 +6643,226 @@
       <node ref="R39" pin="2" pintype="passive"/>
       <node ref="U16" pin="12" pinfunction="CS" pintype="input"/>
     </net>
-    <net code="136" name="Net-(U17A-+)" class="Default">
-      <node ref="R76" pin="1" pintype="passive"/>
-      <node ref="U17" pin="3" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="137" name="Net-(U17A--)" class="Default">
+    <net code="136" name="Net-(U17A--)" class="Default">
       <node ref="R67" pin="2" pintype="passive"/>
       <node ref="R68" pin="2" pintype="passive"/>
       <node ref="R69" pin="2" pintype="passive"/>
-      <node ref="R79" pin="1" pintype="passive"/>
+      <node ref="R76" pin="1" pintype="passive"/>
       <node ref="U17" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="138" name="Net-(U17B--)" class="Default">
-      <node ref="R85" pin="2" pintype="passive"/>
-      <node ref="R88" pin="1" pintype="passive"/>
+    <net code="137" name="Net-(U17B--)" class="Default">
+      <node ref="R82" pin="2" pintype="passive"/>
+      <node ref="R85" pin="1" pintype="passive"/>
       <node ref="U17" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="139" name="Net-(U18A-+)" class="Default">
-      <node ref="R77" pin="1" pintype="passive"/>
-      <node ref="U18" pin="3" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="140" name="Net-(U18A--)" class="Default">
+    <net code="138" name="Net-(U18A--)" class="Default">
       <node ref="R70" pin="2" pintype="passive"/>
       <node ref="R71" pin="2" pintype="passive"/>
       <node ref="R72" pin="2" pintype="passive"/>
-      <node ref="R80" pin="1" pintype="passive"/>
+      <node ref="R77" pin="1" pintype="passive"/>
       <node ref="U18" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="141" name="Net-(U18B--)" class="Default">
-      <node ref="R86" pin="2" pintype="passive"/>
-      <node ref="R89" pin="1" pintype="passive"/>
+    <net code="139" name="Net-(U18B--)" class="Default">
+      <node ref="R83" pin="2" pintype="passive"/>
+      <node ref="R86" pin="1" pintype="passive"/>
       <node ref="U18" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="142" name="Net-(U19A-+)" class="Default">
-      <node ref="R78" pin="1" pintype="passive"/>
-      <node ref="U19" pin="3" pinfunction="+" pintype="input"/>
-    </net>
-    <net code="143" name="Net-(U19A--)" class="Default">
+    <net code="140" name="Net-(U19A--)" class="Default">
       <node ref="R73" pin="2" pintype="passive"/>
       <node ref="R74" pin="2" pintype="passive"/>
       <node ref="R75" pin="2" pintype="passive"/>
-      <node ref="R81" pin="1" pintype="passive"/>
+      <node ref="R78" pin="1" pintype="passive"/>
       <node ref="U19" pin="2" pinfunction="-" pintype="input"/>
     </net>
-    <net code="144" name="Net-(U19B--)" class="Default">
-      <node ref="R87" pin="2" pintype="passive"/>
-      <node ref="R90" pin="1" pintype="passive"/>
+    <net code="141" name="Net-(U19B--)" class="Default">
+      <node ref="R84" pin="2" pintype="passive"/>
+      <node ref="R87" pin="1" pintype="passive"/>
       <node ref="U19" pin="6" pinfunction="-" pintype="input"/>
     </net>
-    <net code="145" name="Net-(U22-AIN6)" class="Default">
-      <node ref="R96" pin="1" pintype="passive"/>
-      <node ref="U22" pin="27" pinfunction="AIN6" pintype="bidirectional"/>
+    <net code="142" name="Net-(U20-AIN6)" class="Default">
+      <node ref="R93" pin="1" pintype="passive"/>
+      <node ref="U20" pin="27" pinfunction="AIN6" pintype="bidirectional"/>
     </net>
-    <net code="146" name="Net-(U22-AIN7)" class="Default">
-      <node ref="R95" pin="1" pintype="passive"/>
-      <node ref="U22" pin="28" pinfunction="AIN7" pintype="bidirectional"/>
+    <net code="143" name="Net-(U20-AIN7)" class="Default">
+      <node ref="R92" pin="1" pintype="passive"/>
+      <node ref="U20" pin="28" pinfunction="AIN7" pintype="bidirectional"/>
     </net>
-    <net code="147" name="Net-(U22-AIN8)" class="Default">
-      <node ref="R92" pin="2" pintype="passive"/>
-      <node ref="U22" pin="1" pinfunction="AIN8" pintype="bidirectional"/>
+    <net code="144" name="Net-(U20-AIN8)" class="Default">
+      <node ref="R89" pin="2" pintype="passive"/>
+      <node ref="U20" pin="1" pinfunction="AIN8" pintype="bidirectional"/>
     </net>
-    <net code="148" name="Net-(U22-AIN9)" class="Default">
-      <node ref="R93" pin="2" pintype="passive"/>
-      <node ref="U22" pin="2" pinfunction="AIN9" pintype="bidirectional"/>
+    <net code="145" name="Net-(U20-AIN9)" class="Default">
+      <node ref="R90" pin="2" pintype="passive"/>
+      <node ref="U20" pin="2" pinfunction="AIN9" pintype="bidirectional"/>
     </net>
-    <net code="149" name="Net-(U22-AINCOM)" class="Default">
-      <node ref="R94" pin="2" pintype="passive"/>
-      <node ref="U22" pin="3" pinfunction="AINCOM" pintype="bidirectional"/>
+    <net code="146" name="Net-(U20-AINCOM)" class="Default">
+      <node ref="R91" pin="2" pintype="passive"/>
+      <node ref="U20" pin="3" pinfunction="AINCOM" pintype="bidirectional"/>
     </net>
-    <net code="150" name="Net-(U22-BYPASS)" class="Default">
+    <net code="147" name="Net-(U20-BYPASS)" class="Default">
+      <node ref="C83" pin="1" pintype="passive"/>
+      <node ref="U20" pin="17" pinfunction="BYPASS" pintype="output"/>
+    </net>
+    <net code="148" name="Net-(U20-CAPN)" class="Default">
+      <node ref="C77" pin="2" pintype="passive"/>
+      <node ref="U20" pin="5" pinfunction="CAPN" pintype="output"/>
+    </net>
+    <net code="149" name="Net-(U20-CAPP)" class="Default">
       <node ref="C77" pin="1" pintype="passive"/>
-      <node ref="U22" pin="17" pinfunction="BYPASS" pintype="output"/>
+      <node ref="U20" pin="4" pinfunction="CAPP" pintype="output"/>
     </net>
-    <net code="151" name="Net-(U22-CAPN)" class="Default">
-      <node ref="C71" pin="2" pintype="passive"/>
-      <node ref="U22" pin="5" pinfunction="CAPN" pintype="output"/>
-    </net>
-    <net code="152" name="Net-(U22-CAPP)" class="Default">
-      <node ref="C71" pin="1" pintype="passive"/>
-      <node ref="U22" pin="4" pinfunction="CAPP" pintype="output"/>
-    </net>
-    <net code="153" name="Net-(Y1-OUT)" class="Default">
+    <net code="150" name="Net-(Y1-OUT)" class="Default">
       <node ref="R22" pin="2" pintype="passive"/>
       <node ref="Y1" pin="3" pinfunction="OUT" pintype="output"/>
     </net>
-    <net code="154" name="unconnected-(J1-Pad3)" class="Default">
+    <net code="151" name="unconnected-(J1-Pad3)" class="Default">
       <node ref="J1" pin="3" pintype="passive+no_connect"/>
     </net>
-    <net code="155" name="unconnected-(J7-Pad1)" class="Default">
+    <net code="152" name="unconnected-(J7-Pad1)" class="Default">
       <node ref="J7" pin="1" pinfunction="1" pintype="passive+no_connect"/>
     </net>
-    <net code="156" name="unconnected-(J7-Pad4)" class="Default">
+    <net code="153" name="unconnected-(J7-Pad4)" class="Default">
       <node ref="J7" pin="4" pinfunction="4" pintype="passive+no_connect"/>
     </net>
-    <net code="157" name="unconnected-(J7-Pad6)" class="Default">
+    <net code="154" name="unconnected-(J7-Pad6)" class="Default">
       <node ref="J7" pin="6" pinfunction="6" pintype="passive+no_connect"/>
     </net>
-    <net code="158" name="unconnected-(J7-Pad7)" class="Default">
+    <net code="155" name="unconnected-(J7-Pad7)" class="Default">
       <node ref="J7" pin="7" pinfunction="7" pintype="passive+no_connect"/>
     </net>
-    <net code="159" name="unconnected-(J7-Pad8)" class="Default">
+    <net code="156" name="unconnected-(J7-Pad8)" class="Default">
       <node ref="J7" pin="8" pinfunction="8" pintype="passive+no_connect"/>
     </net>
-    <net code="160" name="unconnected-(J7-Pad9)" class="Default">
+    <net code="157" name="unconnected-(J7-Pad9)" class="Default">
       <node ref="J7" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="161" name="unconnected-(J8-Pad4)" class="Default">
+    <net code="158" name="unconnected-(J8-Pad4)" class="Default">
       <node ref="J8" pin="4" pinfunction="4" pintype="passive+no_connect"/>
     </net>
-    <net code="162" name="unconnected-(J8-Pad5)" class="Default">
+    <net code="159" name="unconnected-(J8-Pad5)" class="Default">
       <node ref="J8" pin="5" pinfunction="5" pintype="passive+no_connect"/>
     </net>
-    <net code="163" name="unconnected-(J8-Pad6)" class="Default">
+    <net code="160" name="unconnected-(J8-Pad6)" class="Default">
       <node ref="J8" pin="6" pinfunction="6" pintype="passive+no_connect"/>
     </net>
-    <net code="164" name="unconnected-(J8-Pad7)" class="Default">
+    <net code="161" name="unconnected-(J8-Pad7)" class="Default">
       <node ref="J8" pin="7" pinfunction="7" pintype="passive+no_connect"/>
     </net>
-    <net code="165" name="unconnected-(J8-Pad8)" class="Default">
+    <net code="162" name="unconnected-(J8-Pad8)" class="Default">
       <node ref="J8" pin="8" pinfunction="8" pintype="passive+no_connect"/>
     </net>
-    <net code="166" name="unconnected-(J8-Pad9)" class="Default">
+    <net code="163" name="unconnected-(J8-Pad9)" class="Default">
       <node ref="J8" pin="9" pinfunction="9" pintype="passive+no_connect"/>
     </net>
-    <net code="167" name="unconnected-(SW1A-C-Pad3)" class="Default">
+    <net code="164" name="unconnected-(SW1A-C-Pad3)" class="Default">
       <node ref="SW1" pin="3" pinfunction="C" pintype="passive+no_connect"/>
     </net>
-    <net code="168" name="unconnected-(SW1B-A-Pad4)" class="Default">
+    <net code="165" name="unconnected-(SW1B-A-Pad4)" class="Default">
       <node ref="SW1" pin="4" pinfunction="A" pintype="passive+no_connect"/>
     </net>
-    <net code="169" name="unconnected-(SW1B-B-Pad5)" class="Default">
+    <net code="166" name="unconnected-(SW1B-B-Pad5)" class="Default">
       <node ref="SW1" pin="5" pinfunction="B" pintype="passive+no_connect"/>
     </net>
-    <net code="170" name="unconnected-(SW1B-C-Pad6)" class="Default">
+    <net code="167" name="unconnected-(SW1B-C-Pad6)" class="Default">
       <node ref="SW1" pin="6" pinfunction="C" pintype="passive+no_connect"/>
     </net>
-    <net code="171" name="unconnected-(U1-EN-Pad5)" class="Default">
+    <net code="168" name="unconnected-(U1-EN-Pad5)" class="Default">
       <node ref="U1" pin="5" pinfunction="EN" pintype="input+no_connect"/>
     </net>
-    <net code="172" name="unconnected-(U1-NC-Pad2)" class="Default">
+    <net code="169" name="unconnected-(U1-NC-Pad2)" class="Default">
       <node ref="U1" pin="2" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="173" name="unconnected-(U1-NC-Pad3)" class="Default">
+    <net code="170" name="unconnected-(U1-NC-Pad3)" class="Default">
       <node ref="U1" pin="3" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="174" name="unconnected-(U6-NC-Pad1)" class="Default">
+    <net code="171" name="unconnected-(U6-NC-Pad1)" class="Default">
       <node ref="U6" pin="1" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="175" name="unconnected-(U6-NC-Pad2)" class="Default">
+    <net code="172" name="unconnected-(U6-NC-Pad2)" class="Default">
       <node ref="U6" pin="2" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="176" name="unconnected-(U8-D_SEL-Pad2)" class="Default">
+    <net code="173" name="unconnected-(U8-D_SEL-Pad2)" class="Default">
       <node ref="U8" pin="2" pinfunction="D_SEL" pintype="input+no_connect"/>
     </net>
-    <net code="177" name="unconnected-(U8-EXTINT-Pad4)" class="Default">
+    <net code="174" name="unconnected-(U8-EXTINT-Pad4)" class="Default">
       <node ref="U8" pin="4" pinfunction="EXTINT" pintype="input+no_connect"/>
     </net>
-    <net code="178" name="unconnected-(U8-RESERVED-Pad14)" class="Default">
+    <net code="175" name="unconnected-(U8-RESERVED-Pad14)" class="Default">
       <node ref="U8" pin="14" pinfunction="RESERVED" pintype="no_connect"/>
     </net>
-    <net code="179" name="unconnected-(U8-RESERVED-Pad15)" class="Default">
+    <net code="176" name="unconnected-(U8-RESERVED-Pad15)" class="Default">
       <node ref="U8" pin="15" pinfunction="RESERVED" pintype="no_connect"/>
     </net>
-    <net code="180" name="unconnected-(U8-RESERVED-Pad16)" class="Default">
+    <net code="177" name="unconnected-(U8-RESERVED-Pad16)" class="Default">
       <node ref="U8" pin="16" pinfunction="RESERVED" pintype="no_connect"/>
     </net>
-    <net code="181" name="unconnected-(U8-RESERVED-Pad17)" class="Default">
+    <net code="178" name="unconnected-(U8-RESERVED-Pad17)" class="Default">
       <node ref="U8" pin="17" pinfunction="RESERVED" pintype="no_connect"/>
     </net>
-    <net code="182" name="unconnected-(U8-SCL/SPI_CLK-Pad19)" class="Default">
+    <net code="179" name="unconnected-(U8-SCL/SPI_CLK-Pad19)" class="Default">
       <node ref="U8" pin="19" pinfunction="SCL/SPI_CLK" pintype="input+no_connect"/>
     </net>
-    <net code="183" name="unconnected-(U8-SDA/~{SPI_CS}-Pad18)" class="Default">
+    <net code="180" name="unconnected-(U8-SDA/~{SPI_CS}-Pad18)" class="Default">
       <node ref="U8" pin="18" pinfunction="SDA/~{SPI_CS}" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="184" name="unconnected-(U8-USB_DM-Pad5)" class="Default">
+    <net code="181" name="unconnected-(U8-USB_DM-Pad5)" class="Default">
       <node ref="U8" pin="5" pinfunction="USB_DM" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="185" name="unconnected-(U8-USB_DP-Pad6)" class="Default">
+    <net code="182" name="unconnected-(U8-USB_DP-Pad6)" class="Default">
       <node ref="U8" pin="6" pinfunction="USB_DP" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="186" name="unconnected-(U8-VDD_USB-Pad7)" class="Default">
+    <net code="183" name="unconnected-(U8-VDD_USB-Pad7)" class="Default">
       <node ref="U8" pin="7" pinfunction="VDD_USB" pintype="power_in+no_connect"/>
     </net>
-    <net code="187" name="unconnected-(U8-~{SAFEBOOT}-Pad1)" class="Default">
+    <net code="184" name="unconnected-(U8-~{SAFEBOOT}-Pad1)" class="Default">
       <node ref="U8" pin="1" pinfunction="~{SAFEBOOT}" pintype="input+no_connect"/>
     </net>
-    <net code="188" name="unconnected-(U9-Pad8)" class="Default">
+    <net code="185" name="unconnected-(U9-Pad8)" class="Default">
       <node ref="U9" pin="8" pintype="output+no_connect"/>
     </net>
-    <net code="189" name="unconnected-(U9-Pad10)" class="Default">
+    <net code="186" name="unconnected-(U9-Pad10)" class="Default">
       <node ref="U9" pin="10" pintype="output+no_connect"/>
     </net>
-    <net code="190" name="unconnected-(U9-Pad12)" class="Default">
+    <net code="187" name="unconnected-(U9-Pad12)" class="Default">
       <node ref="U9" pin="12" pintype="output+no_connect"/>
     </net>
-    <net code="191" name="unconnected-(U11-PB5-Pad41)" class="Default">
+    <net code="188" name="unconnected-(U11-PB5-Pad41)" class="Default">
       <node ref="U11" pin="41" pinfunction="PB5" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="192" name="unconnected-(U11-PB13-Pad26)" class="Default">
+    <net code="189" name="unconnected-(U11-PB13-Pad26)" class="Default">
       <node ref="U11" pin="26" pinfunction="PB13" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="193" name="unconnected-(U11-PB14-Pad27)" class="Default">
+    <net code="190" name="unconnected-(U11-PB14-Pad27)" class="Default">
       <node ref="U11" pin="27" pinfunction="PB14" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="194" name="unconnected-(U11-PB15-Pad28)" class="Default">
+    <net code="191" name="unconnected-(U11-PB15-Pad28)" class="Default">
       <node ref="U11" pin="28" pinfunction="PB15" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="195" name="unconnected-(U11-PC14-Pad3)" class="Default">
+    <net code="192" name="unconnected-(U11-PC14-Pad3)" class="Default">
       <node ref="U11" pin="3" pinfunction="PC14" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="196" name="unconnected-(U11-PC15-Pad4)" class="Default">
+    <net code="193" name="unconnected-(U11-PC15-Pad4)" class="Default">
       <node ref="U11" pin="4" pinfunction="PC15" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="197" name="unconnected-(U11-PD1-Pad6)" class="Default">
+    <net code="194" name="unconnected-(U11-PD1-Pad6)" class="Default">
       <node ref="U11" pin="6" pinfunction="PD1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="198" name="unconnected-(U16-NC-Pad10)" class="Default">
+    <net code="195" name="unconnected-(U16-NC-Pad10)" class="Default">
       <node ref="U16" pin="10" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="199" name="unconnected-(U16-NC-Pad11)" class="Default">
+    <net code="196" name="unconnected-(U16-NC-Pad11)" class="Default">
       <node ref="U16" pin="11" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="200" name="unconnected-(U16-SCX-Pad3)" class="Default">
+    <net code="197" name="unconnected-(U16-SCX-Pad3)" class="Default">
       <node ref="U16" pin="3" pinfunction="SCX" pintype="input+no_connect"/>
     </net>
-    <net code="201" name="unconnected-(U16-SDX-Pad2)" class="Default">
+    <net code="198" name="unconnected-(U16-SDX-Pad2)" class="Default">
       <node ref="U16" pin="2" pinfunction="SDX" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="202" name="unconnected-(U22-XTAL2-Pad16)" class="Default">
-      <node ref="U22" pin="16" pinfunction="XTAL2" pintype="input+no_connect"/>
+    <net code="199" name="unconnected-(U20-XTAL2-Pad16)" class="Default">
+      <node ref="U20" pin="16" pinfunction="XTAL2" pintype="input+no_connect"/>
     </net>
-    <net code="203" name="unconnected-(Y1-OE-Pad1)" class="Default">
+    <net code="200" name="unconnected-(Y1-OE-Pad1)" class="Default">
       <node ref="Y1" pin="1" pinfunction="OE" pintype="input+no_connect"/>
     </net>
   </nets>

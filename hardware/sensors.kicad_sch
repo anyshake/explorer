@@ -9593,7 +9593,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LSM6DS3"
+		(property "Value" "LSM6DSR"
 			(at 79.248 162.052 0)
 			(effects
 				(font
@@ -9612,7 +9612,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lsm6ds3tr-c.pdf"
+		(property "Datasheet" "https://www.st.com.cn/resource/en/datasheet/lsm6dsr.pdf"
 			(at 66.04 168.91 0)
 			(effects
 				(font
