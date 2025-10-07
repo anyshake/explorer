@@ -19,8 +19,8 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     ofcal.ofcal_1 = offset_cal.channel_1[1];
     ofcal.ofcal_2 = offset_cal.channel_1[2];
     ads1262_reg_set_ofcal(&ofcal);
-    inpmux.mux_p = ADS1262_REG_INPMUX_AIN0;
-    inpmux.mux_n = ADS1262_REG_INPMUX_AIN1;
+    inpmux.mux_n = ADS1262_REG_INPMUX_AIN0;
+    inpmux.mux_p = ADS1262_REG_INPMUX_AIN1;
     ads1262_reg_set_inpmux(&inpmux);
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[0] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
@@ -31,8 +31,8 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     ofcal.ofcal_1 = offset_cal.channel_2[1];
     ofcal.ofcal_2 = offset_cal.channel_2[2];
     ads1262_reg_set_ofcal(&ofcal);
-    inpmux.mux_p = ADS1262_REG_INPMUX_AIN2;
-    inpmux.mux_n = ADS1262_REG_INPMUX_AIN3;
+    inpmux.mux_n = ADS1262_REG_INPMUX_AIN2;
+    inpmux.mux_p = ADS1262_REG_INPMUX_AIN3;
     ads1262_reg_set_inpmux(&inpmux);
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[1] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
@@ -43,8 +43,8 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     ofcal.ofcal_1 = offset_cal.channel_3[1];
     ofcal.ofcal_2 = offset_cal.channel_3[2];
     ads1262_reg_set_ofcal(&ofcal);
-    inpmux.mux_p = ADS1262_REG_INPMUX_AIN4;
-    inpmux.mux_n = ADS1262_REG_INPMUX_AIN5;
+    inpmux.mux_n = ADS1262_REG_INPMUX_AIN4;
+    inpmux.mux_p = ADS1262_REG_INPMUX_AIN5;
     ads1262_reg_set_inpmux(&inpmux);
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[2] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
