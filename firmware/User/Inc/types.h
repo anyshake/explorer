@@ -67,6 +67,7 @@ typedef struct {
 
     uint8_t channel_chunk_length;
     uint16_t packet_sending_interval;
+    int64_t prev_packet_sent_at_ms;
     uint8_array_t* uart_packet_buffer;
 
     osMessageQueueId_t sensor_acquisition_queue;

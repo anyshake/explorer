@@ -342,7 +342,12 @@ void task_send_packet(void* argument) {
             if (message_idx == states->channel_chunk_length) {
                 send_data_packet(states, acq_msg.temperature, message_timestamp);
                 message_idx = 0;
-                mcu_utils_iwdg_feed();
+
+                if (states->prev_packet_sent_at_ms == 0 || message_timestamp - states->prev_packet_sent_at_ms == states->packet_sending_interval) {
+                    mcu_utils_iwdg_feed();
+                }
+
+                states->prev_packet_sent_at_ms = message_timestamp;
             }
         }
     }
