@@ -9,11 +9,6 @@
 
 #define MCU_UTILS_UPTIME_TICK_STEP_US 50
 
-typedef struct {
-    uint32_t tick_us;
-    uint32_t overflow;
-} mcu_uptime_t;
-
 int64_t mcu_utils_uptime_get_us(void);
 int64_t mcu_utils_uptime_get_ms(void);
 
