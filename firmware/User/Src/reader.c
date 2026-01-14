@@ -1,12 +1,7 @@
 #include "User/Inc/reader.h"
 
 explorer_adc_calibration_offset_t adc_calibration_offset_new(void) {
-    explorer_adc_calibration_offset_t offset_cal;
-    for (int i = 0; i < 3; i++) {
-        offset_cal.channel_1[i] = 0x00;
-        offset_cal.channel_2[i] = 0x00;
-        offset_cal.channel_3[i] = 0x00;
-    }
+    explorer_adc_calibration_offset_t offset_cal = {0};
     return offset_cal;
 }
 
