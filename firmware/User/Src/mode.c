@@ -28,11 +28,11 @@ void mode_entry_leveling(explorer_global_states_t* states) {
         get_accel_readout(0, result_arr);
         get_env_temperature(&temperature);
 
-        int16_t acc_x = result_arr[1];
-        int16_t acc_y = result_arr[2];
-        int16_t acc_z = result_arr[0];
-        float x_angle = quick_atan2(-acc_x, quick_sqrt(acc_y * acc_y + acc_z * acc_z)) * 180.0 / MAGIC_PI;
-        float y_angle = quick_atan2(acc_y, acc_z) * 180.0 / MAGIC_PI;
+        float readout_x = result_arr[1];
+        float readout_y = result_arr[2];
+        float readout_z = result_arr[0];
+        float x_angle = quick_atan2(-readout_x, quick_sqrt(readout_y * readout_y + readout_z * readout_z)) * 180.0 / MAGIC_PI;
+        float y_angle = quick_atan2(readout_y, readout_z) * 180.0 / MAGIC_PI;
 
         x_angle = -x_angle;
 
