@@ -20,9 +20,9 @@ void lsm6ds3_wait(void) {
 }
 
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data) {
-    mcu_utils_i2c_read(LSM6DS3_I2C_ADDRES, reg, rx_data, 1, MCU_UTILS_I2C_REG_WIDTH_8);
+    mcu_utils_i2c_read_mem(LSM6DS3_I2C_ADDRES, reg, rx_data, 1, MCU_UTILS_I2C_REG_WIDTH_8);
 }
 
 void lsm6ds3_write_reg(uint8_t reg, uint8_t tx_data) {
-    mcu_utils_i2c_write(LSM6DS3_I2C_ADDRES, reg, &tx_data, sizeof(tx_data), MCU_UTILS_I2C_REG_WIDTH_8);
+    mcu_utils_i2c_write_mem(LSM6DS3_I2C_ADDRES, reg, &tx_data, sizeof(tx_data), MCU_UTILS_I2C_REG_WIDTH_8);
 }
