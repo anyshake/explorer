@@ -35,6 +35,13 @@
 #include "User/Inc/lsm6ds3/regs/ctrl8_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
+#include "User/Inc/lsm6dsr/lsb_per_g.h"
+#include "User/Inc/lsm6dsr/regs/ctrl1_xl.h"
+#include "User/Inc/lsm6dsr/regs/ctrl3_c.h"
+#include "User/Inc/lsm6dsr/regs/ctrl4_c.h"
+#include "User/Inc/lsm6dsr/regs/ctrl8_xl.h"
+#include "User/Inc/lsm6dsr/utils.h"
+
 void peri_gnss_init(void);
 void peri_screen_init(void);
 void peri_eeprom_init(void);

@@ -451,7 +451,11 @@ void system_setup(void) {
     }
 
 #if DEVICE_MODEL == E_C111G
+#if HARDWARE_REV >= 20250804
+    lsm6dsr_reset(false);
+#else
     lsm6ds3_reset(false);
+#endif
 #elif DEVICE_MODEL == E_C121G
     icm42688_reset(false);
 #endif

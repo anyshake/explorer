@@ -22,6 +22,11 @@
 #include "User/Inc/lsm6ds3/regs/outy_xl.h"
 #include "User/Inc/lsm6ds3/regs/outz_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
+#include "User/Inc/lsm6dsr/regs/out_temp.h"
+#include "User/Inc/lsm6dsr/regs/outx_xl.h"
+#include "User/Inc/lsm6dsr/regs/outy_xl.h"
+#include "User/Inc/lsm6dsr/regs/outz_xl.h"
+#include "User/Inc/lsm6dsr/utils.h"
 #include "User/Inc/types.h"
 
 explorer_adc_calibration_offset_t adc_calibration_offset_new(void);

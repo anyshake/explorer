@@ -55,8 +55,8 @@ typedef struct {
     uint8_t sim;
     // Register address automatically incremented during a multiple byte access
     // with a serial interface (I2C or SPI)
-    // 0x00: disabled (default)
-    // 0x01: enabled
+    // 0x00: disabled
+    // 0x01: enabled (default)
     uint8_t if_inc;
     // Big/Little Endian Data selection
     // 0x00: data LSB @ lower address (default)

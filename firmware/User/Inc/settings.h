@@ -5,6 +5,7 @@
 #include "User/Inc/gnss/utils.h"
 #include "User/Inc/icm42688/utils.h"
 #include "User/Inc/lsm6ds3/utils.h"
+#include "User/Inc/lsm6dsr/utils.h"
 #include "User/Inc/types.h"
 #include "Utils/Inc/gpio.h"
 
@@ -57,10 +58,17 @@ static const gnss_ctl_pin_t GNSS_CTL_PIN = {
     .rst = {.port = GPIOA, .pin = GPIO_PIN_15},
 };
 #if DEVICE_MODEL == E_C111G
+#if HARDWARE_REV >= 20250804
+static const lsm6dsr_ints_pin_t LSM6DSR_INTS_PIN = {
+    .int_1 = {.port = GPIOB, .pin = GPIO_PIN_0},
+    .int_2 = {.port = GPIOB, .pin = GPIO_PIN_1},
+};
+#else
 static const lsm6ds3_ints_pin_t LSM6DS3_INTS_PIN = {
     .int_1 = {.port = GPIOB, .pin = GPIO_PIN_0},
     .int_2 = {.port = GPIOB, .pin = GPIO_PIN_1},
 };
+#endif
 #elif DEVICE_MODEL == E_C121G
 static const icm42688_ints_pin_t ICM42688_INTS_PIN = {
     .int_1 = {.port = GPIOB, .pin = GPIO_PIN_1},
@@ -383,6 +391,7 @@ static const uint8_t ANYSHAKE_LOGO_BITMAP_RLE[] = {
     2, 0x06,
     3, 0x07,
     2, 0x06,
-    2, 0x00};
+    2, 0x00  // end
+};
 
 #endif

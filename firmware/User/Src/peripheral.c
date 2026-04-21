@@ -16,6 +16,25 @@ void peri_eeprom_init(void) {
 
 uint16_t peri_imu_init(uint8_t sample_rate) {
 #if DEVICE_MODEL == E_C111G
+#if HARDWARE_REV >= 20250804
+    lsm6dsr_reg_ctrl3_c_t lsm6dsr_reg_ctrl3_c = lsm6dsr_reg_new_ctrl3_c();
+    lsm6dsr_reg_ctrl3_c.bdu = LSM6DSR_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
+    lsm6dsr_reg_ctrl3_c.if_inc = LSM6DSR_REG_CTRL3_C_IF_INC_ENABLED;
+    lsm6dsr_reg_set_ctrl3_c(&lsm6dsr_reg_ctrl3_c);
+    lsm6dsr_reg_ctrl1_xl_t lsm6dsr_reg_ctrl1_xl = lsm6dsr_reg_new_ctrl1_xl();
+    lsm6dsr_reg_ctrl1_xl.odr_xl = LSM6DSR_REG_CTRL1_XL_ODR_XL_416HZ;
+    lsm6dsr_reg_ctrl1_xl.fs_xl = LSM6DSR_REG_CTRL1_XL_FS_XL_2G;
+    lsm6dsr_reg_ctrl1_xl.lpf2_xl_en = LSM6DSR_REG_CTRL1_XL_LPF2_XL_EN_2ND_STAGE;
+    lsm6dsr_reg_set_ctrl1_xl(&lsm6dsr_reg_ctrl1_xl);
+    lsm6dsr_reg_ctrl4_c_t lsm6dsr_reg_ctrl4_c = lsm6dsr_reg_new_ctrl4_c();
+    lsm6dsr_reg_ctrl4_c.drdy_mask = LSM6DSR_REG_CTRL4_C_DRDY_MASK_ENABLE;
+    lsm6dsr_reg_set_ctrl4_c(&lsm6dsr_reg_ctrl4_c);
+    lsm6dsr_reg_ctrl8_xl_t lsm6dsr_reg_ctrl8_xl = lsm6dsr_reg_new_ctrl8_xl();
+    lsm6dsr_reg_ctrl8_xl.hpcf_xl = LSM6DSR_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_20;
+    lsm6dsr_reg_ctrl8_xl.hp_slope_xl_en = LSM6DSR_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLE;
+    lsm6dsr_reg_set_ctrl8_xl(&lsm6dsr_reg_ctrl8_xl);
+    return lsm6dsr_get_lsb_per_g();
+#else
     lsm6ds3_reg_ctrl3_c_t lsm6ds3_reg_ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
     lsm6ds3_reg_ctrl3_c.bdu = LSM6DS3_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
     lsm6ds3_reg_ctrl3_c.if_inc = LSM6DS3_REG_CTRL3_C_IF_INC_ENABLED;
@@ -33,11 +52,12 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     lsm6ds3_reg_ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_ENABLE;
     lsm6ds3_reg_set_ctrl10_c(&lsm6ds3_reg_ctrl10_c);
     lsm6ds3_reg_ctrl8_xl_t lsm6ds3_reg_ctrl8_xl = lsm6ds3_reg_new_ctrl8_xl();
-    lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_50;
     lsm6ds3_reg_ctrl8_xl.lpf2_xl_en = LSM6DS3_REG_CTRL8_XL_LPF2_XL_EN_ENABLE;
+    lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_50;
     lsm6ds3_reg_ctrl8_xl.hp_slope_xl_en = LSM6DS3_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLE;
     lsm6ds3_reg_set_ctrl8_xl(&lsm6ds3_reg_ctrl8_xl);
     return lsm6ds3_get_lsb_per_g();
+#endif
 #elif DEVICE_MODEL == E_C121G
     icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
     icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;

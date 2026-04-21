@@ -48,6 +48,31 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
 }
 
 #if DEVICE_MODEL == E_C111G
+#if HARDWARE_REV >= 20250804
+void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    lsm6dsr_reg_outz_xl_t outz_xl;
+    lsm6dsr_reg_outx_xl_t outx_xl;
+    lsm6dsr_reg_outy_xl_t outy_xl;
+
+    lsm6dsr_wait();
+
+    lsm6dsr_reg_get_outz_xl(&outz_xl);
+    arr[0] = (int16_t)(outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl);
+    arr[0] -= lsb_per_g;
+
+    lsm6dsr_reg_get_outx_xl(&outx_xl);
+    arr[1] = (int16_t)(outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl);
+
+    lsm6dsr_reg_get_outy_xl(&outy_xl);
+    arr[2] = (int16_t)(outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl);
+}
+
+void get_env_temperature(float* temp) {
+    lsm6dsr_reg_out_temp_t out_temp;
+    lsm6dsr_reg_get_out_temp(&out_temp);
+    *temp = (float)out_temp.out_temp_l / 16.0 + 25.0;
+}
+#else
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
     lsm6ds3_reg_outz_xl_t outz_xl;
     lsm6ds3_reg_outx_xl_t outx_xl;
@@ -71,6 +96,7 @@ void get_env_temperature(float* temp) {
     lsm6ds3_reg_get_out_temp(&out_temp);
     *temp = (float)out_temp.out_temp_l / 16.0 + 25.0;
 }
+#endif
 #elif DEVICE_MODEL == E_C121G
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
     icm42688_reg_accel_data_x_t accel_data_x;
