@@ -114,6 +114,7 @@ int64_t gnss_model_handle_timestamp(int64_t timestamp) {
 #elif GNSS_MODEL == ALLYSTAR_TAU812S || GNSS_MODEL == ALLYSTAR_TAU1113 || GNSS_MODEL == ALLYSTAR_TAU1114
 // reference: https://archive.org/download/4c-6k-4oyd-63bikyc-9c-33jgbz-19kc-1aois/4c6k4oyd63bikyc9c33jgbz19kc1aois.pdf
 // reference: https://archive.org/download/tau-1113/TAU1113%E6%A8%A1%E7%BB%84%E8%A7%84%E6%A0%BC%E4%B9%A6_%E6%B6%82%E9%B8%A6%E5%BC%80%E5%8F%91%E8%80%85%E5%B9%B3%E5%8F%B0_%E6%B6%82%E9%B8%A6%E5%BC%80%E5%8F%91%E8%80%85%E5%B9%B3%E5%8F%B0.pdf
+// reference: https://web.archive.org/web/20250503043327/https://docs.datagnss.com/rtk-board/files/T-5-1908-001-GNSS_Protocol_Specification-V2.3.pdf
 // note: the command format of TAU812S, TAU1113, and TAU1114 are very similar to those of the Quectel LC26xZ series, and it has been verified that most of them are universal.
 
 void gnss_model_setup(bool is_rtos) {
