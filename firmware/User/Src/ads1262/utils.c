@@ -30,15 +30,15 @@ void ads1262_wait(ads1262_ctl_pin_t pin) {
 }
 
 void ads1262_read_reg(uint8_t reg, uint8_t* rx_data) {
-    mcu_utils_spi_transfer(ADS1262_CMD_RREG | reg);
-    mcu_utils_spi_transfer(0);  // Read only 1 register
-    *rx_data = mcu_utils_spi_transfer(0xFF);
+    mcu_utils_spi1_transfer(ADS1262_CMD_RREG | reg);
+    mcu_utils_spi1_transfer(0);  // Read only 1 register
+    *rx_data = mcu_utils_spi1_transfer(0xFF);
 }
 
 void ads1262_write_reg(uint8_t reg, uint8_t* tx_data) {
-    mcu_utils_spi_transfer(ADS1262_CMD_WREG | reg);
-    mcu_utils_spi_transfer(0);  // Write only 1 register
-    mcu_utils_spi_transfer(*tx_data);
+    mcu_utils_spi1_transfer(ADS1262_CMD_WREG | reg);
+    mcu_utils_spi1_transfer(0);  // Write only 1 register
+    mcu_utils_spi1_transfer(*tx_data);
 }
 
 void ads1262_write_cmd(ads1262_ctl_pin_t pin,
@@ -49,9 +49,9 @@ void ads1262_write_cmd(ads1262_ctl_pin_t pin,
     if (wait == ADS1262_WRITE_CMD_WAIT_ENABLE) {
         ads1262_wait(pin);
     }
-    mcu_utils_spi_transfer(cmd);
+    mcu_utils_spi1_transfer(cmd);
     for (uint8_t i = 0; i < rx_len; i++) {
-        uint8_t rx_byte = mcu_utils_spi_transfer(0xFF);
+        uint8_t rx_byte = mcu_utils_spi1_transfer(0xFF);
         if (rx_data != NULL) {
             rx_data[i] = rx_byte;
         }

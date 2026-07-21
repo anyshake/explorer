@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #include "Utils/Inc/delay.h"
-#include "Utils/Inc/i2c.h"
+#include "Utils/Inc/i2c1.h"
 
 #define SSD1306_I2C_ADDRESS 0x3C
 

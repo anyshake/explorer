@@ -1,6 +1,6 @@
-#include "Utils/Inc/i2c.h"
+#include "Utils/Inc/i2c1.h"
 
-void mcu_utils_i2c_init(bool is_rtos) {
+void mcu_utils_i2c1_init(bool is_rtos) {
     if (HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_RESET) {
         MX_I2C1_Init();
         HAL_GPIO_WritePin(GPIOB, 6, GPIO_PIN_SET);
@@ -9,17 +9,17 @@ void mcu_utils_i2c_init(bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void mcu_utils_i2c_end(void) {
+void mcu_utils_i2c1_end(void) {
     if (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_RESET) {
         HAL_I2C_DeInit(&hi2c1);
     }
 }
 
-void mcu_utils_i2c_read_mem(uint8_t address,
-                            uint16_t reg,
-                            uint8_t* rx_data,
-                            uint16_t rx_len,
-                            uint8_t reg_width) {
+void mcu_utils_i2c1_read_mem(uint8_t address,
+                             uint16_t reg,
+                             uint8_t* rx_data,
+                             uint16_t rx_len,
+                             uint8_t reg_width) {
     if (rx_data == NULL || !rx_len) {
         return;
     }
@@ -27,11 +27,11 @@ void mcu_utils_i2c_read_mem(uint8_t address,
     HAL_I2C_Mem_Read(&hi2c1, address << 1, reg, reg_width, rx_data, rx_len, 1000);
 }
 
-void mcu_utils_i2c_write_mem(uint8_t address,
-                             uint16_t reg,
-                             uint8_t* tx_data,
-                             uint16_t tx_len,
-                             uint8_t reg_width) {
+void mcu_utils_i2c1_write_mem(uint8_t address,
+                              uint16_t reg,
+                              uint8_t* tx_data,
+                              uint16_t tx_len,
+                              uint8_t reg_width) {
     if (tx_data == NULL || !tx_len) {
         return;
     }
@@ -39,7 +39,7 @@ void mcu_utils_i2c_write_mem(uint8_t address,
     HAL_I2C_Mem_Write(&hi2c1, address << 1, reg, reg_width, tx_data, tx_len, 1000);
 }
 
-void mcu_utils_i2c_read(uint8_t address, uint8_t* rx_data, uint16_t rx_len) {
+void mcu_utils_i2c1_read(uint8_t address, uint8_t* rx_data, uint16_t rx_len) {
     if (rx_data == NULL || !rx_len) {
         return;
     }
@@ -47,7 +47,7 @@ void mcu_utils_i2c_read(uint8_t address, uint8_t* rx_data, uint16_t rx_len) {
     HAL_I2C_Master_Receive(&hi2c1, address << 1, rx_data, rx_len, 1000);
 }
 
-void mcu_utils_i2c_write(uint8_t address, uint8_t* tx_data, uint16_t tx_len) {
+void mcu_utils_i2c1_write(uint8_t address, uint8_t* tx_data, uint16_t tx_len) {
     if (tx_data == NULL || !tx_len) {
         return;
     }

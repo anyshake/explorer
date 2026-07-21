@@ -75,7 +75,7 @@ void read_device_settings(explorer_global_states_t* states) {
 }
 
 void display_device_settings(explorer_global_states_t* states) {
-    snprintf((char*)states->message_buf, sizeof(states->message_buf), "SAMPLE RATE: %3hhu Hz", states->sample_rate);
+    snprintf((char*)states->message_buf, sizeof(states->message_buf), "SAMPLE RATE: %3u Hz", states->sample_rate);
     ssd1306_display_string(0, 0, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, false);
     snprintf((char*)states->message_buf, sizeof(states->message_buf), "PORT BR: %6lu bps", states->baud_rate);
     ssd1306_display_string(0, 1, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, false);
@@ -94,7 +94,7 @@ void display_device_settings(explorer_global_states_t* states) {
     ssd1306_set_brightness(1);  // Set minimum brightness
 }
 
-bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp, int64_t* gnss_time_diff, bool is_rtos) {
+bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_location_t* gnss_location, gnss_time_t* gnss_time, int64_t local_timestamp_us, int64_t* time_offset_us, bool is_rtos) {
     bool got_gga = false;
     bool got_rmc = false;
 
@@ -117,50 +117,20 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
         }
 
         if (got_gga && got_rmc && gga_time.hour == rmc_time.hour && gga_time.minute == rmc_time.minute && gga_time.second == rmc_time.second && gga_time.milisecond == rmc_time.milisecond) {
-            if (gnss_time != NULL && gnss_time_diff != NULL) {
-                int64_t gnss_message_timestamp = gnss_get_timestamp(&rmc_time);
+            if (gnss_time != NULL && time_offset_us != NULL) {
+                int64_t gnss_message_timestamp_ms = gnss_get_timestamp(&rmc_time);
                 // some GNSS module such as Quectel LC260Z and Quectel LC761Z have a wrong timestamp
                 // with an offset of 1 second, already confirmed by Quectel support team
-                gnss_message_timestamp = gnss_model_handle_timestamp(gnss_message_timestamp);
-                *gnss_time_diff = gnss_message_timestamp - local_timestamp;
+                gnss_message_timestamp_ms = gnss_model_handle_timestamp(gnss_message_timestamp_ms);
+                *time_offset_us = gnss_message_timestamp_ms * 1000 - local_timestamp_us;
                 *gnss_time = rmc_time;
             }
             return true;
         } else if (got_gga && got_rmc) {
             got_gga = false;
             got_rmc = false;
-            mcu_utils_uart2_flush();
         }
     }
 
     return false;
-}
-
-uint32_t get_tim3_clk_freq(void) {
-    uint32_t pclk2 = HAL_RCC_GetPCLK2Freq();
-    uint32_t ppre2 = (RCC->CFGR & RCC_CFGR_PPRE2) >> RCC_CFGR_PPRE2_Pos;
-
-    if (ppre2 >= 4) {
-        return pclk2 * 2;
-    }
-    return pclk2;
-}
-
-float get_adjust_step_size(float current_ppm, float avg_ppm, float tick_step_us, uint32_t delta_us) {
-    const float tick_step_min = 4.0f;
-    const float tick_step_max = 25.0f;
-    const float slope = 10.0f;  // aggressiveness of adjustment
-
-    float smoothed_ppm = 0.7f * current_ppm + 0.3f * avg_ppm;
-    float tick_estimate = (smoothed_ppm > 0.0f ? smoothed_ppm : -smoothed_ppm) * delta_us / 1e6f / tick_step_us;
-    float tick_step = slope * tick_estimate;
-
-    if (tick_step < tick_step_min) {
-        tick_step = tick_step_min;
-    }
-    if (tick_step > tick_step_max) {
-        tick_step = tick_step_max;
-    }
-
-    return tick_step;
 }

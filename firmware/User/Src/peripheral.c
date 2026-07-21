@@ -2,6 +2,7 @@
 
 void peri_gnss_init(void) {
     gnss_init(GNSS_CTL_PIN);
+    gnss_pps_init();
 }
 
 void peri_screen_init(void) {
@@ -17,6 +18,9 @@ void peri_eeprom_init(void) {
 uint16_t peri_imu_init(uint8_t sample_rate) {
 #if DEVICE_MODEL == E_C111G
 #if HARDWARE_REV >= 20250804
+    lsm6dsr_reg_master_config_t master_config = lsm6dsr_reg_new_master_config();
+    master_config.shub_pu_en = LSM6DSR_REG_MASTER_CONFIG_SHUB_PU_EN_ENABLED;
+    lsm6dsr_reg_set_master_config(&master_config);
     lsm6dsr_reg_ctrl3_c_t lsm6dsr_reg_ctrl3_c = lsm6dsr_reg_new_ctrl3_c();
     lsm6dsr_reg_ctrl3_c.bdu = LSM6DSR_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
     lsm6dsr_reg_ctrl3_c.if_inc = LSM6DSR_REG_CTRL3_C_IF_INC_ENABLED;

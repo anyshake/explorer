@@ -4,8 +4,8 @@ void filter_iir_df1_new(filter_iir_df1_t* filter, const float* b, const float* a
     for (uint8_t i = 0; i < IIR_DF1_ORDER; i++) {
         filter->b[i] = b[i];
         filter->a[i] = a[i];
-        filter->x_h[i] = 0.0;
-        filter->y_h[i] = 0.0;
+        filter->x_h[i] = 0.0f;
+        filter->y_h[i] = 0.0f;
     }
 }
 

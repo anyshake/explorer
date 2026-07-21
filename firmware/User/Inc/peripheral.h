@@ -7,6 +7,7 @@
 #include "User/Inc/settings.h"
 #include "User/Inc/types.h"
 
+#include "User/Inc/gnss/pps.h"
 #include "User/Inc/gnss/utils.h"
 
 #include "User/Inc/ssd1306/display.h"
@@ -40,6 +41,7 @@
 #include "User/Inc/lsm6dsr/regs/ctrl3_c.h"
 #include "User/Inc/lsm6dsr/regs/ctrl4_c.h"
 #include "User/Inc/lsm6dsr/regs/ctrl8_xl.h"
+#include "User/Inc/lsm6dsr/regs/master_config.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
 void peri_gnss_init(void);

@@ -7,7 +7,7 @@
 #include "User/Inc/array.h"
 #include "User/Inc/gnss/utils.h"
 #include "User/Inc/types.h"
-#include "Utils/Inc/uart.h"
+#include "Utils/Inc/uart/uart1.h"
 
 typedef uint8_t packet_header_t[2];
 typedef uint8_t packet_timestamp_t[8];

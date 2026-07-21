@@ -14,7 +14,7 @@ int64_t gnss_model_handle_timestamp(int64_t timestamp) {
     return timestamp;
 }
 
-#elif GNSS_MODEL == QUECTEL_LC260Z || GNSS_MODEL == QUECTEL_LC760Z || GNSS_MODEL == QUECTEL_LC761Z
+#elif GNSS_MODEL == QUECTEL_LC260Z || GNSS_MODEL == QUECTEL_LC261Z || GNSS_MODEL == QUECTEL_LC760Z || GNSS_MODEL == QUECTEL_LC761Z
 // reference: https://archive.org/download/quectel-lc-26x-z-lc-76x-z-00-gnss-v-1.4-1/Quectel_LC26xZ%E7%B3%BB%E5%88%97LC76xZ00_GNSS_%E5%8D%8F%E8%AE%AE%E8%A7%84%E8%8C%83_V1.4-1.pdf
 
 void gnss_model_setup(bool is_rtos) {

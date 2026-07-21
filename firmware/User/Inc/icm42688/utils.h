@@ -8,7 +8,7 @@
 #include "User/Inc/icm42688/regs/int_status.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
-#include "Utils/Inc/i2c.h"
+#include "Utils/Inc/i2c1.h"
 
 #define ICM42688_I2C_ADDRES 0x69
 

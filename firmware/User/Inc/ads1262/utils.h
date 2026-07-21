@@ -7,7 +7,7 @@
 #include "User/Inc/ads1262/cmd_map.h"
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
-#include "Utils/Inc/spi.h"
+#include "Utils/Inc/spi1.h"
 
 #define ADS1262_RESET_RESET_TYPE_HARD 0x00
 #define ADS1262_RESET_RESET_TYPE_SOFT 0x01

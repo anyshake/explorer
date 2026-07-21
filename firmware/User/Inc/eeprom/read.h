@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 #include "User/Inc/eeprom/utils.h"
-#include "Utils/Inc/i2c.h"
+#include "Utils/Inc/i2c1.h"
 
 void eeprom_read(uint8_t* buf, uint8_t offset, uint8_t len);
 

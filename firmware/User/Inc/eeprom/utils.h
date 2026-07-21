@@ -6,7 +6,7 @@
 
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
-#include "Utils/Inc/i2c.h"
+#include "Utils/Inc/i2c1.h"
 
 #define EEPROM_I2C_ADDRESS 0x50
 

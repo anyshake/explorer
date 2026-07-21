@@ -8,8 +8,9 @@
 
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
-#include "Utils/Inc/uart2.h"
-#include "Utils/Inc/uptime.h"
+#include "Utils/Inc/systime.h"
+#include "Utils/Inc/uart/uart2.h"
+#include "stm32f1xx_hal.h"
 
 #define GNSS_SENTENCE_BUFFER_SIZE 96
 #define GNSS_SENTENCE_PADDING_CHAR '_'
@@ -56,5 +57,6 @@ bool gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms, bool is_rtos);
 uint8_t gnss_padding_sentence(uint8_t* str_buf);
 bool gnss_verify_checksum(uint8_t* str_buf);
 bool gnss_match_keyword(uint8_t* sentence, const char* keyword);
+int64_t gnss_get_timestamp(gnss_time_t* time);
 
 #endif

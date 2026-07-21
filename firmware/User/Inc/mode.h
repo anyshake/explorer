@@ -13,8 +13,8 @@
 #include "User/Inc/types.h"
 
 #include "Utils/Inc/delay.h"
-#include "Utils/Inc/uart.h"
-#include "Utils/Inc/uart2.h"
+#include "Utils/Inc/uart/uart1.h"
+#include "Utils/Inc/uart/uart2.h"
 
 void mode_entry_gnss_debug(explorer_global_states_t* states);
 void mode_entry_leveling(explorer_global_states_t* states);

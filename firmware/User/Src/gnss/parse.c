@@ -83,7 +83,7 @@ void gnss_parse_rmc(uint8_t* str_buf, gnss_location_t* location, gnss_time_t* ti
                         time->hour = result_int / 10000;
                         time->minute = (result_int / 100) % 100;
                         time->second = result_int % 100;
-                        time->milisecond = (result - result_int) * 1000;
+                        time->milisecond = (uint16_t)((result - (float)result_int) * 1000.0f);
                         time->is_valid = true;
                     } else {
                         time->is_valid = false;
@@ -103,9 +103,9 @@ void gnss_parse_rmc(uint8_t* str_buf, gnss_location_t* location, gnss_time_t* ti
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
                         float result = quick_atof(token);
-                        uint8_t deg = result / 100;
-                        float min = result - deg * 100;
-                        float lat_deg = deg + min / 60.0;
+                        uint8_t deg = (uint8_t)(result / 100.0f);
+                        float min = result - (float)deg * 100.0f;
+                        float lat_deg = deg + min / 60.0f;
                         token = strtok(NULL, ",");
                         i++;
                         if (*token == 'S') {
@@ -119,9 +119,9 @@ void gnss_parse_rmc(uint8_t* str_buf, gnss_location_t* location, gnss_time_t* ti
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
                         float result = quick_atof(token);
-                        uint8_t deg = result / 100;
-                        float min = result - deg * 100;
-                        float lng_deg = deg + min / 60.0;
+                        uint8_t deg = (uint8_t)(result / 100.0f);
+                        float min = result - (float)deg * 100.0f;
+                        float lng_deg = deg + min / 60.0f;
                         token = strtok(NULL, ",");
                         i++;
                         if (*token == 'W') {
@@ -163,7 +163,7 @@ void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* lo
                         time->hour = result_int / 10000;
                         time->minute = (result_int / 100) % 100;
                         time->second = result_int % 100;
-                        time->milisecond = (result - result_int) * 1000;
+                        time->milisecond = (uint16_t)((result - (float)result_int) * 1000.0f);
                         time->is_valid = true;
                     } else {
                         time->is_valid = false;
@@ -174,9 +174,9 @@ void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* lo
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
                         float result = quick_atof(token);
-                        uint8_t deg = result / 100;
-                        float min = result - deg * 100;
-                        float lat_deg = deg + min / 60.0;
+                        uint8_t deg = (uint8_t)(result / 100.0f);
+                        float min = result - (float)deg * 100.0f;
+                        float lat_deg = deg + min / 60.0f;
                         token = strtok(NULL, ",");
                         i++;
                         if (*token == 'S') {
@@ -193,9 +193,9 @@ void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* lo
                 if (location != NULL) {
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
                         float result = quick_atof(token);
-                        uint8_t deg = result / 100;
-                        float min = result - deg * 100;
-                        float lng_deg = deg + min / 60.0;
+                        uint8_t deg = (uint8_t)(result / 100.0f);
+                        float min = result - (float)deg * 100.0f;
+                        float lng_deg = deg + min / 60.0f;
                         token = strtok(NULL, ",");
                         i++;
                         if (*token == 'W') {
@@ -219,7 +219,7 @@ void gnss_parse_gga(uint8_t* str_buf, gnss_status_t* status, gnss_location_t* lo
                     if (*token != GNSS_SENTENCE_PADDING_CHAR) {
                         status->hdop = quick_atof(token);
                     } else {
-                        status->hdop = 0.0;
+                        status->hdop = 0.0f;
                     }
                 }
             case 9:

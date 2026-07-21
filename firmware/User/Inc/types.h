@@ -12,19 +12,12 @@
 #define E_C111G 0
 #define E_C121G 1
 
-#define PPM_WINDOW_SIZE 30
-
 typedef struct {
-    float ppm_window[PPM_WINDOW_SIZE];
-    uint8_t ppm_index;
-    float avg_ppm;
-    float current_ppm;
-
-    volatile bool task_disabled;
-    volatile uint64_t updated_at_ms;
-    volatile uint32_t gnss_1pps_tick;
+    volatile float current_ppm;
+    volatile uint64_t monotonic_time_us;
+    volatile uint32_t actual_freq_hz;
     osThreadId_t task_handle;
-} explorer_gnss_discipline_t;
+} explorer_time_sync_t;
 
 typedef struct {
     int64_t timestamp;
@@ -53,7 +46,6 @@ typedef struct {
     bool use_gnss_time;
     bool channel_6d;
 
-    volatile int64_t gnss_time_diff;
     gnss_location_t gnss_location;
     uint8_t message_buf[GNSS_SENTENCE_BUFFER_SIZE];
 
@@ -68,7 +60,7 @@ typedef struct {
     uint8_t channel_chunk_length;
     uint16_t packet_sending_interval;
     int64_t prev_packet_sent_at_ms;
-    uint8_array_t* uart_packet_buffer;
+    uint8_array_t* uart1_packet_buffer;
 
     osMessageQueueId_t sensor_acquisition_queue;
     osThreadId_t send_packet_task_handle;
@@ -77,7 +69,6 @@ typedef struct {
 
 enum explorer_thread_flags_t {
     GNSS_1PPS_UPDATED = 0x01,
-    GNSS_ACQUIRE_ACT,
     SENSOR_ACQUIRE_ACT,
 };
 

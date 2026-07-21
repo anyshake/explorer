@@ -29,6 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Utils/Inc/systime.h"
 
 /* USER CODE END Includes */
 
@@ -129,8 +130,8 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-  if (htim->Instance == TIM3) {
-    HAL_IncUptime();
+  if (htim->Instance == TIM2) {
+    mcu_utils_systime_handle_timer_overflow();
   }
 
   /* USER CODE END Callback 0 */

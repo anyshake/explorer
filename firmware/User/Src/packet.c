@@ -22,16 +22,16 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     uint16_t offset = 0;
     uint8_t* bytes;
 
-    uint16_t uart_buf_size = states->uart_packet_buffer->size;
-    states->uart_packet_buffer->data[0] = 0x01;
-    states->uart_packet_buffer->data[1] = 0xFE;
-    states->uart_packet_buffer->data[uart_buf_size - 2] = 0xEF;
-    states->uart_packet_buffer->data[uart_buf_size - 1] = 0x10;
+    uint16_t uart_buf_size = states->uart1_packet_buffer->size;
+    states->uart1_packet_buffer->data[0] = 0x01;
+    states->uart1_packet_buffer->data[1] = 0xFE;
+    states->uart1_packet_buffer->data[uart_buf_size - 2] = 0xEF;
+    states->uart1_packet_buffer->data[uart_buf_size - 1] = 0x10;
 
     bytes = (uint8_t*)&timestamp;
     for (uint8_t i = 0; i < sizeof(packet_timestamp_t); i++) {
         offset = sizeof(packet_header_t) + i;
-        states->uart_packet_buffer->data[offset] = bytes[i];
+        states->uart1_packet_buffer->data[offset] = bytes[i];
     }
 
     uint32_t device_config = 0x00;
@@ -68,12 +68,12 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
         case 250:
             device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 27;
             break;
-        // case 500:
-        //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_500HZ << 27;
-        //     break;
-        // case 1000:
-        //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_1000HZ << 27;
-        //     break;
+            // case 500:
+            //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_500HZ << 27;
+            //     break;
+            // case 1000:
+            //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_1000HZ << 27;
+            //     break;
     }
     device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 26;
     if (!states->use_accelerometer || states->channel_6d) {
@@ -94,7 +94,7 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     bytes = (uint8_t*)&device_config;
     for (uint8_t i = 0; i < sizeof(packet_device_config_t); i++) {
         offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + i;
-        states->uart_packet_buffer->data[offset] = bytes[i];
+        states->uart1_packet_buffer->data[offset] = bytes[i];
     }
 
     float tempFloat = 0;
@@ -120,7 +120,7 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     }
     for (uint8_t i = 0; i < sizeof(packet_variable_data_t); i++) {
         offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + i;
-        states->uart_packet_buffer->data[offset] = bytes[i];
+        states->uart1_packet_buffer->data[offset] = bytes[i];
     }
 
     offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + sizeof(packet_variable_data_t);
@@ -129,11 +129,11 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
             uint16_t data_offset = offset + i * sizeof(int32_t);
             for (uint8_t j = 0; j < sizeof(int32_t); j++) {
                 bytes = (uint8_t*)&states->adc_acquisition_channel_buffer->data[i];
-                states->uart_packet_buffer->data[data_offset + j] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j] = bytes[j];
                 bytes = (uint8_t*)&states->adc_acquisition_channel_buffer->data[i + 1 * states->channel_chunk_length];
-                states->uart_packet_buffer->data[data_offset + j + 1 * states->channel_chunk_length * sizeof(int32_t)] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j + 1 * states->channel_chunk_length * sizeof(int32_t)] = bytes[j];
                 bytes = (uint8_t*)&states->adc_acquisition_channel_buffer->data[i + 2 * states->channel_chunk_length];
-                states->uart_packet_buffer->data[data_offset + j + 2 * states->channel_chunk_length * sizeof(int32_t)] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j + 2 * states->channel_chunk_length * sizeof(int32_t)] = bytes[j];
             }
         }
 
@@ -145,11 +145,11 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
 
             for (uint8_t j = 0; j < sizeof(int16_t); j++) {
                 bytes = (uint8_t*)&states->accel_acquisition_channel_buffer->data[i];
-                states->uart_packet_buffer->data[data_offset + j] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j] = bytes[j];
                 bytes = (uint8_t*)&states->accel_acquisition_channel_buffer->data[i + 1 * states->channel_chunk_length];
-                states->uart_packet_buffer->data[data_offset + j + 1 * states->channel_chunk_length * sizeof(int16_t)] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j + 1 * states->channel_chunk_length * sizeof(int16_t)] = bytes[j];
                 bytes = (uint8_t*)&states->accel_acquisition_channel_buffer->data[i + 2 * states->channel_chunk_length];
-                states->uart_packet_buffer->data[data_offset + j + 2 * states->channel_chunk_length * sizeof(int16_t)] = bytes[j];
+                states->uart1_packet_buffer->data[data_offset + j + 2 * states->channel_chunk_length * sizeof(int16_t)] = bytes[j];
             }
         }
     }
@@ -157,9 +157,9 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     offset = uart_buf_size - sizeof(packet_trailer_t) - sizeof(packet_checksum_t);
     uint8_t xor_checksum = 0;
     for (uint16_t i = sizeof(packet_header_t); i < offset; i++) {
-        xor_checksum ^= states->uart_packet_buffer->data[i];
+        xor_checksum ^= states->uart1_packet_buffer->data[i];
     }
-    states->uart_packet_buffer->data[offset] = xor_checksum;
+    states->uart1_packet_buffer->data[offset] = xor_checksum;
 
-    mcu_utils_uart_write(states->uart_packet_buffer->data, uart_buf_size, false);
+    mcu_utils_uart1_write(states->uart1_packet_buffer->data, uart_buf_size, false);
 }

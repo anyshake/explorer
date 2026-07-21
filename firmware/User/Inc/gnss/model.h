@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #include "Utils/Inc/delay.h"
-#include "Utils/Inc/uart2.h"
+#include "Utils/Inc/uart/uart2.h"
 
 #define GENERIC 0
 
