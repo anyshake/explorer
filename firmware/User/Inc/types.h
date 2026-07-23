@@ -35,6 +35,7 @@ typedef struct {
 typedef struct {
     bool leveling_mode;
     bool gnss_debug_mode;
+    bool adc_calibration_mode;
 
     uint16_t accel_lsb_per_g;
     uint32_t device_id;

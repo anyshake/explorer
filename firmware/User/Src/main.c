@@ -308,6 +308,10 @@ void system_setup(void) {
     peri_gnss_init();
     gnss_reset(GNSS_CTL_PIN, false);
     gnss_model_setup(false);
+    if (states.gnss_debug_mode) {
+        gnss_model_factory_reset(false);
+        mode_entry_gnss_debug(&states);
+    }
 
     peri_eeprom_init();
     eeprom_read((uint8_t*)&states.device_id, 0, sizeof(states.device_id));
@@ -335,17 +339,16 @@ void system_setup(void) {
     icm42688_reset(false);
 #endif
     states.accel_lsb_per_g = peri_imu_init(states.sample_rate);
-    mcu_utils_delay_ms(1000, false);
-
     if (states.leveling_mode) {
         mode_entry_leveling(&states);
-    } else if (states.gnss_debug_mode) {
-        gnss_model_factory_reset(false);
-        mode_entry_gnss_debug(&states);
     }
+    mcu_utils_delay_ms(1000, false);
 
     ads1262_init(ADS1262_CTL_PIN, ADS1262_INIT_CONTROL_TYPE_HARD);
     ads1262_reset(ADS1262_CTL_PIN, ADS1262_RESET_RESET_TYPE_HARD, false);
+    if (states.adc_calibration_mode) {
+        mode_entry_adc_calibration();
+    }
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
 
     states.packet_sending_interval = PACKET_SENDING_INTERVAL;

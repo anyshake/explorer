@@ -72,6 +72,7 @@ void read_device_settings(explorer_global_states_t* states) {
     uint8_t options_bits = use_accelerometer_bit << 2 | use_gnss_bit << 1 | channel_6d_bit;
     states->leveling_mode = boot1_enabled && (options_bits == 0);
     states->gnss_debug_mode = boot1_enabled && (options_bits == 1);
+    states->adc_calibration_mode = boot1_enabled && (options_bits == 2);
 }
 
 void display_device_settings(explorer_global_states_t* states) {
