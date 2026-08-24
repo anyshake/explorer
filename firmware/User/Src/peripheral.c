@@ -95,10 +95,19 @@ void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {
     ads1262_reg_interface.status = ADS1262_REG_INTERFACE_STATUS_ENABLED;
     ads1262_reg_interface.crc = ADS1262_REG_INTERFACE_CRC_CRC;
     ads1262_reg_set_interface(&ads1262_reg_interface);
+
+    // Fix: explicitly select a SINC filter so DR = 4800 is valid.
+    // Without this, MODE1 stays at reset (0x80 = FIR), where DR = 4800 is illegal.
+    ads1262_reg_mode_1_t ads1262_reg_mode_1 = ads1262_reg_new_mode_1();
+    ads1262_reg_mode_1.filter = ADS1262_REG_MODE_1_FILTER_SINC3; // SINC3
+    ads1262_reg_set_mode_1(&ads1262_reg_mode_1);
+
     ads1262_reg_mode_0_t ads1262_reg_mode_0 = ads1262_reg_new_mode_0();
     ads1262_reg_mode_0.run_mode = ADS1262_REG_MODE_0_RUN_MODE_ONESHOT;
     ads1262_reg_set_mode_0(&ads1262_reg_mode_0);
+
     ads1262_reg_mode_2_t ads1262_reg_mode_2 = ads1262_reg_new_mode_2();
     ads1262_reg_mode_2.dr = ADS1262_REG_MODE_2_DR_4800;
     ads1262_reg_set_mode_2(&ads1262_reg_mode_2);
 }
+
