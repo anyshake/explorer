@@ -12,7 +12,7 @@ ads1262_reg_mode_1_t ads1262_reg_new_mode_1(void) {
 void ads1262_reg_set_mode_1(ads1262_reg_mode_1_t* mode_1) {
     uint8_t mode_1_data = __ADS1262_REG_MODE_1_DEFAULT_VALUE;
     mode_1_data &= ~(0x07 << 5);
-    mode_1_data |= (mode_1->filter & 0x07) << 6;
+    mode_1_data |= (mode_1->filter & 0x07) << 5;
     mode_1_data &= ~(0x01 << 4);
     mode_1_data |= (mode_1->sb_adc & 0x01) << 4;
     mode_1_data &= ~(0x01 << 3);
