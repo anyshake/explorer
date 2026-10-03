@@ -7,7 +7,7 @@ void lsm6ds3_init(lsm6ds3_ints_pin_t pin) {
 
 void lsm6ds3_reset(bool is_rtos) {
     lsm6ds3_reg_ctrl3_c_t ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
-    ctrl3_c.sw_reset = LSM6DS3_REG_CTRL3_C_SW_RESET_NORMAL_MODE;
+    ctrl3_c.sw_reset = LSM6DS3_REG_CTRL3_C_SW_RESET_RESET_DEVICE;
     lsm6ds3_reg_set_ctrl3_c(&ctrl3_c);
     mcu_utils_delay_ms(100, is_rtos);
 }

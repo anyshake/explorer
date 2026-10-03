@@ -82,8 +82,7 @@ static void adc_calibration_read_offset(uint8_t mux_p, uint8_t mux_n, uint8_t of
         float sum = 0.0f;
         for (uint8_t sample = 0; sample < 100; sample++) {
             ads1262_cmd_rdata_t rdata;
-            ads1262_wait(ADS1262_CTL_PIN);
-            ads1262_cmd_rdata(ADS1262_CTL_PIN, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
+            ads1262_cmd_rdata_continuous(ADS1262_CTL_PIN, &rdata);
             sum += rdata.data;
         }
         round_averages[round] = sum / 100.0f;
@@ -97,9 +96,20 @@ static void adc_calibration_read_offset(uint8_t mux_p, uint8_t mux_n, uint8_t of
     }
     float average = sum / 50.0f;
 
-    int32_t rounded_average = (int32_t)((average >= 0.0f) ? (average + 250.0f) : (average - 250.0f));
-    rounded_average = (rounded_average / 500) * 500;
-    uint32_t ofcal_value = ((uint32_t)rounded_average >> 8) & 0xFFFFFF;
+    // OFCAL is a signed 24-bit value that the ADC internally left-shifts by 8.
+    float scaled_offset = average / 256.0f;
+    int32_t signed_ofcal;
+    if (scaled_offset >= 0.0f) {
+        signed_ofcal = (int32_t)(scaled_offset + 0.5f);
+    } else {
+        signed_ofcal = (int32_t)(scaled_offset - 0.5f);
+    }
+    if (signed_ofcal > 0x7FFFFF) {
+        signed_ofcal = 0x7FFFFF;
+    } else if (signed_ofcal < -0x800000) {
+        signed_ofcal = -0x800000;
+    }
+    uint32_t ofcal_value = (uint32_t)signed_ofcal & 0xFFFFFFU;
 
     offset[0] = ofcal_value & 0xFF;
     offset[1] = (ofcal_value >> 8) & 0xFF;
@@ -150,6 +160,10 @@ void mode_entry_adc_calibration(void) {
     interface.status = ADS1262_REG_INTERFACE_STATUS_ENABLED;
     interface.crc = ADS1262_REG_INTERFACE_CRC_CRC;
     ads1262_reg_set_interface(&interface);
+
+    ads1262_reg_mode_1_t mode_1 = ads1262_reg_new_mode_1();
+    mode_1.filter = ADS1262_REG_MODE_1_FILTER_SINC1;
+    ads1262_reg_set_mode_1(&mode_1);
 
     ads1262_reg_mode_0_t mode_0 = ads1262_reg_new_mode_0();
     mode_0.run_mode = ADS1262_REG_MODE_0_RUN_MODE_CONTINUOUS;

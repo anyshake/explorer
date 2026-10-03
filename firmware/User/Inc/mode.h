@@ -11,6 +11,7 @@
 #include "User/Inc/ads1262/regs/inpmux.h"
 #include "User/Inc/ads1262/regs/interface.h"
 #include "User/Inc/ads1262/regs/mode_0.h"
+#include "User/Inc/ads1262/regs/mode_1.h"
 #include "User/Inc/ads1262/regs/mode_2.h"
 #include "User/Inc/ads1262/regs/ofcal.h"
 #include "User/Inc/eeprom/read.h"

@@ -59,6 +59,9 @@ static StaticTask_t send_packet_task_cb;
 static uint8_t sensor_acquire_task_stack[768];
 static StaticTask_t sensor_acquire_task_cb;
 
+static uint8_t sensor_acquisition_queue_mem[SENSOR_ACQUISITION_QUEUE_DEPTH * sizeof(explorer_acquisition_message_t)];
+static StaticQueue_t sensor_acquisition_queue_cb;
+
 void handle_incoming_time_sync_data(uint64_t monotonic_time_us, uint32_t actual_freq_hz) {
     mcu_utils_uart2_flush();
     mcu_utils_systime_calib_freq(actual_freq_hz);
@@ -193,9 +196,17 @@ void task_send_packet(void* argument) {
 
     explorer_acquisition_message_t acq_msg;
     int64_t message_timestamp = 0;
+    uint32_t expected_sequence = 0;
+    bool has_previous_sequence = false;
 
     for (uint8_t message_idx = 0;;) {
         if (osMessageQueueGet(states->sensor_acquisition_queue, &acq_msg, NULL, osWaitForever) == osOK) {
+            if (has_previous_sequence && acq_msg.sequence != expected_sequence) {
+                message_idx = 0;
+            }
+            expected_sequence = acq_msg.sequence + 1;
+            has_previous_sequence = true;
+
             if (message_idx == 0) {
                 message_timestamp = acq_msg.timestamp;
             }
@@ -235,11 +246,12 @@ void task_sensor_acquire(void* argument) {
 
     explorer_acquisition_message_t acq_msg;
     uint32_t time_span = 1000 / states->sample_rate;
+    uint32_t sample_sequence = 0;
 
     osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
-    for (uint32_t prev_timestamp = 0;;) {
+    for (uint64_t prev_timestamp = 0;;) {
         int64_t temp_timestamp_us = 0;
 
         if (!states->use_accelerometer || states->channel_6d) {
@@ -270,7 +282,10 @@ void task_sensor_acquire(void* argument) {
             acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
         }
 #endif
-        osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0);
+        acq_msg.sequence = sample_sequence++;
+        if (osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0) != osOK) {
+            states->sensor_queue_overflow_count++;
+        }
 
         uint64_t current_timestamp;
         do {
@@ -366,8 +381,18 @@ void system_setup(void) {
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
-    const static osMessageQueueAttr_t sensor_acquisition_queue_attr = {.name = "sensor_acquisition_data"};
-    states.sensor_acquisition_queue = osMessageQueueNew(1, sizeof(explorer_acquisition_message_t), &sensor_acquisition_queue_attr);
+    const static osMessageQueueAttr_t sensor_acquisition_queue_attr = {
+        .name = "sensor_acquisition_data",
+        .cb_mem = &sensor_acquisition_queue_cb,
+        .cb_size = sizeof(sensor_acquisition_queue_cb),
+        .mq_mem = sensor_acquisition_queue_mem,
+        .mq_size = sizeof(sensor_acquisition_queue_mem),
+    };
+    states.sensor_acquisition_queue = osMessageQueueNew(SENSOR_ACQUISITION_QUEUE_DEPTH, sizeof(explorer_acquisition_message_t), &sensor_acquisition_queue_attr);
+    if (states.sensor_acquisition_queue == NULL) {
+        ssd1306_display_string(0, 0, "Error Code 0x1", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        Error_Handler();
+    }
 
     const static osThreadAttr_t gnss_acquire_task_attr = {
         .name = "gnss_acquire",

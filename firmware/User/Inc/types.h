@@ -20,6 +20,7 @@ typedef struct {
 } explorer_time_sync_t;
 
 typedef struct {
+    uint32_t sequence;
     int64_t timestamp;
     int32_t adc_data[3];
     int16_t accel_data[3];
@@ -64,6 +65,7 @@ typedef struct {
     uint8_array_t* uart1_packet_buffer;
 
     osMessageQueueId_t sensor_acquisition_queue;
+    volatile uint32_t sensor_queue_overflow_count;
     osThreadId_t send_packet_task_handle;
     osThreadId_t sensor_acquire_task_handle;
 } explorer_global_states_t;

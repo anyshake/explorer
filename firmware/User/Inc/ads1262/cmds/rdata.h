@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "User/Inc/ads1262/cmd_map.h"
 #include "User/Inc/ads1262/regs/interface.h"
@@ -24,6 +25,8 @@ typedef struct {
 void ads1262_cmd_rdata(ads1262_ctl_pin_t pin,
                        ads1262_cmd_rdata_t* rdata,
                        uint8_t control_type);
+void ads1262_cmd_rdata_continuous(ads1262_ctl_pin_t pin,
+                                  ads1262_cmd_rdata_t* rdata);
 bool ads1262_cmd_rdata_is_valid(ads1262_cmd_rdata_t* rdata, uint8_t crc_mode);
 
 #endif

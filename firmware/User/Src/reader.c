@@ -70,7 +70,8 @@ void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
 void get_env_temperature(float* temp) {
     lsm6dsr_reg_out_temp_t out_temp;
     lsm6dsr_reg_get_out_temp(&out_temp);
-    *temp = (float)out_temp.out_temp_l / 16.0f + 25.0f;
+    int16_t temp_raw = (int16_t)((uint16_t)out_temp.out_temp_h << 8 | out_temp.out_temp_l);
+    *temp = (float)temp_raw / 256.0f + 25.0f;
 }
 #else
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
@@ -94,7 +95,8 @@ void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
 void get_env_temperature(float* temp) {
     lsm6ds3_reg_out_temp_t out_temp;
     lsm6ds3_reg_get_out_temp(&out_temp);
-    *temp = (float)out_temp.out_temp_l / 16.0f + 25.0f;
+    int16_t temp_raw = (int16_t)((uint16_t)out_temp.out_temp_h << 8 | out_temp.out_temp_l);
+    *temp = (float)temp_raw / 16.0f + 25.0f;
 }
 #endif
 #elif DEVICE_MODEL == E_C121G

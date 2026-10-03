@@ -1,24 +1,31 @@
 #include "User/Inc/ads1262/cmds/rdata.h"
 
+void ads1262_cmd_rdata_continuous(ads1262_ctl_pin_t pin,
+                                  ads1262_cmd_rdata_t* rdata) {
+    uint8_t rx_data[6] = {0};
+    ads1262_write_cmd(pin, ADS1262_CMD_RDATA1, rx_data, sizeof(rx_data), ADS1262_WRITE_CMD_WAIT_ENABLE);
+
+    rdata->status = rx_data[0];
+    uint32_t raw_data = (uint32_t)rx_data[1] << 24 |
+                        (uint32_t)rx_data[2] << 16 |
+                        (uint32_t)rx_data[3] << 8 |
+                        (uint32_t)rx_data[4];
+    memcpy(&rdata->data, &raw_data, sizeof(raw_data));
+    rdata->crc = rx_data[5];
+}
+
 void ads1262_cmd_rdata(ads1262_ctl_pin_t pin,
                        ads1262_cmd_rdata_t* rdata,
                        uint8_t control_type) {
-    uint8_t rx_data[6] = {0};
     if (control_type == ADS1262_INIT_CONTROL_TYPE_SOFT) {
         ads1262_write_cmd(pin, ADS1262_CMD_START1, NULL, 0, ADS1262_WRITE_CMD_WAIT_DISABLE);
     } else {
         mcu_utils_gpio_high(pin.start);
     }
-    ads1262_write_cmd(pin, ADS1262_CMD_RDATA1, rx_data, sizeof(rx_data), ADS1262_WRITE_CMD_WAIT_ENABLE);
+    ads1262_cmd_rdata_continuous(pin, rdata);
     if (control_type == ADS1262_INIT_CONTROL_TYPE_HARD) {
         mcu_utils_gpio_low(pin.start);
     }
-    rdata->status = rx_data[0];
-    rdata->data = rx_data[1] << 24;
-    rdata->data |= rx_data[2] << 16;
-    rdata->data |= rx_data[3] << 8;
-    rdata->data |= rx_data[4];
-    rdata->crc = rx_data[5];
 }
 
 bool ads1262_cmd_rdata_is_valid(ads1262_cmd_rdata_t* rdata, uint8_t crc_mode) {

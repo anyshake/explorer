@@ -3,8 +3,8 @@
 void mcu_utils_i2c1_init(bool is_rtos) {
     if (HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_RESET) {
         MX_I2C1_Init();
-        HAL_GPIO_WritePin(GPIOB, 6, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOB, 7, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
     }
     mcu_utils_delay_ms(100, is_rtos);
 }

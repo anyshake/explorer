@@ -99,25 +99,38 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
     bool got_gga = false;
     bool got_rmc = false;
 
-    gnss_time_t rmc_time;
-    gnss_time_t gga_time;
+    gnss_status_t parsed_status = {.hdop = 999.0f};
+    gnss_time_t rmc_time = {0};
+    gnss_time_t gga_time = {0};
+    gnss_location_t rmc_location = {0};
+    gnss_location_t gga_location = {0};
 
     while (!got_gga || !got_rmc) {
         bool ok = gnss_get_sentence(message_buf, 990, is_rtos);
         if (!ok) {
             return false;
         }
-        gnss_padding_sentence(message_buf);
+        if (gnss_padding_sentence(message_buf) == 0) {
+            continue;
+        }
 
         if (!got_gga && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_GGA)) {
-            gnss_parse_gga(message_buf, gnss_status, gnss_location, &gga_time);
-            got_gga = true;
+            gnss_parse_gga(message_buf, &parsed_status, &gga_location, &gga_time);
+            got_gga = gga_time.is_valid;
         } else if (!got_rmc && gnss_match_keyword(message_buf, GNSS_SENTENCE_TYPE_RMC)) {
-            gnss_parse_rmc(message_buf, gnss_location, &rmc_time);
-            got_rmc = true;
+            gnss_parse_rmc(message_buf, &rmc_location, &rmc_time);
+            got_rmc = rmc_time.is_valid;
         }
 
         if (got_gga && got_rmc && gga_time.hour == rmc_time.hour && gga_time.minute == rmc_time.minute && gga_time.second == rmc_time.second && gga_time.milisecond == rmc_time.milisecond) {
+            if (gnss_status != NULL) {
+                *gnss_status = parsed_status;
+            }
+            if (gnss_location != NULL) {
+                *gnss_location = rmc_location;
+                gnss_location->elevation = gga_location.elevation;
+                gnss_location->is_valid = rmc_location.is_valid && gga_location.is_valid;
+            }
             if (gnss_time != NULL && time_offset_us != NULL) {
                 int64_t gnss_message_timestamp_ms = gnss_get_timestamp(&rmc_time);
                 // some GNSS module such as Quectel LC260Z and Quectel LC761Z have a wrong timestamp
@@ -130,6 +143,10 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
         } else if (got_gga && got_rmc) {
             got_gga = false;
             got_rmc = false;
+            memset(&rmc_time, 0, sizeof(rmc_time));
+            memset(&gga_time, 0, sizeof(gga_time));
+            memset(&rmc_location, 0, sizeof(rmc_location));
+            memset(&gga_location, 0, sizeof(gga_location));
         }
     }
 
