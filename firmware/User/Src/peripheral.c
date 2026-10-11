@@ -2,7 +2,6 @@
 
 void peri_gnss_init(void) {
     gnss_init(GNSS_CTL_PIN);
-    gnss_pps_init();
 }
 
 void peri_screen_init(void) {

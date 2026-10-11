@@ -8,6 +8,7 @@
 #include "Core/Inc/tim.h"
 #include "FreeRTOS.h"
 #include "cmsis_os2.h"
+#include "task.h"
 
 #include "Utils/Inc/delay.h"
 #include "Utils/Inc/gpio.h"
@@ -48,6 +49,7 @@
 #endif
 
 static volatile explorer_time_sync_t time_sync_status = {0};
+static gnss_pps_state_t gnss_pps_state;
 
 static uint8_t gnss_acquire_task_stack[1024];
 static StaticTask_t gnss_acquire_task_cb;
@@ -80,7 +82,7 @@ void handle_incoming_time_sync_data(uint64_t monotonic_time_us, uint32_t actual_
 
 void HAL_GPIO_EXTI_Callback(uint16_t pin) {
     if (pin == GPIO_PIN_8) {
-        gnss_pps_handle_timer_interrupt(handle_incoming_time_sync_data);
+        gnss_pps_handle_timer_interrupt(&gnss_pps_state, handle_incoming_time_sync_data);
     }
 }
 
@@ -151,7 +153,9 @@ void task_gnss_acquire(void* argument) {
                         got_valid_fix = true;
                         mcu_utils_systime_set_offset(current_time_diff);
                         if (gnss_location.is_valid && gnss_status.hdop <= GNSS_REQUIRED_VALID_HDOP) {
+                            taskENTER_CRITICAL();
                             states->gnss_location = gnss_location;
+                            taskEXIT_CRITICAL();
                             if (first_sync) {
                                 ssd1306_display_string(0, 0, "GNSS Data Valid", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                                 mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
@@ -320,6 +324,7 @@ void system_setup(void) {
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
+    gnss_pps_init(&gnss_pps_state);
     peri_gnss_init();
     gnss_reset(GNSS_CTL_PIN, false);
     gnss_model_setup(false);
