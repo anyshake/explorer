@@ -6,6 +6,7 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_DRIVE_CONFIG_DEFAULT_VALUE 0x05
 
 #define ICM42688_REG_DRIVE_CONFIG_I2C_SLEW_RATE_20_60_NS 0x00
@@ -23,22 +24,23 @@
 #define ICM42688_REG_DRIVE_CONFIG_SPI_SLEW_RATE_0_2_NS 0x05
 
 typedef struct {
-    // Controls slew rate for output pin 14 in I2C mode only
-    // 0x00: 20ns-60ns (default)
-    // 0x01: 12ns-36ns
-    // 0x02: 6ns-18ns
-    // 0x03: 4ns-12ns
-    // 0x04: 2ns-6ns
-    // 0x05: < 2ns
+    // [5:3] Controls slew rate for output pin 14 in I2C mode only
+    // 0x00: 20 ns-60 ns (default)
+    // 0x01: 12 ns-36 ns
+    // 0x02: 6 ns-18 ns
+    // 0x03: 4 ns-12 ns
+    // 0x04: 2 ns-6 ns
+    // 0x05: < 2 ns
     uint8_t i2c_slew_rate;
-    // Controls slew rate for output pin 14 in SPI or I3CSM mode,
+
+    // [2:0] Controls slew rate for output pin 14 in SPI or I3CSM mode,
     // and for all other output pins
-    // 0x00: 20ns-60ns
-    // 0x01: 12ns-36ns
-    // 0x02: 6ns-18ns
-    // 0x03: 4ns-12ns
-    // 0x04: 2ns-6ns
-    // 0x05: < 2ns (default)
+    // 0x00: 20 ns-60 ns
+    // 0x01: 12 ns-36 ns
+    // 0x02: 6 ns-18 ns
+    // 0x03: 4 ns-12 ns
+    // 0x04: 2 ns-6 ns
+    // 0x05: < 2 ns (default)
     uint8_t spi_slew_rate;
 } icm42688_reg_drive_config_t;
 

@@ -12,6 +12,53 @@ void gnss_reset(gnss_ctl_pin_t pin, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
+uint32_t gnss_detect_baudrate(bool is_rtos) {
+    static const uint32_t baudrates[] = {9600, 115200, 38400, 57600, 19200, 4800, 230400, 460800};
+    uint8_t sentence[GNSS_SENTENCE_BUFFER_SIZE];
+
+    for (uint8_t i = 0; i < sizeof(baudrates) / sizeof(baudrates[0]); i++) {
+        mcu_utils_uart2_init(baudrates[i], is_rtos);
+        mcu_utils_uart2_flush();
+        uint8_t length = 0;
+        uint8_t valid_count = 0;
+
+        for (uint32_t start = HAL_GetTick(); HAL_GetTick() - start < GNSS_BAUDRATE_PROBE_TIMEOUT_MS;) {
+            // Drain bytes promptly: the 256-byte UART buffer can fill in 22 ms at 115200.
+            while (mcu_utils_uart2_hasdata()) {
+                uint8_t ch = mcu_utils_uart2_read();
+                if (ch == '$') {
+                    length = 0;
+                    sentence[length++] = ch;
+                } else if (length > 0) {
+                    if (length + 1 >= sizeof(sentence)) {
+                        length = 0;
+                        continue;
+                    }
+                    sentence[length++] = ch;
+                    if (ch == '\n') {
+                        sentence[length] = '\0';
+                        // Accept standard NMEA output without requiring a position fix.
+                        if (length >= 10 && sentence[6] == ',' &&
+                            isupper(sentence[1]) && isupper(sentence[2]) &&
+                            isupper(sentence[3]) && isupper(sentence[4]) && isupper(sentence[5]) &&
+                            gnss_verify_checksum(sentence)) {
+                            if (++valid_count >= 2) {
+                                mcu_utils_uart2_flush();
+                                return baudrates[i];
+                            }
+                        }
+                        length = 0;
+                    }
+                }
+            }
+            mcu_utils_delay_ms(1, is_rtos);
+        }
+    }
+
+    mcu_utils_uart2_end();
+    return 0;
+}
+
 bool gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms, bool is_rtos) {
     if (str_buf == NULL) {
         return false;

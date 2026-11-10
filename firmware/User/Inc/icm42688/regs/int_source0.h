@@ -6,6 +6,7 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_INT_SOURCE0_DEFAULT_VALUE 0x10
 
 #define ICM42688_REG_INT_SOURCE0_UI_FSYNC_INT1_EN_DISABLED 0x00
@@ -30,31 +31,37 @@
 #define ICM42688_REG_INT_SOURCE0_UI_AGC_RDY_INT1_EN_ENABLED 0x01
 
 typedef struct {
-    // Routing of the UI FSYNC interrupt to INT1
+    // [6] Routing of the UI FSYNC interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t ui_fsync_int1_en;
-    // Routing of the PLL ready interrupt to INT1
+
+    // [5] Routing of the PLL ready interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t pll_rdy_int1_en;
-    // Routing of the reset done interrupt to INT1
+
+    // [4] Routing of the reset done interrupt to INT1
     // 0x00: Disabled
     // 0x01: Enabled (default)
     uint8_t reset_done_int1_en;
-    // Routing of the UI DRDY interrupt to INT1
+
+    // [3] Routing of the UI DRDY interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t ui_drdy_int1_en;
-    // Routing of the FIFO threshold interrupt to INT1
+
+    // [2] Routing of the FIFO threshold interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t fifo_ths_int1_en;
-    // Routing of the FIFO full interrupt to INT1
+
+    // [1] Routing of the FIFO full interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t fifo_full_int1_en;
-    // Routing of the UI AGC ready interrupt to INT1
+
+    // [0] Routing of the UI AGC ready interrupt to INT1
     // 0x00: Disabled (default)
     // 0x01: Enabled
     uint8_t ui_agc_rdy_int1_en;

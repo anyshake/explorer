@@ -1,6 +1,8 @@
 #include "User/Inc/lsm6ds3/regs/outy_xl.h"
 
 void lsm6ds3_reg_get_outy_xl(lsm6ds3_reg_outy_xl_t* outy_xl) {
-    lsm6ds3_read_reg(LSM6DS3_REG_OUTY_L_XL, &outy_xl->outy_l_xl);
-    lsm6ds3_read_reg(LSM6DS3_REG_OUTY_H_XL, &outy_xl->outy_h_xl);
+    uint8_t data[2] = {0};
+    lsm6ds3_read_regs(LSM6DS3_REG_OUTY_L_XL, data, sizeof(data));
+    outy_xl->outy_l_xl = data[0];
+    outy_xl->outy_h_xl = data[1];
 }

@@ -7,9 +7,10 @@
 #include "User/Inc/lsm6ds3/utils.h"
 
 typedef struct {
-    // Temperature output (LSbyte)
+    // [7:0] Temperature output (LSB)
     uint8_t out_temp_l;
-    // Temperature output (MSbyte)
+
+    // [7:0] Temperature output (MSB)
     uint8_t out_temp_h;
 } lsm6ds3_reg_out_temp_t;
 

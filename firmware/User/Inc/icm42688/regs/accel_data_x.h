@@ -7,9 +7,10 @@
 #include "User/Inc/icm42688/utils.h"
 
 typedef struct {
-    // Lower byte of Accel X-axis data
+    // [7:0] Lower byte of Accel X-axis data
     uint8_t accel_data_x_l;
-    // Upper byte of Accel X-axis data
+
+    // [7:0] Upper byte of Accel X-axis data
     uint8_t accel_data_x_h;
 } icm42688_reg_accel_data_x_t;
 

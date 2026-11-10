@@ -11,7 +11,8 @@
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/i2c1.h"
 
-#define LSM6DS3_I2C_ADDRES 0x6A
+// 7-bit I2C address selected by the board
+#define LSM6DS3_I2C_ADDRESS 0x6A
 
 typedef struct {
     mcu_utils_gpio_t int_1;
@@ -22,6 +23,8 @@ void lsm6ds3_wait(void);
 void lsm6ds3_init(lsm6ds3_ints_pin_t pin);
 void lsm6ds3_reset(bool is_rtos);
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data);
+// Multi-byte access requires CTRL3_C.IF_INC = 1.
+void lsm6ds3_read_regs(uint8_t reg, uint8_t* rx_data, uint16_t rx_len);
 void lsm6ds3_write_reg(uint8_t reg, uint8_t tx_data);
 
 #endif

@@ -2,7 +2,7 @@
 
 lsm6dsr_reg_ctrl10_c_t lsm6dsr_reg_new_ctrl10_c(void) {
     lsm6dsr_reg_ctrl10_c_t ctrl10_c;
-    ctrl10_c.timestamp_en = LSM6DSR_REG_CTRL10_C_TIMESTAMP_EN_ENABLE;
+    ctrl10_c.timestamp_en = LSM6DSR_REG_CTRL10_C_TIMESTAMP_EN_DISABLED;
     return ctrl10_c;
 }
 

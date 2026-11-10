@@ -6,45 +6,50 @@
 #include "User/Inc/lsm6dsr/reg_map.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
+// Register reset value
 #define __LSM6DSR_REG_CTRL4_C_DEFAULT_VALUE 0x00
 
-#define LSM6DSR_REG_CTRL4_C_SLEEP_G_DISABLE 0x00
-#define LSM6DSR_REG_CTRL4_C_SLEEP_G_ENABLE 0x01
+#define LSM6DSR_REG_CTRL4_C_SLEEP_G_DISABLED 0x00
+#define LSM6DSR_REG_CTRL4_C_SLEEP_G_ENABLED 0x01
 
 #define LSM6DSR_REG_CTRL4_C_INT2_ON_INT1_OFF 0x00
 #define LSM6DSR_REG_CTRL4_C_INT2_ON_INT1_ON 0x01
 
-#define LSM6DSR_REG_CTRL4_C_DRDY_MASK_DISABLE 0x00
-#define LSM6DSR_REG_CTRL4_C_DRDY_MASK_ENABLE 0x01
+#define LSM6DSR_REG_CTRL4_C_DRDY_MASK_DISABLED 0x00
+#define LSM6DSR_REG_CTRL4_C_DRDY_MASK_ENABLED 0x01
 
 #define LSM6DSR_REG_CTRL4_C_I2C_DISABLE_BYPASS 0x00
-#define LSM6DSR_REG_CTRL4_C_I2C_DISABLE_ENABLE 0x01
+#define LSM6DSR_REG_CTRL4_C_I2C_DISABLE_ENABLED 0x01
 
-#define LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_DISABLE 0x00
-#define LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_ENABLE 0x01
+#define LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_DISABLED 0x00
+#define LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_ENABLED 0x01
 
 typedef struct {
-    // Gyroscope sleep mode enable
-    // 0x00: disabled (default)
-    // 0x01: enabled
+    // [6] Gyroscope sleep mode enable
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t sleep_g;
-    // All interrupt signals available on INT1 pad enable
-    // 0x00: interrupt signals divided between INT1 and INT2 pads (default)
-    // 0x01: all interrupt signals in logic or on INT1 pad
+
+    // [5] All interrupt signals available on INT1 pad enable
+    // 0x00: Interrupt signals divided between INT1 and INT2 pads (default)
+    // 0x01: All interrupt signals in logic or on INT1 pad
     uint8_t int2_on_int1;
-    // Data-ready mask enable. If enabled, when switching from Power-Down to an
+
+    // [3] Data-ready mask enable. If enabled, when switching from Power-Down to an
     // active mode, the accelerometer and gyroscope data-ready signals are masked
     // until the settling of the sensor filters is completed
-    // 0x00: disabled (default)
-    // 0x01: enabled
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t drdy_mask;
-    // Disable I2C interface
+
+    // [2] Disable I2C interface
     // 0x00: SPI, I2C and MIPI I3CSM interfaces enabled (default)
     // 0x01: I2C disabled
     uint8_t i2c_disable;
-    // Enables gyroscope digital LPF1
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [1] Enables gyroscope digital LPF1
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t lpf1_sel_g;
 } lsm6dsr_reg_ctrl4_c_t;
 

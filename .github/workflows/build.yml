@@ -1,0 +1,153 @@
+name: Build and release firmware
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmware-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: ${{ matrix.hardware.name }} / ${{ matrix.gnss.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: firmware
+    strategy:
+      fail-fast: false
+      matrix:
+        hardware:
+          - name: current
+            revision: "20250804"
+          - name: legacy
+            revision: "20250803"
+        gnss:
+          - name: generic
+            model: GENERIC
+          - name: quectel_lc760z
+            model: QUECTEL_LC760Z
+          - name: quectel_l76k
+            model: QUECTEL_L76K
+          - name: allystar_tau1114
+            model: ALLYSTAR_TAU1114
+    env:
+      ASSET_NAME: ${{ matrix.hardware.name }}_E-C1x1G_gnss_${{ matrix.gnss.name }}.bin
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Cache PlatformIO packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', '.github/workflows/firmware.yml') }}
+
+      - name: Install PlatformIO
+        run: python -m pip install platformio==6.2.0
+
+      - name: Select firmware variant
+        env:
+          GNSS_MODEL: ${{ matrix.gnss.model }}
+          HARDWARE_REV: ${{ matrix.hardware.revision }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          config = Path("platformio.ini").read_text()
+          for define in ("GNSS_MODEL", "HARDWARE_REV"):
+              pattern = rf"(?m)^([ \t]*-D{define}=)[^\s#;]+"
+              config, count = re.subn(
+                  pattern, lambda match: match[1] + os.environ[define], config
+              )
+              if count != 1:
+                  raise SystemExit(f"Expected exactly one {define} build flag, found {count}")
+          Path("platformio.ci.ini").write_text(config)
+          PY
+
+      - name: Build firmware
+        run: pio run --project-conf platformio.ci.ini --environment genericSTM32F103C8
+
+      - name: Prepare firmware binary
+        run: install -Dm644 .pio/build/genericSTM32F103C8/firmware.bin "dist/$ASSET_NAME"
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: firmware-${{ matrix.hardware.name }}-${{ matrix.gnss.name }}
+          path: firmware/dist/${{ env.ASSET_NAME }}
+          if-no-files-found: error
+
+  release:
+    name: Publish firmware release
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: firmware-${{ github.sha }}
+
+    steps:
+      - name: Check out release notes
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Download all firmware binaries
+        uses: actions/download-artifact@v8
+        with:
+          pattern: firmware-*
+          merge-multiple: true
+          path: dist
+
+      - name: Check all eight binaries are present
+        shell: bash
+        run: |
+          for hardware in current legacy; do
+            for gnss in generic quectel_lc760z quectel_l76k allystar_tau1114; do
+              asset="dist/${hardware}_E-C1x1G_gnss_${gnss}.bin"
+              if [[ ! -s "$asset" ]]; then
+                echo "Missing or empty firmware binary: $asset" >&2
+                exit 1
+              fi
+            done
+          done
+
+      - name: Publish release named after the commit
+        shell: bash
+        run: |
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" \
+              --target "$GITHUB_SHA" \
+              --title "$GITHUB_SHA" \
+              --notes-file .github/firmware-release.md \
+              --draft
+          fi
+
+          gh release upload "$RELEASE_TAG" dist/*.bin --clobber
+          gh release edit "$RELEASE_TAG" \
+            --title "$GITHUB_SHA" \
+            --notes-file .github/firmware-release.md \
+            --draft=false

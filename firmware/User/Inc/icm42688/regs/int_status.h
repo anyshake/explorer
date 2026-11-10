@@ -7,25 +7,31 @@
 #include "User/Inc/icm42688/utils.h"
 
 typedef struct {
-    // This bit automatically sets to 1 when a UI FSYNC interrupt is generated
+    // [6] This bit automatically sets to 1 when a UI FSYNC interrupt is generated
     // The bit clears to 0 after the register has been read
     uint8_t ui_fsync_int;
-    // This bit automatically sets to 1 when a PLL Ready interrupt is generated
+
+    // [5] This bit automatically sets to 1 when a PLL Ready interrupt is generated
     // The bit clears to 0 after the register has been read
     uint8_t pll_rdy_int;
-    // This bit automatically sets to 1 when software reset is complete
+
+    // [4] This bit automatically sets to 1 when software reset is complete
     // The bit clears to 0 after the register has been read
     uint8_t reset_done_int;
-    // This bit automatically sets to 1 when a Data Ready interrupt is generated
+
+    // [3] This bit automatically sets to 1 when a Data Ready interrupt is generated
     // The bit clears to 0 after the register has been read
     uint8_t data_rdy_int;
-    // This bit automatically sets to 1 when the FIFO buffer reaches the threshold
+
+    // [2] This bit automatically sets to 1 when the FIFO buffer reaches the threshold
     // The bit clears to 0 after the register has been read
     uint8_t fifo_ths_int;
-    // This bit automatically sets to 1 when the FIFO buffer is full
+
+    // [1] This bit automatically sets to 1 when the FIFO buffer is full
     // The bit clears to 0 after the register has been read
     uint8_t fifo_full_int;
-    // This bit automatically sets to 1 when an AGC Ready interrupt is generated
+
+    // [0] This bit automatically sets to 1 when an AGC Ready interrupt is generated
     // The bit clears to 0 after the register has been read
     uint8_t agc_rdy_int;
 } icm42688_reg_int_status_t;

@@ -4,7 +4,7 @@ icm42688_reg_int_config1_t icm42688_reg_new_int_config1(void) {
     icm42688_reg_int_config1_t int_config1;
     int_config1.int_tpulse_duration = ICM42688_REG_INT_CONFIG1_INT_TPULSE_DURATION_100US;
     int_config1.int_tdeassert_disable = ICM42688_REG_INT_CONFIG1_INT_TDEASSERT_DISABLE_MINIMUM;
-    int_config1.int_async_reset = ICM42688_REG_INT_CONFIG1_INT_ASYNC_RESET_DISABLED;
+    int_config1.int_async_reset = ICM42688_REG_INT_CONFIG1_INT_ASYNC_RESET_RESET_VALUE;
     return int_config1;
 }
 

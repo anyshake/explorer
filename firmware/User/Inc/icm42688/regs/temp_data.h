@@ -7,9 +7,10 @@
 #include "User/Inc/icm42688/utils.h"
 
 typedef struct {
-    // Lower byte of temperature data
+    // [7:0] Lower byte of temperature data
     uint8_t temp_data_l;
-    // Upper byte of temperature data
+
+    // [7:0] Upper byte of temperature data
     uint8_t temp_data_h;
 } icm42688_reg_temp_data_t;
 

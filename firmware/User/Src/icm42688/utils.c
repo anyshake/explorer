@@ -7,7 +7,7 @@ void icm42688_init(icm42688_ints_pin_t pin) {
 
 void icm42688_reset(bool is_rtos) {
     icm42688_reg_device_config_t device_config = icm42688_reg_new_device_config();
-    device_config.soft_reset_config = ICM42688_REG_DEVICE_CONFIG_SOFT_RESET_CONFIG_ENABLE;
+    device_config.soft_reset_config = ICM42688_REG_DEVICE_CONFIG_SOFT_RESET_CONFIG_ENABLED;
     icm42688_reg_set_device_config(&device_config);
     mcu_utils_delay_ms(100, is_rtos);
 }
@@ -20,11 +20,13 @@ void icm42688_wait(void) {
 }
 
 void icm42688_read_reg(uint8_t reg, uint8_t* rx_data) {
-    mcu_utils_i2c1_read_mem(ICM42688_I2C_ADDRES, reg, rx_data, 1,
-                            MCU_UTILS_I2C1_REG_WIDTH_8);
+    icm42688_read_regs(reg, rx_data, 1);
+}
+
+void icm42688_read_regs(uint8_t reg, uint8_t* rx_data, uint16_t rx_len) {
+    mcu_utils_i2c1_read_mem(ICM42688_I2C_ADDRESS, reg, rx_data, rx_len, MCU_UTILS_I2C1_REG_WIDTH_8);
 }
 
 void icm42688_write_reg(uint8_t reg, uint8_t tx_data) {
-    mcu_utils_i2c1_write_mem(ICM42688_I2C_ADDRES, reg, &tx_data, sizeof(tx_data),
-                             MCU_UTILS_I2C1_REG_WIDTH_8);
+    mcu_utils_i2c1_write_mem(ICM42688_I2C_ADDRESS, reg, &tx_data, sizeof(tx_data), MCU_UTILS_I2C1_REG_WIDTH_8);
 }

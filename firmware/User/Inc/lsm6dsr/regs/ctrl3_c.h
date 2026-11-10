@@ -6,6 +6,7 @@
 #include "User/Inc/lsm6dsr/reg_map.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
+// Register reset value
 #define __LSM6DSR_REG_CTRL3_C_DEFAULT_VALUE 0x04
 
 #define LSM6DSR_REG_CTRL3_C_BOOT_NORMAL_MODE 0x00
@@ -30,35 +31,41 @@
 #define LSM6DSR_REG_CTRL3_C_SW_RESET_RESET_DEVICE 0x01
 
 typedef struct {
-    // Reboot memory content
-    // 0x00: normal mode (default)
-    // 0x01: reboot memory content
+    // [7] Reboot memory content
+    // 0x00: Normal mode (default)
+    // 0x01: Reboot memory content
     uint8_t boot;
-    // Block Data Update
-    // 0x00: continuous update (default)
-    // 0x01: output registers not updated until MSB and LSB have been read
+
+    // [6] Block Data Update
+    // 0x00: Continuous update (default)
+    // 0x01: Output registers not updated until MSB and LSB have been read
     uint8_t bdu;
-    // Interrupt activation level
-    // 0x00: interrupt output pads active high (default)
-    // 0x01: interrupt output pads active low
+
+    // [5] Interrupt activation level
+    // 0x00: Interrupt output pads active high (default)
+    // 0x01: Interrupt output pads active low
     uint8_t h_lactive;
-    // Push-pull/open-drain selection on INT1 and INT2 pads
-    // 0x00: push-pull mode (default)
-    // 0x01: open-drain mode
+
+    // [4] Push-pull/open-drain selection on INT1 and INT2 pads
+    // 0x00: Push-pull mode (default)
+    // 0x01: Open-drain mode
     uint8_t pp_od;
-    // SPI Serial Interface Mode selection
+
+    // [3] SPI Serial Interface Mode selection
     // 0x00: 4-wire interface (default)
     // 0x01: 3-wire interface
     uint8_t sim;
-    // Register address automatically incremented during a multiple byte access
+
+    // [2] Register address automatically incremented during a multiple byte access
     // with a serial interface (I2C or SPI)
-    // 0x00: disabled
-    // 0x01: enabled (default)
+    // 0x00: Disabled
+    // 0x01: Enabled (default)
     uint8_t if_inc;
-    // Software reset
+
+    // [0] Software reset
     // Note: This bit is automatically cleared after the reset operation
-    // 0x00: normal mode (default)
-    // 0x01: reset device
+    // 0x00: Normal mode (default)
+    // 0x01: Reset device
     uint8_t sw_reset;
 } lsm6dsr_reg_ctrl3_c_t;
 

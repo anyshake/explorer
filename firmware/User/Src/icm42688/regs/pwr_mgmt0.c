@@ -2,8 +2,8 @@
 
 icm42688_reg_pwr_mgmt0_t icm42688_reg_new_pwr_mgmt0(void) {
     icm42688_reg_pwr_mgmt0_t pwr_mgmt0;
-    pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_ENABLED;
-    pwr_mgmt0.idle = ICM42688_REG_PWR_MGMT0_IDLE_ENABLED;
+    pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_SENSOR_ENABLED;
+    pwr_mgmt0.idle = ICM42688_REG_PWR_MGMT0_IDLE_DISABLED;
     pwr_mgmt0.gyro_mode = ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF;
     pwr_mgmt0.accel_mode = ICM42688_REG_PWR_MGMT0_ACCEL_MODE_OFF;
     return pwr_mgmt0;
@@ -21,6 +21,8 @@ void icm42688_reg_set_pwr_mgmt0(icm42688_reg_pwr_mgmt0_t* pwr_mgmt0) {
     pwr_mgmt0_data |= (pwr_mgmt0->accel_mode & 0x03);
     icm42688_write_reg(ICM42688_REG_REG_BANK_SEL, 0);
     icm42688_write_reg(ICM42688_REG_PWR_MGMT0, pwr_mgmt0_data);
+    // Leave at least 200 us without register writes; allow for 1 ms tick rounding.
+    mcu_utils_delay_ms(2, false);
 }
 
 void icm42688_reg_get_pwr_mgmt0(icm42688_reg_pwr_mgmt0_t* pwr_mgmt0) {

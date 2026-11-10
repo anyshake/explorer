@@ -2,11 +2,11 @@
 
 lsm6dsr_reg_ctrl4_c_t lsm6dsr_reg_new_ctrl4_c(void) {
     lsm6dsr_reg_ctrl4_c_t ctrl4_c;
-    ctrl4_c.sleep_g = LSM6DSR_REG_CTRL4_C_SLEEP_G_DISABLE;
+    ctrl4_c.sleep_g = LSM6DSR_REG_CTRL4_C_SLEEP_G_DISABLED;
     ctrl4_c.int2_on_int1 = LSM6DSR_REG_CTRL4_C_INT2_ON_INT1_OFF;
-    ctrl4_c.drdy_mask = LSM6DSR_REG_CTRL4_C_DRDY_MASK_DISABLE;
+    ctrl4_c.drdy_mask = LSM6DSR_REG_CTRL4_C_DRDY_MASK_DISABLED;
     ctrl4_c.i2c_disable = LSM6DSR_REG_CTRL4_C_I2C_DISABLE_BYPASS;
-    ctrl4_c.lpf1_sel_g = LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_DISABLE;
+    ctrl4_c.lpf1_sel_g = LSM6DSR_REG_CTRL4_C_LPF1_SEL_G_DISABLED;
     return ctrl4_c;
 }
 

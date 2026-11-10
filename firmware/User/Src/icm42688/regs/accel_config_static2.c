@@ -3,7 +3,7 @@
 icm42688_reg_accel_config_static2_t icm42688_reg_new_accel_config_static2(void) {
     icm42688_reg_accel_config_static2_t accel_config_static2;
     accel_config_static2.accel_aaf_delt = 0x18;
-    accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_ENABLED;
+    accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_FILTER_ENABLED;
     return accel_config_static2;
 }
 

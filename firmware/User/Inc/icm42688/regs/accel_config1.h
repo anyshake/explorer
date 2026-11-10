@@ -6,6 +6,7 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_ACCEL_CONFIG1_DEFAULT_VALUE 0x0D
 
 #define ICM42688_REG_ACCEL_CONFIG1_ACCEL_UI_FILT_ORD_1 0x00
@@ -15,12 +16,13 @@
 #define ICM42688_REG_ACCEL_CONFIG1_ACCEL_DEC2_M2_ORD_3 0x02
 
 typedef struct {
-    // Selects order of ACCEL UI filter
+    // [4:3] Selects order of ACCEL UI filter
     // 0x00: 1st order
     // 0x01: 2nd order (default)
     // 0x02: 3rd order
     uint8_t accel_ui_filt_ord;
-    // Order of Accelerometer DEC2_M2 filter
+
+    // [2:1] Order of Accelerometer DEC2_M2 filter
     // 0x02: 3rd order (default)
     uint8_t accel_dec2_m2_ord;
 } icm42688_reg_accel_config1_t;

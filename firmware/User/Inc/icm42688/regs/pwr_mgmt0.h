@@ -6,13 +6,14 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_PWR_MGMT0_DEFAULT_VALUE 0x00
 
-#define ICM42688_REG_PWR_MGMT0_TEMP_DIS_ENABLED 0x00
-#define ICM42688_REG_PWR_MGMT0_TEMP_DIS_DISABLED 0x01
+#define ICM42688_REG_PWR_MGMT0_TEMP_DIS_SENSOR_ENABLED 0x00
+#define ICM42688_REG_PWR_MGMT0_TEMP_DIS_SENSOR_DISABLED 0x01
 
-#define ICM42688_REG_PWR_MGMT0_IDLE_ENABLED 0x00
-#define ICM42688_REG_PWR_MGMT0_IDLE_DISABLED 0x01
+#define ICM42688_REG_PWR_MGMT0_IDLE_DISABLED 0x00
+#define ICM42688_REG_PWR_MGMT0_IDLE_ENABLED 0x01
 
 #define ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF 0x00
 #define ICM42688_REG_PWR_MGMT0_GYRO_MODE_STANDBY 0x01
@@ -23,19 +24,24 @@
 #define ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE 0x03
 
 typedef struct {
-    // Temperature sensor enable / disable
+    // [5] Temperature sensor enable / disable
     // 0x00: Temperature sensor is enabled (default)
     // 0x01: Temperature sensor is disabled
     uint8_t temp_dis;
-    // 0x00: the RC oscillator is powered on even if Accel and Gyro are powered off (default)
-    // 0x01: when Accel and Gyro are powered off, the chip will go to OFF state, since the RC oscillator will also be powered off
+
+    // [4] Keep the RC oscillator running while both sensors are off
+    // 0x00: RC oscillator powers off with both sensors (default)
+    // 0x01: RC oscillator remains on even when both sensors are off
     uint8_t idle;
-    // Gyroscope needs to be kept ON for a minimum of 45ms. When transitioning from OFF to any of the other modes, do not issue any register writes for 200μs
+
+    // [3:2] Gyroscope needs to be kept ON for a minimum of 45 ms. When transitioning from OFF to any of the
+    // other modes, do not issue any register writes for 200 us
     // 0x00: Turns gyroscope off (default)
     // 0x01: Places gyroscope in Standby Mode
     // 0x03: Places gyroscope in Low Noise Mode
     uint8_t gyro_mode;
-    // When transitioning from OFF to any of the other modes, do not issue any register writes for 200μs
+
+    // [1:0] When transitioning from OFF to any of the other modes, do not issue any register writes for 200 us
     // 0x00: Turns accelerometer off (default)
     // 0x01: Turns accelerometer off
     // 0x02: Places accelerometer in Low Power (LP) Mode

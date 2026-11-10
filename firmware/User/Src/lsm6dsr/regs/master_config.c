@@ -26,19 +26,28 @@ void lsm6dsr_reg_set_master_config(lsm6dsr_reg_master_config_t* master_config) {
     master_config_data |= (master_config->shub_pu_en & 0x01) << 3;
     master_config_data &= ~(0x01 << 2);
     master_config_data |= (master_config->master_on & 0x01) << 2;
-    master_config_data &= ~(0x03 << 1);
-    master_config_data |= (master_config->aux_sens_on & 0x03) << 1;
+    master_config_data &= ~0x03;
+    master_config_data |= (master_config->aux_sens_on & 0x03);
+    uint8_t func_cfg_access = 0;
+    lsm6dsr_read_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, &func_cfg_access);
+    // MASTER_CONFIG belongs to the sensor-hub bank, not the user bank.
+    lsm6dsr_write_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, (func_cfg_access & 0x3F) | LSM6DSR_BANK_SENSOR_HUB);
     lsm6dsr_write_reg(LSM6DSR_REG_MASTER_CONFIG, master_config_data);
+    lsm6dsr_write_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, func_cfg_access);
 }
 
 void lsm6dsr_reg_get_master_config(lsm6dsr_reg_master_config_t* master_config) {
     uint8_t master_config_data = 0;
+    uint8_t func_cfg_access = 0;
+    lsm6dsr_read_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, &func_cfg_access);
+    lsm6dsr_write_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, (func_cfg_access & 0x3F) | LSM6DSR_BANK_SENSOR_HUB);
     lsm6dsr_read_reg(LSM6DSR_REG_MASTER_CONFIG, &master_config_data);
+    lsm6dsr_write_reg(LSM6DSR_REG_FUNC_CFG_ACCESS, func_cfg_access);
     master_config->rst_master_regs = (master_config_data >> 7) & 0x01;
     master_config->write_once = (master_config_data >> 6) & 0x01;
     master_config->start_config = (master_config_data >> 5) & 0x01;
     master_config->pass_through_mode = (master_config_data >> 4) & 0x01;
     master_config->shub_pu_en = (master_config_data >> 3) & 0x01;
     master_config->master_on = (master_config_data >> 2) & 0x01;
-    master_config->aux_sens_on = (master_config_data >> 1) & 0x03;
+    master_config->aux_sens_on = master_config_data & 0x03;
 }

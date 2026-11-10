@@ -6,6 +6,7 @@
 #include "User/Inc/lsm6dsr/reg_map.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
+// Register reset value
 #define __LSM6DSR_REG_INT1_CTRL_DEFAULT_VALUE 0x00
 
 #define LSM6DSR_REG_INT1_CTRL_DEN_DRDY_FLAG_DISABLED 0x00
@@ -33,37 +34,44 @@
 #define LSM6DSR_REG_INT1_CTRL_INT1_DRDY_XL_ENABLED 0x01
 
 typedef struct {
-    // Sends DEN_DRDY (DEN stamped on Sensor Data flag) to INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+    // [7] Sends DEN_DRDY (DEN stamped on Sensor Data flag) to INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t den_drdy_flag;
-    // Enables COUNTER_BDR_IA interrupt on INT1
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [6] Enables COUNTER_BDR_IA interrupt on INT1
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_cnt_bdr;
-    // Enables FIFO full flag interrupt on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [5] Enables FIFO full flag interrupt on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_fifo_full;
-    // Enables FIFO overrun interrupt on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [4] Enables FIFO overrun interrupt on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_fifo_ovr;
-    // Enables FIFO threshold interrupt on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [3] Enables FIFO threshold interrupt on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_fifo_th;
-    // Enables boot status on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [2] Enables boot status on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_boot;
-    // Enables gyroscope data-ready interrupt on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [1] Enables gyroscope data-ready interrupt on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_drdy_g;
-    // Enables accelerometer data-ready interrupt on INT1 pin
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [0] Enables accelerometer data-ready interrupt on INT1 pin
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t int1_drdy_xl;
 } lsm6dsr_reg_int1_ctrl_t;
 

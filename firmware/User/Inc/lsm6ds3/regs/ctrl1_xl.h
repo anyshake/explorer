@@ -6,10 +6,10 @@
 #include "User/Inc/lsm6ds3/reg_map.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
+// Register reset value
 #define __LSM6DS3_REG_CTRL1_XL_DEFAULT_VALUE 0x00
 
 #define LSM6DS3_REG_CTRL1_XL_ODR_XL_POWER_DOWN 0x00
-#define LSM6DS3_REG_CTRL1_XL_ODR_XL_1_6HZ 0x0B
 #define LSM6DS3_REG_CTRL1_XL_ODR_XL_12_5HZ 0x01
 #define LSM6DS3_REG_CTRL1_XL_ODR_XL_26HZ 0x02
 #define LSM6DS3_REG_CTRL1_XL_ODR_XL_52HZ 0x03
@@ -26,33 +26,34 @@
 #define LSM6DS3_REG_CTRL1_XL_FS_XL_4G 0x02
 #define LSM6DS3_REG_CTRL1_XL_FS_XL_8G 0x03
 
-#define LSM6DS3_REG_CTRL1_XL_BW0_XL_400HZ 0x00
-#define LSM6DS3_REG_CTRL1_XL_BW0_XL_200HZ 0x01
-#define LSM6DS3_REG_CTRL1_XL_BW0_XL_100HZ 0x02
-#define LSM6DS3_REG_CTRL1_XL_BW0_XL_50HZ 0x03
+#define LSM6DS3_REG_CTRL1_XL_BW_XL_400HZ 0x00
+#define LSM6DS3_REG_CTRL1_XL_BW_XL_200HZ 0x01
+#define LSM6DS3_REG_CTRL1_XL_BW_XL_100HZ 0x02
+#define LSM6DS3_REG_CTRL1_XL_BW_XL_50HZ 0x03
 
 typedef struct {
-    // Output data rate and power mode selection
+    // [7:4] Output data rate; the power mode also depends on CTRL6_C.XL_HM_MODE
     // 0x00: Power-down mode (default)
-    // 0x0B: 1.6 Hz low-power mode, 12.5 Hz high performance mode
-    // 0x01: 12.5 Hz low-power mode, 12.5 Hz high performance mode
-    // 0x02: 26 Hz low-power mode, 26 Hz high performance mode
-    // 0x03: 52 Hz low-power mode, 52 Hz high performance mode
-    // 0x04: 104 Hz low-power mode, 104 Hz high performance mode
-    // 0x05: 208 Hz low-power mode, 208 Hz high performance mode
-    // 0x06: 416 Hz low-power mode, 416 Hz high performance mode
-    // 0x07: 833 Hz low-power mode, 833 Hz high performance mode
-    // 0x08: 1660 Hz low-power mode, 1660 Hz high performance mode
-    // 0x09: 3330 Hz low-power mode, 3330 Hz high performance mode
-    // 0x0A: 6660 Hz low-power mode, 6660 Hz high performance mode
+    // 0x01: 12.5 Hz
+    // 0x02: 26 Hz
+    // 0x03: 52 Hz
+    // 0x04: 104 Hz
+    // 0x05: 208 Hz
+    // 0x06: 416 Hz
+    // 0x07: 833 Hz
+    // 0x08: 1.66 kHz
+    // 0x09: 3.33 kHz
+    // 0x0A: 6.66 kHz
     uint8_t odr_xl;
-    // Accelerometer full-scale selection
-    // 0x00: +-2 g (default)
-    // 0x01: +-16 g
-    // 0x02: +-4 g
-    // 0x03: +-8 g
+
+    // [3:2] Accelerometer full-scale selection
+    // 0x00: ±2 g (default)
+    // 0x01: ±16 g
+    // 0x02: ±4 g
+    // 0x03: ±8 g
     uint8_t fs_xl;
-    // Anti-aliasing filter bandwidth selection
+
+    // [1:0] Anti-aliasing filter bandwidth selection
     // 0x00: 400 Hz (default)
     // 0x01: 200 Hz
     // 0x02: 100 Hz

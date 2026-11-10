@@ -18,7 +18,7 @@ void icm42688_reg_set_gyro_accel_config0(icm42688_reg_gyro_accel_config0_t* gyro
 }
 
 void icm42688_reg_get_gyro_accel_config0(icm42688_reg_gyro_accel_config0_t* gyro_accel_config0) {
-    icm42688_write_reg(ICM42688_REG_GYRO_ACCEL_CONFIG0, 0);
+    icm42688_write_reg(ICM42688_REG_REG_BANK_SEL, 0);
     uint8_t gyro_accel_config0_data = 0;
     icm42688_read_reg(ICM42688_REG_GYRO_ACCEL_CONFIG0, &gyro_accel_config0_data);
     gyro_accel_config0->accel_ui_filt_bw = (gyro_accel_config0_data >> 4) & 0x0F;

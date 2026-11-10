@@ -4,7 +4,7 @@ lsm6ds3_reg_ctrl1_xl_t lsm6ds3_reg_new_ctrl1_xl(void) {
     lsm6ds3_reg_ctrl1_xl_t ctrl1_xl;
     ctrl1_xl.odr_xl = LSM6DS3_REG_CTRL1_XL_ODR_XL_POWER_DOWN;
     ctrl1_xl.fs_xl = LSM6DS3_REG_CTRL1_XL_FS_XL_2G;
-    ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_400HZ;
+    ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW_XL_400HZ;
     return ctrl1_xl;
 }
 

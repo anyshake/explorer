@@ -6,6 +6,7 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_ACCEL_CONFIG0_DEFAULT_VALUE 0x06
 
 #define ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_16G 0x00
@@ -30,28 +31,29 @@
 #define ICM42688_REG_ACCEL_CONFIG0_ACCEL_ODR_500_HZ 0x0F
 
 typedef struct {
-    // Full scale select for accelerometer UI interface output
+    // [7:5] Full scale select for accelerometer UI interface output
     // 0x00: ±16g (default)
     // 0x01: ±8g
     // 0x02: ±4g
     // 0x03: ±2g
     uint8_t accel_fs_sel;
-    // Accelerometer ODR selection for UI interface output
-    // 0x01: 32kHz (LN mode)
-    // 0x02: 16kHz (LN mode)
-    // 0x03: 8kHz (LN mode)
-    // 0x04: 4kHz (LN mode)
-    // 0x05: 2kHz (LN mode)
-    // 0x06: 1kHz (LN mode) (default)
-    // 0x07: 200Hz (LP or LN mode)
-    // 0x08: 100Hz (LP or LN mode)
-    // 0x09: 50Hz (LP or LN mode)
-    // 0x0A: 25Hz (LP or LN mode)
-    // 0x0B: 12.5Hz (LP or LN mode)
-    // 0x0C: 6.25Hz (LP mode)
-    // 0x0D: 3.125Hz (LP mode)
-    // 0x0E: 1.5625Hz (LP mode)
-    // 0x0F: 500Hz (LP or LN mode)
+
+    // [3:0] Accelerometer ODR selection for UI interface output
+    // 0x01: 32 kHz (LN mode)
+    // 0x02: 16 kHz (LN mode)
+    // 0x03: 8 kHz (LN mode)
+    // 0x04: 4 kHz (LN mode)
+    // 0x05: 2 kHz (LN mode)
+    // 0x06: 1 kHz (LN mode) (default)
+    // 0x07: 200 Hz (LP or LN mode)
+    // 0x08: 100 Hz (LP or LN mode)
+    // 0x09: 50 Hz (LP or LN mode)
+    // 0x0A: 25 Hz (LP or LN mode)
+    // 0x0B: 12.5 Hz (LP or LN mode)
+    // 0x0C: 6.25 Hz (LP mode)
+    // 0x0D: 3.125 Hz (LP mode)
+    // 0x0E: 1.5625 Hz (LP mode)
+    // 0x0F: 500 Hz (LP or LN mode)
     uint8_t accel_odr;
 } icm42688_reg_accel_config0_t;
 

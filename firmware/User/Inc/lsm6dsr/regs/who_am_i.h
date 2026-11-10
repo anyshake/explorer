@@ -6,13 +6,14 @@
 #include "User/Inc/lsm6dsr/reg_map.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
-#define __LSM6DSR_WHO_AM_I_DEFAULT_VALUE 0x6A
+#define LSM6DSR_WHO_AM_I_VALUE 0x6B
+
+// Register reset value
+#define __LSM6DSR_WHO_AM_I_DEFAULT_VALUE 0x6B
 
 typedef struct {
-    // Device ID, read-only
-    // 0x69: LSM6DS3
-    // 0x6A: LSM6DS3TR-C
-    // 0x6C: LSM6DSO
+    // [7:0] Device ID, read-only
+    // 0x6B: LSM6DSR
     uint8_t dev_id;
 } lsm6dsr_reg_who_am_i_t;
 

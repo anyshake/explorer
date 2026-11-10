@@ -3,12 +3,12 @@
 lsm6ds3_reg_ctrl4_c_t lsm6ds3_reg_new_ctrl4_c(void) {
     lsm6ds3_reg_ctrl4_c_t ctrl4_c;
     ctrl4_c.xl_bw_scal_odr = LSM6DS3_REG_CTRL4_C_XL_BW_SCAL_ODR_BYPASS;
-    ctrl4_c.sleep_g = LSM6DS3_REG_CTRL4_C_SLEEP_G_DISABLE;
+    ctrl4_c.sleep_g = LSM6DS3_REG_CTRL4_C_SLEEP_G_DISABLED;
     ctrl4_c.int2_on_int1 = LSM6DS3_REG_CTRL4_C_INT2_ON_INT1_OFF;
-    ctrl4_c.fifo_temp_en = LSM6DS3_REG_CTRL4_C_FIFO_TEMP_EN_DISABLE;
-    ctrl4_c.drdy_mask = LSM6DS3_REG_CTRL4_C_DRDY_MASK_DISABLE;
+    ctrl4_c.fifo_temp_en = LSM6DS3_REG_CTRL4_C_FIFO_TEMP_EN_DISABLED;
+    ctrl4_c.drdy_mask = LSM6DS3_REG_CTRL4_C_DRDY_MASK_DISABLED;
     ctrl4_c.i2c_disable = LSM6DS3_REG_CTRL4_C_I2C_DISABLE_BYPASS;
-    ctrl4_c.stop_on_fth = LSM6DS3_REG_CTRL4_C_STOP_ON_FTH_DISABLE;
+    ctrl4_c.stop_on_fth = LSM6DS3_REG_CTRL4_C_STOP_ON_FTH_DISABLED;
     return ctrl4_c;
 }
 

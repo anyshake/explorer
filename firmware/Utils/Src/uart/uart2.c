@@ -4,6 +4,10 @@ extern mcu_utils_uart_buffer_t uart2_rx_buffer;
 extern uint8_t uart2_rx_char;
 
 void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
+    if (HAL_UART_GetState(&huart2) != HAL_UART_STATE_RESET && huart2.Init.BaudRate != baudrate) {
+        mcu_utils_uart2_end();
+    }
+
     if (HAL_UART_GetState(&huart2) == HAL_UART_STATE_RESET) {
         huart2.Instance = USART2;
         huart2.Init.BaudRate = baudrate;
@@ -13,9 +17,16 @@ void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
         huart2.Init.Mode = UART_MODE_TX_RX;
         huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
         huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-        HAL_UART_Init(&huart2);
+        if (HAL_UART_Init(&huart2) != HAL_OK) {
+            Error_Handler();
+        }
         mcu_utils_uart2_flush();
-        HAL_UART_Receive_DMA(&huart2, &uart2_rx_char, sizeof(uart2_rx_char));
+        __HAL_UART_CLEAR_OREFLAG(&huart2);
+        HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+        HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
+        if (HAL_UART_Receive_DMA(&huart2, &uart2_rx_char, sizeof(uart2_rx_char)) != HAL_OK) {
+            Error_Handler();
+        }
     }
 
     mcu_utils_delay_ms(100, is_rtos);
@@ -34,11 +45,15 @@ void mcu_utils_uart2_flush(void) {
 
 void mcu_utils_uart2_end(void) {
     if (HAL_UART_GetState(&huart2) != HAL_UART_STATE_RESET) {
-        HAL_UART_DMAStop(&huart2);
-        __HAL_UART_DISABLE_IT(&huart2, UART_IT_IDLE);
+        HAL_NVIC_DisableIRQ(USART2_IRQn);
         HAL_NVIC_DisableIRQ(DMA1_Channel6_IRQn);
         HAL_NVIC_DisableIRQ(DMA1_Channel7_IRQn);
+        HAL_UART_DMAStop(&huart2);
+        __HAL_UART_DISABLE_IT(&huart2, UART_IT_IDLE);
         HAL_UART_DeInit(&huart2);
+        HAL_NVIC_ClearPendingIRQ(USART2_IRQn);
+        HAL_NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
+        HAL_NVIC_ClearPendingIRQ(DMA1_Channel7_IRQn);
         mcu_utils_uart2_flush();
     }
 }

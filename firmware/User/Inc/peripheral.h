@@ -27,6 +27,7 @@
 #include "User/Inc/icm42688/regs/accel_config_static4.h"
 #include "User/Inc/icm42688/regs/gyro_accel_config0.h"
 #include "User/Inc/icm42688/regs/pwr_mgmt0.h"
+#include "User/Inc/icm42688/regs/who_am_i.h"
 #include "User/Inc/icm42688/utils.h"
 
 #include "User/Inc/lsm6ds3/lsb_per_g.h"
@@ -35,7 +36,17 @@
 #include "User/Inc/lsm6ds3/regs/ctrl3_c.h"
 #include "User/Inc/lsm6ds3/regs/ctrl4_c.h"
 #include "User/Inc/lsm6ds3/regs/ctrl8_xl.h"
+#include "User/Inc/lsm6ds3/regs/who_am_i.h"
 #include "User/Inc/lsm6ds3/utils.h"
+
+#include "User/Inc/lsm6ds3tr_c/lsb_per_g.h"
+#include "User/Inc/lsm6ds3tr_c/regs/ctrl10_c.h"
+#include "User/Inc/lsm6ds3tr_c/regs/ctrl1_xl.h"
+#include "User/Inc/lsm6ds3tr_c/regs/ctrl3_c.h"
+#include "User/Inc/lsm6ds3tr_c/regs/ctrl4_c.h"
+#include "User/Inc/lsm6ds3tr_c/regs/ctrl8_xl.h"
+#include "User/Inc/lsm6ds3tr_c/regs/who_am_i.h"
+#include "User/Inc/lsm6ds3tr_c/utils.h"
 
 #include "User/Inc/lsm6dsr/lsb_per_g.h"
 #include "User/Inc/lsm6dsr/regs/ctrl1_xl.h"
@@ -43,12 +54,14 @@
 #include "User/Inc/lsm6dsr/regs/ctrl4_c.h"
 #include "User/Inc/lsm6dsr/regs/ctrl8_xl.h"
 #include "User/Inc/lsm6dsr/regs/master_config.h"
+#include "User/Inc/lsm6dsr/regs/who_am_i.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
 void peri_gnss_init(void);
 void peri_screen_init(void);
 void peri_eeprom_init(void);
-uint16_t peri_imu_init(uint8_t sample_rate);
+explorer_imu_type_t peri_imu_detect(void);
+uint16_t peri_imu_init(explorer_imu_type_t imu_type);
 void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d);
 
 #endif

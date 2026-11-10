@@ -6,6 +6,7 @@
 #include "User/Inc/lsm6ds3/reg_map.h"
 #include "User/Inc/lsm6ds3/utils.h"
 
+// Register reset value
 #define __LSM6DS3_REG_INT1_CTRL_DEFAULT_VALUE 0x00
 
 #define LSM6DS3_REG_INT1_CTRL_STEP_DETECTOR_DISABLED 0x00
@@ -33,37 +34,44 @@
 #define LSM6DS3_REG_INT1_CTRL_DRDY_XL_ENABLED 0x01
 
 typedef struct {
-    // Pedometer step recognition interrupt enable on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+    // [7] Pedometer step recognition interrupt enable on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t step_detector;
-    // Significant motion interrupt enable on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [6] Significant motion interrupt enable on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t sign_mot;
-    // FIFO full flag interrupt enable on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [5] FIFO full flag interrupt enable on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t full_flag;
-    // FIFO overrun interrupt on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [4] FIFO overrun interrupt on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t fifo_ovr;
-    // FIFO threshold interrupt on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [3] FIFO threshold interrupt on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t fth;
-    // Boot status available on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [2] Boot status available on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t boot;
-    // Gyroscope Data Ready on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [1] Gyroscope Data Ready on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t drdy_g;
-    // Accelerometer Data Ready on INT1 pad
-    // 0x00: disabled (default)
-    // 0x01: enabled
+
+    // [0] Accelerometer Data Ready on INT1 pad
+    // 0x00: Disabled (default)
+    // 0x01: Enabled
     uint8_t drdy_xl;
 } lsm6ds3_reg_int1_ctrl_t;
 

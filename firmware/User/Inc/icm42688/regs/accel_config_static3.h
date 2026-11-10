@@ -6,11 +6,12 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_ACCEL_CONFIG_STATIC3_DEFAULT_VALUE 0x40
 
 typedef struct {
-    // Controls bandwidth of the accelerometer anti-alias filter
-    // See section 5.2 for details
+    // [7:0] Controls bandwidth of the accelerometer anti-alias filter
+    // See the anti-alias filter bandwidth table in DS-000347, section 5.3
     uint8_t accel_aaf_deltsqr_bit_0_to_7;
 } icm42688_reg_accel_config_static3_t;
 

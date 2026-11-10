@@ -7,9 +7,10 @@
 #include "User/Inc/icm42688/utils.h"
 
 typedef struct {
-    // Lower byte of Gyro Y-axis data
+    // [7:0] Lower byte of Gyro Y-axis data
     uint8_t gyro_data_y_l;
-    // Upper byte of Gyro Y-axis data
+
+    // [7:0] Upper byte of Gyro Y-axis data
     uint8_t gyro_data_y_h;
 } icm42688_reg_gyro_data_y_t;
 

@@ -3,10 +3,10 @@
 lsm6dsr_reg_ctrl8_xl_t lsm6dsr_reg_new_ctrl8_xl(void) {
     lsm6dsr_reg_ctrl8_xl_t ctrl8_xl;
     ctrl8_xl.hpcf_xl = LSM6DSR_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_4;
-    ctrl8_xl.hp_ref_mode_xl = LSM6DSR_REG_CTRL8_XL_HP_REF_MODE_XL_DISABLE;
-    ctrl8_xl.fastsettl_mode_xl = LSM6DSR_REG_CTRL8_XL_FASTSETTL_MODE_XL_DISABLE;
-    ctrl8_xl.hp_slope_xl_en = LSM6DSR_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLE;
-    ctrl8_xl.low_pass_on_6d = LSM6DSR_REG_CTRL8_XL_LOW_PASS_ON_6D_DISABLE;
+    ctrl8_xl.hp_ref_mode_xl = LSM6DSR_REG_CTRL8_XL_HP_REF_MODE_XL_DISABLED;
+    ctrl8_xl.fastsettl_mode_xl = LSM6DSR_REG_CTRL8_XL_FASTSETTL_MODE_XL_DISABLED;
+    ctrl8_xl.hp_slope_xl_en = LSM6DSR_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLED;
+    ctrl8_xl.low_pass_on_6d = LSM6DSR_REG_CTRL8_XL_LOW_PASS_ON_6D_DISABLED;
     return ctrl8_xl;
 }
 

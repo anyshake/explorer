@@ -6,6 +6,8 @@ void lsm6ds3_init(lsm6ds3_ints_pin_t pin) {
 }
 
 void lsm6ds3_reset(bool is_rtos) {
+    // Restore the user bank after an MCU-only reset.
+    lsm6ds3_write_reg(LSM6DS3_REG_FUNC_CFG_ACCESS, 0x00);
     lsm6ds3_reg_ctrl3_c_t ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
     ctrl3_c.sw_reset = LSM6DS3_REG_CTRL3_C_SW_RESET_RESET_DEVICE;
     lsm6ds3_reg_set_ctrl3_c(&ctrl3_c);
@@ -20,9 +22,13 @@ void lsm6ds3_wait(void) {
 }
 
 void lsm6ds3_read_reg(uint8_t reg, uint8_t* rx_data) {
-    mcu_utils_i2c1_read_mem(LSM6DS3_I2C_ADDRES, reg, rx_data, 1, MCU_UTILS_I2C1_REG_WIDTH_8);
+    lsm6ds3_read_regs(reg, rx_data, 1);
+}
+
+void lsm6ds3_read_regs(uint8_t reg, uint8_t* rx_data, uint16_t rx_len) {
+    mcu_utils_i2c1_read_mem(LSM6DS3_I2C_ADDRESS, reg, rx_data, rx_len, MCU_UTILS_I2C1_REG_WIDTH_8);
 }
 
 void lsm6ds3_write_reg(uint8_t reg, uint8_t tx_data) {
-    mcu_utils_i2c1_write_mem(LSM6DS3_I2C_ADDRES, reg, &tx_data, sizeof(tx_data), MCU_UTILS_I2C1_REG_WIDTH_8);
+    mcu_utils_i2c1_write_mem(LSM6DS3_I2C_ADDRESS, reg, &tx_data, sizeof(tx_data), MCU_UTILS_I2C1_REG_WIDTH_8);
 }

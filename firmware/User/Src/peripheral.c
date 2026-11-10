@@ -14,9 +14,39 @@ void peri_eeprom_init(void) {
     eeprom_init(EEPROM_WP_PIN);
 }
 
-uint16_t peri_imu_init(uint8_t sample_rate) {
-#if DEVICE_MODEL == E_C111G
-#if HARDWARE_REV >= 20250804
+explorer_imu_type_t peri_imu_detect(void) {
+    uint8_t dev_id = 0;
+    uint8_t bank = 0x00;
+    // All three ST variants use FUNC_CFG_ACCESS = 0x00 for the user bank.
+    if (HAL_I2C_Mem_Write(&hi2c1, LSM6DS3_I2C_ADDRESS << 1, LSM6DS3_REG_FUNC_CFG_ACCESS, MCU_UTILS_I2C1_REG_WIDTH_8,
+                          &bank, 1, 100) == HAL_OK &&
+        HAL_I2C_Mem_Read(&hi2c1, LSM6DS3_I2C_ADDRESS << 1, LSM6DS3_REG_WHO_AM_I, MCU_UTILS_I2C1_REG_WIDTH_8, &dev_id, 1,
+                         100) == HAL_OK) {
+        switch (dev_id) {
+            case LSM6DS3_WHO_AM_I_VALUE:
+                return EXPLORER_IMU_LSM6DS3;
+            case LSM6DS3TR_C_WHO_AM_I_VALUE:
+                return EXPLORER_IMU_LSM6DS3TR_C;
+            case LSM6DSR_WHO_AM_I_VALUE:
+                return EXPLORER_IMU_LSM6DSR;
+        }
+    }
+
+    // A MCU-only reset may leave the ICM42688 in another register bank.
+    if (HAL_I2C_Mem_Write(&hi2c1, ICM42688_I2C_ADDRESS << 1, ICM42688_REG_REG_BANK_SEL, MCU_UTILS_I2C1_REG_WIDTH_8,
+                          &bank, 1, 100) == HAL_OK &&
+        HAL_I2C_Mem_Read(&hi2c1, ICM42688_I2C_ADDRESS << 1, ICM42688_REG_WHO_AM_I, MCU_UTILS_I2C1_REG_WIDTH_8, &dev_id,
+                         1, 100) == HAL_OK &&
+        dev_id == ICM42688_WHO_AM_I_VALUE) {
+        return EXPLORER_IMU_ICM42688;
+    }
+
+    return EXPLORER_IMU_UNKNOWN;
+}
+
+static uint16_t peri_lsm6dsr_init(void) {
+    lsm6dsr_init(LSM6DSR_INTS_PIN);
+    lsm6dsr_reset(false);
     lsm6dsr_reg_master_config_t master_config = lsm6dsr_reg_new_master_config();
     master_config.shub_pu_en = LSM6DSR_REG_MASTER_CONFIG_SHUB_PU_EN_ENABLED;
     lsm6dsr_reg_set_master_config(&master_config);
@@ -28,16 +58,21 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     lsm6dsr_reg_ctrl1_xl.odr_xl = LSM6DSR_REG_CTRL1_XL_ODR_XL_416HZ;
     lsm6dsr_reg_ctrl1_xl.fs_xl = LSM6DSR_REG_CTRL1_XL_FS_XL_2G;
     lsm6dsr_reg_ctrl1_xl.lpf2_xl_en = LSM6DSR_REG_CTRL1_XL_LPF2_XL_EN_2ND_STAGE;
-    lsm6dsr_reg_set_ctrl1_xl(&lsm6dsr_reg_ctrl1_xl);
     lsm6dsr_reg_ctrl4_c_t lsm6dsr_reg_ctrl4_c = lsm6dsr_reg_new_ctrl4_c();
-    lsm6dsr_reg_ctrl4_c.drdy_mask = LSM6DSR_REG_CTRL4_C_DRDY_MASK_ENABLE;
+    lsm6dsr_reg_ctrl4_c.drdy_mask = LSM6DSR_REG_CTRL4_C_DRDY_MASK_ENABLED;
     lsm6dsr_reg_set_ctrl4_c(&lsm6dsr_reg_ctrl4_c);
     lsm6dsr_reg_ctrl8_xl_t lsm6dsr_reg_ctrl8_xl = lsm6dsr_reg_new_ctrl8_xl();
     lsm6dsr_reg_ctrl8_xl.hpcf_xl = LSM6DSR_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_20;
-    lsm6dsr_reg_ctrl8_xl.hp_slope_xl_en = LSM6DSR_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLE;
+    lsm6dsr_reg_ctrl8_xl.hp_slope_xl_en = LSM6DSR_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLED;
     lsm6dsr_reg_set_ctrl8_xl(&lsm6dsr_reg_ctrl8_xl);
+    // Start sampling only after filter and data-ready configuration is complete.
+    lsm6dsr_reg_set_ctrl1_xl(&lsm6dsr_reg_ctrl1_xl);
     return lsm6dsr_get_lsb_per_g();
-#else
+}
+
+static uint16_t peri_lsm6ds3_init(void) {
+    lsm6ds3_init(LSM6DS3_INTS_PIN);
+    lsm6ds3_reset(false);
     lsm6ds3_reg_ctrl3_c_t lsm6ds3_reg_ctrl3_c = lsm6ds3_reg_new_ctrl3_c();
     lsm6ds3_reg_ctrl3_c.bdu = LSM6DS3_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
     lsm6ds3_reg_ctrl3_c.if_inc = LSM6DS3_REG_CTRL3_C_IF_INC_ENABLED;
@@ -45,31 +80,66 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     lsm6ds3_reg_ctrl1_xl_t lsm6ds3_reg_ctrl1_xl = lsm6ds3_reg_new_ctrl1_xl();
     lsm6ds3_reg_ctrl1_xl.odr_xl = LSM6DS3_REG_CTRL1_XL_ODR_XL_416HZ;
     lsm6ds3_reg_ctrl1_xl.fs_xl = LSM6DS3_REG_CTRL1_XL_FS_XL_2G;
-    lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW0_XL_50HZ;
-    lsm6ds3_reg_set_ctrl1_xl(&lsm6ds3_reg_ctrl1_xl);
+    lsm6ds3_reg_ctrl1_xl.bw_xl = LSM6DS3_REG_CTRL1_XL_BW_XL_50HZ;
     lsm6ds3_reg_ctrl4_c_t lsm6ds3_reg_ctrl4_c = lsm6ds3_reg_new_ctrl4_c();
     lsm6ds3_reg_ctrl4_c.xl_bw_scal_odr = LSM6DS3_REG_CTRL4_C_XL_BW_SCAL_ODR_BYPASS;
-    lsm6ds3_reg_ctrl4_c.drdy_mask = LSM6DS3_REG_CTRL4_C_DRDY_MASK_ENABLE;
+    lsm6ds3_reg_ctrl4_c.drdy_mask = LSM6DS3_REG_CTRL4_C_DRDY_MASK_ENABLED;
     lsm6ds3_reg_set_ctrl4_c(&lsm6ds3_reg_ctrl4_c);
     lsm6ds3_reg_ctrl10_c_t lsm6ds3_reg_ctrl10_c = lsm6ds3_reg_new_ctrl10_c();
-    lsm6ds3_reg_ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_ENABLE;
+    lsm6ds3_reg_ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_ENABLED;
     lsm6ds3_reg_set_ctrl10_c(&lsm6ds3_reg_ctrl10_c);
     lsm6ds3_reg_ctrl8_xl_t lsm6ds3_reg_ctrl8_xl = lsm6ds3_reg_new_ctrl8_xl();
-    lsm6ds3_reg_ctrl8_xl.lpf2_xl_en = LSM6DS3_REG_CTRL8_XL_LPF2_XL_EN_ENABLE;
+    lsm6ds3_reg_ctrl8_xl.lpf2_xl_en = LSM6DS3_REG_CTRL8_XL_LPF2_XL_EN_ENABLED;
     lsm6ds3_reg_ctrl8_xl.hpcf_xl = LSM6DS3_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_50;
-    lsm6ds3_reg_ctrl8_xl.hp_slope_xl_en = LSM6DS3_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLE;
+    lsm6ds3_reg_ctrl8_xl.hp_slope_xl_en = LSM6DS3_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLED;
     lsm6ds3_reg_set_ctrl8_xl(&lsm6ds3_reg_ctrl8_xl);
+    // Start sampling only after filter and data-ready configuration is complete.
+    lsm6ds3_reg_set_ctrl1_xl(&lsm6ds3_reg_ctrl1_xl);
     return lsm6ds3_get_lsb_per_g();
-#endif
-#elif DEVICE_MODEL == E_C121G
+}
+
+static uint16_t peri_lsm6ds3tr_c_init(void) {
+    lsm6ds3tr_c_init(LSM6DS3TR_C_INTS_PIN);
+    lsm6ds3tr_c_reset(false);
+    lsm6ds3tr_c_reg_ctrl3_c_t ctrl3_c = lsm6ds3tr_c_reg_new_ctrl3_c();
+    ctrl3_c.bdu = LSM6DS3TR_C_REG_CTRL3_C_BDU_OUTPUT_REGISTERS_NOT_UPDATED;
+    ctrl3_c.if_inc = LSM6DS3TR_C_REG_CTRL3_C_IF_INC_ENABLED;
+    lsm6ds3tr_c_reg_set_ctrl3_c(&ctrl3_c);
+    lsm6ds3tr_c_reg_ctrl1_xl_t ctrl1_xl = lsm6ds3tr_c_reg_new_ctrl1_xl();
+    ctrl1_xl.odr_xl = LSM6DS3TR_C_REG_CTRL1_XL_ODR_XL_416HZ;
+    ctrl1_xl.fs_xl = LSM6DS3TR_C_REG_CTRL1_XL_FS_XL_2G;
+    ctrl1_xl.lpf1_bw_sel = LSM6DS3TR_C_REG_CTRL1_XL_LPF1_BW_SEL_ODR_2;
+    ctrl1_xl.bw0_xl = LSM6DS3TR_C_REG_CTRL1_XL_BW0_XL_400HZ;
+    lsm6ds3tr_c_reg_ctrl4_c_t ctrl4_c = lsm6ds3tr_c_reg_new_ctrl4_c();
+    ctrl4_c.drdy_mask = LSM6DS3TR_C_REG_CTRL4_C_DRDY_MASK_ENABLED;
+    lsm6ds3tr_c_reg_set_ctrl4_c(&ctrl4_c);
+    // Unlike LSM6DS3, TR-C LPF2 does not require FUNC_EN; keep embedded functions off.
+    lsm6ds3tr_c_reg_ctrl10_c_t ctrl10_c = lsm6ds3tr_c_reg_new_ctrl10_c();
+    lsm6ds3tr_c_reg_set_ctrl10_c(&ctrl10_c);
+    lsm6ds3tr_c_reg_ctrl8_xl_t ctrl8_xl = lsm6ds3tr_c_reg_new_ctrl8_xl();
+    ctrl8_xl.lpf2_xl_en = LSM6DS3TR_C_REG_CTRL8_XL_LPF2_XL_EN_ENABLED;
+    ctrl8_xl.hpcf_xl = LSM6DS3TR_C_REG_CTRL8_XL_HPCF_XL_LPF2_ODR_50;
+    ctrl8_xl.input_composite = LSM6DS3TR_C_REG_CTRL8_XL_INPUT_COMPOSITE_LOW_LATENCY;
+    ctrl8_xl.hp_slope_xl_en = LSM6DS3TR_C_REG_CTRL8_XL_HP_SLOPE_XL_EN_DISABLED;
+    lsm6ds3tr_c_reg_set_ctrl8_xl(&ctrl8_xl);
+    // Start sampling only after filter and data-ready configuration is complete.
+    lsm6ds3tr_c_reg_set_ctrl1_xl(&ctrl1_xl);
+    return lsm6ds3tr_c_get_lsb_per_g();
+}
+
+static uint16_t peri_icm42688_init(void) {
+    icm42688_init(ICM42688_INTS_PIN);
+    icm42688_reset(false);
     icm42688_reg_accel_config0_t icm42688_reg_accel_config0 = icm42688_reg_new_accel_config0();
     icm42688_reg_accel_config0.accel_fs_sel = ICM42688_REG_ACCEL_CONFIG0_ACCEL_FS_SEL_2G;
     icm42688_reg_accel_config0.accel_odr = ICM42688_REG_ACCEL_CONFIG0_ACCEL_ODR_500_HZ;
     icm42688_reg_set_accel_config0(&icm42688_reg_accel_config0);
     icm42688_reg_gyro_accel_config0_t icm42688_reg_gyro_accel_config0 = icm42688_reg_new_gyro_accel_config0();
-    icm42688_reg_gyro_accel_config0.accel_ui_filt_bw = ICM42688_REG_GYRO_ACCEL_CONFIG0_ACCEL_UI_FILT_BW_MAX_400HZ_ODR_20;
+    icm42688_reg_gyro_accel_config0.accel_ui_filt_bw =
+        ICM42688_REG_GYRO_ACCEL_CONFIG0_ACCEL_UI_FILT_BW_MAX_400HZ_ODR_20;
     icm42688_reg_set_gyro_accel_config0(&icm42688_reg_gyro_accel_config0);
     icm42688_reg_accel_config_static3_t icm42688_reg_accel_config_static3 = icm42688_reg_new_accel_config_static3();
+    // DS-000347 anti-alias filter table: DELT=1, DELTSQR=1, BITSHIFT=15 gives 42 Hz.
     icm42688_reg_accel_config_static3.accel_aaf_deltsqr_bit_0_to_7 = 1;
     icm42688_reg_set_accel_config_static3(&icm42688_reg_accel_config_static3);
     icm42688_reg_accel_config_static4_t icm42688_reg_accel_config_static4 = icm42688_reg_new_accel_config_static4();
@@ -78,15 +148,29 @@ uint16_t peri_imu_init(uint8_t sample_rate) {
     icm42688_reg_set_accel_config_static4(&icm42688_reg_accel_config_static4);
     icm42688_reg_accel_config_static2_t icm42688_reg_accel_config_static2 = icm42688_reg_new_accel_config_static2();
     icm42688_reg_accel_config_static2.accel_aaf_delt = 1;
-    icm42688_reg_accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_ENABLED;
+    icm42688_reg_accel_config_static2.accel_aaf_dis = ICM42688_REG_ACCEL_CONFIG_STATIC2_ACCEL_AAF_DIS_FILTER_ENABLED;
     icm42688_reg_set_accel_config_static2(&icm42688_reg_accel_config_static2);
     icm42688_reg_pwr_mgmt0_t icm42688_reg_pwr_mgmt0 = icm42688_reg_new_pwr_mgmt0();
-    icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_ENABLED;
+    icm42688_reg_pwr_mgmt0.temp_dis = ICM42688_REG_PWR_MGMT0_TEMP_DIS_SENSOR_ENABLED;
     icm42688_reg_pwr_mgmt0.gyro_mode = ICM42688_REG_PWR_MGMT0_GYRO_MODE_OFF;
     icm42688_reg_pwr_mgmt0.accel_mode = ICM42688_REG_PWR_MGMT0_ACCEL_MODE_LOW_NOISE;
     icm42688_reg_set_pwr_mgmt0(&icm42688_reg_pwr_mgmt0);
     return icm42688_get_lsb_per_g();
-#endif
+}
+
+uint16_t peri_imu_init(explorer_imu_type_t imu_type) {
+    switch (imu_type) {
+        case EXPLORER_IMU_LSM6DS3:
+            return peri_lsm6ds3_init();
+        case EXPLORER_IMU_LSM6DS3TR_C:
+            return peri_lsm6ds3tr_c_init();
+        case EXPLORER_IMU_LSM6DSR:
+            return peri_lsm6dsr_init();
+        case EXPLORER_IMU_ICM42688:
+            return peri_icm42688_init();
+        default:
+            return 0;
+    }
 }
 
 void peri_adc_init(uint8_t control_type, uint8_t sample_rate, bool channel_6d) {

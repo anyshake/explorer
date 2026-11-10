@@ -9,8 +9,13 @@
 #include "User/Inc/gnss/utils.h"
 #include "cmsis_os2.h"
 
-#define E_C111G 0
-#define E_C121G 1
+typedef enum {
+    EXPLORER_IMU_UNKNOWN,
+    EXPLORER_IMU_LSM6DS3,
+    EXPLORER_IMU_LSM6DS3TR_C,
+    EXPLORER_IMU_LSM6DSR,
+    EXPLORER_IMU_ICM42688,
+} explorer_imu_type_t;
 
 typedef struct {
     volatile float current_ppm;
@@ -38,10 +43,13 @@ typedef struct {
     bool gnss_debug_mode;
     bool adc_calibration_mode;
 
+    explorer_imu_type_t imu_type;
+    bool use_iir;
     uint16_t accel_lsb_per_g;
     uint32_t device_id;
 
     uint32_t baud_rate;
+    uint32_t gnss_baud_rate;
     uint8_t sample_rate;
 
     bool use_accelerometer;

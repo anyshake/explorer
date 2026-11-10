@@ -2,12 +2,12 @@
 
 lsm6ds3_reg_ctrl10_c_t lsm6ds3_reg_new_ctrl10_c(void) {
     lsm6ds3_reg_ctrl10_c_t ctrl10_c;
-    ctrl10_c.zen_g = LSM6DS3_REG_CTRL10_C_ZEN_G_OUTPUT_ENABLE;
-    ctrl10_c.yen_g = LSM6DS3_REG_CTRL10_C_YEN_G_OUTPUT_ENABLE;
-    ctrl10_c.xen_g = LSM6DS3_REG_CTRL10_C_XEN_G_OUTPUT_ENABLE;
-    ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_DISABLE;
-    ctrl10_c.pedo_rst_step = LSM6DS3_REG_CTRL10_C_PEDO_RST_STEP_DISABLE;
-    ctrl10_c.sign_motion_en = LSM6DS3_REG_CTRL10_C_SIGN_MOTION_EN_DISABLE;
+    ctrl10_c.zen_g = LSM6DS3_REG_CTRL10_C_ZEN_G_OUTPUT_ENABLED;
+    ctrl10_c.yen_g = LSM6DS3_REG_CTRL10_C_YEN_G_OUTPUT_ENABLED;
+    ctrl10_c.xen_g = LSM6DS3_REG_CTRL10_C_XEN_G_OUTPUT_ENABLED;
+    ctrl10_c.func_en = LSM6DS3_REG_CTRL10_C_FUNC_EN_DISABLED;
+    ctrl10_c.pedo_rst_step = LSM6DS3_REG_CTRL10_C_PEDO_RST_STEP_DISABLED;
+    ctrl10_c.sign_motion_en = LSM6DS3_REG_CTRL10_C_SIGN_MOTION_EN_DISABLED;
     return ctrl10_c;
 }
 
@@ -22,7 +22,7 @@ void lsm6ds3_reg_set_ctrl10_c(lsm6ds3_reg_ctrl10_c_t* ctrl10_c) {
     ctrl10_c_data &= ~(0x01 << 2);
     ctrl10_c_data |= (ctrl10_c->func_en & 0x01) << 2;
     ctrl10_c_data &= ~(0x01 << 1);
-    ctrl10_c_data |= (ctrl10_c->pedo_rst_step & 0x01);
+    ctrl10_c_data |= (ctrl10_c->pedo_rst_step & 0x01) << 1;
     ctrl10_c_data &= ~0x01;
     ctrl10_c_data |= (ctrl10_c->sign_motion_en & 0x01);
     lsm6ds3_write_reg(LSM6DS3_REG_CTRL10_C, ctrl10_c_data);

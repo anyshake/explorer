@@ -6,21 +6,23 @@
 #include "User/Inc/icm42688/reg_map.h"
 #include "User/Inc/icm42688/utils.h"
 
+// Register reset value
 #define __ICM42688_REG_DEVICE_CONFIG_DEFAULT_VALUE 0x00
 
 #define ICM42688_REG_DEVICE_CONFIG_SPI_MODE_0_3 0x00
 #define ICM42688_REG_DEVICE_CONFIG_SPI_MODE_1_2 0x01
 
 #define ICM42688_REG_DEVICE_CONFIG_SOFT_RESET_CONFIG_NORMAL 0x00
-#define ICM42688_REG_DEVICE_CONFIG_SOFT_RESET_CONFIG_ENABLE 0x01
+#define ICM42688_REG_DEVICE_CONFIG_SOFT_RESET_CONFIG_ENABLED 0x01
 
 typedef struct {
-    // SPI mode selection
+    // [4] SPI mode selection
     // 0x00: Mode 0 and Mode 3 (default)
     // 0x01: Mode 1 and Mode 2
     uint8_t spi_mode;
-    // Accelerometer full-scale selection
-    // After writing 1 to this bitfield, wait 1ms for soft reset
+
+    // [0] Accelerometer full-scale selection
+    // After writing 1 to this bitfield, wait 1 ms for soft reset
     // to be effective, before attempting any other register access
     // 0x00: Normal (default)
     // 0x01: Enable reset

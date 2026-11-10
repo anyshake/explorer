@@ -17,14 +17,6 @@ void read_device_settings(explorer_global_states_t* states) {
             states->sample_rate = 50;
             break;
     }
-#if HARDWARE_REV >= 20250804
-    // IIR corrects low-frequency response, not the output sample rate.
-    // It runs at the fixed 250 Hz acquisition rate on all three channels.
-    filter_iir_df1_new(&states->df1_filter_ch1, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-    filter_iir_df1_new(&states->df1_filter_ch2, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-    filter_iir_df1_new(&states->df1_filter_ch3, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
-#endif
-
     mcu_utils_gpio_mode(BAUDRATE_SELECT_P1, MCU_UTILS_GPIO_MODE_INPUT);
     mcu_utils_gpio_mode(BAUDRATE_SELECT_P2, MCU_UTILS_GPIO_MODE_INPUT);
     switch (mcu_utils_gpio_read(BAUDRATE_SELECT_P1) << 1 | mcu_utils_gpio_read(BAUDRATE_SELECT_P2)) {

@@ -6,6 +6,7 @@
 #include "User/Inc/lsm6dsr/reg_map.h"
 #include "User/Inc/lsm6dsr/utils.h"
 
+// Register reset value
 #define __LSM6DSR_REG_CTRL1_XL_DEFAULT_VALUE 0x00
 
 #define LSM6DSR_REG_CTRL1_XL_ODR_XL_POWER_DOWN 0x00
@@ -30,29 +31,31 @@
 #define LSM6DSR_REG_CTRL1_XL_LPF2_XL_EN_2ND_STAGE 0x01
 
 typedef struct {
-    // Output data rate and power mode selection
+    // [7:4] Output data rate; the power mode also depends on CTRL6_C.XL_HM_MODE
     // 0x00: Power-down mode (default)
-    // 0x0B: 1.6 Hz low-power mode, 12.5 Hz high performance mode
-    // 0x01: 12.5 Hz low-power mode, 12.5 Hz high performance mode
-    // 0x02: 26 Hz low-power mode, 26 Hz high performance mode
-    // 0x03: 52 Hz low-power mode, 52 Hz high performance mode
-    // 0x04: 104 Hz low-power mode, 104 Hz high performance mode
-    // 0x05: 208 Hz low-power mode, 208 Hz high performance mode
-    // 0x06: 416 Hz low-power mode, 416 Hz high performance mode
-    // 0x07: 833 Hz low-power mode, 833 Hz high performance mode
-    // 0x08: 1660 Hz low-power mode, 1660 Hz high performance mode
-    // 0x09: 3330 Hz low-power mode, 3330 Hz high performance mode
-    // 0x0A: 6660 Hz low-power mode, 6660 Hz high performance mode
+    // 0x01: 12.5 Hz
+    // 0x02: 26 Hz
+    // 0x03: 52 Hz
+    // 0x04: 104 Hz
+    // 0x05: 208 Hz
+    // 0x06: 416 Hz
+    // 0x07: 833 Hz
+    // 0x08: 1.66 kHz
+    // 0x09: 3.33 kHz
+    // 0x0A: 6.66 kHz
+    // 0x0B: 1.6 Hz in low-power mode; 12.5 Hz in high-performance mode
     uint8_t odr_xl;
-    // Accelerometer full-scale selection
-    // 0x00: +-2 g (default)
-    // 0x01: +-16 g
-    // 0x02: +-4 g
-    // 0x03: +-8 g
+
+    // [3:2] Accelerometer full-scale selection
+    // 0x00: ±2 g (default)
+    // 0x01: ±16 g
+    // 0x02: ±4 g
+    // 0x03: ±8 g
     uint8_t fs_xl;
-    // Accelerometer high-resolution selection
-    // 0x00: output from first stage digital filtering selected (default)
-    // 0x01: output from LPF2 second filtering stage selected
+
+    // [1] Accelerometer high-resolution selection
+    // 0x00: Output from first stage digital filtering selected (default)
+    // 0x01: Output from LPF2 second filtering stage selected
     uint8_t lpf2_xl_en;
 } lsm6dsr_reg_ctrl1_xl_t;
 

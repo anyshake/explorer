@@ -25,8 +25,8 @@ void mode_entry_leveling(explorer_global_states_t* states) {
     int16_t result_arr[3];
     float temperature = 0.0f;
     while (1) {
-        get_accel_readout(0, result_arr);
-        get_env_temperature(&temperature);
+        get_accel_readout(states->imu_type, 0, result_arr);
+        get_env_temperature(states->imu_type, &temperature);
 
         float readout_x = result_arr[1];
         float readout_y = result_arr[2];

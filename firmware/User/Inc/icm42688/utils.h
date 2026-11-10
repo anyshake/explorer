@@ -10,7 +10,8 @@
 #include "Utils/Inc/gpio.h"
 #include "Utils/Inc/i2c1.h"
 
-#define ICM42688_I2C_ADDRES 0x69
+// 7-bit I2C address selected by the board
+#define ICM42688_I2C_ADDRESS 0x69
 
 typedef struct {
     mcu_utils_gpio_t int_1;
@@ -21,6 +22,7 @@ void icm42688_wait(void);
 void icm42688_init(icm42688_ints_pin_t pin);
 void icm42688_reset(bool is_rtos);
 void icm42688_read_reg(uint8_t reg, uint8_t* rx_data);
+void icm42688_read_regs(uint8_t reg, uint8_t* rx_data, uint16_t rx_len);
 void icm42688_write_reg(uint8_t reg, uint8_t tx_data);
 
 #endif

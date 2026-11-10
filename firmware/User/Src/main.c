@@ -216,9 +216,9 @@ void task_send_packet(void* argument) {
 
             if (states->sample_rate == 100 || states->sample_rate == 200) {
                 if (!filter_resample_250_apply(&states->resample_filter, states->sample_rate,
-                                              (!states->use_accelerometer || states->channel_6d) ? acq_msg.adc_data : NULL,
-                                              (states->use_accelerometer || states->channel_6d) ? acq_msg.accel_data : NULL,
-                                              &acq_msg.timestamp)) {
+                                               (!states->use_accelerometer || states->channel_6d) ? acq_msg.adc_data : NULL,
+                                               (states->use_accelerometer || states->channel_6d) ? acq_msg.accel_data : NULL,
+                                               &acq_msg.timestamp)) {
                     continue;
                 }
             } else if (acq_msg.sequence % (ADC_ACQUISITION_RATE / states->sample_rate) != 0) {
@@ -280,12 +280,12 @@ void task_sensor_acquire(void* argument) {
             if (!states->channel_6d) {
                 temp_timestamp_us = mcu_utils_systime_get_unix_time_us();
             }
-            get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
+            get_accel_readout(states->imu_type, states->accel_lsb_per_g, acq_msg.accel_data);
             if (!states->channel_6d) {
                 acq_msg.timestamp = ((temp_timestamp_us + mcu_utils_systime_get_unix_time_us()) / 2) / 1000;
             }
         }
-        get_env_temperature(&acq_msg.temperature);
+        get_env_temperature(states->imu_type, &acq_msg.temperature);
 
         // All output rates share: low-pass -> compensation -> phase alignment.
         for (uint8_t ch = 0; ch < 3; ch++) {
@@ -294,17 +294,16 @@ void task_sensor_acquire(void* argument) {
             }
             if (states->use_accelerometer || states->channel_6d) {
                 int32_t filtered = filter_antialias_apply(&states->accel_antialias_filter[ch], acq_msg.accel_data[ch]);
-                acq_msg.accel_data[ch] = filtered > INT16_MAX ? INT16_MAX : filtered < INT16_MIN ? INT16_MIN : (int16_t)filtered;
+                acq_msg.accel_data[ch] = filtered > INT16_MAX ? INT16_MAX : filtered < INT16_MIN ? INT16_MIN
+                                                                                                 : (int16_t)filtered;
             }
         }
 
-#if HARDWARE_REV >= 20250804
-        if (!states->use_accelerometer || states->channel_6d) {
+        if (states->use_iir && (!states->use_accelerometer || states->channel_6d)) {
             acq_msg.adc_data[0] = apply_data_compensation(acq_msg.adc_data[0], &states->df1_filter_ch1);
             acq_msg.adc_data[1] = apply_data_compensation(acq_msg.adc_data[1], &states->df1_filter_ch2);
             acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
         }
-#endif
         if (!states->use_accelerometer || states->channel_6d) {
             filter_adc_phase_apply(&states->adc_phase_filter, acq_msg.adc_data);
         }
@@ -324,6 +323,20 @@ void task_sensor_acquire(void* argument) {
     }
 }
 
+static void detect_gnss_baudrate(explorer_global_states_t* states) {
+    do {
+        ssd1306_display_string(0, 2, "Detect GNSS Baudrate", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+        states->gnss_baud_rate = gnss_detect_baudrate(false);
+        if (states->gnss_baud_rate == 0) {
+            ssd1306_display_string(0, 2, "GNSS Not Detected", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+            mcu_utils_delay_ms(1000, false);
+        }
+    } while (states->gnss_baud_rate == 0);
+
+    snprintf((char*)states->message_buf, sizeof(states->message_buf), "GNSS BR: %lu bps", states->gnss_baud_rate);
+    ssd1306_display_string(0, 2, (char*)states->message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+}
+
 void system_setup(void) {
     mcu_utils_systime_init();
 
@@ -337,29 +350,56 @@ void system_setup(void) {
     mcu_utils_i2c1_init(false);
     mcu_utils_spi1_init(false);
     mcu_utils_uart1_init(states.baud_rate, false);
-    mcu_utils_uart2_init(GNSS_BAUDRATE, false);
 
     peri_screen_init();
     ssd1306_display_bitmap(0, 0, 128, 8, ANYSHAKE_LOGO_BITMAP_RLE, SSD1306_FONT_DISPLAY_COLOR_WHITE);
-#if DEVICE_MODEL == E_C111G
-    ssd1306_display_string(0, 0, "E-C111G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-#elif DEVICE_MODEL == E_C121G
-    ssd1306_display_string(0, 0, "E-C121G Init...", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
-#endif
+    ssd1306_display_string(0, 0, "Detect Hardware", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+    for (uint8_t attempt = 0; attempt < 3 && states.imu_type == EXPLORER_IMU_UNKNOWN; attempt++) {
+        states.imu_type = peri_imu_detect();
+        if (states.imu_type == EXPLORER_IMU_UNKNOWN) {
+            mcu_utils_delay_ms(100, false);
+        }
+    }
+
+    switch (states.imu_type) {
+        case EXPLORER_IMU_LSM6DS3:
+        case EXPLORER_IMU_LSM6DS3TR_C:
+        case EXPLORER_IMU_LSM6DSR:
+        case EXPLORER_IMU_ICM42688:
+            break;
+        default:
+            ssd1306_display_string(0, 0, "Unknown IMU", SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+            Error_Handler();
+            return;
+    }
+    peri_eeprom_init();
+    eeprom_read((uint8_t*)&states.device_id, 0, sizeof(states.device_id));
+
+    // IIR follows the configured E-C111G PCB revision, independently of its IMU.
+    states.use_iir = HARDWARE_REV >= 20250804 && states.imu_type != EXPLORER_IMU_ICM42688;
+    ssd1306_display_string(0, 0, states.imu_type == EXPLORER_IMU_ICM42688 ? "E-C121G Init..." : "E-C111G Init...",
+                           SSD1306_FONT_TYPE_ASCII_8X16, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
+    snprintf((char*)states.message_buf, sizeof(states.message_buf), "Device ID: %08lX", states.device_id);
+    ssd1306_display_string(0, 2, (char*)states.message_buf, SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
     mcu_utils_led_blink(MCU_STATE_PIN, 3, false);
     mcu_utils_delay_ms(1000, false);
 
-    gnss_pps_init(&gnss_pps_state);
     peri_gnss_init();
-    gnss_reset(GNSS_CTL_PIN, false);
-    gnss_model_setup(false);
-    if (states.gnss_debug_mode) {
-        gnss_model_factory_reset(false);
-        mode_entry_gnss_debug(&states);
+    if ((states.use_gnss_time || states.gnss_debug_mode) && !states.adc_calibration_mode) {
+        gnss_reset(GNSS_CTL_PIN, false);
+        detect_gnss_baudrate(&states);
+        gnss_model_setup(false);
+        if (states.gnss_debug_mode) {
+            gnss_model_factory_reset(false);
+            mcu_utils_delay_ms(1000, false);
+            detect_gnss_baudrate(&states);
+            mode_entry_gnss_debug(&states);
+        }
+        // PPS callbacks flush UART input; enable them only after baudrate detection.
+        gnss_pps_init(&gnss_pps_state);
+    } else {
+        mcu_utils_gpio_low(GNSS_CTL_PIN.rst);
     }
-
-    peri_eeprom_init();
-    eeprom_read((uint8_t*)&states.device_id, 0, sizeof(states.device_id));
 
     states.adc_calibration_offset = adc_calibration_offset_new();
     uint8_t calib_factors_status = 0;
@@ -374,16 +414,7 @@ void system_setup(void) {
         mcu_utils_delay_ms(1000, false);
     }
 
-#if DEVICE_MODEL == E_C111G
-#if HARDWARE_REV >= 20250804
-    lsm6dsr_reset(false);
-#else
-    lsm6ds3_reset(false);
-#endif
-#elif DEVICE_MODEL == E_C121G
-    icm42688_reset(false);
-#endif
-    states.accel_lsb_per_g = peri_imu_init(ADC_ACQUISITION_RATE);
+    states.accel_lsb_per_g = peri_imu_init(states.imu_type);
     if (states.leveling_mode) {
         mode_entry_leveling(&states);
     }
@@ -395,6 +426,12 @@ void system_setup(void) {
         mode_entry_adc_calibration();
     }
     peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, ADC_ACQUISITION_RATE, states.channel_6d);
+    if (states.use_iir) {
+        // IIR compensation always runs at the fixed 250 Hz acquisition rate.
+        filter_iir_df1_new(&states.df1_filter_ch1, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+        filter_iir_df1_new(&states.df1_filter_ch2, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+        filter_iir_df1_new(&states.df1_filter_ch3, IIR_DF1_B_COEFFS_250_HZ, IIR_DF1_A_COEFFS_250_HZ);
+    }
     for (uint8_t ch = 0; ch < 3; ch++) {
         filter_antialias_init(&states.adc_antialias_filter[ch]);
         filter_antialias_init(&states.accel_antialias_filter[ch]);

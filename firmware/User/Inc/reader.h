@@ -22,6 +22,11 @@
 #include "User/Inc/lsm6ds3/regs/outy_xl.h"
 #include "User/Inc/lsm6ds3/regs/outz_xl.h"
 #include "User/Inc/lsm6ds3/utils.h"
+#include "User/Inc/lsm6ds3tr_c/regs/out_temp.h"
+#include "User/Inc/lsm6ds3tr_c/regs/outx_xl.h"
+#include "User/Inc/lsm6ds3tr_c/regs/outy_xl.h"
+#include "User/Inc/lsm6ds3tr_c/regs/outz_xl.h"
+#include "User/Inc/lsm6ds3tr_c/utils.h"
 #include "User/Inc/lsm6dsr/regs/out_temp.h"
 #include "User/Inc/lsm6dsr/regs/outx_xl.h"
 #include "User/Inc/lsm6dsr/regs/outy_xl.h"
@@ -33,7 +38,7 @@
 
 explorer_adc_calibration_offset_t adc_calibration_offset_new(void);
 int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]);
-void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]);
-void get_env_temperature(float* temp);
+void get_accel_readout(explorer_imu_type_t imu_type, uint16_t lsb_per_g, int16_t arr[]);
+void get_env_temperature(explorer_imu_type_t imu_type, float* temp);
 
 #endif

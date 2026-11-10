@@ -7,9 +7,10 @@
 #include "User/Inc/lsm6dsr/utils.h"
 
 typedef struct {
-    // X-axis linear acceleration value (LSbyte)
+    // [7:0] X-axis linear acceleration value (LSB)
     uint8_t outx_l_xl;
-    // X-axis linear acceleration value (MSbyte)
+
+    // [7:0] X-axis linear acceleration value (MSB)
     uint8_t outx_h_xl;
 } lsm6dsr_reg_outx_xl_t;
 

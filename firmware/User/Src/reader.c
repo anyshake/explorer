@@ -51,81 +51,123 @@ int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offs
     return timestamp_us;
 }
 
-#if DEVICE_MODEL == E_C111G
-#if HARDWARE_REV >= 20250804
-void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
-    lsm6dsr_reg_outz_xl_t outz_xl;
-    lsm6dsr_reg_outx_xl_t outx_xl;
-    lsm6dsr_reg_outy_xl_t outy_xl;
+static void get_lsm6dsr_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    uint8_t data[6] = {0};
 
     lsm6dsr_wait();
 
-    lsm6dsr_reg_get_outz_xl(&outz_xl);
-    arr[0] = (int16_t)(outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl);
+    // One burst for all three axes; output order follows the board orientation.
+    lsm6dsr_read_regs(LSM6DSR_REG_OUTX_L_XL, data, sizeof(data));
+    arr[0] = (int16_t)((uint16_t)data[5] << 8 | data[4]);
     arr[0] -= lsb_per_g;
-
-    lsm6dsr_reg_get_outx_xl(&outx_xl);
-    arr[1] = (int16_t)(outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl);
-
-    lsm6dsr_reg_get_outy_xl(&outy_xl);
-    arr[2] = (int16_t)(outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl);
+    arr[1] = (int16_t)((uint16_t)data[1] << 8 | data[0]);
+    arr[2] = (int16_t)((uint16_t)data[3] << 8 | data[2]);
 }
 
-void get_env_temperature(float* temp) {
+static void get_lsm6dsr_temperature(float* temp) {
     lsm6dsr_reg_out_temp_t out_temp;
     lsm6dsr_reg_get_out_temp(&out_temp);
     int16_t temp_raw = (int16_t)((uint16_t)out_temp.out_temp_h << 8 | out_temp.out_temp_l);
     *temp = (float)temp_raw / 256.0f + 25.0f;
 }
-#else
-void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
-    lsm6ds3_reg_outz_xl_t outz_xl;
-    lsm6ds3_reg_outx_xl_t outx_xl;
-    lsm6ds3_reg_outy_xl_t outy_xl;
+
+static void get_lsm6ds3_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    uint8_t data[6] = {0};
 
     lsm6ds3_wait();
 
-    lsm6ds3_reg_get_outz_xl(&outz_xl);
-    arr[0] = (int16_t)(outz_xl.outz_h_xl << 8 | outz_xl.outz_l_xl);
+    // One burst for all three axes; output order follows the board orientation.
+    lsm6ds3_read_regs(LSM6DS3_REG_OUTX_L_XL, data, sizeof(data));
+    arr[0] = (int16_t)((uint16_t)data[5] << 8 | data[4]);
     arr[0] -= lsb_per_g;
-
-    lsm6ds3_reg_get_outx_xl(&outx_xl);
-    arr[1] = (int16_t)(outx_xl.outx_h_xl << 8 | outx_xl.outx_l_xl);
-
-    lsm6ds3_reg_get_outy_xl(&outy_xl);
-    arr[2] = (int16_t)(outy_xl.outy_h_xl << 8 | outy_xl.outy_l_xl);
+    arr[1] = (int16_t)((uint16_t)data[1] << 8 | data[0]);
+    arr[2] = (int16_t)((uint16_t)data[3] << 8 | data[2]);
 }
 
-void get_env_temperature(float* temp) {
+static void get_lsm6ds3_temperature(float* temp) {
     lsm6ds3_reg_out_temp_t out_temp;
     lsm6ds3_reg_get_out_temp(&out_temp);
     int16_t temp_raw = (int16_t)((uint16_t)out_temp.out_temp_h << 8 | out_temp.out_temp_l);
     *temp = (float)temp_raw / 16.0f + 25.0f;
 }
-#endif
-#elif DEVICE_MODEL == E_C121G
-void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
-    icm42688_reg_accel_data_x_t accel_data_x;
-    icm42688_reg_accel_data_y_t accel_data_y;
-    icm42688_reg_accel_data_z_t accel_data_z;
+
+static void get_lsm6ds3tr_c_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    uint8_t data[6] = {0};
+
+    lsm6ds3tr_c_wait();
+
+    // One burst for all three axes; output order follows the board orientation.
+    lsm6ds3tr_c_read_regs(LSM6DS3TR_C_REG_OUTX_L_XL, data, sizeof(data));
+    arr[0] = (int16_t)((uint16_t)data[5] << 8 | data[4]);
+    arr[0] -= lsb_per_g;
+    arr[1] = (int16_t)((uint16_t)data[1] << 8 | data[0]);
+    arr[2] = (int16_t)((uint16_t)data[3] << 8 | data[2]);
+}
+
+static void get_lsm6ds3tr_c_temperature(float* temp) {
+    lsm6ds3tr_c_reg_out_temp_t out_temp;
+    lsm6ds3tr_c_reg_get_out_temp(&out_temp);
+    int16_t temp_raw = (int16_t)((uint16_t)out_temp.out_temp_h << 8 | out_temp.out_temp_l);
+    *temp = (float)temp_raw / 256.0f + 25.0f;
+}
+
+static void get_icm42688_accel_readout(uint16_t lsb_per_g, int16_t arr[]) {
+    uint8_t data[6] = {0};
 
     icm42688_wait();
 
-    icm42688_reg_get_accel_data_z(&accel_data_z);
-    arr[0] = (int16_t)(accel_data_z.accel_data_z_h << 8 | accel_data_z.accel_data_z_l);
+    icm42688_write_reg(ICM42688_REG_REG_BANK_SEL, 0x00);
+    // One burst for all three axes; output order follows the board orientation.
+    icm42688_read_regs(ICM42688_REG_ACCEL_DATA_X1, data, sizeof(data));
+    arr[0] = (int16_t)((uint16_t)data[4] << 8 | data[5]);
     arr[0] -= lsb_per_g;
-
-    icm42688_reg_get_accel_data_x(&accel_data_x);
-    arr[1] = (int16_t)(accel_data_x.accel_data_x_h << 8 | accel_data_x.accel_data_x_l);
-
-    icm42688_reg_get_accel_data_y(&accel_data_y);
-    arr[2] = (int16_t)(accel_data_y.accel_data_y_h << 8 | accel_data_y.accel_data_y_l);
+    arr[1] = (int16_t)((uint16_t)data[0] << 8 | data[1]);
+    arr[2] = (int16_t)((uint16_t)data[2] << 8 | data[3]);
 }
 
-void get_env_temperature(float* temp) {
+static void get_icm42688_temperature(float* temp) {
     icm42688_reg_temp_data_t temp_data;
     icm42688_reg_get_temp_data(&temp_data);
-    int16_t temp_raw = temp_data.temp_data_h << 8 | temp_data.temp_data_l;
+    int16_t temp_raw = (int16_t)((uint16_t)temp_data.temp_data_h << 8 | temp_data.temp_data_l);
     *temp = (float)temp_raw / 132.48f + 25.0f;
 }
-#endif
+
+void get_accel_readout(explorer_imu_type_t imu_type, uint16_t lsb_per_g, int16_t arr[]) {
+    switch (imu_type) {
+        case EXPLORER_IMU_LSM6DS3:
+            get_lsm6ds3_accel_readout(lsb_per_g, arr);
+            break;
+        case EXPLORER_IMU_LSM6DS3TR_C:
+            get_lsm6ds3tr_c_accel_readout(lsb_per_g, arr);
+            break;
+        case EXPLORER_IMU_LSM6DSR:
+            get_lsm6dsr_accel_readout(lsb_per_g, arr);
+            break;
+        case EXPLORER_IMU_ICM42688:
+            get_icm42688_accel_readout(lsb_per_g, arr);
+            break;
+        default:
+            arr[0] = arr[1] = arr[2] = 0;
+            break;
+    }
+}
+
+void get_env_temperature(explorer_imu_type_t imu_type, float* temp) {
+    switch (imu_type) {
+        case EXPLORER_IMU_LSM6DS3:
+            get_lsm6ds3_temperature(temp);
+            break;
+        case EXPLORER_IMU_LSM6DS3TR_C:
+            get_lsm6ds3tr_c_temperature(temp);
+            break;
+        case EXPLORER_IMU_LSM6DSR:
+            get_lsm6dsr_temperature(temp);
+            break;
+        case EXPLORER_IMU_ICM42688:
+            get_icm42688_temperature(temp);
+            break;
+        default:
+            *temp = 0.0f;
+            break;
+    }
+}
