@@ -57,7 +57,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', '.github/workflows/firmware.yml') }}
+          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', '.github/workflows/build.yml') }}
 
       - name: Install PlatformIO
         run: python -m pip install platformio==6.2.0
@@ -107,7 +107,6 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      RELEASE_TAG: firmware-${{ github.sha }}
 
     steps:
       - name: Check out release notes
@@ -138,16 +137,19 @@ jobs:
       - name: Publish release named after the commit
         shell: bash
         run: |
+          # Match FW_REV from firmware/fw_rev.py, as displayed on the OLED.
+          RELEASE_TAG="git-${GITHUB_SHA:0:7}"
+
           if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             gh release create "$RELEASE_TAG" \
               --target "$GITHUB_SHA" \
-              --title "$GITHUB_SHA" \
+              --title "$RELEASE_TAG" \
               --notes-file .github/firmware-release.md \
               --draft
           fi
 
           gh release upload "$RELEASE_TAG" dist/*.bin --clobber
           gh release edit "$RELEASE_TAG" \
-            --title "$GITHUB_SHA" \
+            --title "$RELEASE_TAG" \
             --notes-file .github/firmware-release.md \
             --draft=false
