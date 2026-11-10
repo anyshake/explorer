@@ -22,7 +22,7 @@ int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offs
     int64_t timestamp_us = started_at_us + (mcu_utils_systime_get_unix_time_us() - started_at_us) / 2;
     arr[0] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : UINT32_MAX;
+                 : INT32_MAX;
 
     ofcal.ofcal_0 = offset_cal.channel_2[0];
     ofcal.ofcal_1 = offset_cal.channel_2[1];
@@ -34,7 +34,7 @@ int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offs
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[1] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : UINT32_MAX;
+                 : INT32_MAX;
 
     ofcal.ofcal_0 = offset_cal.channel_3[0];
     ofcal.ofcal_1 = offset_cal.channel_3[1];
@@ -46,7 +46,7 @@ int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offs
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[2] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : UINT32_MAX;
+                 : INT32_MAX;
 
     return timestamp_us;
 }

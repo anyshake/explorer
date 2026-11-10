@@ -6,17 +6,14 @@
 #include <stdint.h>
 #include <string.h>
 
-#define IIR_DF1_ORDER 3
-#define ANTIALIAS_TAPS 61
-#define ANTIALIAS_DELAY_MS 120
-#define RESAMPLE_250_PHASE_TAPS 41
-#define RESAMPLE_250_DELAY_MS 80
+#include "User/Inc/settings.h"
 
 typedef struct {
     float b[IIR_DF1_ORDER];
     float a[IIR_DF1_ORDER];
     float x_h[IIR_DF1_ORDER];
     float y_h[IIR_DF1_ORDER];
+    bool initialized;
 } filter_iir_df1_t;
 
 /* Linear-phase low-pass: fs = 250 Hz, fc = 25 Hz (-3 dB).
@@ -52,16 +49,17 @@ bool filter_resample_250_apply(filter_resample_250_t* filter, uint8_t sample_rat
                               int32_t adc_data[3], int16_t accel_data[3], int64_t* timestamp_ms);
 
 /* Causal fractional delay using the current and previous samples.
- * CH2/CH3 incur 685/1370 us to align with CH1's earlier sample;
- * CH1 has no additional delay.
+ * Mode-specific SINC2 delays are configured in settings.h.
+ * CH1 has no additional delay; the mode is selected at initialization.
  */
 typedef struct {
     int32_t previous[3];
     uint8_t initialized; // Bit mask of channels with valid history.
     uint8_t sample_rate;
+    bool channel_6d;
 } filter_adc_phase_t;
 
-void filter_adc_phase_init(filter_adc_phase_t* filter, uint8_t sample_rate);
+void filter_adc_phase_init(filter_adc_phase_t* filter, uint8_t sample_rate, bool channel_6d);
 void filter_adc_phase_apply(filter_adc_phase_t* filter, int32_t data[3]);
 
 void filter_iir_df1_new(filter_iir_df1_t* filter, const float* b, const float* a);

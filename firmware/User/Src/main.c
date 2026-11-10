@@ -436,7 +436,7 @@ void system_setup(void) {
         filter_antialias_init(&states.adc_antialias_filter[ch]);
         filter_antialias_init(&states.accel_antialias_filter[ch]);
     }
-    filter_adc_phase_init(&states.adc_phase_filter, ADC_ACQUISITION_RATE);
+    filter_adc_phase_init(&states.adc_phase_filter, ADC_ACQUISITION_RATE, states.channel_6d);
 
     states.packet_sending_interval = PACKET_SENDING_INTERVAL;
     states.channel_chunk_length = states.packet_sending_interval * states.sample_rate / 1000;
