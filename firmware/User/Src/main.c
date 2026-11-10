@@ -205,14 +205,29 @@ void task_send_packet(void* argument) {
 
     for (uint8_t message_idx = 0;;) {
         if (osMessageQueueGet(states->sensor_acquisition_queue, &acq_msg, NULL, osWaitForever) == osOK) {
-            if (has_previous_sequence && acq_msg.sequence != expected_sequence) {
+            if (!has_previous_sequence || acq_msg.sequence != expected_sequence) {
                 message_idx = 0;
+                if (states->sample_rate == 100 || states->sample_rate == 200) {
+                    filter_resample_250_init(&states->resample_filter);
+                }
             }
             expected_sequence = acq_msg.sequence + 1;
             has_previous_sequence = true;
 
+            if (states->sample_rate == 100 || states->sample_rate == 200) {
+                if (!filter_resample_250_apply(&states->resample_filter, states->sample_rate,
+                                              (!states->use_accelerometer || states->channel_6d) ? acq_msg.adc_data : NULL,
+                                              (states->use_accelerometer || states->channel_6d) ? acq_msg.accel_data : NULL,
+                                              &acq_msg.timestamp)) {
+                    continue;
+                }
+            } else if (acq_msg.sequence % (ADC_ACQUISITION_RATE / states->sample_rate) != 0) {
+                // Integer-ratio modes select samples by acquisition sequence.
+                continue;
+            }
             if (message_idx == 0) {
-                message_timestamp = acq_msg.timestamp;
+                // Apply once, after decimation/resampling, for every output rate.
+                message_timestamp = acq_msg.timestamp + DATA_TIMESTAMP_OFFSET_MS;
             }
 
             uint8_t message_idx_offset1 = message_idx + states->channel_chunk_length;
@@ -249,35 +264,39 @@ void task_sensor_acquire(void* argument) {
     explorer_global_states_t* states = (explorer_global_states_t*)argument;
 
     explorer_acquisition_message_t acq_msg;
-    uint32_t time_span = 1000 / states->sample_rate;
+    uint32_t time_span = 1000 / ADC_ACQUISITION_RATE;
     uint32_t sample_sequence = 0;
 
     osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
     for (uint64_t prev_timestamp = 0;;) {
-        int64_t temp_timestamp_us = 0;
-
         if (!states->use_accelerometer || states->channel_6d) {
-            if (states->channel_6d) {
+            acq_msg.timestamp = get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data) / 1000;
+        }
+
+        if (states->use_accelerometer || states->channel_6d) {
+            int64_t temp_timestamp_us = 0;
+            if (!states->channel_6d) {
                 temp_timestamp_us = mcu_utils_systime_get_unix_time_us();
             }
-            get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data);
-            if (states->channel_6d) {
+            get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
+            if (!states->channel_6d) {
                 acq_msg.timestamp = ((temp_timestamp_us + mcu_utils_systime_get_unix_time_us()) / 2) / 1000;
             }
         }
-
-        if (!states->channel_6d) {
-            temp_timestamp_us = mcu_utils_systime_get_unix_time_us();
-        }
-        if (states->use_accelerometer || states->channel_6d) {
-            get_accel_readout(states->accel_lsb_per_g, acq_msg.accel_data);
-        }
-        if (!states->channel_6d) {
-            acq_msg.timestamp = ((temp_timestamp_us + mcu_utils_systime_get_unix_time_us()) / 2) / 1000;
-        }
         get_env_temperature(&acq_msg.temperature);
+
+        // All output rates share: low-pass -> compensation -> phase alignment.
+        for (uint8_t ch = 0; ch < 3; ch++) {
+            if (!states->use_accelerometer || states->channel_6d) {
+                acq_msg.adc_data[ch] = filter_antialias_apply(&states->adc_antialias_filter[ch], acq_msg.adc_data[ch]);
+            }
+            if (states->use_accelerometer || states->channel_6d) {
+                int32_t filtered = filter_antialias_apply(&states->accel_antialias_filter[ch], acq_msg.accel_data[ch]);
+                acq_msg.accel_data[ch] = filtered > INT16_MAX ? INT16_MAX : filtered < INT16_MIN ? INT16_MIN : (int16_t)filtered;
+            }
+        }
 
 #if HARDWARE_REV >= 20250804
         if (!states->use_accelerometer || states->channel_6d) {
@@ -286,6 +305,12 @@ void task_sensor_acquire(void* argument) {
             acq_msg.adc_data[2] = apply_data_compensation(acq_msg.adc_data[2], &states->df1_filter_ch3);
         }
 #endif
+        if (!states->use_accelerometer || states->channel_6d) {
+            filter_adc_phase_apply(&states->adc_phase_filter, acq_msg.adc_data);
+        }
+        // Samples refer to the FIR's center, not the time it finished running.
+        // The 100/200 Hz resampler removes its own additional delay separately.
+        acq_msg.timestamp -= ANTIALIAS_DELAY_MS;
         acq_msg.sequence = sample_sequence++;
         if (osMessageQueuePut(states->sensor_acquisition_queue, &acq_msg, 0, 0) != osOK) {
             states->sensor_queue_overflow_count++;
@@ -358,7 +383,7 @@ void system_setup(void) {
 #elif DEVICE_MODEL == E_C121G
     icm42688_reset(false);
 #endif
-    states.accel_lsb_per_g = peri_imu_init(states.sample_rate);
+    states.accel_lsb_per_g = peri_imu_init(ADC_ACQUISITION_RATE);
     if (states.leveling_mode) {
         mode_entry_leveling(&states);
     }
@@ -369,10 +394,15 @@ void system_setup(void) {
     if (states.adc_calibration_mode) {
         mode_entry_adc_calibration();
     }
-    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, states.sample_rate, states.channel_6d);
+    peri_adc_init(ADS1262_INIT_CONTROL_TYPE_HARD, ADC_ACQUISITION_RATE, states.channel_6d);
+    for (uint8_t ch = 0; ch < 3; ch++) {
+        filter_antialias_init(&states.adc_antialias_filter[ch]);
+        filter_antialias_init(&states.accel_antialias_filter[ch]);
+    }
+    filter_adc_phase_init(&states.adc_phase_filter, ADC_ACQUISITION_RATE);
 
     states.packet_sending_interval = PACKET_SENDING_INTERVAL;
-    states.channel_chunk_length = states.packet_sending_interval / (1000 / states.sample_rate);
+    states.channel_chunk_length = states.packet_sending_interval * states.sample_rate / 1000;
     states.uart1_packet_buffer = array_uint8_make(get_data_packet_size(states.use_accelerometer, states.channel_6d, states.channel_chunk_length));
 
     if (!states.use_accelerometer || states.channel_6d) {

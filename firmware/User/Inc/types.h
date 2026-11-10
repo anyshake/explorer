@@ -58,6 +58,10 @@ typedef struct {
     filter_iir_df1_t df1_filter_ch1;
     filter_iir_df1_t df1_filter_ch2;
     filter_iir_df1_t df1_filter_ch3;
+    filter_antialias_t adc_antialias_filter[3];
+    filter_antialias_t accel_antialias_filter[3];
+    filter_adc_phase_t adc_phase_filter;
+    filter_resample_250_t resample_filter;
 
     uint8_t channel_chunk_length;
     uint16_t packet_sending_interval;

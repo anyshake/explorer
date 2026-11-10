@@ -29,8 +29,10 @@
 #include "User/Inc/lsm6dsr/utils.h"
 #include "User/Inc/types.h"
 
+#include "Utils/Inc/systime.h"
+
 explorer_adc_calibration_offset_t adc_calibration_offset_new(void);
-void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]);
+int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]);
 void get_accel_readout(uint16_t lsb_per_g, int16_t arr[]);
 void get_env_temperature(float* temp);
 

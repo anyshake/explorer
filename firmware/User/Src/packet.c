@@ -68,12 +68,12 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
         case 250:
             device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_250HZ << 27;
             break;
-            // case 500:
-            //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_500HZ << 27;
-            //     break;
-            // case 1000:
-            //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_1000HZ << 27;
-            //     break;
+        // case 500:
+        //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_500HZ << 27;
+        //     break;
+        // case 1000:
+        //     device_config |= PACKET_DEVICE_CONFIG_SAMPLE_RATE_1000HZ << 27;
+        //     break;
     }
     device_config |= (states->use_gnss_time ? PACKET_DEVICE_CONFIG_GNSS_AVAILABLE : PACKET_DEVICE_CONFIG_GNSS_NOT_AVAILABLE) << 26;
     if (!states->use_accelerometer || states->channel_6d) {
@@ -86,7 +86,8 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
                          (PACKET_DEVICE_CONFIG_CHANNEL_5_INT16 << 16) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_6_INT16 << 14);
     }
-    device_config |= (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
+    device_config |= (PACKET_VARIABLE_CONFIG_BIT_5_ENABLED << 5) |
+                     (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED) << 3) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_2_ENABLED : PACKET_VARIABLE_CONFIG_BIT_2_DISABLED) << 2) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_1_ENABLED : PACKET_VARIABLE_CONFIG_BIT_1_DISABLED) << 1) |
@@ -94,32 +95,6 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     bytes = (uint8_t*)&device_config;
     for (uint8_t i = 0; i < sizeof(packet_device_config_t); i++) {
         offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + i;
-        states->uart1_packet_buffer->data[offset] = bytes[i];
-    }
-
-    float tempFloat = 0;
-    switch ((timestamp / 1000) % 10) {
-        case 0:
-            bytes = (uint8_t*)&states->device_id;
-            break;
-        case 1:
-            tempFloat = (float)states->gnss_location.latitude;
-            bytes = (uint8_t*)&tempFloat;
-            break;
-        case 2:
-            tempFloat = (float)states->gnss_location.longitude;
-            bytes = (uint8_t*)&tempFloat;
-            break;
-        case 3:
-            tempFloat = (float)states->gnss_location.elevation;
-            bytes = (uint8_t*)&tempFloat;
-            break;
-        case 4:
-            bytes = (uint8_t*)&temperature;
-            break;
-    }
-    for (uint8_t i = 0; i < sizeof(packet_variable_data_t); i++) {
-        offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + i;
         states->uart1_packet_buffer->data[offset] = bytes[i];
     }
 
@@ -152,6 +127,43 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
                 states->uart1_packet_buffer->data[data_offset + j + 2 * states->channel_chunk_length * sizeof(int16_t)] = bytes[j];
             }
         }
+    }
+
+    float tempFloat = 0;
+    uint32_t packet_delay_us = 0;
+    uint32_t reserved = 0;
+    bytes = (uint8_t*)&reserved;
+    switch ((timestamp / 1000) % 10) {
+        case 0:
+            bytes = (uint8_t*)&states->device_id;
+            break;
+        case 1:
+            tempFloat = (float)states->gnss_location.latitude;
+            bytes = (uint8_t*)&tempFloat;
+            break;
+        case 2:
+            tempFloat = (float)states->gnss_location.longitude;
+            bytes = (uint8_t*)&tempFloat;
+            break;
+        case 3:
+            tempFloat = (float)states->gnss_location.elevation;
+            bytes = (uint8_t*)&tempFloat;
+            break;
+        case 4:
+            bytes = (uint8_t*)&temperature;
+            break;
+        case 5: {
+            // Measure after filling the payload, just before checksum and DMA.
+            // The packet timestamp already includes DSP and empirical offsets.
+            int64_t delay_us = mcu_utils_systime_get_unix_time_us() - timestamp * 1000;
+            packet_delay_us = delay_us < 0 || delay_us >= UINT32_MAX ? UINT32_MAX : (uint32_t)delay_us;
+            bytes = (uint8_t*)&packet_delay_us;
+            break;
+        }
+    }
+    for (uint8_t i = 0; i < sizeof(packet_variable_data_t); i++) {
+        offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + i;
+        states->uart1_packet_buffer->data[offset] = bytes[i];
     }
 
     offset = uart_buf_size - sizeof(packet_trailer_t) - sizeof(packet_checksum_t);

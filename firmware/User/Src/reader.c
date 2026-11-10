@@ -5,7 +5,7 @@ explorer_adc_calibration_offset_t adc_calibration_offset_new(void) {
     return offset_cal;
 }
 
-void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]) {
+int64_t get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_t offset_cal, int32_t arr[]) {
     ads1262_reg_ofcal_t ofcal = ads1262_reg_new_ofcal();
     ads1262_reg_inpmux_t inpmux = ads1262_reg_new_inpmux();
     ads1262_cmd_rdata_t rdata;
@@ -17,10 +17,12 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     inpmux.mux_n = ADS1262_REG_INPMUX_AIN0;
     inpmux.mux_p = ADS1262_REG_INPMUX_AIN1;
     ads1262_reg_set_inpmux(&inpmux);
+    int64_t started_at_us = mcu_utils_systime_get_unix_time_us();
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
+    int64_t timestamp_us = started_at_us + (mcu_utils_systime_get_unix_time_us() - started_at_us) / 2;
     arr[0] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : 0;
+                 : UINT32_MAX;
 
     ofcal.ofcal_0 = offset_cal.channel_2[0];
     ofcal.ofcal_1 = offset_cal.channel_2[1];
@@ -32,7 +34,7 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[1] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : 0;
+                 : UINT32_MAX;
 
     ofcal.ofcal_0 = offset_cal.channel_3[0];
     ofcal.ofcal_1 = offset_cal.channel_3[1];
@@ -44,7 +46,9 @@ void get_adc_readout(ads1262_ctl_pin_t ctl_pin, explorer_adc_calibration_offset_
     ads1262_cmd_rdata(ctl_pin, &rdata, ADS1262_INIT_CONTROL_TYPE_HARD);
     arr[2] = ads1262_cmd_rdata_is_valid(&rdata, ADS1262_REG_INTERFACE_CRC_CRC)
                  ? rdata.data
-                 : 0;
+                 : UINT32_MAX;
+
+    return timestamp_us;
 }
 
 #if DEVICE_MODEL == E_C111G
