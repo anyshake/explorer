@@ -106,22 +106,29 @@ void task_gnss_acquire(void* argument) {
 
         for (int64_t local_timestamp_us = 0;;) {
             uint32_t flags = osThreadFlagsWait(GNSS_1PPS_UPDATED, osFlagsWaitAny, 1500);
-            if (flags & GNSS_1PPS_UPDATED) {
+            if ((flags & osFlagsError) == 0 && (flags & GNSS_1PPS_UPDATED)) {
                 __disable_irq();
                 local_timestamp_us = (int64_t)time_sync_status.monotonic_time_us;
                 float current_ppm = time_sync_status.current_ppm;
                 __enable_irq();
 
                 if (mcu_utils_systime_get_uptime_us() - local_timestamp_us >= 500 * 1000) {
+                    consecutive_valid_count = 0;
                     continue;
                 }
 
-                gnss_status_t gnss_status;
-                gnss_time_t gnss_time;
-                gnss_location_t gnss_location;
+                gnss_status_t gnss_status = {.hdop = GNSS_INVALID_HDOP};
+                gnss_time_t gnss_time = {0};
+                gnss_location_t gnss_location = {0};
 
                 bool ok = parse_gnss_message(states->message_buf, &gnss_status, &gnss_location, &gnss_time, local_timestamp_us, &current_time_diff, true);
+                taskENTER_CRITICAL();
+                states->gnss_status = gnss_status;
+                states->gnss_fixed = ok && gnss_location.is_valid;
+                states->gnss_time_valid = ok && gnss_time.is_valid;
+                taskEXIT_CRITICAL();
                 if (!ok) {
+                    consecutive_valid_count = 0;
                     if (first_sync) {
                         ssd1306_display_string(0, 2, "Timeout Reading GNSS!", SSD1306_FONT_TYPE_ASCII_8X6, SSD1306_FONT_DISPLAY_COLOR_WHITE, true);
                     }
@@ -166,12 +173,20 @@ void task_gnss_acquire(void* argument) {
                             break;
                         }
                     }
+                } else {
+                    consecutive_valid_count = 0;
                 }
 
                 mcu_utils_led_blink(MCU_STATE_PIN, 1, true);
             } else if (!first_sync) {
+                taskENTER_CRITICAL();
+                states->gnss_fixed = false;
+                states->gnss_time_valid = false;
+                taskEXIT_CRITICAL();
                 got_valid_fix = false;
                 break;
+            } else {
+                consecutive_valid_count = 0;
             }
         }
 
@@ -247,10 +262,20 @@ void task_send_packet(void* argument) {
 
             message_idx++;
             if (message_idx == states->channel_chunk_length) {
-                send_data_packet(states, acq_msg.temperature, message_timestamp);
+                taskENTER_CRITICAL();
+                int64_t last_pps_us = gnss_pps_state.last_pps_us;
+                bool has_last_pps = gnss_pps_state.has_last_pps;
+                bool pps_locked = gnss_pps_state.has_freq_filter;
+                taskEXIT_CRITICAL();
+
+                int64_t pps_age_us = mcu_utils_systime_get_uptime_us() - last_pps_us;
+                states->gnss_locked = pps_locked && pps_age_us >= 0 && pps_age_us < 1500 * 1000;
+                states->gnss_pps_age_seconds = !has_last_pps || pps_age_us < 0 || pps_age_us / 1000000 >= UINT16_MAX ? UINT16_MAX : (uint16_t)(pps_age_us / 1000000);
+
+                bool ok = send_data_packet(states, acq_msg.temperature, message_timestamp);
                 message_idx = 0;
 
-                if (states->prev_packet_sent_at_ms == 0 || message_timestamp - states->prev_packet_sent_at_ms == states->packet_sending_interval) {
+                if (ok && (states->prev_packet_sent_at_ms == 0 || message_timestamp - states->prev_packet_sent_at_ms == states->packet_sending_interval)) {
                     mcu_utils_iwdg_feed();
                 }
 

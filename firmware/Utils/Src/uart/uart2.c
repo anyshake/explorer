@@ -2,6 +2,7 @@
 
 extern mcu_utils_uart_buffer_t uart2_rx_buffer;
 extern uint8_t uart2_rx_char;
+static volatile uint32_t uart2_flush_generation;
 
 void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
     if (HAL_UART_GetState(&huart2) != HAL_UART_STATE_RESET && huart2.Init.BaudRate != baudrate) {
@@ -32,14 +33,24 @@ void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
     mcu_utils_delay_ms(100, is_rtos);
 }
 
-void mcu_utils_uart2_write(uint8_t* tx_data, uint16_t tx_len, bool wait) {
-    HAL_UART_Transmit_DMA(&huart2, tx_data, tx_len);
-    while (wait && __HAL_UART_GET_FLAG(&huart2, UART_FLAG_TC) == RESET) {
+bool mcu_utils_uart2_tx_ready(void) {
+    return huart2.gState == HAL_UART_STATE_READY && huart2.hdmatx != NULL && HAL_DMA_GetState(huart2.hdmatx) == HAL_DMA_STATE_READY;
+}
+
+HAL_StatusTypeDef mcu_utils_uart2_write(uint8_t* tx_data, uint16_t tx_len, bool wait) {
+    HAL_StatusTypeDef status = HAL_UART_Transmit_DMA(&huart2, tx_data, tx_len);
+    if (status != HAL_OK) {
+        return status;
+    }
+
+    while (wait && !mcu_utils_uart2_tx_ready()) {
         ;
     }
+    return HAL_OK;
 }
 
 void mcu_utils_uart2_flush(void) {
+    uart2_flush_generation++;
     uart2_rx_buffer.tail = uart2_rx_buffer.head;
 }
 
@@ -95,6 +106,7 @@ int16_t mcu_utils_uart2_read_line(uint8_t* str, uint16_t len) {
         return 0;
     }
 
+    uint32_t generation = uart2_flush_generation;
     uint16_t tmp_tail = uart2_rx_buffer.tail;
     for (uint16_t count = 0; tmp_tail != uart2_rx_buffer.head;) {
         uint8_t ch = uart2_rx_buffer.buffer[tmp_tail];
@@ -108,7 +120,20 @@ int16_t mcu_utils_uart2_read_line(uint8_t* str, uint16_t len) {
         count++;
 
         if (ch == '\n') {
-            uart2_rx_buffer.tail = tmp_tail;
+            // PPS may flush the ring while this task scans it.
+            // Discard the sentence instead of restoring a pre-flush tail.
+            uint32_t primask = __get_PRIMASK();
+            __disable_irq();
+            bool flushed = generation != uart2_flush_generation;
+            if (!flushed) {
+                uart2_rx_buffer.tail = tmp_tail;
+            }
+            if (primask == 0) {
+                __enable_irq();
+            }
+            if (flushed) {
+                return 0;
+            }
             return count;
         }
     }

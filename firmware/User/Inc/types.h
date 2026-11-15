@@ -57,6 +57,11 @@ typedef struct {
     bool channel_6d;
 
     gnss_location_t gnss_location;
+    gnss_status_t gnss_status;
+    bool gnss_fixed;
+    bool gnss_time_valid;
+    bool gnss_locked;
+    uint16_t gnss_pps_age_seconds;
     uint8_t message_buf[GNSS_SENTENCE_BUFFER_SIZE];
 
     explorer_adc_calibration_offset_t adc_calibration_offset;

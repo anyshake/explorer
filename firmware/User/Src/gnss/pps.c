@@ -25,13 +25,13 @@ void gnss_pps_handle_timer_interrupt(gnss_pps_state_t* state,
 
     int64_t local_tick = (int64_t)mcu_utils_systime_get_tick();
     int64_t monotonic_time_us = mcu_utils_systime_get_uptime_us();
-    uint32_t hal_tick = HAL_GetTick();
     uint32_t actual_clock_freq = 0;
     bool valid_1pps = false;
 
-    if (state->has_last_hal_tick) {
-        uint32_t hal_diff = hal_tick - state->last_hal_tick;
-        valid_1pps = hal_diff >= 990 && hal_diff <= 1010;
+    if (state->has_last_pps) {
+        // A long PPS gap must not alias across the 32-bit HAL tick wrap.
+        int64_t pps_interval_us = monotonic_time_us - state->last_pps_us;
+        valid_1pps = pps_interval_us >= 990 * 1000 && pps_interval_us <= 1010 * 1000;
     }
 
     if (valid_1pps) {
@@ -65,8 +65,8 @@ void gnss_pps_handle_timer_interrupt(gnss_pps_state_t* state,
         gnss_pps_reset_buffer(state);
     }
 
-    state->last_hal_tick = hal_tick;
-    state->has_last_hal_tick = true;
+    state->last_pps_us = monotonic_time_us;
+    state->has_last_pps = true;
 
     if (callback != NULL && actual_clock_freq != 0) {
         callback((uint64_t)monotonic_time_us, actual_clock_freq);

@@ -12,13 +12,13 @@
 
 typedef struct {
     bool enabled;
-    bool has_last_hal_tick;
-    uint32_t last_hal_tick;
+    volatile bool has_last_pps;
+    volatile int64_t last_pps_us;
     uint8_t valid_pps_count;
     int64_t tick_buf[GNSS_PPS_FREQ_WINDOW];
     uint8_t tick_index;
     uint8_t tick_count;
-    bool has_freq_filter;
+    volatile bool has_freq_filter;
     uint64_t filtered_freq;
 } gnss_pps_state_t;
 

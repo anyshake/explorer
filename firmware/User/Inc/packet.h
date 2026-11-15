@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "User/Inc/array.h"
 #include "User/Inc/gnss/utils.h"
 #include "User/Inc/types.h"
@@ -92,6 +95,11 @@ typedef uint8_t packet_trailer_t[2];
 #define PACKET_VARIABLE_CONFIG_BIT_5_DISABLED 0x00
 #define PACKET_VARIABLE_CONFIG_BIT_5_ENABLED 0x01
 
+// Variable 6: GNSS status (uint32_t, little-endian).
+// [0] Locked (1) / holdover (0); [1] Fix valid; [2] Paired NMEA time valid.
+// [10:3] HDOP * 10, rounded; 255 means saturated or unavailable.
+// [15:11] Satellites, saturated at 31.
+// [31:16] Seconds since last PPS; 65535 means saturated or no PPS received.
 #define PACKET_VARIABLE_CONFIG_BIT_6_DISABLED 0x00
 #define PACKET_VARIABLE_CONFIG_BIT_6_ENABLED 0x01
 
@@ -105,6 +113,6 @@ typedef uint8_t packet_trailer_t[2];
 #define PACKET_VARIABLE_CONFIG_BIT_9_ENABLED 0x01
 
 uint16_t get_data_packet_size(bool use_accelerometer, bool channel_6d, uint8_t channel_chunk_length);
-void send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp);
+bool send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp);
 
 #endif

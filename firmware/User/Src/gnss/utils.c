@@ -80,7 +80,8 @@ bool gnss_get_sentence(uint8_t* str_buf, uint16_t timeout_ms, bool is_rtos) {
             line_len = 0;
         }
 
-        mcu_utils_delay_ms(100, is_rtos);
+        // A 256-byte UART buffer can fill in 22 ms at 115200 baud.
+        mcu_utils_delay_ms(5, is_rtos);
     }
 
     return false;

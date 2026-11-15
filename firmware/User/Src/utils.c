@@ -85,7 +85,15 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
     gnss_location_t gga_location = {0};
 
     while (!got_gga || !got_rmc) {
-        bool ok = gnss_get_sentence(message_buf, 990, is_rtos);
+        int64_t age_us = mcu_utils_systime_get_uptime_us() - local_timestamp_us;
+        if (age_us < 0 || age_us >= GNSS_PAIR_DEADLINE_US) {
+            return false;
+        }
+        uint16_t remaining_ms = (uint16_t)((GNSS_PAIR_DEADLINE_US - age_us) / 1000);
+        if (remaining_ms == 0) {
+            return false;
+        }
+        bool ok = gnss_get_sentence(message_buf, remaining_ms, is_rtos);
         if (!ok) {
             return false;
         }
@@ -102,6 +110,10 @@ bool parse_gnss_message(uint8_t* message_buf, gnss_status_t* gnss_status, gnss_l
         }
 
         if (got_gga && got_rmc && gga_time.hour == rmc_time.hour && gga_time.minute == rmc_time.minute && gga_time.second == rmc_time.second && gga_time.milisecond == rmc_time.milisecond) {
+            age_us = mcu_utils_systime_get_uptime_us() - local_timestamp_us;
+            if (age_us < 0 || age_us >= GNSS_PAIR_DEADLINE_US) {
+                return false;
+            }
             if (gnss_status != NULL) {
                 *gnss_status = parsed_status;
             }

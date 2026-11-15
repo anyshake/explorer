@@ -10,7 +10,8 @@
 #include "stm32f1xx_hal_uart.h"
 
 void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos);
-void mcu_utils_uart2_write(uint8_t* tx_data, uint16_t tx_len, bool wait);
+bool mcu_utils_uart2_tx_ready(void);
+HAL_StatusTypeDef mcu_utils_uart2_write(uint8_t* tx_data, uint16_t tx_len, bool wait);
 void mcu_utils_uart2_end(void);
 void mcu_utils_uart2_flush(void);
 uint8_t mcu_utils_uart2_read(void);

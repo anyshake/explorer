@@ -18,7 +18,12 @@ uint16_t get_data_packet_size(bool use_accelerometer, bool channel_6d, uint8_t c
     return base_size;
 }
 
-void send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp) {
+bool send_data_packet(explorer_global_states_t* states, float temperature, int64_t timestamp) {
+    // Do not overwrite the buffer while DMA is transmitting.
+    if (!mcu_utils_uart1_tx_ready()) {
+        return false;
+    }
+
     uint16_t offset = 0;
     uint8_t* bytes;
 
@@ -86,7 +91,8 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
                          (PACKET_DEVICE_CONFIG_CHANNEL_5_INT16 << 16) |
                          (PACKET_DEVICE_CONFIG_CHANNEL_6_INT16 << 14);
     }
-    device_config |= (PACKET_VARIABLE_CONFIG_BIT_5_ENABLED << 5) |
+    device_config |= ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_6_ENABLED : PACKET_VARIABLE_CONFIG_BIT_6_DISABLED) << 6) |
+                     (PACKET_VARIABLE_CONFIG_BIT_5_ENABLED << 5) |
                      (PACKET_VARIABLE_CONFIG_BIT_4_ENABLED << 4) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_3_ENABLED : PACKET_VARIABLE_CONFIG_BIT_3_DISABLED) << 3) |
                      ((states->use_gnss_time ? PACKET_VARIABLE_CONFIG_BIT_2_ENABLED : PACKET_VARIABLE_CONFIG_BIT_2_DISABLED) << 2) |
@@ -131,6 +137,7 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
 
     float tempFloat = 0;
     uint32_t packet_delay_us = 0;
+    uint32_t gnss_status_data = 0;
     uint32_t reserved = 0;
     bytes = (uint8_t*)&reserved;
     switch ((timestamp / 1000) % 10) {
@@ -160,6 +167,24 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
             bytes = (uint8_t*)&packet_delay_us;
             break;
         }
+        case 6: {
+            taskENTER_CRITICAL();
+            gnss_status_t gnss_status = states->gnss_status;
+            bool gnss_fixed = states->gnss_fixed;
+            bool gnss_time_valid = states->gnss_time_valid;
+            taskEXIT_CRITICAL();
+
+            uint32_t hdop = gnss_status.hdop >= 0.0f && gnss_status.hdop < 25.5f ? (uint32_t)(gnss_status.hdop * 10.0f + 0.5f) : UINT8_MAX;
+            uint32_t satellites = gnss_status.satellites > 31 ? 31 : gnss_status.satellites;
+            gnss_status_data = (states->gnss_locked ? 1U : 0U) |
+                               (gnss_fixed ? 1U << 1 : 0U) |
+                               (gnss_time_valid ? 1U << 2 : 0U) |
+                               (hdop << 3) |
+                               (satellites << 11) |
+                               ((uint32_t)states->gnss_pps_age_seconds << 16);
+            bytes = (uint8_t*)&gnss_status_data;
+            break;
+        }
     }
     for (uint8_t i = 0; i < sizeof(packet_variable_data_t); i++) {
         offset = sizeof(packet_header_t) + sizeof(packet_timestamp_t) + sizeof(packet_device_config_t) + i;
@@ -173,5 +198,5 @@ void send_data_packet(explorer_global_states_t* states, float temperature, int64
     }
     states->uart1_packet_buffer->data[offset] = xor_checksum;
 
-    mcu_utils_uart1_write(states->uart1_packet_buffer->data, uart_buf_size, false);
+    return mcu_utils_uart1_write(states->uart1_packet_buffer->data, uart_buf_size, false) == HAL_OK;
 }
