@@ -1,5 +1,5 @@
-#ifndef __ADS1262_REGS_INPMUX_H
-#define __ADS1262_REGS_INPMUX_H
+#ifndef __USER_ADS1262_REGS_INPMUX_H
+#define __USER_ADS1262_REGS_INPMUX_H
 
 #include <stdint.h>
 

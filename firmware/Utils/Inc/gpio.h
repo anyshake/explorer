@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_GPIO_H
-#define __ANYSHAKE_MCU_UTILS_GPIO_H
+#ifndef __UTILS_GPIO_H
+#define __UTILS_GPIO_H
 
 #include <stdbool.h>
 #include <stdint.h>

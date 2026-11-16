@@ -1,5 +1,5 @@
-#ifndef __EEPROM_UTILS_H
-#define __EEPROM_UTILS_H
+#ifndef __USER_EEPROM_UTILS_H
+#define __USER_EEPROM_UTILS_H
 
 #include <stdbool.h>
 #include <stdint.h>

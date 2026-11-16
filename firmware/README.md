@@ -1,52 +1,82 @@
-# Quick Start Guide
+# AnyShake Explorer Firmware
 
-## Download Prebuilt Firmware
+Firmware for the STM32F103C8 on the AnyShake Explorer (E-C111G and E-C121G). It is a STM32CubeMX project (`Explorer.ioc`) with FreeRTOS, built with PlatformIO.
 
-Download firmware for **E-C111G and E-C121G** from [GitHub Releases](https://github.com/anyshake/explorer/releases). Each release is named after its source Git commit and includes eight firmware variants.
+## Quick Start
 
-Follow the [firmware selection guide](../.github/firmware-release.md) to choose the file for your PCB hardware revision and GNSS module. The same guide is included in each release.
+You do not need to build anything. Prebuilt files are attached to every [release](https://github.com/anyshake/explorer/releases/latest).
 
-## Build firmware on Your Own
+1. **Pick the file.** The release notes explain how to choose by PCB revision and GNSS module.
+2. **Flash it.** Two options:
+   - **Recommended: the `_bootloader.bin` file.** Install the bootloader once with an ST-Link. After that, update over the serial port. See the [bootloader and dfu-tool guide](../docs/bootloader-guide.md).
+   - **The standalone file** (without `_bootloader`). Flash it to `0x08000000` with an ST-Link every time. See [Flashing with an ST-Link](../docs/flashing-with-st-link.md).
 
-### Install VSCode
+Devices shipped before the end of 2026 do not have the bootloader preinstalled.
 
-Download and install [VSCode](https://code.visualstudio.com/).
+## Build on Your Own
 
-### Install PlatformIO
+Set up the tools first, as described in [Build environment](../docs/build-environment.md). Then open this `firmware` folder in VS Code.
 
-Install [PlatformIO](https://platformio.org/) extension for VSCode.
+### 1. Configure `platformio.ini`
 
-You can checkout [Install PlatformIO](https://platformio.org/install/ide?install=vscode) for more information.
+Edit two values in `[env:genericSTM32F103C8_standalone]`. The bootloader environment inherits them.
 
-### Clone Repository
-
-Clone this repository to your local machine with `--depth=1` option to reduce download size.
-
-```bash
-$ git clone --depth=1 https://github.com/anyshake/explorer.git
+```ini
+build_flags =
+    ...
+    -DGNSS_MODEL=ALLYSTAR_TAU1114  ; your GNSS module
+    -DHARDWARE_REV=20250804        ; revision printed on your PCB
 ```
 
-If you don't have git installed, you can download the source code as a `.zip` or `.tar.gz` archive, extract it and `cd` into the directory. However, you will not be able to update the source code with `git pull`.
+`GNSS_MODEL` is the model printed on the GNSS module:
 
-- [github.com/anyshake/explorer/archive/refs/heads/master.zip](https://github.com/anyshake/explorer/archive/refs/heads/master.zip)
-- [github.com/anyshake/explorer/archive/refs/heads/master.tar.gz](https://github.com/anyshake/explorer/archive/refs/heads/master.tar.gz)
+| GNSS module                                         | `GNSS_MODEL`                                                                 |
+| --------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Unknown or unmarked                                 | `GENERIC`                                                                    |
+| Quectel LC260Z / LC261Z / LC760Z / LC761Z           | `QUECTEL_LC260Z`, `QUECTEL_LC261Z`, `QUECTEL_LC760Z`, `QUECTEL_LC761Z`       |
+| Zhongkewei ATGM332D / ATGM336H, Quectel L26K / L76K | `ZHONGKEWEI_ATGM332D`, `ZHONGKEWEI_ATGM336H`, `QUECTEL_L26K`, `QUECTEL_L76K` |
+| Allystar TAU812S / TAU1113 / TAU1114                | `ALLYSTAR_TAU812S`, `ALLYSTAR_TAU1113`, `ALLYSTAR_TAU1114`                   |
 
-### Build Firmware
+Use the exact model you have. The LC261Z and LC761Z are BDS-only and are configured differently from the others.
 
-Open the `firmware` directory in VSCode, wait for PlatformIO to install dependencies.
+### 2. Choose the Environment
 
-After dependencies are installed, you can build the firmware with PlatformIO.
+| Environment                     | Starts at    | Use it when                                                     |
+| ------------------------------- | ------------ | --------------------------------------------------------------- |
+| `genericSTM32F103C8_bootloader` | `0x08001000` | **Recommended.** The bootloader is installed                    |
+| `genericSTM32F103C8_standalone` | `0x08000000` | There is no bootloader. This is the default in `platformio.ini` |
 
-- Click PlatformIO icon on the left sidebar
-- Click Default > General > Build
+The default is standalone, because that is what works on a device without a bootloader.
 
-### Flash Firmware
+Once the bootloader is installed, make the bootloader environment the default by swapping the comment in `[platformio]`:
 
-Ensure the ST-Link is connected to the device correctly (SWCLK->CLK, SWDIO->DIO, GND->GND), then connect the ST-Link to your PC with USB.
+```ini
+; default_envs = genericSTM32F103C8_standalone
+default_envs = genericSTM32F103C8_bootloader
+```
 
-Make sure the ST-Link is recognized by your PC, then you can flash the firmware with PlatformIO.
+### 3. Build and Flash
 
-- Click PlatformIO icon on the left sidebar
-- Click Default > General > Upload
+| Step                  | VS Code (PlatformIO sidebar → environment → General) | CLI                                  |
+| --------------------- | ---------------------------------------------------- | ------------------------------------ |
+| Build                 | **Build**                                            | `pio run -e <environment>`           |
+| Flash with an ST-Link | **Upload**                                           | `pio run -e <environment> -t upload` |
 
-The device will be reset after the firmware is uploaded.
+PlatformIO writes to the right address for each environment.
+
+The output is `.pio/build/<environment>/firmware.bin`.
+
+With the bootloader installed, you can flash without an ST-Link:
+
+```sh
+pio run -e genericSTM32F103C8_bootloader
+cd ../dfu-tool
+go run . -port /dev/ttyUSB0 ../firmware/.pio/build/genericSTM32F103C8_bootloader/firmware.bin
+```
+
+## Notes for Developers
+
+- **Generated code.** `Core/`, `Drivers/`, `Middlewares/` and `STM32F103C8Tx_FLASH.ld` are generated by CubeMX from `Explorer.ioc`.
+  - In `Core/`, only edit inside the `USER CODE` blocks.
+  - Project code lives in `User/` and `Utils/`.
+- **Bootloader build.** `STM32F103C8Tx_FLASH_APP.ld` and `Utils/Src/bootloader.c` (enabled by `USE_BOOTLOADER`) must match the bootloader. See [DFU internals](../docs/dfu-internals.md).

@@ -1,5 +1,5 @@
-#ifndef __LSM6DSR_REGS_OUT_TEMP_H
-#define __LSM6DSR_REGS_OUT_TEMP_H
+#ifndef __USER_LSM6DSR_REGS_OUT_TEMP_H
+#define __USER_LSM6DSR_REGS_OUT_TEMP_H
 
 #include <stdint.h>
 

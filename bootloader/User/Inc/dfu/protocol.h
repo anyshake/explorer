@@ -1,0 +1,31 @@
+#ifndef __USER_DFU_PROTOCOL_H
+#define __USER_DFU_PROTOCOL_H
+
+#define DFU_HOST_SYNC 0xA5U
+#define DFU_DEVICE_SYNC 0x5AU
+
+#define DFU_MAX_CHUNK 1024U
+#define DFU_MAX_PAYLOAD (4U + DFU_MAX_CHUNK)
+
+typedef enum {
+    DFU_CMD_HELLO = 0x01,
+    DFU_CMD_BEGIN = 0x02,
+    DFU_CMD_DATA = 0x03,
+    DFU_CMD_END = 0x04,
+    DFU_CMD_BOOT = 0x05,
+    DFU_CMD_ENTER = 0x06,
+} dfu_cmd_t;
+
+typedef enum {
+    DFU_STATUS_OK = 0x00,
+    DFU_STATUS_BAD_CRC = 0x01,
+    DFU_STATUS_BAD_CMD = 0x02,
+    DFU_STATUS_BAD_LENGTH = 0x03,
+    DFU_STATUS_BAD_STATE = 0x04,
+    DFU_STATUS_BAD_OFFSET = 0x05,
+    DFU_STATUS_FLASH_ERROR = 0x06,
+    DFU_STATUS_VERIFY_ERROR = 0x07,
+    DFU_STATUS_BAD_IMAGE = 0x08,
+} dfu_status_t;
+
+#endif

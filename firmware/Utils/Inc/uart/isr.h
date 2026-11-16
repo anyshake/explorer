@@ -1,10 +1,14 @@
-#ifndef __ANYSHAKE_MCU_UTILS_UART_ISR_H
-#define __ANYSHAKE_MCU_UTILS_UART_ISR_H
+#ifndef __UTILS_UART_ISR_H
+#define __UTILS_UART_ISR_H
 
 #include <stdint.h>
 
 #include "Core/Inc/usart.h"
 #include "stm32f1xx_hal_uart.h"
+
+#if defined(USE_BOOTLOADER)
+#include "Utils/Inc/bootloader.h"
+#endif
 
 typedef struct {
     volatile uint16_t head;

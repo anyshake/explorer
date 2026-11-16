@@ -1,5 +1,5 @@
-#ifndef __MAGIC_H
-#define __MAGIC_H
+#ifndef __USER_MAGIC_H
+#define __USER_MAGIC_H
 
 #include <stdbool.h>
 #include <stddef.h>

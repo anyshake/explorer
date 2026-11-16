@@ -1,5 +1,5 @@
-#ifndef __ADS1262_CMDS_START_H
-#define __ADS1262_CMDS_START_H
+#ifndef __USER_ADS1262_CMDS_START_H
+#define __USER_ADS1262_CMDS_START_H
 
 #include <stdint.h>
 

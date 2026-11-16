@@ -1,5 +1,5 @@
-#ifndef __ICM42688_REG_MAP_H
-#define __ICM42688_REG_MAP_H
+#ifndef __USER_ICM42688_REG_MAP_H
+#define __USER_ICM42688_REG_MAP_H
 
 // Register layouts: ICM-42688-P datasheet DS-000347 Rev 1.5, sections 10-18.
 

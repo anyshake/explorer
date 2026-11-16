@@ -1,5 +1,5 @@
-#ifndef __ICM42688_UTILS_H
-#define __ICM42688_UTILS_H
+#ifndef __USER_ICM42688_UTILS_H
+#define __USER_ICM42688_UTILS_H
 
 #include <stdbool.h>
 #include <stdint.h>

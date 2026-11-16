@@ -1,5 +1,5 @@
-#ifndef __SETTINGS_H
-#define __SETTINGS_H
+#ifndef __USER_SETTINGS_H
+#define __USER_SETTINGS_H
 
 #include <stdint.h>
 

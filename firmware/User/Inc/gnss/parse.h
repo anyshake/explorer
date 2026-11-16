@@ -1,5 +1,5 @@
-#ifndef __GNSS_PARSE_H
-#define __GNSS_PARSE_H
+#ifndef __USER_GNSS_PARSE_H
+#define __USER_GNSS_PARSE_H
 
 #include <stdbool.h>
 #include <stdint.h>

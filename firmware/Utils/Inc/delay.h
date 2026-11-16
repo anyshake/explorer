@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_DELAY_H
-#define __ANYSHAKE_MCU_UTILS_DELAY_H
+#ifndef __UTILS_DELAY_H
+#define __UTILS_DELAY_H
 
 #include <stdbool.h>
 #include <stdint.h>

@@ -1,5 +1,5 @@
-#ifndef __ADS1262_REGS_GPIODAT_H
-#define __ADS1262_REGS_GPIODAT_H
+#ifndef __USER_ADS1262_REGS_GPIODAT_H
+#define __USER_ADS1262_REGS_GPIODAT_H
 
 #include <stdint.h>
 

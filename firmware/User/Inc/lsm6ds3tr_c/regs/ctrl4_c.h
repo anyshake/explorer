@@ -1,5 +1,5 @@
-#ifndef __LSM6DS3TR_C_REGS_CTRL4_C_H
-#define __LSM6DS3TR_C_REGS_CTRL4_C_H
+#ifndef __USER_LSM6DS3TR_C_REGS_CTRL4_C_H
+#define __USER_LSM6DS3TR_C_REGS_CTRL4_C_H
 
 #include <stdint.h>
 

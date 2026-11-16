@@ -1,5 +1,5 @@
-#ifndef __MODE_H
-#define __MODE_H
+#ifndef __USER_MODE_H
+#define __USER_MODE_H
 
 #include <stdbool.h>
 #include <stdint.h>

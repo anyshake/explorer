@@ -40,7 +40,8 @@ jobs:
           - name: allystar_tau1114
             model: ALLYSTAR_TAU1114
     env:
-      ASSET_NAME: ${{ matrix.hardware.name }}_E-C1x1G_gnss_${{ matrix.gnss.name }}.bin
+      STANDALONE_ASSET_NAME: ${{ matrix.hardware.name }}_E-C1x1G_gnss_${{ matrix.gnss.name }}.bin
+      BOOTLOADER_ASSET_NAME: ${{ matrix.hardware.name }}_E-C1x1G_gnss_${{ matrix.gnss.name }}_bootloader.bin
 
     steps:
       - name: Check out source
@@ -57,7 +58,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', '.github/workflows/build.yml') }}
+          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', 'bootloader/platformio.ini', '.github/workflows/build.yml') }}
 
       - name: Install PlatformIO
         run: python -m pip install platformio==6.2.0
@@ -84,21 +85,112 @@ jobs:
           PY
 
       - name: Build firmware
-        run: pio run --project-conf platformio.ci.ini --environment genericSTM32F103C8
+        run: |
+          pio run --project-conf platformio.ci.ini \
+            --environment genericSTM32F103C8_standalone \
+            --environment genericSTM32F103C8_bootloader
 
-      - name: Prepare firmware binary
-        run: install -Dm644 .pio/build/genericSTM32F103C8/firmware.bin "dist/$ASSET_NAME"
+      - name: Prepare firmware binaries
+        run: |
+          install -Dm644 .pio/build/genericSTM32F103C8_standalone/firmware.bin "dist/$STANDALONE_ASSET_NAME"
+          install -Dm644 .pio/build/genericSTM32F103C8_bootloader/firmware.bin "dist/$BOOTLOADER_ASSET_NAME"
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v7
         with:
           name: firmware-${{ matrix.hardware.name }}-${{ matrix.gnss.name }}
-          path: firmware/dist/${{ env.ASSET_NAME }}
+          path: |
+            firmware/dist/${{ env.STANDALONE_ASSET_NAME }}
+            firmware/dist/${{ env.BOOTLOADER_ASSET_NAME }}
+          if-no-files-found: error
+
+  bootloader:
+    name: bootloader
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: bootloader
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Cache PlatformIO packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('firmware/platformio.ini', 'bootloader/platformio.ini', '.github/workflows/build.yml') }}
+
+      - name: Install PlatformIO
+        run: python -m pip install platformio==6.2.0
+
+      - name: Build bootloader
+        run: pio run --environment genericSTM32F103C8
+
+      - name: Prepare bootloader binary
+        run: install -Dm644 .pio/build/genericSTM32F103C8/firmware.bin dist/bootloader_E-C1x1G.bin
+
+      - name: Upload bootloader artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: firmware-bootloader
+          path: bootloader/dist/bootloader_E-C1x1G.bin
+          if-no-files-found: error
+
+  dfu-tool:
+    name: dfu tool
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: dfu-tool
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: dfu-tool/go.mod
+          cache-dependency-path: dfu-tool/go.sum
+
+      - name: Test
+        run: go test ./...
+
+      - name: Cross-compile
+        run: |
+          for target in linux/amd64 linux/arm64 windows/amd64 darwin/amd64 darwin/arm64; do
+            os="${target%/*}"
+            arch="${target#*/}"
+            ext=""
+            [[ "$os" == windows ]] && ext=".exe"
+            CGO_ENABLED=0 GOOS="$os" GOARCH="$arch" go build -trimpath -ldflags="-s -w" \
+              -o "dist/dfu-tool_${os}_${arch}${ext}" .
+          done
+
+      - name: Upload dfu tool artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: firmware-dfu-tool
+          path: dfu-tool/dist/*
           if-no-files-found: error
 
   release:
     name: Publish firmware release
-    needs: build
+    needs: [build, bootloader, dfu-tool]
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -121,17 +213,27 @@ jobs:
           merge-multiple: true
           path: dist
 
-      - name: Check all eight binaries are present
+      - name: Check all binaries are present
         shell: bash
         run: |
           for hardware in current legacy; do
             for gnss in generic quectel_lc760z quectel_l76k allystar_tau1114; do
-              asset="dist/${hardware}_E-C1x1G_gnss_${gnss}.bin"
-              if [[ ! -s "$asset" ]]; then
-                echo "Missing or empty firmware binary: $asset" >&2
-                exit 1
-              fi
+              for asset in "dist/${hardware}_E-C1x1G_gnss_${gnss}.bin" "dist/${hardware}_E-C1x1G_gnss_${gnss}_bootloader.bin"; do
+                if [[ ! -s "$asset" ]]; then
+                  echo "Missing or empty firmware binary: $asset" >&2
+                  exit 1
+                fi
+              done
             done
+          done
+          for asset in dist/bootloader_E-C1x1G.bin \
+            dist/dfu-tool_linux_amd64 dist/dfu-tool_linux_arm64 \
+            dist/dfu-tool_windows_amd64.exe \
+            dist/dfu-tool_darwin_amd64 dist/dfu-tool_darwin_arm64; do
+            if [[ ! -s "$asset" ]]; then
+              echo "Missing or empty release asset: $asset" >&2
+              exit 1
+            fi
           done
 
       - name: Publish release named after the commit
@@ -148,7 +250,7 @@ jobs:
               --draft
           fi
 
-          gh release upload "$RELEASE_TAG" dist/*.bin --clobber
+          gh release upload "$RELEASE_TAG" dist/* --clobber
           gh release edit "$RELEASE_TAG" \
             --title "$RELEASE_TAG" \
             --notes-file .github/firmware-release.md \

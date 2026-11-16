@@ -1,5 +1,5 @@
-#ifndef __EEPROM_READ_H
-#define __EEPROM_READ_H
+#ifndef __USER_EEPROM_READ_H
+#define __USER_EEPROM_READ_H
 
 #include <stdint.h>
 

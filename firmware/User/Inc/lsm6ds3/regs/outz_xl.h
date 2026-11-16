@@ -1,5 +1,5 @@
-#ifndef __LSM6DS3_REGS_OUTZ_XL_H
-#define __LSM6DS3_REGS_OUTZ_XL_H
+#ifndef __USER_LSM6DS3_REGS_OUTZ_XL_H
+#define __USER_LSM6DS3_REGS_OUTZ_XL_H
 
 #include <stdint.h>
 

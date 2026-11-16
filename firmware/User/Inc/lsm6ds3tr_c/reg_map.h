@@ -1,5 +1,5 @@
-#ifndef __LSM6DS3TR_C_REG_MAP_H
-#define __LSM6DS3TR_C_REG_MAP_H
+#ifndef __USER_LSM6DS3TR_C_REG_MAP_H
+#define __USER_LSM6DS3TR_C_REG_MAP_H
 
 // Register layouts: https://github.com/STMicroelectronics/lsm6ds3tr-c-pid
 

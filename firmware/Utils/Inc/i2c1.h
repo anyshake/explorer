@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_I2C1_H
-#define __ANYSHAKE_MCU_UTILS_I2C1_H
+#ifndef __UTILS_I2C1_H
+#define __UTILS_I2C1_H
 
 #include <stdbool.h>
 #include <stdint.h>

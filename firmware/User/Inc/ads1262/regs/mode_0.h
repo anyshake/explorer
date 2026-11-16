@@ -1,5 +1,5 @@
-#ifndef __ADS1262_REGS_MODE_0_H
-#define __ADS1262_REGS_MODE_0_H
+#ifndef __USER_ADS1262_REGS_MODE_0_H
+#define __USER_ADS1262_REGS_MODE_0_H
 
 #include <stdint.h>
 

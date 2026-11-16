@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_IWDG_H
-#define __ANYSHAKE_MCU_UTILS_IWDG_H
+#ifndef __UTILS_IWDG_H
+#define __UTILS_IWDG_H
 
 #include "Core/Inc/iwdg.h"
 #include "Utils/Inc/delay.h"

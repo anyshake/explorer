@@ -1,5 +1,5 @@
-#ifndef __SSD1306_UTILS_H
-#define __SSD1306_UTILS_H
+#ifndef __USER_SSD1306_UTILS_H
+#define __USER_SSD1306_UTILS_H
 
 #include <stdbool.h>
 #include <stdint.h>

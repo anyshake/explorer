@@ -1,5 +1,5 @@
-#ifndef __GNSS_PPS_H
-#define __GNSS_PPS_H
+#ifndef __USER_GNSS_PPS_H
+#define __USER_GNSS_PPS_H
 
 #include <stdbool.h>
 #include <stdint.h>

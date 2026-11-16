@@ -1,5 +1,5 @@
-#ifndef __ICM42688_REGS_TEMP_DATA_H
-#define __ICM42688_REGS_TEMP_DATA_H
+#ifndef __USER_ICM42688_REGS_TEMP_DATA_H
+#define __USER_ICM42688_REGS_TEMP_DATA_H
 
 #include <stdint.h>
 

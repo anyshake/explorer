@@ -1,5 +1,5 @@
-#ifndef __FILTER_H
-#define __FILTER_H
+#ifndef __USER_FILTER_H
+#define __USER_FILTER_H
 
 #include <math.h>
 #include <stdbool.h>

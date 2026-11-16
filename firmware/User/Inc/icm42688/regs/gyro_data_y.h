@@ -1,5 +1,5 @@
-#ifndef __ICM42688_REGS_GYRO_DATA_Y_H
-#define __ICM42688_REGS_GYRO_DATA_Y_H
+#ifndef __USER_ICM42688_REGS_GYRO_DATA_Y_H
+#define __USER_ICM42688_REGS_GYRO_DATA_Y_H
 
 #include <stdint.h>
 

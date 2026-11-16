@@ -1,5 +1,5 @@
-#ifndef __ADS1262_REGS_INTERFACE_H
-#define __ADS1262_REGS_INTERFACE_H
+#ifndef __USER_ADS1262_REGS_INTERFACE_H
+#define __USER_ADS1262_REGS_INTERFACE_H
 
 #include <stdint.h>
 

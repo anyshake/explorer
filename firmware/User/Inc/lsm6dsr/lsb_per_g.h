@@ -1,5 +1,5 @@
-#ifndef __LSM6DSR_LSB_PER_G_H
-#define __LSM6DSR_LSB_PER_G_H
+#ifndef __USER_LSM6DSR_LSB_PER_G_H
+#define __USER_LSM6DSR_LSB_PER_G_H
 
 #include <stdint.h>
 #include "User/Inc/lsm6dsr/regs/ctrl1_xl.h"

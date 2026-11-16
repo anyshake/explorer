@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_UART_UART1_H
-#define __ANYSHAKE_MCU_UTILS_UART_UART1_H
+#ifndef __UTILS_UART_UART1_H
+#define __UTILS_UART_UART1_H
 
 #include <stdbool.h>
 #include <stdint.h>

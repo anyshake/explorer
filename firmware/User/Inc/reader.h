@@ -1,5 +1,5 @@
-#ifndef __READER_H
-#define __READER_H
+#ifndef __USER_READER_H
+#define __USER_READER_H
 
 #include <stdbool.h>
 #include <stdint.h>

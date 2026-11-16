@@ -80,10 +80,21 @@ Whether you're monitoring **earthquake activity**, conducting **structural healt
 
 ## Get Started
 
-- [**Hardware**](https://github.com/anyshake/explorer/tree/master/hardware): Schematics, PCB layout, BOM
-- [**Firmware**](https://github.com/anyshake/explorer/tree/master/firmware): MCU code (PlatformIO)
-- [**Software**](https://github.com/anyshake/observer): Cross-platform visualization & analysis
-- [**Docs**](https://anyshake.org/docs/anyshake-explorer/product-overview/): Quick start and configuration guides
+**Just got your Explorer?** It ships with working firmware:
+
+1. Connect it to your computer over RS-232 or RS-485, and power it with 9–12 V DC.
+2. Install [**AnyShake Observer**](https://github.com/anyshake/observer) and follow the [**docs**](https://anyshake.org/docs/anyshake-explorer/product-overview/).
+3. To update the firmware later, install the bootloader once, then update over the serial port. See the [**bootloader and dfu-tool guide**](docs/bootloader-guide.md).
+
+| Directory                  | Contents                                                 |
+| -------------------------- | -------------------------------------------------------- |
+| [`docs`](docs)             | Firmware update guides, build environment, DFU internals |
+| [`hardware`](hardware)     | Schematics, PCB layout, BOM (KiCad)                      |
+| [`firmware`](firmware)     | MCU firmware (PlatformIO)                                |
+| [`bootloader`](bootloader) | Optional UART1 bootloader for firmware updates           |
+| [`dfu-tool`](dfu-tool)     | Command-line firmware update tool                        |
+
+Prebuilt firmware, bootloader and dfu-tool are on the [**Releases**](https://github.com/anyshake/explorer/releases/latest) page.
 
 ## Credits
 

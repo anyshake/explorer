@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_SPI1_H
-#define __ANYSHAKE_MCU_UTILS_SPI1_H
+#ifndef __UTILS_SPI1_H
+#define __UTILS_SPI1_H
 
 #include <stdbool.h>
 #include <stdint.h>

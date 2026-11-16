@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_SYSTIME_H
-#define __ANYSHAKE_MCU_UTILS_SYSTIME_H
+#ifndef __UTILS_SYSTIME_H
+#define __UTILS_SYSTIME_H
 
 #include <stdint.h>
 

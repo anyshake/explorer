@@ -1,5 +1,5 @@
-#ifndef __LSM6DSR_UTILS_H
-#define __LSM6DSR_UTILS_H
+#ifndef __USER_LSM6DSR_UTILS_H
+#define __USER_LSM6DSR_UTILS_H
 
 #include <stdbool.h>
 #include <stdint.h>

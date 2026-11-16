@@ -1,5 +1,5 @@
-#ifndef __ADS1262_UTILS_H
-#define __ADS1262_UTILS_H
+#ifndef __USER_ADS1262_UTILS_H
+#define __USER_ADS1262_UTILS_H
 
 #include <stdbool.h>
 #include <stdint.h>

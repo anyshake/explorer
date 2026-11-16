@@ -1,5 +1,5 @@
-#ifndef __ADS1262_REGS_TDACN_H
-#define __ADS1262_REGS_TDACN_H
+#ifndef __USER_ADS1262_REGS_TDACN_H
+#define __USER_ADS1262_REGS_TDACN_H
 
 #include <stdint.h>
 

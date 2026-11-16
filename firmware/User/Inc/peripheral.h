@@ -1,5 +1,5 @@
-#ifndef __PERIPHERAL_H
-#define __PERIPHERAL_H
+#ifndef __USER_PERIPHERAL_H
+#define __USER_PERIPHERAL_H
 
 #include <stdbool.h>
 #include <stdint.h>

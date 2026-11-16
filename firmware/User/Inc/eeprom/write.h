@@ -1,5 +1,5 @@
-#ifndef __EEPROM_WRITE_H
-#define __EEPROM_WRITE_H
+#ifndef __USER_EEPROM_WRITE_H
+#define __USER_EEPROM_WRITE_H
 
 #include <stdint.h>
 

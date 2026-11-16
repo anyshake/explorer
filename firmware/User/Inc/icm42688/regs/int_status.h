@@ -1,5 +1,5 @@
-#ifndef __ICM42688_REGS_INT_STATUS_H
-#define __ICM42688_REGS_INT_STATUS_H
+#ifndef __USER_ICM42688_REGS_INT_STATUS_H
+#define __USER_ICM42688_REGS_INT_STATUS_H
 
 #include <stdint.h>
 

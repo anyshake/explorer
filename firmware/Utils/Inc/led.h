@@ -1,5 +1,5 @@
-#ifndef __ANYSHAKE_MCU_UTILS_LED_H
-#define __ANYSHAKE_MCU_UTILS_LED_H
+#ifndef __UTILS_LED_H
+#define __UTILS_LED_H
 
 #include <stdbool.h>
 #include <stdint.h>

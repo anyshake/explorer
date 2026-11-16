@@ -24,6 +24,9 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
     if (huart->Instance == USART1) {
+#if defined(USE_BOOTLOADER)
+        mcu_utils_bootloader_feed(uart1_rx_char);
+#endif
         uint16_t next_head = (uart1_rx_buffer.head + 1) % sizeof(uart1_rx_buffer.buffer);
         if (next_head != uart1_rx_buffer.tail) {
             uart1_rx_buffer.buffer[uart1_rx_buffer.head] = uart1_rx_char;

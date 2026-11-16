@@ -1,5 +1,5 @@
-#ifndef __PACKET_H
-#define __PACKET_H
+#ifndef __USER_PACKET_H
+#define __USER_PACKET_H
 
 #include <stdbool.h>
 #include <stdint.h>

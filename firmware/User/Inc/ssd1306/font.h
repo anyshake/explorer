@@ -1,5 +1,5 @@
-#ifndef __SSD1306_FONT_H
-#define __SSD1306_FONT_H
+#ifndef __USER_SSD1306_FONT_H
+#define __USER_SSD1306_FONT_H
 
 #include <stdint.h>
 

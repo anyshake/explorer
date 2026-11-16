@@ -1,5 +1,5 @@
-#ifndef __ADS1262_CMD_MAP_H
-#define __ADS1262_CMD_MAP_H
+#ifndef __USER_ADS1262_CMD_MAP_H
+#define __USER_ADS1262_CMD_MAP_H
 
 // NOP
 #define ADS1262_CMD_NOP 0x00
