@@ -175,3 +175,11 @@ func (c *Client) Boot() error {
 	_, err := c.transactOK(protocol.CmdBoot, nil, 2*time.Second)
 	return err
 }
+
+// Leave starts the installed firmware if boot is set and the firmware is valid; it never writes flash.
+func (c *Client) Leave(info *protocol.DeviceInfo, boot bool) (bool, error) {
+	if !boot || !info.AppValid {
+		return false, nil
+	}
+	return true, c.Boot()
+}

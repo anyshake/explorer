@@ -4,6 +4,16 @@ extern mcu_utils_uart_buffer_t uart2_rx_buffer;
 extern uint8_t uart2_rx_char;
 static volatile uint32_t uart2_flush_generation;
 
+// HAL_UART_MspInit() leaves RX floating: some MCUs then flag every received
+// byte as a noise error, so RX becomes an input with pull-up.
+static void mcu_utils_uart2_pull_up_rx(void) {
+    GPIO_InitTypeDef gpio = {0};
+    gpio.Pin = GPIO_PIN_3;
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(GPIOA, &gpio);
+}
+
 void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
     if (HAL_UART_GetState(&huart2) != HAL_UART_STATE_RESET && huart2.Init.BaudRate != baudrate) {
         mcu_utils_uart2_end();
@@ -21,6 +31,7 @@ void mcu_utils_uart2_init(uint32_t baudrate, bool is_rtos) {
         if (HAL_UART_Init(&huart2) != HAL_OK) {
             Error_Handler();
         }
+        mcu_utils_uart2_pull_up_rx();
         mcu_utils_uart2_flush();
         __HAL_UART_CLEAR_OREFLAG(&huart2);
         HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);

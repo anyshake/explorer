@@ -78,13 +78,15 @@ func Device(info *protocol.DeviceInfo, imageSize int) {
 	if info.AppValid {
 		valid = pterm.FgGreen.Sprint("yes")
 	}
-	used := float64(imageSize) * 100 / float64(info.AppMaxSize)
 	rows := [][]string{
 		{"Bootloader", info.BootloaderRev},
 		{"Entered", info.Reason.String()},
 		{"App area", fmt.Sprintf("0x%08x, %d KiB", info.AppBase, info.AppMaxSize/1024)},
 		{"Current app", valid},
-		{"New image", fmt.Sprintf("%d bytes (%.1f%% of the app area)", imageSize, used)},
+	}
+	if imageSize > 0 {
+		used := float64(imageSize) * 100 / float64(info.AppMaxSize)
+		rows = append(rows, []string{"New image", fmt.Sprintf("%d bytes (%.1f%% of the app area)", imageSize, used)})
 	}
 	for i := range rows {
 		rows[i][0] = pterm.Gray(rows[i][0])

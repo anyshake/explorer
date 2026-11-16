@@ -9,12 +9,12 @@ import (
 	"time"
 
 	"github.com/pterm/pterm"
-	"go.bug.st/serial"
 
 	"github.com/anyshake/explorer/dfu-tool/internal/autobaud"
 	"github.com/anyshake/explorer/dfu-tool/internal/client"
 	"github.com/anyshake/explorer/dfu-tool/internal/image"
 	"github.com/anyshake/explorer/dfu-tool/internal/protocol"
+	"github.com/anyshake/explorer/dfu-tool/internal/serialport"
 	"github.com/anyshake/explorer/dfu-tool/internal/ui"
 )
 
@@ -30,13 +30,14 @@ func run() error {
 		portName = flag.String("port", "", "serial port connected to the Explorer UART1 (e.g. /dev/ttyUSB0, COM3)")
 		noEnter  = flag.Bool("no-enter", false, "do not send the DFU-entry command; wait for the bootloader instead (power-cycle the device to recover a broken firmware)")
 		wait     = flag.Duration("wait", 10*time.Second, "how long to wait for the bootloader to answer")
-		noBoot   = flag.Bool("no-boot", false, "stay in the bootloader after flashing")
+		noBoot   = flag.Bool("no-boot", false, "stay in the bootloader afterwards")
 		list     = flag.Bool("list", false, "list serial ports and exit")
 		debug    = flag.Bool("debug", false, "dump every byte sent and received")
 		noColor  = flag.Bool("no-color", false, "plain output without colors and animations")
+		check    = flag.Bool("check", false, "only check that the device enters the bootloader, then start the firmware again; nothing is flashed")
 	)
 	flag.Usage = func() {
-		pterm.Printfln("Usage: %s -port <port> [options] <firmware.bin>\n\nOptions:", os.Args[0])
+		pterm.Printfln("Usage: %s -port <port> [options] <firmware.bin>\n       %s -port <port> -check [options]\n\nOptions:", os.Args[0], os.Args[0])
 		flag.CommandLine.SetOutput(os.Stdout)
 		flag.PrintDefaults()
 	}
@@ -50,31 +51,38 @@ func run() error {
 	}
 
 	if *list {
-		ports, err := serial.GetPortsList()
+		ports, err := serialport.List()
 		if err != nil {
 			return err
 		}
 		ui.Ports(ports)
 		return nil
 	}
-	if *portName == "" || flag.NArg() != 1 {
+	wantArgs := 1
+	if *check {
+		wantArgs = 0
+	}
+	if *portName == "" || flag.NArg() != wantArgs {
 		flag.Usage()
 		os.Exit(2)
 	}
 
-	path := strings.ToLower(flag.Arg(0))
-	if strings.HasSuffix(path, ".elf") || strings.HasSuffix(path, ".hex") {
-		return errors.New("please pass the raw firmware.bin image")
+	var img []byte
+	if !*check {
+		path := strings.ToLower(flag.Arg(0))
+		if strings.HasSuffix(path, ".elf") || strings.HasSuffix(path, ".hex") {
+			return errors.New("please pass the raw firmware.bin image")
+		}
+		data, err := os.ReadFile(flag.Arg(0))
+		if err != nil {
+			return err
+		}
+		img = image.Pad(data)
 	}
-	img, err := os.ReadFile(flag.Arg(0))
-	if err != nil {
-		return err
-	}
-	img = image.Pad(img)
 
 	ui.Banner()
 
-	port, err := serial.Open(*portName, &serial.Mode{BaudRate: protocol.BootloaderBaudRate})
+	port, err := serialport.Open(*portName, protocol.BootloaderBaudRate)
 	if err != nil {
 		return fmt.Errorf("open %s: %w", *portName, err)
 	}
@@ -84,13 +92,14 @@ func run() error {
 		link = &traceLink{Port: port}
 	}
 	c := client.New(link)
-	setBaud := func(baud int) error { return port.SetMode(&serial.Mode{BaudRate: baud}) }
+	setBaud := func(baud int) error { return port.SetBaud(baud) }
 
 	var poke func() error
+	detected := 0
 	if !*noEnter {
 		step := ui.Start("Detecting the firmware baud rate on %s", *portName)
 		bauds := autobaud.FirmwareBaudRates
-		detected, err := autobaud.Detect(link, setBaud)
+		detected, err = autobaud.Detect(link, setBaud)
 		if err != nil {
 			step.Fail("Baud rate detection failed")
 			return err
@@ -104,6 +113,15 @@ func run() error {
 
 		frame := protocol.EncodeRequest(protocol.CmdEnter, nil)
 		poke = func() error {
+			if detected != 0 {
+				if err := setBaud(detected); err != nil {
+					return err
+				}
+				if err := autobaud.SendBetweenPackets(link, frame, detected, 3); err != nil {
+					return err
+				}
+				return setBaud(protocol.BootloaderBaudRate)
+			}
 			for _, baud := range bauds {
 				if err := setBaud(baud); err != nil {
 					return err
@@ -111,7 +129,6 @@ func run() error {
 				if _, err := link.Write(frame); err != nil {
 					return err
 				}
-				_ = port.Drain()
 				time.Sleep(autobaud.TxTime(len(frame), baud))
 			}
 			return setBaud(protocol.BootloaderBaudRate)
@@ -130,6 +147,13 @@ func run() error {
 	info, err := c.Hello(*wait, poke)
 	if errors.Is(err, client.ErrTimeout) {
 		step.Fail("No answer from the bootloader")
+		if detected != 0 && setBaud(detected) == nil {
+			if running, _ := autobaud.Streaming(link, time.Second); running {
+				return errors.New("the firmware is still running and never received the DFU request: " +
+					"check that the adapter's TX line reaches the device, " +
+					"and that the firmware is a *_bootloader.bin build")
+			}
+		}
 		return errors.New("check the port and that the bootloader has been flashed " +
 			"(retry with -no-enter and power-cycle the device)")
 	}
@@ -139,6 +163,10 @@ func run() error {
 	}
 	step.Done("Bootloader is ready")
 	ui.Device(info, len(img))
+
+	if *check {
+		return finishCheck(c, info, *noBoot)
+	}
 
 	if err := image.Check(info, img); err != nil {
 		return err
@@ -161,6 +189,22 @@ func run() error {
 		return fmt.Errorf("boot: %w", err)
 	}
 	ui.Success("New firmware started")
+	return nil
+}
+
+func finishCheck(c *client.Client, info *protocol.DeviceInfo, noBoot bool) error {
+	ui.Success("The device can enter DFU mode")
+	booted, err := c.Leave(info, !noBoot)
+	switch {
+	case err != nil:
+		return fmt.Errorf("boot: %w", err)
+	case noBoot:
+		ui.Info("Staying in the bootloader (-no-boot)")
+	case !booted:
+		ui.Warn("No valid firmware installed, the device stays in the bootloader")
+	default:
+		ui.Success("Firmware started again, nothing was flashed")
+	}
 	return nil
 }
 

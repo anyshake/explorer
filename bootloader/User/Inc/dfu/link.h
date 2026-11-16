@@ -25,6 +25,7 @@ typedef struct {
     const uint32_t* payload;  // valid until the next dfu_link_receive()
 } dfu_request_t;
 
+void dfu_link_init(void);
 dfu_rx_result_t dfu_link_receive(uint32_t deadline, dfu_request_t* req);
 void dfu_link_send(uint8_t cmd, dfu_status_t status, const uint32_t* payload, uint32_t words);
 void dfu_link_set_blink_period(uint32_t ms);

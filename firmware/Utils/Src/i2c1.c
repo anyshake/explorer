@@ -15,6 +15,30 @@ void mcu_utils_i2c1_end(void) {
     }
 }
 
+// Some STM32F103-compatible MCUs never finish the 2-byte (POS/BTF) reception
+// sequence of HAL_I2C_Mem_Read(): BTF never rises, the read times out and
+// I2C1 stays BUSY, so every following transfer fails. 1-byte and 3-byte
+// reads use other sequences and work, so a 2-byte read is done as a 3-byte
+// read of which the last byte is dropped. Callers never read a register with
+// read side effects (e.g. a FIFO) as the last byte of a 2-byte read.
+static HAL_StatusTypeDef mcu_utils_i2c1_read_chunk(uint8_t address,
+                                                   uint16_t reg,
+                                                   uint8_t* rx_data,
+                                                   uint16_t rx_len,
+                                                   uint8_t reg_width) {
+    if (rx_len != 2) {
+        return HAL_I2C_Mem_Read(&hi2c1, address << 1, reg, reg_width, rx_data, rx_len, 1000);
+    }
+
+    uint8_t buf[3];
+    HAL_StatusTypeDef status = HAL_I2C_Mem_Read(&hi2c1, address << 1, reg, reg_width, buf, sizeof(buf), 1000);
+    if (status == HAL_OK) {
+        rx_data[0] = buf[0];
+        rx_data[1] = buf[1];
+    }
+    return status;
+}
+
 void mcu_utils_i2c1_read_mem(uint8_t address,
                              uint16_t reg,
                              uint8_t* rx_data,
@@ -37,7 +61,7 @@ void mcu_utils_i2c1_read_mem(uint8_t address,
         if (chunk_len > MCU_UTILS_I2C1_MEM_READ_CHUNK_SIZE) {
             chunk_len = MCU_UTILS_I2C1_MEM_READ_CHUNK_SIZE;
         }
-        if (HAL_I2C_Mem_Read(&hi2c1, address << 1, reg + offset, reg_width, rx_data + offset, chunk_len, 1000) != HAL_OK) {
+        if (mcu_utils_i2c1_read_chunk(address, reg + offset, rx_data + offset, chunk_len, reg_width) != HAL_OK) {
             return;
         }
     }

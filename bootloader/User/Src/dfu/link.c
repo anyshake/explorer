@@ -3,6 +3,11 @@
 static uint32_t rx_words[1U + DFU_MAX_PAYLOAD / 4U + 1U];
 static uint32_t blink_period = 250U;
 
+void dfu_link_init(void) {
+    LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_10, LL_GPIO_PULL_UP);
+    LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_10, LL_GPIO_MODE_INPUT);
+}
+
 bool dfu_link_expired(uint32_t deadline) {
     return deadline != DFU_FOREVER && (int32_t)(boot_ms - deadline) >= 0;
 }

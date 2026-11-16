@@ -27,6 +27,7 @@ type simDevice struct {
 	next    int
 	first   []byte
 	booted  bool
+	cmds    []uint8
 	dropAck map[int]bool
 	garbage []byte
 }
@@ -94,6 +95,7 @@ func (d *simDevice) reply(cmd uint8, st protocol.Status, payload []byte) {
 }
 
 func (d *simDevice) handle(cmd uint8, p []byte) {
+	d.cmds = append(d.cmds, cmd)
 	u32 := func(v int) []byte { return binary.LittleEndian.AppendUint32(nil, uint32(v)) }
 	switch cmd {
 	case protocol.CmdHello:
@@ -208,5 +210,40 @@ func TestOddSizedImageIsPadded(t *testing.T) {
 	}
 	if err := c.Flash(info, img, nil); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestCheckNeverWrites(t *testing.T) {
+	for _, tc := range []struct {
+		name       string
+		appValid   bool
+		boot       bool
+		wantBooted bool
+	}{
+		{"boots the firmware", true, true, true},
+		{"no-boot", true, false, false},
+		{"no firmware", false, true, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			dev := newSimDevice()
+			c := New(dev)
+			info, err := c.Hello(time.Second, nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			info.AppValid = tc.appValid
+			booted, err := c.Leave(info, tc.boot)
+			if err != nil || booted != tc.wantBooted || dev.booted != tc.wantBooted {
+				t.Fatalf("booted=%v dev=%v err=%v", booted, dev.booted, err)
+			}
+			for _, cmd := range dev.cmds {
+				if cmd != protocol.CmdHello && cmd != protocol.CmdBoot {
+					t.Fatalf("unexpected command %d", cmd)
+				}
+			}
+			if !bytes.Equal(dev.flash, bytes.Repeat([]byte{0xFF}, simAppSize)) {
+				t.Fatal("flash was modified")
+			}
+		})
 	}
 }

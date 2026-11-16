@@ -14,6 +14,13 @@ void mcu_utils_uart1_init(uint32_t baudrate, bool is_rtos) {
         huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
         huart1.Init.OverSampling = UART_OVERSAMPLING_16;
         HAL_UART_Init(&huart1);
+
+        GPIO_InitTypeDef gpio = {0};
+        gpio.Pin = GPIO_PIN_10;
+        gpio.Mode = GPIO_MODE_INPUT;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(GPIOA, &gpio);
+
         mcu_utils_uart1_flush();
         HAL_UART_Receive_DMA(&huart1, &uart1_rx_char, sizeof(uart1_rx_char));
     }

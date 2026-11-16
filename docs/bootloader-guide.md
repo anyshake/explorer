@@ -64,11 +64,22 @@ It takes well under a minute. Leave the baud rate switches as they are.
 
 For every later update, only step 3 is needed.
 
+To check that a device can enter the bootloader without updating it, run the tool with `-check` and no file:
+
+```sh
+./dfu-tool_linux_amd64 -port /dev/ttyUSB0 -check
+```
+
+It shows the bootloader information, then starts the installed firmware again. Nothing is written.
+
 ## If Something Goes Wrong
 
 - **"No answer from the bootloader."**
   - Check the port name, and make sure no other program has the port open.
   - If the firmware does not respond, run the tool with `-no-enter`, then power-cycle the device while the tool waits.
+- **"The firmware is still running and never received the DFU request."**
+  - Check that the adapter's TX line reaches the device.
+  - Check that the installed firmware is a `*_bootloader.bin` build.
 - **The update was interrupted** (cable pulled, power lost).
   - Nothing is lost: an incomplete firmware never starts, and the device waits in update mode. Run the tool again, with `-no-enter` if needed.
 - **"image reset vector … is outside the application area."**
