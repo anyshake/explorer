@@ -7,6 +7,11 @@
 #include "stm32f1xx_hal.h"
 #include "stm32f1xx_hal_tim.h"
 
+// Offset corrections up to the threshold are slewed at the given rate
+// (100 ppm: 100 us per second); larger ones are applied at once.
+#define MCU_UTILS_SYSTIME_SLEW_RATE_PPM 100
+#define MCU_UTILS_SYSTIME_STEP_THRESHOLD_US 10000
+
 void mcu_utils_systime_init(void);
 void mcu_utils_systime_calib_freq(uint32_t actual_freq_hz);
 void mcu_utils_systime_handle_timer_overflow(void);

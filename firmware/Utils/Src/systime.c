@@ -10,7 +10,11 @@ static volatile systime_base_t systime_base;
 static volatile uint64_t timer_freq_hz;
 static uint32_t nominal_timer_freq_hz;
 static volatile uint64_t timer_overflow_count;
+// Unix time offset: unix_offset_us at uptime slew_start_us, then moving
+// towards slew_target_us at MCU_UTILS_SYSTIME_SLEW_RATE_PPM.
 static volatile int64_t unix_offset_us;
+static volatile int64_t slew_target_us;
+static volatile int64_t slew_start_us;
 
 static uint32_t systime_irq_lock(void) {
     uint32_t primask = __get_PRIMASK();
@@ -44,6 +48,8 @@ void mcu_utils_systime_init(void) {
     timer_freq_hz = nominal_timer_freq_hz;
     timer_overflow_count = 0;
     unix_offset_us = 0;
+    slew_target_us = 0;
+    slew_start_us = 0;
 
     __HAL_TIM_SET_COUNTER(&htim1, 0);
     __HAL_TIM_SET_COUNTER(&htim2, 0);
@@ -126,19 +132,48 @@ int64_t mcu_utils_systime_get_uptime_ms(void) {
     return mcu_utils_systime_get_uptime_us() / 1000;
 }
 
+// Must be called with interrupts disabled.
+static int64_t systime_offset_at(int64_t uptime_us) {
+    int64_t elapsed_us = uptime_us - slew_start_us;
+    if (elapsed_us <= 0) {
+        return unix_offset_us;
+    }
+    int64_t max_step_us = elapsed_us * MCU_UTILS_SYSTIME_SLEW_RATE_PPM / 1000000;
+    int64_t remaining_us = slew_target_us - unix_offset_us;
+    if (remaining_us > max_step_us) {
+        return unix_offset_us + max_step_us;
+    }
+    if (remaining_us < -max_step_us) {
+        return unix_offset_us - max_step_us;
+    }
+    return slew_target_us;
+}
+
 int64_t mcu_utils_systime_get_unix_time_us(void) {
+    int64_t uptime_us = mcu_utils_systime_get_uptime_us();
     uint32_t primask = systime_irq_lock();
-    int64_t offset = unix_offset_us;
+    int64_t offset = systime_offset_at(uptime_us);
     systime_irq_unlock(primask);
-    return mcu_utils_systime_get_uptime_us() + offset;
+    return uptime_us + offset;
 }
 
 int64_t mcu_utils_systime_get_unix_time_ms(void) {
     return mcu_utils_systime_get_unix_time_us() / 1000;
 }
 
+// Small corrections are slewed instead of stepped, so that Unix time never
+// jumps: a step moves the sampling phase against the millisecond boundaries
+// at once. Large ones (first sync, lost sync) are stepped.
 void mcu_utils_systime_set_offset(int64_t offset_us) {
+    int64_t uptime_us = mcu_utils_systime_get_uptime_us();
     uint32_t primask = systime_irq_lock();
-    unix_offset_us = offset_us;
+    int64_t current_us = systime_offset_at(uptime_us);
+    int64_t error_us = offset_us - current_us;
+    if (error_us > MCU_UTILS_SYSTIME_STEP_THRESHOLD_US || error_us < -MCU_UTILS_SYSTIME_STEP_THRESHOLD_US) {
+        current_us = offset_us;
+    }
+    unix_offset_us = current_us;
+    slew_target_us = offset_us;
+    slew_start_us = uptime_us;
     systime_irq_unlock(primask);
 }

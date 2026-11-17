@@ -289,13 +289,16 @@ void task_sensor_acquire(void* argument) {
     explorer_global_states_t* states = (explorer_global_states_t*)argument;
 
     explorer_acquisition_message_t acq_msg;
-    uint32_t time_span = 1000 / ADC_ACQUISITION_RATE;
+    const int64_t sample_period_us = 1000000 / ADC_ACQUISITION_RATE;
     uint32_t sample_sequence = 0;
 
     osThreadFlagsWait(SENSOR_ACQUIRE_ACT, osFlagsWaitAny, osWaitForever);
     mcu_utils_iwdg_init();
 
-    for (uint64_t prev_timestamp = 0;;) {
+    // Each sample has a scheduled time on the PPS-calibrated uptime clock.
+    // Waiting from the previous sample instead would let every late sample
+    // push all later ones back, losing samples per second for good.
+    for (int64_t next_sample_us = mcu_utils_systime_get_uptime_us();;) {
         if (!states->use_accelerometer || states->channel_6d) {
             acq_msg.timestamp = get_adc_readout(ADS1262_CTL_PIN, states->adc_calibration_offset, acq_msg.adc_data) / 1000;
         }
@@ -340,11 +343,19 @@ void task_sensor_acquire(void* argument) {
             states->sensor_queue_overflow_count++;
         }
 
-        uint64_t current_timestamp;
-        do {
-            current_timestamp = mcu_utils_systime_get_uptime_ms();
-        } while (current_timestamp - prev_timestamp < time_span);
-        prev_timestamp = current_timestamp;
+        next_sample_us += sample_period_us;
+        int64_t now_us = mcu_utils_systime_get_uptime_us();
+        int64_t behind_us = now_us - next_sample_us;
+        if (behind_us >= SENSOR_ACQUISITION_MAX_CATCH_UP_US) {
+            // Too far behind to catch up: restart the schedule and skip the
+            // missed sequence numbers, so the gap is reported, not hidden.
+            sample_sequence += (uint32_t)(behind_us / sample_period_us);
+            next_sample_us = now_us;
+        }
+        // Late samples are taken at once until the schedule is caught up.
+        while (mcu_utils_systime_get_uptime_us() < next_sample_us) {
+            ;
+        }
     }
 }
 

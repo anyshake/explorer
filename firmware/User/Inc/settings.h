@@ -16,6 +16,9 @@
 #define PACKET_SENDING_INTERVAL 100
 #define ADC_ACQUISITION_RATE 250
 #define SENSOR_ACQUISITION_QUEUE_DEPTH 8
+// A late acquisition loop takes the missed samples back to back; beyond this
+// it restarts the schedule and reports the skipped samples as a gap.
+#define SENSOR_ACQUISITION_MAX_CATCH_UP_US (100 * 1000)
 #define GNSS_REQUIRED_VALID_HDOP 5.0f
 #define GNSS_RESYNC_INTERVAL_MS (60 * 1000)
 #define GNSS_PAIR_DEADLINE_US 900000
