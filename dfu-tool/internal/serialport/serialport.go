@@ -32,8 +32,13 @@ func (p *Port) Write(b []byte) (int, error) { return p.conn.Write(b) }
 func (p *Port) Close() error                { return p.conn.Close() }
 func (p *Port) ResetInputBuffer() error     { return p.conn.ResetInputBuffer() }
 
+// Read returns as soon as any data arrives, like go.bug.st/serial on darwin;
+// waiting out the timeout would make SendBetweenPackets miss the idle gap.
 func (p *Port) SetReadTimeout(t time.Duration) error {
-	return p.conn.SetReadTimeout(int(t.Milliseconds()))
+	if ms := t.Milliseconds(); ms > 0 {
+		return p.conn.SetFirstByteReadTimeout(uint32(ms))
+	}
+	return p.conn.SetReadTimeout(0)
 }
 
 func (p *Port) SetBaud(baud int) error {
