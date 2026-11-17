@@ -275,7 +275,11 @@ void task_send_packet(void* argument) {
                 bool ok = send_data_packet(states, acq_msg.temperature, message_timestamp);
                 message_idx = 0;
 
-                if (ok && (states->prev_packet_sent_at_ms == 0 || message_timestamp - states->prev_packet_sent_at_ms == states->packet_sending_interval)) {
+                // Packet timestamps are truncated to milliseconds, so a steady
+                // interval can read as interval +/- 1 ms; only larger deviations
+                // indicate a stalled or irregular acquisition.
+                int64_t interval_error_ms = message_timestamp - states->prev_packet_sent_at_ms - states->packet_sending_interval;
+                if (ok && (states->prev_packet_sent_at_ms == 0 || llabs(interval_error_ms) <= PACKET_INTERVAL_TOLERANCE_MS)) {
                     mcu_utils_iwdg_feed();
                 }
 

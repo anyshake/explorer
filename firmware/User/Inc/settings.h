@@ -14,6 +14,9 @@
 // Empirical PPS waveform alignment; positive values move packet times later.
 #define DATA_TIMESTAMP_OFFSET_MS 10
 #define PACKET_SENDING_INTERVAL 100
+// Allowed deviation between consecutive packet timestamps before the watchdog
+// stops being fed; covers millisecond truncation of the sample timestamps.
+#define PACKET_INTERVAL_TOLERANCE_MS 2
 #define ADC_ACQUISITION_RATE 250
 #define SENSOR_ACQUISITION_QUEUE_DEPTH 8
 // A late acquisition loop takes the missed samples back to back; beyond this
