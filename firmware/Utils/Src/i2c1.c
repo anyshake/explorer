@@ -1,7 +1,44 @@
 #include "Utils/Inc/i2c1.h"
 
+static void mcu_utils_i2c1_recover_bus(void) {
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6 | GPIO_PIN_7, GPIO_PIN_SET);
+
+// Half period of the bit-banged clock. HAL_Delay(2) waits 1-2 ms, which is
+// slow but valid for every I2C device and needs no calibration.
+#define MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS 2
+
+    GPIO_InitTypeDef gpio = {0};
+    gpio.Pin = GPIO_PIN_6 | GPIO_PIN_7;
+    gpio.Mode = GPIO_MODE_OUTPUT_OD;
+    gpio.Pull = GPIO_NOPULL;
+    gpio.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOB, &gpio);
+    HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+
+    for (uint8_t i = 0; i < 9 && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7) == GPIO_PIN_RESET; i++) {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+        HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+        HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+    }
+
+    // STOP: SDA rises while SCL is high.
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+    HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
+    HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+    HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+    HAL_Delay(MCU_UTILS_I2C1_RECOVERY_HALF_PERIOD_MS);
+}
+
 void mcu_utils_i2c1_init(bool is_rtos) {
     if (HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_RESET) {
+        // Runs before MX_I2C1_Init(): HAL_I2C_MspInit() then switches the
+        // pins back to the I2C1 alternate function.
+        mcu_utils_i2c1_recover_bus();
         MX_I2C1_Init();
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
