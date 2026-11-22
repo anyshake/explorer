@@ -51,7 +51,7 @@ static void handle_begin(void) {
         return;
     }
     uint32_t size = req.payload[0];
-    if (size < 8U || size > BOOT_APP_MAX_SIZE || (size & 3U) != 0) {
+    if (size < BOOT_VECTOR_WORDS * 4U || size > BOOT_APP_MAX_SIZE || (size & 3U) != 0) {
         reply(DFU_STATUS_BAD_IMAGE);
         return;
     }
@@ -116,7 +116,7 @@ static void handle_end(void) {
         reply(DFU_STATUS_VERIFY_ERROR);
         return;
     }
-    if (!boot_vectors_are_valid(session.first_word, app[1])) {
+    if (!boot_vectors_are_valid(session.first_word, session.image_size)) {
         reply(DFU_STATUS_BAD_IMAGE);
         return;
     }

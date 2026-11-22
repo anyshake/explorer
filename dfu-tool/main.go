@@ -188,7 +188,7 @@ func run() error {
 	if err := c.Boot(); err != nil {
 		return fmt.Errorf("boot: %w", err)
 	}
-	ui.Success("New firmware started")
+	ui.Success("Bootloader accepted the firmware start request (application health is not verified)")
 	return nil
 }
 

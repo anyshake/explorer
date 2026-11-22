@@ -13,6 +13,8 @@
 #define BOOT_APP_BASE 0x08001000U
 #define BOOT_APP_END 0x08010000U
 #define BOOT_APP_MAX_SIZE (BOOT_APP_END - BOOT_APP_BASE)
+// Core vectors plus IRQs through USBWakeUp; excludes BootRAM signature.
+#define BOOT_VECTOR_WORDS 59U
 
 // RAM layout: the last 16 bytes of SRAM are excluded from both linker scripts
 // and survive a system reset. The firmware writes BOOT_MAILBOX_DFU_REQUEST
@@ -35,7 +37,7 @@ extern volatile uint32_t boot_ms;
 
 void boot_feed_watchdog(void);
 bool boot_app_is_valid(void);
-bool boot_vectors_are_valid(uint32_t sp, uint32_t pc);
+bool boot_vectors_are_valid(uint32_t sp, uint32_t image_size);
 boot_reason_t boot_take_request(void);
 void boot_jump_if_requested(void);
 void boot_start_app(void);

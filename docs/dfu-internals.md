@@ -101,7 +101,11 @@ Timeouts:
 
 `BEGIN` erases the vector page first, so the old image is invalid from that moment.
 
-The first word of the image, the initial SP, is held back until `END` has verified the CRC of the whole image and both vectors. An interrupted update therefore leaves no valid application, and the bootloader stays in update mode.
+The first word of the image, the initial SP, is held back until `END` has verified the CRC of the whole image and the vector table. An interrupted update therefore leaves no valid application, and the bootloader stays in update mode.
+
+Both dfu-tool (before `BEGIN`) and the bootloader (at `END`) check the initial SP and all 58 handler slots through USBWakeUp. The SP must be aligned and within application RAM (at most `0x20004FF0`). Nonzero handlers must be Thumb addresses after the vector table and inside the uploaded image; the reset handler must not be zero. Reserved zero slots are allowed. The reserved tail and BootRAM signature at `0x108` are not handler slots. Checking only the reset handler is insufficient: a standalone image can have its reset handler above `0x08001000` while early exception handlers still point into the bootloader region.
+
+Before starting an installed image, the bootloader repeats the vector check against the application partition (the uploaded length is not persisted). These checks reject incorrectly linked images, but do not prove firmware compatibility or successful application startup. CRC verifies transfer integrity, not application health. A `BOOT` acknowledgement only means the start request was accepted. Automatic recovery from a hung application would additionally require a watchdog and a startup-confirmation contract with the firmware; this is not currently implemented.
 
 ## Constants That Must Match
 

@@ -163,6 +163,7 @@ func testImage(size int) []byte {
 	for i := range img {
 		img[i] = byte(i*7 + i>>8)
 	}
+	clear(img[:59*4]) // unused vectors, not random code bytes
 	binary.LittleEndian.PutUint32(img[0:], 0x20004FF0)
 	binary.LittleEndian.PutUint32(img[4:], simAppBase+0x1235)
 	return img

@@ -22,17 +22,31 @@ void boot_feed_watchdog(void) {
     WRITE_REG(IWDG->KR, 0xAAAAU);
 }
 
-bool boot_vectors_are_valid(uint32_t sp, uint32_t pc) {
-    bool sp_ok = sp > BOOT_RAM_BASE && sp <= BOOT_RAM_END && (sp & 3U) == 0;
-    bool pc_ok = (pc & 1U) == 1U && pc >= BOOT_APP_BASE && pc < BOOT_APP_END;
-    return sp_ok && pc_ok;
+bool boot_vectors_are_valid(uint32_t sp, uint32_t image_size) {
+    if (sp <= BOOT_RAM_BASE || sp > BOOT_MAILBOX_ADDR || (sp & 3U) != 0 ||
+        image_size < BOOT_VECTOR_WORDS * 4U || image_size > BOOT_APP_MAX_SIZE) {
+        return false;
+    }
+    const volatile uint32_t* vectors = (const volatile uint32_t*)BOOT_APP_BASE;
+    for (uint32_t i = 1; i < BOOT_VECTOR_WORDS; i++) {
+        uint32_t pc = vectors[i];
+        if (pc == 0 && i != 1) {  // unused/reserved vectors
+            continue;
+        }
+        uint32_t addr = pc & ~1U;
+        if ((pc & 1U) == 0 || addr < BOOT_APP_BASE + BOOT_VECTOR_WORDS * 4U ||
+            addr >= BOOT_APP_BASE + image_size) {
+            return false;
+        }
+    }
+    return true;
 }
 
 bool boot_app_is_valid(void) {
     const volatile uint32_t* vectors = (const volatile uint32_t*)BOOT_APP_BASE;
     // The initial SP word is the last word written by the DFU procedure,
     // so an interrupted update always leaves it erased (0xFFFFFFFF).
-    return boot_vectors_are_valid(vectors[0], vectors[1]);
+    return boot_vectors_are_valid(vectors[0], BOOT_APP_MAX_SIZE);
 }
 
 boot_reason_t boot_take_request(void) {
